@@ -708,22 +708,6 @@
         "wires": []
     },
     {
-        "id": "f697ac614f19f598",
-        "type": "debug",
-        "z": "bdd121f92a65b34d",
-        "name": "debug 2",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1460,
-        "y": 280,
-        "wires": []
-    },
-    {
         "id": "8d538ff52e989fdb",
         "type": "inject",
         "z": "a843f3ff30ad0d18",
