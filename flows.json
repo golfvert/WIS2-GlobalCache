@@ -1,0 +1,4134 @@
+[
+    {
+        "id": "13ad60a837edfb78",
+        "type": "tab",
+        "label": "MVP",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "bdd121f92a65b34d",
+        "type": "tab",
+        "label": "Aria2 Basic",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a843f3ff30ad0d18",
+        "type": "tab",
+        "label": "Subscriber",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "caa031b5574b994f",
+        "type": "tab",
+        "label": "Downloader",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "102b04b3eaea572e",
+        "type": "tab",
+        "label": "Cleaner",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "af64ebcc5f745fbb",
+        "type": "group",
+        "z": "a843f3ff30ad0d18",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "2d16d1fb9be9c0af",
+            "fa24a2f54b4ae1a2",
+            "91375cbee22eac8b",
+            "febc59b2a01d3b51",
+            "cb516c136f502154",
+            "f41773382fda2a90",
+            "b6e7189343a699c5",
+            "7396f17b4d5a8acc",
+            "1972856ebcf4fd08",
+            "43e8195bba447330",
+            "0c40af1e53657c10",
+            "a194d606d2c36f0c",
+            "97e2e9730afa6411",
+            "fecc8e288bcc1234",
+            "d199768c970a404f",
+            "bf84f00af773ae55",
+            "088242062a8edf86",
+            "7cbd67306119b602",
+            "9204f8d517897d74",
+            "ff38c27547f57df5",
+            "4ce66cb6c1cd331a",
+            "b6f1b5afd8f26926",
+            "b0058fcf19b55fbc",
+            "1fb5a0fd9a1d867e",
+            "11e84d462d0da702",
+            "f0bb2e3b8a4db6ac",
+            "9da53c72d3d77292",
+            "fb872857136145a0",
+            "1437e30492222fdc",
+            "5a5ed27cce4a9ee1",
+            "8fb0ec6470571fd1",
+            "e4140757ba2e1d5d",
+            "e3a7bdd291dc874f",
+            "264ce3bcd8f56fe2",
+            "225fb9b32f8b87a0",
+            "0b7db5e2a563f7ee",
+            "3f291a7f649259e7",
+            "a9c4d402f2216f61",
+            "2c404c7fec3703ea",
+            "3efa48b69a3564fa"
+        ],
+        "x": 174,
+        "y": 1219,
+        "w": 1032,
+        "h": 602
+    },
+    {
+        "id": "704fe7a0a3413400",
+        "type": "group",
+        "z": "a843f3ff30ad0d18",
+        "style": {
+            "stroke": "#999999",
+            "stroke-opacity": "1",
+            "fill": "none",
+            "fill-opacity": "1",
+            "label": true,
+            "label-position": "nw",
+            "color": "#a4a4a4"
+        },
+        "nodes": [
+            "720bdf8b4f4fd2bc",
+            "c2e79e20b06839e6",
+            "3c5d87dbdc9a0a2c",
+            "507cce674d0f12d6",
+            "5f6c31b4abc8077c",
+            "d17844f69c0a434e",
+            "93db13a150783f1f",
+            "3484111e0c147f1d",
+            "9c7128f744e64e17",
+            "290454c1bf394d2d"
+        ],
+        "x": 174,
+        "y": 1839,
+        "w": 612,
+        "h": 222
+    },
+    {
+        "id": "8cf5f6b5.937088",
+        "type": "mqtt-broker",
+        "name": "Subscriber",
+        "broker": "\"\"",
+        "port": "",
+        "tls": "",
+        "clientid": "",
+        "autoConnect": false,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "029ff868be3010db",
+        "type": "redis-config",
+        "name": "Cluster",
+        "options": "$eval($env(\"REDIS_URL\"))",
+        "cluster": true,
+        "optionsType": "jsonata"
+    },
+    {
+        "id": "6916ceefd6df8fb5",
+        "type": "websocket-listener",
+        "path": "ws://aria2:6800/jsonrpc",
+        "wholemsg": "false"
+    },
+    {
+        "id": "bfc54a35b25c2232",
+        "type": "redis-config",
+        "name": "R1",
+        "options": "172.39.0.11:6379",
+        "cluster": false,
+        "optionsType": "str"
+    },
+    {
+        "id": "1ff2e6e3c4ca03d4",
+        "type": "redis-config",
+        "name": "R2",
+        "options": "172.39.0.12:6379",
+        "cluster": false,
+        "optionsType": "str"
+    },
+    {
+        "id": "3cdfe90d9df486bc",
+        "type": "redis-config",
+        "name": "R3",
+        "options": "172.39.0.13:6379",
+        "cluster": false,
+        "optionsType": "str"
+    },
+    {
+        "id": "ecd4cba1d3c3ffc0",
+        "type": "status",
+        "z": "13ad60a837edfb78",
+        "name": "Primary",
+        "scope": [
+            "5d2fc40d284feb0e"
+        ],
+        "x": 170,
+        "y": 200,
+        "wires": [
+            [
+                "db6692c486872572"
+            ]
+        ]
+    },
+    {
+        "id": "db6692c486872572",
+        "type": "switch",
+        "z": "13ad60a837edfb78",
+        "name": "Green ?",
+        "property": "status.fill",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "green",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 300,
+        "y": 200,
+        "wires": [
+            [
+                "8dafdd8865d5f168"
+            ]
+        ]
+    },
+    {
+        "id": "8dafdd8865d5f168",
+        "type": "change",
+        "z": "13ad60a837edfb78",
+        "name": "Init",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "$split($env(\"MQTT_SUB_TOPIC\"),\",\")",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "action",
+                "pt": "msg",
+                "to": "subscribe",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 430,
+        "y": 200,
+        "wires": [
+            [
+                "0ba924a28af55b20"
+            ]
+        ]
+    },
+    {
+        "id": "0ba924a28af55b20",
+        "type": "mqtt in",
+        "z": "13ad60a837edfb78",
+        "d": true,
+        "name": "Subscriber",
+        "topic": "",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "8cf5f6b5.937088",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 1,
+        "x": 560,
+        "y": 200,
+        "wires": [
+            [
+                "c3809b39629c6e96"
+            ]
+        ]
+    },
+    {
+        "id": "c3809b39629c6e96",
+        "type": "switch",
+        "z": "13ad60a837edfb78",
+        "name": "Canonical ?",
+        "property": " ( payload.links[0].rel = \"canonical\" ) and ( $contains(payload.links[0].href,\"wis2.dwd.de\")) and ( $contains(topic,\"core\" ) )",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 710,
+        "y": 200,
+        "wires": [
+            [
+                "30dc42c05e9aafb2"
+            ]
+        ]
+    },
+    {
+        "id": "30dc42c05e9aafb2",
+        "type": "change",
+        "z": "13ad60a837edfb78",
+        "name": "href",
+        "rules": [
+            {
+                "t": "set",
+                "p": "href",
+                "pt": "msg",
+                "to": "payload.links[0].href",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 850,
+        "y": 200,
+        "wires": [
+            [
+                "f5d5c26e5cd9a716"
+            ]
+        ]
+    },
+    {
+        "id": "3d23281ed2c1be93",
+        "type": "debug",
+        "z": "13ad60a837edfb78",
+        "name": "debug 9",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "href",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1200,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "e3bf84eb266b260f",
+        "type": "inject",
+        "z": "13ad60a837edfb78",
+        "name": "Create Job",
+        "props": [
+            {
+                "p": "href",
+                "v": "https://wis2.dwd.de/gc/24h/kr-kma/c84f75d7-7173-4345-8b64-db9b37630dfa__A_INVS06RKSL040530_C_RKSL_20250604053030_ir112.bin",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 340,
+        "y": 320,
+        "wires": [
+            [
+                "e0ba593fcf0ddd74"
+            ]
+        ]
+    },
+    {
+        "id": "e0ba593fcf0ddd74",
+        "type": "function",
+        "z": "13ad60a837edfb78",
+        "name": "Create BullMQ Job",
+        "func": "let cluster = context.get(\"redisCluster\");\nlet redis_url = JSON.parse(env.get(\"REDIS_URL\"));\n\nasync function checkConnection(redisClient) {\n    try {\n        await redisClient.ping();\n        return true; // Redis is reachable\n    } catch (error) {\n        return false; // Connection failed\n    }\n}\n\nasync function getRedisCluster() {\n    if (!cluster || !(await checkConnection(cluster))) {\n\n    cluster = new redis.Cluster(redis_url);\n    context.set(\"redisCluster\", cluster);\n    node.status({ fill: \"green\", shape: \"ring\", text: \"Connected to Redis Cluster\" });\n    \n    }\n    return cluster;\n}\n\n// Ensure Redis Cluster is active before proceeding\ngetRedisCluster()\n    .then(cluster => {\n        msg.payload = { success: true, message: \"Redis Cluster is active!\" };\n        node.send(msg);\n    })\n    .catch(error => {\n        msg.payload = { success: false, error: error.message };\n        node.status({ fill: \"red\", shape: \"ring\", text: \"Redis Connection Failed\" });\n        node.send(msg);\n    });\n\n\n\nasync function checkQueueHealth(queue) {\n    try {\n        await queue.client.ping(); // Pings Redis to verify the queue is active\n        return true;\n    } catch (error) {\n        return false;\n    }\n}\n\n// Check if the queue exists and is active\nlet downloadQueue = context.get(\"downloadQueue\");\n\nif (!downloadQueue || !(await checkQueueHealth(downloadQueue))) {\n    downloadQueue = new bullmq.Queue(\"download-aria2\", { connection: cluster, prefix: \"{titine}\" });\n    context.set(\"downloadQueue\", downloadQueue);\n    node.status({ fill: \"green\", shape: \"ring\", text: \"Download Queue Connected\" });\n} \n\n// Job data from inject node\nconst jobData = {\n    href: msg.href,\n    priority: msg.payload.priority || 1,\n    timestamp: new Date().toISOString()\n};\n\n// Job options\nconst jobOptions = {\n    priority: jobData.priority,\n    delay: msg.payload.delay || 0,\n    attempts: 3,\n    backoff: {\n        type: 'exponential',\n        delay: 2000\n    },\n    removeOnComplete: 100,\n    removeOnFail: 50\n};\n\n// Add job to queue\ndownloadQueue.add('download-link', jobData, jobOptions)\n    .then(job => {\n        msg.payload = {\n            success: true,\n            jobId: job.id,\n            message: 'Job created successfully',\n            data: jobData\n        };\n        node.send(msg);\n    })\n    .catch(error => {\n        msg.payload = {\n            success: false,\n            error: error.message\n        };\n        node.send(msg);\n    })\n    .finally(() => {\n        // Clean up connection\n        downloadQueue.close();\n    });\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "bullmq",
+                "module": "bullmq"
+            },
+            {
+                "var": "redis",
+                "module": "ioredis"
+            }
+        ],
+        "x": 550,
+        "y": 320,
+        "wires": [
+            [
+                "90141abee6103800"
+            ]
+        ]
+    },
+    {
+        "id": "90141abee6103800",
+        "type": "debug",
+        "z": "13ad60a837edfb78",
+        "name": "Job Created",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 750,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "f5d5c26e5cd9a716",
+        "type": "delay",
+        "z": "13ad60a837edfb78",
+        "name": "",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "250",
+        "nbRateUnits": "10",
+        "rateUnits": "minute",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": true,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 1010,
+        "y": 200,
+        "wires": [
+            [
+                "3d23281ed2c1be93",
+                "e0ba593fcf0ddd74"
+            ]
+        ]
+    },
+    {
+        "id": "4163e5cc44843a9e",
+        "type": "function",
+        "z": "13ad60a837edfb78",
+        "name": "Setup BullMQ Worker 1",
+        "func": "let redis_url = JSON.parse(env.get(\"REDIS_URL\"))\nconst cluster = new Redis.Cluster(redis_url);\n\n\nconst RPC_URL = \"http://aria2:6800/jsonrpc\";\nconst WS_URL = \"ws://aria2:6800/jsonrpc\";\nconst RPC_SECRET = \"secret\";\n\nconst ws = new WebSocket(WS_URL);\n\nws.on(\"message\", data => {\n    const response = JSON.parse(data);\n    if (response.method === \"aria2.onDownloadComplete\") {\n        const gid = response.params[0].gid;\n        console.log(`Download completed for GID: ${gid}`);\n    }\n});\n\n// Job processor function\nconst processDownloadJob = async (job) => {\n    const { href } = job.data;\n\n    const aria2 = {\n        jsonrpc: \"2.0\",\n        method: \"aria2.addUri\",\n        id: \"1\",\n        params: [`token:${RPC_SECRET}`, [href]]\n    };\n\n\n        try {\n            const response = await axios.post(RPC_URL, aria2);\n            const gid = response.data.result;\n            console.log(`Download requested with GID: ${gid}`);\n\n            // Wait for completion using WebSocket events\n            await new Promise(resolve => {\n                node.log(`promise`);\n                ws.on(\"message\", data => {\n                    node.log(`message received`);\n                    const event = JSON.parse(data);\n                    if (event.method === \"aria2.onDownloadComplete\" && event.params[0].gid === gid) {\n                        node.log(`Download completed: ${href}`);\n                        resolve();\n                    } else if (event.method === \"aria2.onDownloadError\" && event.params[0].gid === gid) {\n                        node.log(`Download error: ${href}`);\n                        resolve();\n                    }\n\n                });\n            });\n\n            console.log(`Finished processing: ${href}`);\n\n        return { status: 'sent', timestamp: new Date().toISOString() };\n\n    } catch (error) {\n        node.error(`Job ${job.id} failed: ${error.message}`);\n\n        // Send error message to Node-RED flow\n        node.send({\n            payload: {\n                type: 'job-failed',\n                jobId: job.id,\n                error: error.message\n            }\n        });\n\n        throw error;\n    }\n};\n\n// Create worker with prefix hash tag\nconst downloadWorker = new bullmq.Worker('download-aria2', processDownloadJob, {\n    connection: cluster,\n    prefix: '{titine}', // Hash tag ensures all keys go to same slot\n    concurrency: 5,\n    limiter: {\n        max: 10,\n        duration: 1000\n    }\n});\n\n// Worker event handlers\ndownloadWorker.on('completed', (job, result) => {\n    node.log(`Job ${job.id} completed with result:`);\n});\n\ndownloadWorker.on('failed', (job, err) => {\n    node.error(`Job ${job.id} failed:`, err.message);\n});\n\ndownloadWorker.on('progress', (job, progress) => {\n    node.log(`Job ${job.id} progress: ${progress}%`);\n});\n\n// Store worker reference for cleanup\ncontext.set('downloadWorker', downloadWorker);\n\nmsg.payload = {\n    status: 'Worker started',\n    queueName: 'download-aria2',\n    concurrency: 5\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "// Cleanup worker on node shutdown\nconst worker = context.get('emailWorker');\nif (worker) {\n    worker.close();\n}",
+        "libs": [
+            {
+                "var": "bullmq",
+                "module": "bullmq"
+            },
+            {
+                "var": "Redis",
+                "module": "ioredis"
+            },
+            {
+                "var": "axios",
+                "module": "axios"
+            },
+            {
+                "var": "WebSocket",
+                "module": "ws"
+            }
+        ],
+        "x": 560,
+        "y": 400,
+        "wires": [
+            [
+                "97f5be7ad8b731eb"
+            ]
+        ]
+    },
+    {
+        "id": "2db4787b68cc95c0",
+        "type": "inject",
+        "z": "13ad60a837edfb78",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 340,
+        "y": 400,
+        "wires": [
+            [
+                "4163e5cc44843a9e"
+            ]
+        ]
+    },
+    {
+        "id": "97f5be7ad8b731eb",
+        "type": "debug",
+        "z": "13ad60a837edfb78",
+        "name": "debug 8",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "f4289f70518e3e89",
+        "type": "inject",
+        "z": "13ad60a837edfb78",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 100,
+        "wires": [
+            [
+                "8dafdd8865d5f168"
+            ]
+        ]
+    },
+    {
+        "id": "05f3c022da1bc27d",
+        "type": "comment",
+        "z": "13ad60a837edfb78",
+        "name": "",
+        "info": "//let cluster = global.get(\"redisCluster\");\nlet downloadQueue = global.get(\"downloadQueue\");\n\nif (!cluster) {\n    let redis_url = env.get(\"REDIS_URL\");\n    cluster = new Redis.Cluster(redis_url);\n    global.set(\"redisCluster\", cluster); // Store connection in Node-RED context\n    // Create queue with prefix hash tag\n    \n    const downloadQueue = new bullmq.Queue('download-aria2', {\n        connection: cluster,\n        prefix: '{titine}'\n    });\n    global.set(\"downloadQueue\", downloadQueue); // Store connection in Node-RED context\n\n}\nreturn msg;\n\n\n\n// Check if a Redis connection already exists\nlet cluster = global.get(\"redisCluster\");\nlet downloadQueue = global.get(\"downloadQueue\");\n\n\nif (!cluster) {\n    cluster = new redis.Cluster([\n    { host: '172.39.0.11', port: 6379 },\n    { host: '172.39.0.12', port: 6379 },\n    { host: '172.39.0.13', port: 6379 }\n]);\n    global.set(\"redisCluster\", cluster); // Store connection in Node-RED context\n    downloadQueue = new bullmq.Queue('download-aria2', {\n        connection: cluster,\n        prefix: '{titine}'\n    });\n    global.set(\"downloadQueue\", downloadQueue); // Store connection in Node-RED context\n}\n\n\n\nasync function checkQueueHealth(queue) {\n    try {\n        await queue.client.ping(); // Pings Redis to verify the queue is active\n        return true;\n    } catch (error) {\n        return false;\n    }\n}\n\n// Check if the queue exists and is active\nlet downloadQueue = context.get(\"downloadQueue\");\n\nif (!downloadQueue || !(await checkQueueHealth(downloadQueue))) {\n    downloadQueue = new bullmq.Queue(\"download-queue\", { connection: cluster, prefix: \"{titine}\" });\n    context.set(\"downloadQueue\", downloadQueue);\n    node.status({ fill: \"green\", shape: \"ring\", text: \"Download Queue Connected\" });\n} ",
+        "x": 1000,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "a0b876343448e901",
+        "type": "function",
+        "z": "13ad60a837edfb78",
+        "name": "Queues",
+        "func": "let cluster = context.get(\"redisCluster\");\nlet redis_url = JSON.parse(env.get(\"REDIS_URL\"));\n\nasync function checkConnection(redisClient) {\n    try {\n        await redisClient.ping();\n        return true; // Redis is reachable\n    } catch (error) {\n        return false; // Connection failed\n    }\n}\n\nasync function getRedisCluster() {\n    if (!cluster || !(await checkConnection(cluster))) {\n       cluster = new redis.Cluster(redis_url);\n       context.set(\"redisCluster\", cluster);\n       node.status({ fill: \"green\", shape: \"ring\", text: \"Connected to Redis Cluster\" });\n    }\n    return cluster;\n}\n\n// Ensure Redis Cluster is active before proceeding\ngetRedisCluster()\n    .then(cluster => {\n        msg.payload = { success: true, message: \"Redis Cluster is active!\" };\n        node.send(msg);\n    })\n    .catch(error => {\n        msg.payload = { success: false, error: error.message };\n        node.status({ fill: \"red\", shape: \"ring\", text: \"Redis Connection Failed\" });\n        node.send(msg);\n    });\n\nasync function checkQueueHealth(queue) {\n    try {\n        await queue.client.ping(); // Pings Redis to verify the queue is active\n        return true;\n    } catch (error) {\n        return false;\n    }\n}\n\n// Check if the queue exists and is active\nlet downloadQueue = context.get(\"downloadQueue\");\n\nif (!downloadQueue || !(await checkQueueHealth(downloadQueue))) {\n    downloadQueue = new bullmq.Queue(\"download-aria2\", { connection: cluster, prefix: \"{titine}\" });\n    context.set(\"downloadQueue\", downloadQueue);\n    node.status({ fill: \"green\", shape: \"ring\", text: \"Download Queue Connected\" });\n} \n\n// Job data from inject node\nconst jobData = {\n    href: msg.href,\n    priority: msg.payload.priority || 1,\n    timestamp: new Date().toISOString()\n};\n\n// Job options\nconst jobOptions = {\n    priority: jobData.priority,\n    delay: msg.payload.delay || 0,\n    attempts: 3,\n    backoff: {\n        type: 'exponential',\n        delay: 2000\n    },\n    removeOnComplete: 100,\n    removeOnFail: 50\n};\n\n// Add job to queue\ndownloadQueue.add('download-link', jobData, jobOptions)\n    .then(job => {\n        msg.payload = {\n            success: true,\n            jobId: job.id,\n            message: 'Job created successfully',\n            data: jobData\n        };\n        node.send(msg);\n    })\n    .catch(error => {\n        msg.payload = {\n            success: false,\n            error: error.message\n        };\n        node.send(msg);\n    })\n    .finally(() => {\n        // Clean up connection\n        downloadQueue.close();\n    });\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "bullmq",
+                "module": "bullmq"
+            },
+            {
+                "var": "redis",
+                "module": "ioredis"
+            }
+        ],
+        "x": 300,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "67a7f76cba5a2aee",
+        "type": "inject",
+        "z": "bdd121f92a65b34d",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "headers",
+                "v": "{     \"Content-Type\": \"application/json\" }",
+                "vt": "json"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"jsonrpc\":\"2.0\",\"method\":\"aria2.addUri\",\"id\":\"1\",\"params\":[\"token:secret\",[\"https://dl-cdn.alpinelinux.org/alpine/v3.22/releases/aarch64/alpine-standard-3.22.0-aarch64.iso\"]]}",
+        "payloadType": "json",
+        "x": 330,
+        "y": 160,
+        "wires": [
+            [
+                "654b596c417dcd2c"
+            ]
+        ]
+    },
+    {
+        "id": "654b596c417dcd2c",
+        "type": "http request",
+        "z": "bdd121f92a65b34d",
+        "name": "",
+        "method": "POST",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://aria2:6800/jsonrpc",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 600,
+        "y": 160,
+        "wires": [
+            [
+                "2422de9974b85761"
+            ]
+        ]
+    },
+    {
+        "id": "2422de9974b85761",
+        "type": "debug",
+        "z": "bdd121f92a65b34d",
+        "name": "debug 3",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "1bc65a08dd955980",
+        "type": "websocket in",
+        "z": "bdd121f92a65b34d",
+        "name": "",
+        "server": "6916ceefd6df8fb5",
+        "client": "",
+        "x": 500,
+        "y": 320,
+        "wires": [
+            [
+                "b8dbf00becfa4a75"
+            ]
+        ]
+    },
+    {
+        "id": "b8dbf00becfa4a75",
+        "type": "debug",
+        "z": "bdd121f92a65b34d",
+        "name": "debug 7",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "8d538ff52e989fdb",
+        "type": "inject",
+        "z": "a843f3ff30ad0d18",
+        "name": "Once",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 290,
+        "y": 220,
+        "wires": [
+            [
+                "081076f5de576ea7"
+            ]
+        ]
+    },
+    {
+        "id": "ca4ba278850aba50",
+        "type": "function",
+        "z": "a843f3ff30ad0d18",
+        "name": "UUID",
+        "func": "msg.payload = crypto.randomUUID();\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "crypto",
+                "module": "crypto"
+            }
+        ],
+        "x": 590,
+        "y": 220,
+        "wires": [
+            [
+                "32c6383a13bb297d",
+                "dd045490fff21a17",
+                "b7063bd33192a3f5"
+            ]
+        ]
+    },
+    {
+        "id": "24ba1c385f47fa95",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "name": "Handle Monitoring",
+        "rules": [
+            {
+                "t": "set",
+                "p": "downloadid",
+                "pt": "flow",
+                "to": "DOWNLOAD_ID",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "host",
+                "pt": "flow",
+                "to": "WHOAMI",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "queues",
+                "pt": "flow",
+                "to": "DOWNLOAD_QUEUES",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "loadbalancer",
+                "pt": "flow",
+                "to": "LOAD_BALANCER",
+                "tot": "env"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 100,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "32c6383a13bb297d",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "name": "K8s",
+        "rules": [
+            {
+                "t": "set",
+                "p": "k8s",
+                "pt": "flow",
+                "to": "$length($env(\"POD_NAME\")) = 0 ? false : $env(\"POD_NAME\")",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 730,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "dd045490fff21a17",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "name": "Handle connection",
+        "rules": [
+            {
+                "t": "set",
+                "p": "action",
+                "pt": "msg",
+                "to": "connect",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "broker",
+                "pt": "msg",
+                "to": "{}",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "broker.force",
+                "pt": "msg",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "broker.broker",
+                "pt": "msg",
+                "to": "MQTT_SUB_BROKER",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "broker.usetls",
+                "pt": "msg",
+                "to": "$contains($env(\"MQTT_SUB_BROKER\"),/wss/) or $contains($env(\"MQTT_SUB_BROKER\"),/mqtts/)",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "broker.verifyservercert",
+                "pt": "msg",
+                "to": "$length($env(\"MQTT_SUB_VERIFYCERT\")) = 0 ? false : $env(\"MQTT_SUB_VERIFYCERT\")",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "broker.username",
+                "pt": "msg",
+                "to": "MQTT_SUB_USERNAME",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "broker.password",
+                "pt": "msg",
+                "to": "MQTT_SUB_PASSWORD",
+                "tot": "env"
+            },
+            {
+                "t": "set",
+                "p": "broker.protocolVersion",
+                "pt": "msg",
+                "to": "$length($env(\"MQTT_SUB_BROKERVERSION\")) = 0 ? 4 : $env(\"MQTT_SUB_BROKERVERSION\")",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 180,
+        "wires": [
+            [
+                "5d2fc40d284feb0e"
+            ]
+        ]
+    },
+    {
+        "id": "5d2fc40d284feb0e",
+        "type": "mqtt out",
+        "z": "a843f3ff30ad0d18",
+        "name": "Define Subscriber",
+        "topic": "",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "8cf5f6b5.937088",
+        "x": 970,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "051f1aadd5a065d6",
+        "type": "redis-instance",
+        "z": "a843f3ff30ad0d18",
+        "server": "029ff868be3010db",
+        "name": "Redis",
+        "topic": "redis",
+        "location": "flow",
+        "x": 250,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "2d16d1fb9be9c0af",
+        "type": "inject",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "2s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 270,
+        "y": 1340,
+        "wires": [
+            [
+                "2c404c7fec3703ea"
+            ]
+        ]
+    },
+    {
+        "id": "fa24a2f54b4ae1a2",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Alive",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "[\t    $flowContext(\"downloadid\"),\t    $flowContext(\"uuid\"),\t    $millis()\t]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 1340,
+        "wires": [
+            [
+                "91375cbee22eac8b"
+            ]
+        ]
+    },
+    {
+        "id": "91375cbee22eac8b",
+        "type": "redis-command",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "server": "029ff868be3010db",
+        "command": "HSET",
+        "name": "Set",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 750,
+        "y": 1340,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "febc59b2a01d3b51",
+        "type": "inject",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "10s",
+        "props": [
+            {
+                "p": "topic",
+                "v": "[ $flowContext(\"downloadid\") ]",
+                "vt": "jsonata"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "x": 270,
+        "y": 1440,
+        "wires": [
+            [
+                "3efa48b69a3564fa"
+            ]
+        ]
+    },
+    {
+        "id": "cb516c136f502154",
+        "type": "function",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Elect",
+        "func": "let min = \"zzzzzzzz-zzzz-zzzz-zzzz-zzzzzzzzzzzz\"\nlet arr = msg.payload;\nlet i;\nlet j=0;\nlet del=[];\nlet priority=\"secondary\";\n\nfor (i = 0; i < arr.length - 1; i = i + 2) {\n    if ( (arr[i] < min) && ( ( Date.now() - parseFloat(arr[i+1]) ) < 8000 ) ) min = arr[i] ;\n    if ( (Date.now() - parseFloat(arr[i + 1])) >= 8000 ) {\n        del[j] = arr[i];\n        j=j+1;\n    }\n}\n\nif ( flow.get(\"uuid\") == min ) priority=\"primary\"\n\nmsg.centre_id=flow.get(\"downloadid\");\nmsg.payload = priority;\nmsg.del = del;\nmsg.uuid = flow.get(\"uuid\");\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 1400,
+        "wires": [
+            [
+                "1437e30492222fdc"
+            ]
+        ]
+    },
+    {
+        "id": "f41773382fda2a90",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Primary ?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "primary",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "secondary",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 320,
+        "y": 1680,
+        "wires": [
+            [
+                "0c40af1e53657c10",
+                "3f291a7f649259e7"
+            ],
+            [
+                "97e2e9730afa6411",
+                "a9c4d402f2216f61"
+            ]
+        ]
+    },
+    {
+        "id": "b6e7189343a699c5",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Delete ?",
+        "property": "del",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nempty"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 580,
+        "y": 1560,
+        "wires": [
+            [
+                "7396f17b4d5a8acc"
+            ]
+        ]
+    },
+    {
+        "id": "7396f17b4d5a8acc",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Del",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "$append(msg.centre_id,msg.del)",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 710,
+        "y": 1560,
+        "wires": [
+            [
+                "43e8195bba447330"
+            ]
+        ]
+    },
+    {
+        "id": "1972856ebcf4fd08",
+        "type": "redis-command",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "server": "029ff868be3010db",
+        "command": "HGETALL",
+        "name": "Getall",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 650,
+        "y": 1400,
+        "wires": [
+            [
+                "cb516c136f502154"
+            ]
+        ]
+    },
+    {
+        "id": "43e8195bba447330",
+        "type": "redis-command",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "server": "029ff868be3010db",
+        "command": "HDEL",
+        "name": "Del",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 830,
+        "y": 1560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0c40af1e53657c10",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Open",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "control",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "open",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 1640,
+        "wires": [
+            [
+                "bf84f00af773ae55"
+            ]
+        ]
+    },
+    {
+        "id": "a194d606d2c36f0c",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Queue",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "control",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "queue",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 630,
+        "y": 1720,
+        "wires": [
+            [
+                "fecc8e288bcc1234",
+                "9204f8d517897d74"
+            ]
+        ]
+    },
+    {
+        "id": "97e2e9730afa6411",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Reset",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "control",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "reset",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 1700,
+        "wires": [
+            [
+                "088242062a8edf86",
+                "ff38c27547f57df5"
+            ]
+        ]
+    },
+    {
+        "id": "fecc8e288bcc1234",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Flush",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "control",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "flush",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 770,
+        "y": 1740,
+        "wires": [
+            [
+                "7cbd67306119b602",
+                "4ce66cb6c1cd331a"
+            ]
+        ]
+    },
+    {
+        "id": "d199768c970a404f",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Queue",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "control",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "queue",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 970,
+        "y": 1740,
+        "wires": [
+            [
+                "b6f1b5afd8f26926"
+            ]
+        ]
+    },
+    {
+        "id": "bf84f00af773ae55",
+        "type": "link out",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "link out 4",
+        "mode": "link",
+        "links": [
+            "93db13a150783f1f",
+            "fbf08e5fe9f4d457"
+        ],
+        "x": 535,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "088242062a8edf86",
+        "type": "link out",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "link out 5",
+        "mode": "link",
+        "links": [
+            "3484111e0c147f1d",
+            "2a717a1429576405"
+        ],
+        "x": 535,
+        "y": 1680,
+        "wires": []
+    },
+    {
+        "id": "7cbd67306119b602",
+        "type": "link out",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "link out 6",
+        "mode": "link",
+        "links": [
+            "fbf08e5fe9f4d457"
+        ],
+        "x": 865,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "9204f8d517897d74",
+        "type": "link out",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "link out 7",
+        "mode": "link",
+        "links": [
+            "2a717a1429576405"
+        ],
+        "x": 735,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "ff38c27547f57df5",
+        "type": "delay",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "250",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 535,
+        "y": 1720,
+        "wires": [
+            [
+                "a194d606d2c36f0c"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "4ce66cb6c1cd331a",
+        "type": "delay",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "250",
+        "timeoutUnits": "milliseconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 865,
+        "y": 1740,
+        "wires": [
+            [
+                "d199768c970a404f"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "b6f1b5afd8f26926",
+        "type": "link out",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "link out 8",
+        "mode": "link",
+        "links": [
+            "fbf08e5fe9f4d457"
+        ],
+        "x": 1065,
+        "y": 1740,
+        "wires": []
+    },
+    {
+        "id": "b0058fcf19b55fbc",
+        "type": "comment",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Elect Primary/Secondary",
+        "info": "",
+        "x": 330,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "1fb5a0fd9a1d867e",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Primary",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "[\t   \"docker\",\t   $flowContext(\"downloadid\") & \"_primary\",\t   $flowContext(\"host\"),\t   $flowContext(\"downloadid\") & \"_primary_time\",\t   $millis()\t]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "topic",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 580,
+        "y": 1600,
+        "wires": [
+            [
+                "9da53c72d3d77292"
+            ]
+        ]
+    },
+    {
+        "id": "11e84d462d0da702",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Secondary",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "[    \"docker\",    $flowContext(\"downloadid\") & \"_secondary\",    $flowContext(\"host\"),    $flowContext(\"downloadid\") & \"_secondary_time\",    $millis() ]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "topic",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 610,
+        "y": 1780,
+        "wires": [
+            [
+                "f0bb2e3b8a4db6ac"
+            ]
+        ]
+    },
+    {
+        "id": "f0bb2e3b8a4db6ac",
+        "type": "redis-command",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "server": "029ff868be3010db",
+        "command": "HSET",
+        "name": "Set",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 750,
+        "y": 1780,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9da53c72d3d77292",
+        "type": "redis-command",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "server": "029ff868be3010db",
+        "command": "HSET",
+        "name": "Set",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 710,
+        "y": 1600,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fb872857136145a0",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "K8s ?",
+        "property": "k8s",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "false"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 510,
+        "y": 1440,
+        "wires": [
+            [
+                "1972856ebcf4fd08"
+            ],
+            [
+                "8fb0ec6470571fd1"
+            ]
+        ]
+    },
+    {
+        "id": "1437e30492222fdc",
+        "type": "link out",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "link out 26",
+        "mode": "link",
+        "links": [
+            "5a5ed27cce4a9ee1"
+        ],
+        "x": 1165,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "5a5ed27cce4a9ee1",
+        "type": "link in",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "link in 14",
+        "links": [
+            "1437e30492222fdc"
+        ],
+        "x": 225,
+        "y": 1680,
+        "wires": [
+            [
+                "f41773382fda2a90"
+            ]
+        ]
+    },
+    {
+        "id": "8fb0ec6470571fd1",
+        "type": "http request",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Pod",
+        "method": "GET",
+        "ret": "txt",
+        "paytoqs": "ignore",
+        "url": "http://localhost:4040",
+        "tls": "",
+        "persist": false,
+        "proxy": "",
+        "insecureHTTPParser": false,
+        "authType": "",
+        "senderr": false,
+        "headers": [],
+        "x": 650,
+        "y": 1480,
+        "wires": [
+            [
+                "e4140757ba2e1d5d"
+            ]
+        ]
+    },
+    {
+        "id": "e4140757ba2e1d5d",
+        "type": "json",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 770,
+        "y": 1480,
+        "wires": [
+            [
+                "e3a7bdd291dc874f"
+            ]
+        ]
+    },
+    {
+        "id": "e3a7bdd291dc874f",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Master ?",
+        "property": "payload.name",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "k8s",
+                "vt": "flow"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 900,
+        "y": 1480,
+        "wires": [
+            [
+                "264ce3bcd8f56fe2"
+            ],
+            [
+                "225fb9b32f8b87a0"
+            ]
+        ]
+    },
+    {
+        "id": "264ce3bcd8f56fe2",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Primary",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "primary",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1040,
+        "y": 1460,
+        "wires": [
+            [
+                "1437e30492222fdc"
+            ]
+        ]
+    },
+    {
+        "id": "225fb9b32f8b87a0",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Secondary",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "secondary",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1050,
+        "y": 1500,
+        "wires": [
+            [
+                "1437e30492222fdc"
+            ]
+        ]
+    },
+    {
+        "id": "0b7db5e2a563f7ee",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "K8s ?",
+        "property": "k8s",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 510,
+        "y": 1340,
+        "wires": [
+            [
+                "fa24a2f54b4ae1a2"
+            ]
+        ]
+    },
+    {
+        "id": "3f291a7f649259e7",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "K8s ?",
+        "property": "k8s",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 450,
+        "y": 1600,
+        "wires": [
+            [
+                "b6e7189343a699c5",
+                "1fb5a0fd9a1d867e"
+            ]
+        ]
+    },
+    {
+        "id": "a9c4d402f2216f61",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "K8s ?",
+        "property": "k8s",
+        "propertyType": "flow",
+        "rules": [
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 450,
+        "y": 1780,
+        "wires": [
+            [
+                "11e84d462d0da702"
+            ]
+        ]
+    },
+    {
+        "id": "720bdf8b4f4fd2bc",
+        "type": "comment",
+        "z": "a843f3ff30ad0d18",
+        "g": "704fe7a0a3413400",
+        "name": "Health check",
+        "info": "",
+        "x": 290,
+        "y": 1880,
+        "wires": []
+    },
+    {
+        "id": "c2e79e20b06839e6",
+        "type": "http in",
+        "z": "a843f3ff30ad0d18",
+        "g": "704fe7a0a3413400",
+        "name": "",
+        "url": "/primary",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 270,
+        "y": 1940,
+        "wires": [
+            [
+                "9c7128f744e64e17"
+            ]
+        ]
+    },
+    {
+        "id": "3c5d87dbdc9a0a2c",
+        "type": "http response",
+        "z": "a843f3ff30ad0d18",
+        "g": "704fe7a0a3413400",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 1940,
+        "wires": []
+    },
+    {
+        "id": "507cce674d0f12d6",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "g": "704fe7a0a3413400",
+        "name": "Response",
+        "rules": [
+            {
+                "t": "set",
+                "p": "statusCode",
+                "pt": "msg",
+                "to": "code",
+                "tot": "flow"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 1920,
+        "wires": [
+            [
+                "3c5d87dbdc9a0a2c"
+            ]
+        ]
+    },
+    {
+        "id": "5f6c31b4abc8077c",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "g": "704fe7a0a3413400",
+        "name": "200",
+        "rules": [
+            {
+                "t": "set",
+                "p": "code",
+                "pt": "flow",
+                "to": "200",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 1980,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d17844f69c0a434e",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "g": "704fe7a0a3413400",
+        "name": "404",
+        "rules": [
+            {
+                "t": "set",
+                "p": "code",
+                "pt": "flow",
+                "to": "404",
+                "tot": "num"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 410,
+        "y": 2020,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "93db13a150783f1f",
+        "type": "link in",
+        "z": "a843f3ff30ad0d18",
+        "g": "704fe7a0a3413400",
+        "name": "Is primary",
+        "links": [
+            "bf84f00af773ae55"
+        ],
+        "x": 260,
+        "y": 1980,
+        "wires": [
+            [
+                "5f6c31b4abc8077c"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "3484111e0c147f1d",
+        "type": "link in",
+        "z": "a843f3ff30ad0d18",
+        "g": "704fe7a0a3413400",
+        "name": "Is secondary",
+        "links": [
+            "088242062a8edf86"
+        ],
+        "x": 270,
+        "y": 2020,
+        "wires": [
+            [
+                "d17844f69c0a434e"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "fbf08e5fe9f4d457",
+        "type": "link in",
+        "z": "a843f3ff30ad0d18",
+        "name": "link in 3",
+        "links": [
+            "bf84f00af773ae55",
+            "7cbd67306119b602",
+            "b6f1b5afd8f26926"
+        ],
+        "x": 755,
+        "y": 280,
+        "wires": [
+            [
+                "f0fc3d4efdfc4442",
+                "22b5b78420c0a3cb"
+            ]
+        ]
+    },
+    {
+        "id": "2a717a1429576405",
+        "type": "link in",
+        "z": "a843f3ff30ad0d18",
+        "name": "link in 4",
+        "links": [
+            "088242062a8edf86",
+            "9204f8d517897d74"
+        ],
+        "x": 875,
+        "y": 280,
+        "wires": [
+            [
+                "22b5b78420c0a3cb"
+            ]
+        ]
+    },
+    {
+        "id": "f0fc3d4efdfc4442",
+        "type": "q-gate",
+        "z": "a843f3ff30ad0d18",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "queueing",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "queueCmd": "queue",
+        "defaultCmd": "default",
+        "triggerCmd": "trigger",
+        "flushCmd": "flush",
+        "resetCmd": "reset",
+        "peekCmd": "peek",
+        "dropCmd": "drop",
+        "statusCmd": "status",
+        "maxQueueLength": "10000",
+        "keepNewest": false,
+        "qToggle": false,
+        "persist": false,
+        "storeName": "memory",
+        "x": 790,
+        "y": 340,
+        "wires": [
+            [
+                "22b5b78420c0a3cb"
+            ]
+        ]
+    },
+    {
+        "id": "22b5b78420c0a3cb",
+        "type": "q-gate",
+        "z": "a843f3ff30ad0d18",
+        "name": "",
+        "controlTopic": "control",
+        "defaultState": "queueing",
+        "openCmd": "open",
+        "closeCmd": "close",
+        "toggleCmd": "toggle",
+        "queueCmd": "queue",
+        "defaultCmd": "default",
+        "triggerCmd": "trigger",
+        "flushCmd": "flush",
+        "resetCmd": "reset",
+        "peekCmd": "peek",
+        "dropCmd": "drop",
+        "statusCmd": "status",
+        "maxQueueLength": "10000",
+        "keepNewest": false,
+        "qToggle": false,
+        "persist": false,
+        "storeName": "memory",
+        "x": 910,
+        "y": 340,
+        "wires": [
+            [
+                "c2b6f560b793a1fb"
+            ]
+        ]
+    },
+    {
+        "id": "c16b0c693308307a",
+        "type": "status",
+        "z": "a843f3ff30ad0d18",
+        "name": "Primary",
+        "scope": [
+            "5d2fc40d284feb0e"
+        ],
+        "x": 270,
+        "y": 340,
+        "wires": [
+            [
+                "7f71969539841a7b"
+            ]
+        ]
+    },
+    {
+        "id": "7f71969539841a7b",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "name": "Green ?",
+        "property": "status.fill",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "green",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 400,
+        "y": 340,
+        "wires": [
+            [
+                "81cb5717a2fafef6"
+            ]
+        ]
+    },
+    {
+        "id": "81cb5717a2fafef6",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "name": "Init",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "$split($env(\"MQTT_SUB_TOPIC\"),\",\")",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "action",
+                "pt": "msg",
+                "to": "subscribe",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 340,
+        "wires": [
+            [
+                "9c3031ba855f3a78"
+            ]
+        ]
+    },
+    {
+        "id": "9c3031ba855f3a78",
+        "type": "mqtt in",
+        "z": "a843f3ff30ad0d18",
+        "d": true,
+        "name": "Subscriber",
+        "topic": "",
+        "qos": "2",
+        "datatype": "json",
+        "broker": "8cf5f6b5.937088",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 1,
+        "x": 660,
+        "y": 340,
+        "wires": [
+            [
+                "f0fc3d4efdfc4442"
+            ]
+        ]
+    },
+    {
+        "id": "c2b6f560b793a1fb",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "name": "Save msg",
+        "rules": [
+            {
+                "t": "set",
+                "p": "currentpayload",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "currenttopic",
+                "pt": "msg",
+                "to": "topic",
+                "tot": "msg",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "[]",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "currentpayload.id",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1040,
+        "y": 340,
+        "wires": [
+            [
+                "3cc8399040d36f53"
+            ]
+        ]
+    },
+    {
+        "id": "3cc8399040d36f53",
+        "type": "redis-command",
+        "z": "a843f3ff30ad0d18",
+        "server": "029ff868be3010db",
+        "command": "GET",
+        "name": "Get",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 1170,
+        "y": 340,
+        "wires": [
+            [
+                "9572d28d216ceb1d"
+            ]
+        ]
+    },
+    {
+        "id": "9572d28d216ceb1d",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "name": "Chech ID",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1300,
+        "y": 340,
+        "wires": [
+            [
+                "3b687ba89026d039",
+                "1c11b44d773945e5"
+            ]
+        ]
+    },
+    {
+        "id": "3b687ba89026d039",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "name": "Save",
+        "rules": [
+            {
+                "t": "set",
+                "p": "extid",
+                "pt": "msg",
+                "to": "msg.currentpayload.id",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "[msg.extid,true,\"EX\",900]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "extid",
+                "pt": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "topic",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1430,
+        "y": 300,
+        "wires": [
+            [
+                "32ee10307e72ad18"
+            ]
+        ]
+    },
+    {
+        "id": "32ee10307e72ad18",
+        "type": "redis-command",
+        "z": "a843f3ff30ad0d18",
+        "server": "029ff868be3010db",
+        "command": "SET",
+        "name": "Set",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 1550,
+        "y": 300,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b7063bd33192a3f5",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "name": "Save",
+        "rules": [
+            {
+                "t": "set",
+                "p": "uuid",
+                "pt": "flow",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 730,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1c11b44d773945e5",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "name": "Get data_id",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "[]",
+                "tot": "json",
+                "dc": true
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "\"data_id:\" & payload.properties.data_id",
+                "tot": "jsonata",
+                "dc": true
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1450,
+        "y": 340,
+        "wires": [
+            [
+                "015fe07f352fa401"
+            ]
+        ]
+    },
+    {
+        "id": "06d424e75fdcaa65",
+        "type": "redis-command",
+        "z": "a843f3ff30ad0d18",
+        "server": "029ff868be3010db",
+        "command": "GET",
+        "name": "Get",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 330,
+        "y": 440,
+        "wires": [
+            [
+                "67081aede34e0d28"
+            ]
+        ]
+    },
+    {
+        "id": "67081aede34e0d28",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "name": "Chech ID",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "null"
+            },
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 2,
+        "x": 460,
+        "y": 440,
+        "wires": [
+            [
+                "524b215f871858e0"
+            ],
+            [
+                "730e6aa25cdd247b"
+            ]
+        ]
+    },
+    {
+        "id": "015fe07f352fa401",
+        "type": "link out",
+        "z": "a843f3ff30ad0d18",
+        "name": "link out 1",
+        "mode": "link",
+        "links": [
+            "eeaf6cab7c20b287"
+        ],
+        "x": 1555,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "eeaf6cab7c20b287",
+        "type": "link in",
+        "z": "a843f3ff30ad0d18",
+        "name": "link in 1",
+        "links": [
+            "015fe07f352fa401"
+        ],
+        "x": 235,
+        "y": 440,
+        "wires": [
+            [
+                "06d424e75fdcaa65"
+            ]
+        ]
+    },
+    {
+        "id": "4fabcc07ce7c5007",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "name": "HSET",
+        "rules": [
+            {
+                "t": "set",
+                "p": "href",
+                "pt": "msg",
+                "to": "msg.currentpayload.links[rel=\"canonical\"].href",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "data_id",
+                "pt": "msg",
+                "to": "currentpayload.properties.data_id",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[ \"data_id:\" & data_id , href , \"start\" ]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 420,
+        "wires": [
+            [
+                "c872219801c0a4f7",
+                "91e5f52ea18fea85"
+            ]
+        ]
+    },
+    {
+        "id": "a64379f16b45e9d4",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "name": "HSET",
+        "rules": [
+            {
+                "t": "set",
+                "p": "href",
+                "pt": "msg",
+                "to": "msg.currentpayload.links[rel=\"canonical\"].href",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "data_id",
+                "pt": "msg",
+                "to": "currentpayload.properties.data_id",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[ \"data_id:\" & data_id , href , $millis() ]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 750,
+        "y": 460,
+        "wires": [
+            [
+                "6fa223b1812349d6"
+            ]
+        ]
+    },
+    {
+        "id": "6fa223b1812349d6",
+        "type": "redis-command",
+        "z": "a843f3ff30ad0d18",
+        "d": true,
+        "server": "029ff868be3010db",
+        "command": "HSET",
+        "name": "HSET",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 870,
+        "y": 460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "c872219801c0a4f7",
+        "type": "redis-command",
+        "z": "a843f3ff30ad0d18",
+        "server": "029ff868be3010db",
+        "command": "HSET",
+        "name": "HSET",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 870,
+        "y": 400,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "524b215f871858e0",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "name": "Canonical ?",
+        "property": "currentpayload.links[rel=\"canonical\"].href",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 610,
+        "y": 420,
+        "wires": [
+            [
+                "4fabcc07ce7c5007"
+            ]
+        ]
+    },
+    {
+        "id": "730e6aa25cdd247b",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "name": "Canonical ?",
+        "property": "currentpayload.links[rel=\"canonical\"].href",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 610,
+        "y": 460,
+        "wires": [
+            [
+                "a64379f16b45e9d4"
+            ]
+        ]
+    },
+    {
+        "id": "8395eb1b472a1bd4",
+        "type": "function",
+        "z": "a843f3ff30ad0d18",
+        "name": "Weighted RR",
+        "func": "// Define selected queues (modifiable)\nlet selectedQueues = [1, 3, 8];\n\n// Initialize tracking in context if not already set\nif (!context.get(\"queueLoads\")) {\n    context.set(\"queueLoads\", selectedQueues.map(() => 0)); // Tracks total cost per queue\n}\nif (!context.get(\"index\")) {\n    context.set(\"index\", 0);\n}\n\nlet queueLoads = context.get(\"queueLoads\");\nlet index = context.get(\"index\");\nlet messageCost = msg.cost || 1; // Default cost is 1 if not provided\n\n// Find the queue with the least total assigned cost\nlet minLoad = Math.min(...queueLoads);\nlet candidates = selectedQueues.filter((_, i) => queueLoads[i] === minLoad);\n\n// Pick next available queue in round-robin order\nlet assignedQueue = candidates[index % candidates.length];\n\n// Update the selected queue's load by adding the message cost\nqueueLoads[selectedQueues.indexOf(assignedQueue)] += messageCost; \ncontext.set(\"queueLoads\", queueLoads);\ncontext.set(\"index\", (index + 1) % candidates.length); // Ensures cycling properly\n\n// Return updated message\nmsg.payload = {\n    original: msg.payload,\n    assignedQueue: assignedQueue,\n    messageCost: messageCost,\n    updatedLoads: queueLoads\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1400,
+        "y": 740,
+        "wires": [
+            [
+                "b08a417ced8b7a58"
+            ]
+        ]
+    },
+    {
+        "id": "ab34943ef6cac4a6",
+        "type": "inject",
+        "z": "a843f3ff30ad0d18",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "n",
+                "v": "6",
+                "vt": "num"
+            },
+            {
+                "p": "cost",
+                "v": "$round(($random() * 100 ), 0)",
+                "vt": "jsonata"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1250,
+        "y": 740,
+        "wires": [
+            [
+                "8395eb1b472a1bd4"
+            ]
+        ]
+    },
+    {
+        "id": "b08a417ced8b7a58",
+        "type": "debug",
+        "z": "a843f3ff30ad0d18",
+        "name": "debug 13",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1640,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "95ed95de7384f286",
+        "type": "function",
+        "z": "a843f3ff30ad0d18",
+        "name": "Selected Queues",
+        "func": "// Define selected queues (modifiable)\nlet selectedQueues = [1, 3, 8];\n\n// Initialize tracking in context if not already set\nif (!context.get(\"counts\")) {\n    context.set(\"counts\", selectedQueues.map(() => 0)); // Only track selected queues\n}\nif (!context.get(\"index\")) {\n    context.set(\"index\", 0);\n}\n\nlet counts = context.get(\"counts\");\nlet index = context.get(\"index\");\n\n// Find the least-used queue\nlet minCount = Math.min(...counts);\nlet candidates = selectedQueues.filter((_, i) => counts[i] === minCount);\n\n// Pick next available candidate in round-robin order\nlet assignedQueue = candidates[index % candidates.length];\n\n// Update tracking\ncounts[selectedQueues.indexOf(assignedQueue)]++; \ncontext.set(\"counts\", counts);\ncontext.set(\"index\", (index + 1) % candidates.length); // Ensures cycling properly\n\n// Return updated message\nmsg.payload = {\n    original: msg.payload,\n    assignedQueue: assignedQueue\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1440,
+        "y": 800,
+        "wires": [
+            [
+                "e78de171b92f4a6f"
+            ]
+        ]
+    },
+    {
+        "id": "95f76fbed854533a",
+        "type": "inject",
+        "z": "a843f3ff30ad0d18",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1250,
+        "y": 800,
+        "wires": [
+            [
+                "95ed95de7384f286"
+            ]
+        ]
+    },
+    {
+        "id": "e78de171b92f4a6f",
+        "type": "debug",
+        "z": "a843f3ff30ad0d18",
+        "name": "debug 11",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1650,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "b424cb4365e5b625",
+        "type": "function",
+        "z": "a843f3ff30ad0d18",
+        "name": "Round-Robin",
+        "func": "// Initialize tracking object if not already set\nif (!context.get(\"counts\")) {\n    context.set(\"counts\", Array(msg.n).fill(0)); // Track usage counts\n    context.set(\"index\", 0); // For round-robin fairness\n}\n\nlet counts = context.get(\"counts\");\nlet index = context.get(\"index\");\n\n// Find the least-used number\nlet minCount = Math.min(...counts);\nlet candidates = [];\n\nfor (let i = 0; i < counts.length; i++) {\n    if (counts[i] === minCount) {\n        candidates.push(i + 1); // Store valid numbers (1 to N)\n    }\n}\n\n// Pick in round-robin order\nlet assignedNumber = candidates[index % candidates.length];\nindex++; // Move to the next option for fairness\n\n// Update tracking\ncounts[assignedNumber - 1]++;\ncontext.set(\"counts\", counts);\ncontext.set(\"index\", index);\n\n// Return message with assigned number\nmsg.payload = {\n    original: msg.payload,\n    assignedNumber: assignedNumber\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1380,
+        "y": 1000,
+        "wires": [
+            [
+                "53b663db5a3c2cb0"
+            ]
+        ]
+    },
+    {
+        "id": "bfa542c4f8dc1b68",
+        "type": "inject",
+        "z": "a843f3ff30ad0d18",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 1220,
+        "y": 1000,
+        "wires": [
+            [
+                "b424cb4365e5b625"
+            ]
+        ]
+    },
+    {
+        "id": "5ce191035153a381",
+        "type": "debug",
+        "z": "a843f3ff30ad0d18",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1840,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "53b663db5a3c2cb0",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "name": "LB",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 6,
+        "x": 1550,
+        "y": 1000,
+        "wires": [
+            [
+                "5ce191035153a381"
+            ],
+            [],
+            [],
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "91e5f52ea18fea85",
+        "type": "function",
+        "z": "a843f3ff30ad0d18",
+        "name": "Queues",
+        "func": "let cluster = context.get(\"redisCluster\");\nlet redis_url = JSON.parse(env.get(\"REDIS_URL\"));\n\nasync function checkConnection(redisClient) {\n    try {\n        await redisClient.ping();\n        return true; // Redis is reachable\n    } catch (error) {\n        return false; // Connection failed\n    }\n}\n\nasync function getRedisCluster() {\n    if (!cluster || !(await checkConnection(cluster))) {\n       cluster = new redis.Cluster(redis_url);\n       context.set(\"redisCluster\", cluster);\n       node.status({ fill: \"green\", shape: \"ring\", text: \"Connected to Redis Cluster\" });\n    }\n    return cluster;\n}\n\n// Ensure Redis Cluster is active before proceeding\ngetRedisCluster()\n    .then(cluster => {\n        msg.status = { success: true, message: \"Redis Cluster is active!\" };\n        node.send(msg);\n    })\n    .catch(error => {\n        msg.payload = { success: false, error: error.message };\n        node.status({ fill: \"red\", shape: \"ring\", text: \"Redis Connection Failed\" });\n        node.send(msg);\n    });\n\nasync function checkQueueHealth(queue) {\n    try {\n        await queue.client.ping(); // Pings Redis to verify the queue is active\n        return true;\n    } catch (error) {\n        return false;\n    }\n}\n\n// Check if the queues exist and is active\nlet downloadQueues = context.get(\"downloadQueues\") || {}; // Retrieve existing queues\n\nasync function initializeQueues() {\n    const queueNumbers = env.get(\"QUEUES\")\n        .split(\",\")\n        .map(num => {\n            let parsedNum = parseInt(num, 10);\n            return isNaN(parsedNum) ? null : parsedNum; // Remove invalid values\n        })\n        .filter(num => num !== null); // Ensure only valid numbers remain\n    if (!queueNumbers.length) {\n        node.error(\"❌ No queues were initialized!\");\n        return;\n    }\n    for (let i of queueNumbers) {\n        let queueName = `download-queue${i}`;\n\n        // Check if the queue exists and is healthy\n        if (!downloadQueues[queueName] || !(await checkQueueHealth(downloadQueues[queueName]))) {\n            downloadQueues[queueName] = new bullmq.Queue(queueName, { connection: cluster, prefix: `{queue${i}}` });\n            node.send({ fill: \"green\", shape: \"ring\", text: `Connected ${queueName}` });\n        }\n    }\n\n    // Store updated queues in the context\n    context.set(\"downloadQueues\", downloadQueues);\n}\n\n\n// Run queue initialization\ninitializeQueues();\n\n// Store queue total costs\nlet queueCosts = context.get(\"queueCosts\") || {};\n\n// Initialize queue costs if missing\nObject.keys(downloadQueues).forEach(queueName => {\n    queueCosts[queueName] = queueCosts[queueName] || 0; // Default cost is 0\n});\n\n\n\n// **Select the queue with the lowest total cost**\nconst selectedQueueName = Object.keys(downloadQueues).reduce((lowest, queueName) =>\n    queueCosts[queueName] < queueCosts[lowest] ? queueName : lowest, Object.keys(downloadQueues)[0]);\n\nconsole.log(\"📊 Queue Costs:\", queueCosts);\nconsole.log(\"✅ Selected queue:\", selectedQueueName);\n\nconsole.log(\"ℹ️ Available queues:\", Object.keys(downloadQueues));\n\n\nconst selectedQueue = downloadQueues[selectedQueueName];\n\nnode.status({ fill: \"green\", shape: \"ring\", text: `Connected ${selectedQueueName}` });\n\n\n\n// **Job data (Cost defaults to 1 if not provided)**\nconst jobData = {\n    href: msg.href,\n//    cost: msg.payload.cost || 1,\n    timestamp: new Date().toISOString(),\n    queue: selectedQueueName\n};\n\nqueueCosts[selectedQueueName] += 1;\ncontext.set(\"queueCosts\", queueCosts);\n\nmsg.payload = jobData;\n\nreturn msg;\n\n// **Job options**\nconst jobOptions = {\n    priority: jobData.cost,\n    delay: msg.payload.delay || 0,\n    attempts: 3,\n    backoff: { type: \"exponential\", delay: 2000 },\n    removeOnComplete: 100,\n    removeOnFail: 50\n};\n\n// **Add job to the selected queue**\nselectedQueue.add(\"download-job\", jobData, jobOptions)\n    .then(job => {\n        // **Update the queue's total assigned cost**\n        queueCosts[selectedQueueName] += jobData.cost;\n        context.set(\"queueCosts\", queueCosts);\n\n        msg.payload = {\n            success: true,\n            jobId: job.id,\n            queue: selectedQueueName,\n            cost: jobData.cost,\n            message: \"Job assigned successfully\",\n            data: jobData\n        };\n        node.send(msg);\n    })\n    .catch(error => {\n        msg.payload = { success: false, error: error.message };\n        node.send(msg);\n    });",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "bullmq",
+                "module": "bullmq"
+            },
+            {
+                "var": "redis",
+                "module": "ioredis"
+            }
+        ],
+        "x": 1000,
+        "y": 420,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "43b3f35e7b6a1f43",
+        "type": "function",
+        "z": "a843f3ff30ad0d18",
+        "name": "Queues",
+        "func": "let cluster = context.get(\"redisCluster\");\nlet redis_url = JSON.parse(env.get(\"REDIS_URL\"));\n\nasync function checkConnection(redisClient) {\n    try {\n        await redisClient.ping();\n        return true; // Redis is reachable\n    } catch (error) {\n        return false; // Connection failed\n    }\n}\n\nasync function getRedisCluster() {\n    if (!cluster || !(await checkConnection(cluster))) {\n       cluster = new redis.Cluster(redis_url);\n       context.set(\"redisCluster\", cluster);\n       node.status({ fill: \"green\", shape: \"ring\", text: \"Connected to Redis Cluster\" });\n    }\n    return cluster;\n}\n\n// Ensure Redis Cluster is active before proceeding\ngetRedisCluster()\n    .then(cluster => {\n        msg.status = { success: true, message: \"Redis Cluster is active!\" };\n    })\n    .catch(error => {\n        msg.payload = { success: false, error: error.message };\n        node.status({ fill: \"red\", shape: \"ring\", text: \"Redis Connection Failed\" });\n    });\n\nasync function checkQueueHealth(queue) {\n    try {\n        await queue.client.ping(); // Pings Redis to verify the queue is active\n        return true;\n    } catch (error) {\n        return false;\n    }\n}\n\n// Check if the queues exist and is active\nlet downloadQueues = context.get(\"downloadQueues\") || {}; // Retrieve existing queues\n\nfunction initializeQueues() {\n    const queueNumbers = JSON.parse(env.get(\"QUEUES\"))\n        queueNumbers.forEach(num => {\n            if (typeof num === \"number\" && !isNaN(num)) {\n                let queueName = `download-queue${num}`;\n\n                // Check if the queue exists and is healthy\n                if (!downloadQueues[queueName] || !( checkQueueHealth(downloadQueues[queueName]))) {\n                    downloadQueues[queueName] = new bullmq.Queue(queueName, { connection: cluster, prefix: `{queue${num}}` });\n                    node.status({ fill: \"green\", shape: \"ring\", text: `Connected ${queueName}` });\n                }\n            } else {\n                console.error(`⚠️ Invalid value detected: ${num}`);\n            }\n        });\n    // Store updated queues in the context\n    context.set(\"downloadQueues\", downloadQueues);\n}\n\n// Run queue initialization\ninitializeQueues();\n\n// Store queue total costs\nlet queueCosts = context.get(\"queueCosts\") || {};\n\n// Initialize queue costs if missing\nObject.keys(downloadQueues).forEach(queueName => {\n    queueCosts[queueName] = queueCosts[queueName] || 0; // Default cost is 0\n});\n\n// **Select the queue with the lowest total cost**\nconst selectedQueueName = Object.keys(downloadQueues).reduce((lowest, queueName) =>\n    queueCosts[queueName] < queueCosts[lowest] ? queueName : lowest, Object.keys(downloadQueues)[0]);\n\nconst selectedQueue = downloadQueues[selectedQueueName];\n\nnode.status({ fill: \"green\", shape: \"ring\", text: `Connected ${selectedQueueName}` });\n\n// **Job data (Cost defaults to 1 if not provided)**\nconst jobData = {\n    href: msg.href,\n    cost: msg.payload.cost || 1,\n    timestamp: new Date().toISOString(),\n    queue: selectedQueueName\n};\n\nqueueCosts[selectedQueueName] += 1;\ncontext.set(\"queueCosts\", queueCosts);\n\n// **Job options**\nconst jobOptions = {\n    priority: jobData.cost,\n    delay: msg.payload.delay || 0,\n    attempts: 3,\n    backoff: { type: \"exponential\", delay: 2000 },\n    removeOnComplete: 100,\n    removeOnFail: 50\n};\n\n// **Add job to the selected queue**\nselectedQueue.add(\"download-job\", jobData, jobOptions)\n    .then(job => {\n\n        msg.payload = {\n            success: true,\n            jobId: job.id,\n            queue: selectedQueueName,\n            cost: jobData.cost,\n            message: \"Job assigned successfully\",\n            data: jobData\n        };\n        node.send(msg);\n    })\n    .catch(error => {\n        msg.payload = { success: false, error: error.message };\n        node.send(msg);\n    });\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "bullmq",
+                "module": "bullmq"
+            },
+            {
+                "var": "redis",
+                "module": "ioredis"
+            }
+        ],
+        "x": 590,
+        "y": 820,
+        "wires": [
+            [
+                "0f165b5444cfb091"
+            ]
+        ]
+    },
+    {
+        "id": "2dbe56bb35c408b7",
+        "type": "inject",
+        "z": "a843f3ff30ad0d18",
+        "name": "",
+        "props": [
+            {
+                "p": "href",
+                "v": "https://wis2-global-cache.s3.amazonaws.com/data/de-dwd-gts-to-wis2/data/core/I/E/D/X/06/EUMP/A_IEDX06EUMP061305_C_EDZW_20250606135851_29943025",
+                "vt": "str"
+            },
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "{\"cost\": 1, \"delay\": 2}",
+        "payloadType": "json",
+        "x": 410,
+        "y": 820,
+        "wires": [
+            [
+                "43b3f35e7b6a1f43"
+            ]
+        ]
+    },
+    {
+        "id": "0f165b5444cfb091",
+        "type": "debug",
+        "z": "a843f3ff30ad0d18",
+        "name": "debug 6",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 780,
+        "y": 820,
+        "wires": []
+    },
+    {
+        "id": "5825e4ebfbfd92d7",
+        "type": "inject",
+        "z": "a843f3ff30ad0d18",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 290,
+        "y": 960,
+        "wires": [
+            [
+                "9f3634a55739e7fe"
+            ]
+        ]
+    },
+    {
+        "id": "9f3634a55739e7fe",
+        "type": "function",
+        "z": "a843f3ff30ad0d18",
+        "name": "function 3",
+        "func": "const queueNumbers = JSON.parse(env.get(\"QUEUES\"))\nfunction printItems(arr) {\n    arr.forEach(num => {\n        if (typeof num === \"number\" && !isNaN(num)) {\n            console.log(`item-${num}`);\n        } else {\n            console.error(`⚠️ Invalid value detected: ${num}`);\n        }\n    });\n}\n\nprintItems(queueNumbers);\n\nmsg.payload = \"test\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 960,
+        "wires": [
+            [
+                "e09000ec55a15ac2"
+            ]
+        ]
+    },
+    {
+        "id": "e09000ec55a15ac2",
+        "type": "debug",
+        "z": "a843f3ff30ad0d18",
+        "name": "debug 24",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 960,
+        "wires": []
+    },
+    {
+        "id": "c47f4271ec73296f",
+        "type": "function",
+        "z": "a843f3ff30ad0d18",
+        "name": "Queues",
+        "func": "let cluster = context.get(\"redisCluster\");\nlet redis_url = JSON.parse(env.get(\"REDIS_URL\"));\n\nasync function checkConnection(redisClient) {\n    try {\n        await redisClient.ping();\n        return true; // Redis is reachable\n    } catch (error) {\n        return false; // Connection failed\n    }\n}\n\nasync function getRedisCluster() {\n    if (!cluster || !(await checkConnection(cluster))) {\n       cluster = new redis.Cluster(redis_url);\n       context.set(\"redisCluster\", cluster);\n       node.status({ fill: \"green\", shape: \"ring\", text: \"Connected to Redis Cluster\" });\n    }\n    return cluster;\n}\n\n// Ensure Redis Cluster is active before proceeding\ngetRedisCluster()\n    .then(cluster => {\n        msg.status = { success: true, message: \"Redis Cluster is active!\" };\n        node.send(msg);\n    })\n    .catch(error => {\n        msg.payload = { success: false, error: error.message };\n        node.status({ fill: \"red\", shape: \"ring\", text: \"Redis Connection Failed\" });\n        node.send(msg);\n    });\n\nasync function checkQueueHealth(queue) {\n    try {\n        await queue.client.ping(); // Pings Redis to verify the queue is active\n        return true;\n    } catch (error) {\n        return false;\n    }\n}\n\n// Check if the queues exist and is active\nlet downloadQueues = context.get(\"downloadQueues\") || {}; // Retrieve existing queues\n\nasync function initializeQueues() {\n    const queueNumbers = env.get(\"QUEUES\")\n        .split(\",\")\n        .map(num => {\n            let parsedNum = parseInt(num, 10);\n            return isNaN(parsedNum) ? null : parsedNum; // Remove invalid values\n        })\n        .filter(num => num !== null); // Ensure only valid numbers remain\n    if (!queueNumbers.length) {\n        node.error(\"❌ No queues were initialized!\");\n        return;\n    }\n    for (let i of queueNumbers) {\n        let queueName = `download-queue${i}`;\n\n        // Check if the queue exists and is healthy\n        if (!downloadQueues[queueName] || !(await checkQueueHealth(downloadQueues[queueName]))) {\n            downloadQueues[queueName] = new bullmq.Queue(queueName, { connection: cluster, prefix: `{queue${i}}` });\n            node.send({ fill: \"green\", shape: \"ring\", text: `Connected ${queueName}` });\n        }\n    }\n\n    // Store updated queues in the context\n    context.set(\"downloadQueues\", downloadQueues);\n}\n\n\n// Run queue initialization\ninitializeQueues();\n\n// Store queue total costs\nlet queueCosts = context.get(\"queueCosts\") || {};\n\n// Initialize queue costs if missing\nObject.keys(downloadQueues).forEach(queueName => {\n    queueCosts[queueName] = queueCosts[queueName] || 0; // Default cost is 0\n});\n\n\n\n// **Select the queue with the lowest total cost**\nconst selectedQueueName = Object.keys(downloadQueues).reduce((lowest, queueName) =>\n    queueCosts[queueName] < queueCosts[lowest] ? queueName : lowest, Object.keys(downloadQueues)[0]);\n\nconsole.log(\"📊 Queue Costs:\", queueCosts);\nconsole.log(\"✅ Selected queue:\", selectedQueueName);\n\nconsole.log(\"ℹ️ Available queues:\", Object.keys(downloadQueues));\n\n\nconst selectedQueue = downloadQueues[selectedQueueName];\n\nnode.status({ fill: \"green\", shape: \"ring\", text: `Connected ${selectedQueueName}` });\n\n\n\n// **Job data (Cost defaults to 1 if not provided)**\nconst jobData = {\n    href: msg.href,\n//    cost: msg.payload.cost || 1,\n    timestamp: new Date().toISOString(),\n    queue: selectedQueueName\n};\n\nqueueCosts[selectedQueueName] += 1;\ncontext.set(\"queueCosts\", queueCosts);\n\nmsg.payload = jobData;\n\nreturn msg;\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "bullmq",
+                "module": "bullmq"
+            },
+            {
+                "var": "redis",
+                "module": "ioredis"
+            }
+        ],
+        "x": 610,
+        "y": 720,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1f42ba253b89c411",
+        "type": "inject",
+        "z": "a843f3ff30ad0d18",
+        "name": "",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 190,
+        "y": 3620,
+        "wires": [
+            [
+                "c873d7e16a176a24",
+                "c253a8dec94d8c05",
+                "3220724d5efa561b"
+            ]
+        ]
+    },
+    {
+        "id": "c873d7e16a176a24",
+        "type": "redis-command",
+        "z": "a843f3ff30ad0d18",
+        "server": "bfc54a35b25c2232",
+        "command": "FLUSHALL",
+        "name": "",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 410,
+        "y": 3560,
+        "wires": [
+            [
+                "a91d4913fe6552d7"
+            ]
+        ]
+    },
+    {
+        "id": "c253a8dec94d8c05",
+        "type": "redis-command",
+        "z": "a843f3ff30ad0d18",
+        "server": "bfc54a35b25c2232",
+        "command": "FLUSHALL",
+        "name": "",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 410,
+        "y": 3640,
+        "wires": [
+            [
+                "a91d4913fe6552d7"
+            ]
+        ]
+    },
+    {
+        "id": "3220724d5efa561b",
+        "type": "redis-command",
+        "z": "a843f3ff30ad0d18",
+        "server": "bfc54a35b25c2232",
+        "command": "FLUSHALL",
+        "name": "",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 410,
+        "y": 3700,
+        "wires": [
+            [
+                "a91d4913fe6552d7"
+            ]
+        ]
+    },
+    {
+        "id": "a91d4913fe6552d7",
+        "type": "debug",
+        "z": "a843f3ff30ad0d18",
+        "name": "debug 25",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 620,
+        "y": 3700,
+        "wires": []
+    },
+    {
+        "id": "081076f5de576ea7",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "name": "Role ?",
+        "property": "payload",
+        "propertyType": "env",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "SUBSCRIBER",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 430,
+        "y": 220,
+        "wires": [
+            [
+                "ca4ba278850aba50",
+                "24ba1c385f47fa95"
+            ]
+        ]
+    },
+    {
+        "id": "2c404c7fec3703ea",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Role ?",
+        "property": "payload",
+        "propertyType": "env",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "SUBSCRIBER",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 390,
+        "y": 1340,
+        "wires": [
+            [
+                "0b7db5e2a563f7ee"
+            ]
+        ]
+    },
+    {
+        "id": "3efa48b69a3564fa",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "g": "af64ebcc5f745fbb",
+        "name": "Role ?",
+        "property": "payload",
+        "propertyType": "env",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "SUBSCRIBER",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 390,
+        "y": 1440,
+        "wires": [
+            [
+                "fb872857136145a0"
+            ]
+        ]
+    },
+    {
+        "id": "9c7128f744e64e17",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "g": "704fe7a0a3413400",
+        "name": "Role ?",
+        "property": "payload",
+        "propertyType": "env",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "SUBSCRIBER",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 410,
+        "y": 1940,
+        "wires": [
+            [
+                "507cce674d0f12d6"
+            ],
+            [
+                "290454c1bf394d2d"
+            ]
+        ]
+    },
+    {
+        "id": "290454c1bf394d2d",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "g": "704fe7a0a3413400",
+        "name": "404",
+        "rules": [
+            {
+                "t": "set",
+                "p": "statusCode",
+                "pt": "msg",
+                "to": "404",
+                "tot": "num"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 550,
+        "y": 1960,
+        "wires": [
+            [
+                "3c5d87dbdc9a0a2c"
+            ]
+        ]
+    },
+    {
+        "id": "fbec033c3f83e9b3",
+        "type": "function",
+        "z": "caa031b5574b994f",
+        "name": "Setup BullMQ Worker 1",
+        "func": "let redis_url = JSON.parse(env.get(\"REDIS_URL\"));\nconst cluster = new Redis.Cluster(redis_url);\n\nconst RPC_URL = \"http://aria2:6800/jsonrpc\";\nconst WS_URL = \"ws://aria2:6800/jsonrpc\";\nconst RPC_SECRET = \"secret\";\n\nconst ws = new WebSocket(WS_URL);\n\nws.on(\"message\", data => {\n    const response = JSON.parse(data);\n    if (response.method === \"aria2.onDownloadComplete\") {\n        const gid = response.params[0].gid;\n        console.log(`Download completed for GID: ${gid}`);\n    }\n});\n\n// Job processor function\nconst processDownloadJob = async (job) => {\n    const { href } = job.data;\n\n    const aria2 = {\n        jsonrpc: \"2.0\",\n        method: \"aria2.addUri\",\n        id: \"1\",\n        params: [`token:${RPC_SECRET}`, [href]]\n    };\n\n\n        try {\n            const response = await axios.post(RPC_URL, aria2);\n            const gid = response.data.result;\n            console.log(`Download requested with GID: ${gid}`);\n\n            // Wait for completion using WebSocket events\n            await new Promise(resolve => {\n                node.log(`promise`);\n                ws.on(\"message\", data => {\n                    node.log(`message received`);\n                    const event = JSON.parse(data);\n                    if (event.method === \"aria2.onDownloadComplete\" && event.params[0].gid === gid) {\n                        node.log(`Download completed: ${href}`);\n                        resolve();\n                    } else if (event.method === \"aria2.onDownloadError\" && event.params[0].gid === gid) {\n                        node.log(`Download error: ${href}`);\n                        resolve();\n                    }\n\n                });\n            });\n\n            console.log(`Finished processing: ${href}`);\n\n        return { status: 'sent', timestamp: new Date().toISOString() };\n\n    } catch (error) {\n        node.error(`Job ${job.id} failed: ${error.message}`);\n\n        // Send error message to Node-RED flow\n        node.send({\n            payload: {\n                type: 'job-failed',\n                jobId: job.id,\n                error: error.message\n            }\n        });\n\n        throw error;\n    }\n};\n\n// Create worker with prefix hash tag\nconst downloadWorker = new bullmq.Worker('download-queue1', processDownloadJob, {\n    connection: cluster,\n    prefix: '{queue1}', // Hash tag ensures all keys go to same slot\n    concurrency: 5,\n    limiter: {\n        max: 10,\n        duration: 1000\n    }\n});\n\n// Worker event handlers\ndownloadWorker.on('completed', (job, result) => {\n    node.log(`Job ${job.id} completed with result:`);\n});\n\ndownloadWorker.on('failed', (job, err) => {\n    node.error(`Job ${job.id} failed:`, err.message);\n});\n\ndownloadWorker.on('progress', (job, progress) => {\n    node.log(`Job ${job.id} progress: ${progress}%`);\n});\n\n// Store worker reference for cleanup\ncontext.set('downloadWorker', downloadWorker);\n\nmsg.payload = {\n    status: 'Worker started',\n    queueName: 'download-queue1',\n    concurrency: 5\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "// Cleanup worker on node shutdown\nconst worker = context.get('emailWorker');\nif (worker) {\n    worker.close();\n}",
+        "libs": [
+            {
+                "var": "bullmq",
+                "module": "bullmq"
+            },
+            {
+                "var": "Redis",
+                "module": "ioredis"
+            },
+            {
+                "var": "axios",
+                "module": "axios"
+            },
+            {
+                "var": "WebSocket",
+                "module": "ws"
+            }
+        ],
+        "x": 410,
+        "y": 160,
+        "wires": [
+            [
+                "2927b0785ce4b768"
+            ]
+        ]
+    },
+    {
+        "id": "b9a8ff201fcebe4a",
+        "type": "inject",
+        "z": "caa031b5574b994f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 160,
+        "wires": [
+            [
+                "fbec033c3f83e9b3"
+            ]
+        ]
+    },
+    {
+        "id": "2927b0785ce4b768",
+        "type": "debug",
+        "z": "caa031b5574b994f",
+        "name": "debug 16",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "fdbb7a95d3baf0d7",
+        "type": "function",
+        "z": "caa031b5574b994f",
+        "name": "Setup BullMQ Worker 1",
+        "func": "let redis_url = JSON.parse(env.get(\"REDIS_URL\"))\nconst cluster = new Redis.Cluster(redis_url);\n\n\nconst RPC_URL = \"http://aria2:6800/jsonrpc\";\nconst WS_URL = \"ws://aria2:6800/jsonrpc\";\nconst RPC_SECRET = \"secret\";\n\nconst ws = new WebSocket(WS_URL);\n\nws.on(\"message\", data => {\n    const response = JSON.parse(data);\n    if (response.method === \"aria2.onDownloadComplete\") {\n        const gid = response.params[0].gid;\n        console.log(`Download completed for GID: ${gid}`);\n    }\n});\n\n// Job processor function\nconst processDownloadJob = async (job) => {\n    const { href } = job.data;\n\n    const aria2 = {\n        jsonrpc: \"2.0\",\n        method: \"aria2.addUri\",\n        id: \"1\",\n        params: [`token:${RPC_SECRET}`, [href]]\n    };\n\n\n        try {\n            const response = await axios.post(RPC_URL, aria2);\n            const gid = response.data.result;\n            console.log(`Download requested with GID: ${gid}`);\n\n            // Wait for completion using WebSocket events\n            await new Promise(resolve => {\n                node.log(`promise`);\n                ws.on(\"message\", data => {\n                    node.log(`message received`);\n                    const event = JSON.parse(data);\n                    if (event.method === \"aria2.onDownloadComplete\" && event.params[0].gid === gid) {\n                        node.log(`Download completed: ${href}`);\n                        resolve();\n                    } else if (event.method === \"aria2.onDownloadError\" && event.params[0].gid === gid) {\n                        node.log(`Download error: ${href}`);\n                        resolve();\n                    }\n\n                });\n            });\n\n            console.log(`Finished processing: ${href}`);\n\n        return { status: 'sent', timestamp: new Date().toISOString() };\n\n    } catch (error) {\n        node.error(`Job ${job.id} failed: ${error.message}`);\n\n        // Send error message to Node-RED flow\n        node.send({\n            payload: {\n                type: 'job-failed',\n                jobId: job.id,\n                error: error.message\n            }\n        });\n\n        throw error;\n    }\n};\n\n// Create worker with prefix hash tag\nconst downloadWorker = new bullmq.Worker('download-aria2', processDownloadJob, {\n    connection: cluster,\n    prefix: '{titine}', // Hash tag ensures all keys go to same slot\n    concurrency: 5,\n    limiter: {\n        max: 10,\n        duration: 1000\n    }\n});\n\n// Worker event handlers\ndownloadWorker.on('completed', (job, result) => {\n    node.log(`Job ${job.id} completed with result:`);\n});\n\ndownloadWorker.on('failed', (job, err) => {\n    node.error(`Job ${job.id} failed:`, err.message);\n});\n\ndownloadWorker.on('progress', (job, progress) => {\n    node.log(`Job ${job.id} progress: ${progress}%`);\n});\n\n// Store worker reference for cleanup\ncontext.set('downloadWorker', downloadWorker);\n\nmsg.payload = {\n    status: 'Worker started',\n    queueName: 'download-aria2',\n    concurrency: 5\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "// Cleanup worker on node shutdown\nconst worker = context.get('emailWorker');\nif (worker) {\n    worker.close();\n}",
+        "libs": [
+            {
+                "var": "bullmq",
+                "module": "bullmq"
+            },
+            {
+                "var": "Redis",
+                "module": "ioredis"
+            },
+            {
+                "var": "axios",
+                "module": "axios"
+            },
+            {
+                "var": "WebSocket",
+                "module": "ws"
+            }
+        ],
+        "x": 330,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "39fcb519e113233b",
+        "type": "function",
+        "z": "caa031b5574b994f",
+        "name": "Setup BullMQ Worker 2",
+        "func": "let redis_url = JSON.parse(env.get(\"REDIS_URL\"));\nconst cluster = new Redis.Cluster(redis_url);\n\nconst RPC_URL = \"http://aria2:6800/jsonrpc\";\nconst WS_URL = \"ws://aria2:6800/jsonrpc\";\nconst RPC_SECRET = \"secret\";\n\nconst ws = new WebSocket(WS_URL);\n\nws.on(\"message\", data => {\n    const response = JSON.parse(data);\n    if (response.method === \"aria2.onDownloadComplete\") {\n        const gid = response.params[0].gid;\n        console.log(`Download completed for GID: ${gid}`);\n    }\n});\n\n// Job processor function\nconst processDownloadJob = async (job) => {\n    const { href } = job.data;\n\n    const aria2 = {\n        jsonrpc: \"2.0\",\n        method: \"aria2.addUri\",\n        id: \"1\",\n        params: [`token:${RPC_SECRET}`, [href]]\n    };\n\n\n        try {\n            const response = await axios.post(RPC_URL, aria2);\n            const gid = response.data.result;\n            console.log(`Download requested with GID: ${gid}`);\n\n            // Wait for completion using WebSocket events\n            await new Promise(resolve => {\n                node.log(`promise`);\n                ws.on(\"message\", data => {\n                    node.log(`message received`);\n                    const event = JSON.parse(data);\n                    if (event.method === \"aria2.onDownloadComplete\" && event.params[0].gid === gid) {\n                        node.log(`Download completed: ${href}`);\n                        resolve();\n                    } else if (event.method === \"aria2.onDownloadError\" && event.params[0].gid === gid) {\n                        node.log(`Download error: ${href}`);\n                        resolve();\n                    }\n\n                });\n            });\n\n            console.log(`Finished processing: ${href}`);\n\n        return { status: 'sent', timestamp: new Date().toISOString() };\n\n    } catch (error) {\n        node.error(`Job ${job.id} failed: ${error.message}`);\n\n        // Send error message to Node-RED flow\n        node.send({\n            payload: {\n                type: 'job-failed',\n                jobId: job.id,\n                error: error.message\n            }\n        });\n\n        throw error;\n    }\n};\n\n// Create worker with prefix hash tag\nconst downloadWorker = new bullmq.Worker('download-queue2', processDownloadJob, {\n    connection: cluster,\n    prefix: '{queue2}', // Hash tag ensures all keys go to same slot\n    concurrency: 5,\n    limiter: {\n        max: 10,\n        duration: 1000\n    }\n});\n\n// Worker event handlers\ndownloadWorker.on('completed', (job, result) => {\n    node.log(`Job ${job.id} completed with result:`);\n});\n\ndownloadWorker.on('failed', (job, err) => {\n    node.error(`Job ${job.id} failed:`, err.message);\n});\n\ndownloadWorker.on('progress', (job, progress) => {\n    node.log(`Job ${job.id} progress: ${progress}%`);\n});\n\n// Store worker reference for cleanup\ncontext.set('downloadWorker', downloadWorker);\n\nmsg.payload = {\n    status: 'Worker started',\n    queueName: 'download-queue2',\n    concurrency: 5\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "// Cleanup worker on node shutdown\nconst worker = context.get('emailWorker');\nif (worker) {\n    worker.close();\n}",
+        "libs": [
+            {
+                "var": "bullmq",
+                "module": "bullmq"
+            },
+            {
+                "var": "Redis",
+                "module": "ioredis"
+            },
+            {
+                "var": "axios",
+                "module": "axios"
+            },
+            {
+                "var": "WebSocket",
+                "module": "ws"
+            }
+        ],
+        "x": 410,
+        "y": 220,
+        "wires": [
+            [
+                "4aa38a93464959d2"
+            ]
+        ]
+    },
+    {
+        "id": "430ec428596d8afa",
+        "type": "inject",
+        "z": "caa031b5574b994f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 220,
+        "wires": [
+            [
+                "39fcb519e113233b"
+            ]
+        ]
+    },
+    {
+        "id": "4aa38a93464959d2",
+        "type": "debug",
+        "z": "caa031b5574b994f",
+        "name": "debug 10",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "9d528209d5aa016a",
+        "type": "function",
+        "z": "caa031b5574b994f",
+        "name": "Setup BullMQ Worker 4",
+        "func": "let redis_url = JSON.parse(env.get(\"REDIS_URL\"));\nconst cluster = new Redis.Cluster(redis_url);\n\nconst RPC_URL = \"http://aria2:6800/jsonrpc\";\nconst WS_URL = \"ws://aria2:6800/jsonrpc\";\nconst RPC_SECRET = \"secret\";\n\nconst ws = new WebSocket(WS_URL);\n\nws.on(\"message\", data => {\n    const response = JSON.parse(data);\n    if (response.method === \"aria2.onDownloadComplete\") {\n        const gid = response.params[0].gid;\n        console.log(`Download completed for GID: ${gid}`);\n    }\n});\n\n// Job processor function\nconst processDownloadJob = async (job) => {\n    const { href } = job.data;\n\n    const aria2 = {\n        jsonrpc: \"2.0\",\n        method: \"aria2.addUri\",\n        id: \"1\",\n        params: [`token:${RPC_SECRET}`, [href]]\n    };\n\n\n        try {\n            const response = await axios.post(RPC_URL, aria2);\n            const gid = response.data.result;\n            console.log(`Download requested with GID: ${gid}`);\n\n            // Wait for completion using WebSocket events\n            await new Promise(resolve => {\n                node.log(`promise`);\n                ws.on(\"message\", data => {\n                    node.log(`message received`);\n                    const event = JSON.parse(data);\n                    if (event.method === \"aria2.onDownloadComplete\" && event.params[0].gid === gid) {\n                        node.log(`Download completed: ${href}`);\n                        resolve();\n                    } else if (event.method === \"aria2.onDownloadError\" && event.params[0].gid === gid) {\n                        node.log(`Download error: ${href}`);\n                        resolve();\n                    }\n\n                });\n            });\n\n            console.log(`Finished processing: ${href}`);\n\n        return { status: 'sent', timestamp: new Date().toISOString() };\n\n    } catch (error) {\n        node.error(`Job ${job.id} failed: ${error.message}`);\n\n        // Send error message to Node-RED flow\n        node.send({\n            payload: {\n                type: 'job-failed',\n                jobId: job.id,\n                error: error.message\n            }\n        });\n\n        throw error;\n    }\n};\n\n// Create worker with prefix hash tag\nconst downloadWorker = new bullmq.Worker('download-queue4', processDownloadJob, {\n    connection: cluster,\n    prefix: '{queue4}', // Hash tag ensures all keys go to same slot\n    concurrency: 5,\n    limiter: {\n        max: 10,\n        duration: 1000\n    }\n});\n\n// Worker event handlers\ndownloadWorker.on('completed', (job, result) => {\n    node.log(`Job ${job.id} completed with result:`);\n});\n\ndownloadWorker.on('failed', (job, err) => {\n    node.error(`Job ${job.id} failed:`, err.message);\n});\n\ndownloadWorker.on('progress', (job, progress) => {\n    node.log(`Job ${job.id} progress: ${progress}%`);\n});\n\n// Store worker reference for cleanup\ncontext.set('downloadWorker', downloadWorker);\n\nmsg.payload = {\n    status: 'Worker started',\n    queueName: 'download-queue4',\n    concurrency: 5\n};\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "// Cleanup worker on node shutdown\nconst worker = context.get('emailWorker');\nif (worker) {\n    worker.close();\n}",
+        "libs": [
+            {
+                "var": "bullmq",
+                "module": "bullmq"
+            },
+            {
+                "var": "Redis",
+                "module": "ioredis"
+            },
+            {
+                "var": "axios",
+                "module": "axios"
+            },
+            {
+                "var": "WebSocket",
+                "module": "ws"
+            }
+        ],
+        "x": 410,
+        "y": 280,
+        "wires": [
+            [
+                "f2b63297911edbbd"
+            ]
+        ]
+    },
+    {
+        "id": "3708690d7f2dac40",
+        "type": "inject",
+        "z": "caa031b5574b994f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "1",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 280,
+        "wires": [
+            [
+                "9d528209d5aa016a"
+            ]
+        ]
+    },
+    {
+        "id": "f2b63297911edbbd",
+        "type": "debug",
+        "z": "caa031b5574b994f",
+        "name": "debug 18",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "c4989ac61f8a7413",
+        "type": "function",
+        "z": "caa031b5574b994f",
+        "name": "function 1",
+        "func": "// Convert environment variable string to JSON array\nconst redisNodes = JSON.parse(env.get(\"REDIS_URL\"));\nconst subscribers = redisNodes.map(node => new redis(node));\n\nsubscribers.forEach((subscriber, index) => {\n    let nodeInfo = `${redisNodes[index].host}:${redisNodes[index].port}`;\n\n    // Enable keyspace notifications if not set\n    subscriber.config(\"SET\", \"notify-keyspace-events\", \"Ex\").catch(err =>\n        console.error(`⚠️ Failed to enable key notifications on ${nodeInfo}:`, err));\n\n    // Subscribe to key events\n    subscriber.psubscribe(\"__keyevent@0__:expired\", (err, count) => {\n        if (err) {\n            console.error(`❌ Subscription failed on ${nodeInfo}`, err);\n        } else {\n            console.log(`🔔 Listening for key events on ${nodeInfo}`);\n        }\n    });\n\n    subscriber.on(\"pmessage\", (pattern, channel, message) => {\n        msg.payload = {\n            event: channel,\n            key: message\n        };\n        node.send(msg);\n    });\n\n});\n\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "redis",
+                "module": "ioredis"
+            }
+        ],
+        "x": 460,
+        "y": 480,
+        "wires": [
+            [
+                "07fcd802fcd2d4ba"
+            ]
+        ]
+    },
+    {
+        "id": "2c5fdbbaf540593a",
+        "type": "inject",
+        "z": "caa031b5574b994f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 260,
+        "y": 480,
+        "wires": [
+            [
+                "c4989ac61f8a7413",
+                "320046f74816eb13"
+            ]
+        ]
+    },
+    {
+        "id": "07fcd802fcd2d4ba",
+        "type": "debug",
+        "z": "caa031b5574b994f",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 800,
+        "y": 480,
+        "wires": []
+    },
+    {
+        "id": "ba2b261e5ff18958",
+        "type": "inject",
+        "z": "caa031b5574b994f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[ \"myrandomkey\", \"myvalue\", \"EX\", 1 ]",
+        "payloadType": "json",
+        "x": 250,
+        "y": 600,
+        "wires": [
+            [
+                "28d2cab579c01cda"
+            ]
+        ]
+    },
+    {
+        "id": "28d2cab579c01cda",
+        "type": "redis-command",
+        "z": "caa031b5574b994f",
+        "server": "029ff868be3010db",
+        "command": "SET",
+        "name": "",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 420,
+        "y": 600,
+        "wires": [
+            [
+                "c270c22796d03033"
+            ]
+        ]
+    },
+    {
+        "id": "c270c22796d03033",
+        "type": "debug",
+        "z": "caa031b5574b994f",
+        "name": "debug 17",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 610,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "a22fb4dffd61865f",
+        "type": "inject",
+        "z": "caa031b5574b994f",
+        "name": "",
+        "props": [
+            {
+                "p": "topic",
+                "v": "[ \"myrandomkey\"]",
+                "vt": "json"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 250,
+        "y": 680,
+        "wires": [
+            [
+                "857916718574901c"
+            ]
+        ]
+    },
+    {
+        "id": "857916718574901c",
+        "type": "redis-command",
+        "z": "caa031b5574b994f",
+        "server": "029ff868be3010db",
+        "command": "TTL",
+        "name": "",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 420,
+        "y": 680,
+        "wires": [
+            [
+                "d3adfe20f5140ca5"
+            ]
+        ]
+    },
+    {
+        "id": "d3adfe20f5140ca5",
+        "type": "debug",
+        "z": "caa031b5574b994f",
+        "name": "debug 20",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "710b741424bb87af",
+        "type": "redis-instance",
+        "z": "caa031b5574b994f",
+        "server": "bfc54a35b25c2232",
+        "name": "",
+        "topic": "redis",
+        "location": "flow",
+        "x": 1330,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "e4f9c2a83a91992f",
+        "type": "redis-instance",
+        "z": "caa031b5574b994f",
+        "server": "1ff2e6e3c4ca03d4",
+        "name": "",
+        "topic": "redis",
+        "location": "flow",
+        "x": 1330,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "5adc1ba75eca74e6",
+        "type": "redis-instance",
+        "z": "caa031b5574b994f",
+        "server": "3cdfe90d9df486bc",
+        "name": "",
+        "topic": "redis",
+        "location": "flow",
+        "x": 1330,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "97071f1eb02ea981",
+        "type": "inject",
+        "z": "caa031b5574b994f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[\"set\",\"notify-keyspace-events\",\"KEx\"]",
+        "payloadType": "json",
+        "x": 890,
+        "y": 420,
+        "wires": [
+            [
+                "0540226d2a34acab",
+                "01a22354e6b44dea",
+                "9669b7f4c78a1821"
+            ]
+        ]
+    },
+    {
+        "id": "0540226d2a34acab",
+        "type": "redis-command",
+        "z": "caa031b5574b994f",
+        "server": "bfc54a35b25c2232",
+        "command": "CONFIG",
+        "name": "",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 1100,
+        "y": 360,
+        "wires": [
+            [
+                "9487a782af0a1d85"
+            ]
+        ]
+    },
+    {
+        "id": "01a22354e6b44dea",
+        "type": "redis-command",
+        "z": "caa031b5574b994f",
+        "server": "bfc54a35b25c2232",
+        "command": "CONFIG",
+        "name": "",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 1100,
+        "y": 440,
+        "wires": [
+            [
+                "9487a782af0a1d85"
+            ]
+        ]
+    },
+    {
+        "id": "9669b7f4c78a1821",
+        "type": "redis-command",
+        "z": "caa031b5574b994f",
+        "server": "bfc54a35b25c2232",
+        "command": "CONFIG",
+        "name": "",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 1100,
+        "y": 500,
+        "wires": [
+            [
+                "9487a782af0a1d85"
+            ]
+        ]
+    },
+    {
+        "id": "9487a782af0a1d85",
+        "type": "debug",
+        "z": "caa031b5574b994f",
+        "name": "debug 21",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1320,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "4a8605bdb723c5a3",
+        "type": "redis-in",
+        "z": "caa031b5574b994f",
+        "server": "bfc54a35b25c2232",
+        "command": "psubscribe",
+        "name": "",
+        "topic": "__keyevent@0__:expired",
+        "obj": true,
+        "timeout": 0,
+        "x": 990,
+        "y": 600,
+        "wires": [
+            [
+                "75108e8f491b2056"
+            ]
+        ]
+    },
+    {
+        "id": "ae522b93aa1b923a",
+        "type": "redis-in",
+        "z": "caa031b5574b994f",
+        "server": "1ff2e6e3c4ca03d4",
+        "command": "psubscribe",
+        "name": "",
+        "topic": "__keyevent@0__:expired",
+        "obj": true,
+        "timeout": 0,
+        "x": 970,
+        "y": 660,
+        "wires": [
+            [
+                "75108e8f491b2056"
+            ]
+        ]
+    },
+    {
+        "id": "35b19d1a87035188",
+        "type": "redis-in",
+        "z": "caa031b5574b994f",
+        "server": "3cdfe90d9df486bc",
+        "command": "psubscribe",
+        "name": "",
+        "topic": "__keyevent@0__:expired",
+        "obj": true,
+        "timeout": 0,
+        "x": 970,
+        "y": 720,
+        "wires": [
+            [
+                "75108e8f491b2056"
+            ]
+        ]
+    },
+    {
+        "id": "eadfd4afb1820d45",
+        "type": "debug",
+        "z": "caa031b5574b994f",
+        "name": "debug 22",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1380,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "75108e8f491b2056",
+        "type": "switch",
+        "z": "caa031b5574b994f",
+        "name": "",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "cont",
+                "v": "myrandom",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 1210,
+        "y": 660,
+        "wires": [
+            [
+                "eadfd4afb1820d45"
+            ]
+        ]
+    },
+    {
+        "id": "320046f74816eb13",
+        "type": "function",
+        "z": "caa031b5574b994f",
+        "name": "function 2",
+        "func": "if (!context.get(\"redisSubscribers\")) {\n    const redisNodes = JSON.parse(env.get(\"REDIS_URL\"));\n\n    // Store the list of Redis subscribers globally\n    const subscribers = redisNodes.map(node => new redis(node));\n    context.set(\"redisSubscribers\", subscribers);\n\n    console.log(\"✅ Redis subscriptions initialized once!\");\n}\n\n\nconst subscribers = context.get(\"redisSubscribers\");\n\nsubscribers.forEach((subscriber, index) => {\n    let nodeInfo = `${JSON.parse(env.get(\"REDIS_URL\"))[index].host}:${JSON.parse(env.get(\"REDIS_URL\"))[index].port}`;\n\n    // Only subscribe if this node doesn't already have listeners\n    if (!context.get(`listener_${nodeInfo}`)) {\n        subscriber.psubscribe(\"__keyevent@*__:expired\", (err, count) => {\n            if (err) {\n                console.error(`❌ Subscription failed on ${nodeInfo}`, err);\n            } else {\n                console.log(`🔔 Listening for key expirations on ${nodeInfo}`);\n                context.set(`listener_${nodeInfo}`, true); // Mark listener as active\n            }\n        });\n\n\n        subscriber.on(\"pmessage\", (pattern, channel, message) => {\n            msg.payload = {\n                event: channel,\n                key: message\n            };\n            node.send(msg);\n        });\n    } else {\n        console.log(`⚠️ Listener already exists for ${nodeInfo}, skipping duplicate subscription.`);\n    }\n});\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "redis",
+                "module": "ioredis"
+            }
+        ],
+        "x": 460,
+        "y": 420,
+        "wires": [
+            [
+                "75bea42a95fd51f1"
+            ]
+        ]
+    },
+    {
+        "id": "75bea42a95fd51f1",
+        "type": "debug",
+        "z": "caa031b5574b994f",
+        "name": "debug 23",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 660,
+        "y": 420,
+        "wires": []
+    }
+]
