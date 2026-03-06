@@ -32,6 +32,14 @@
         "env": []
     },
     {
+        "id": "5ff6c20513455391",
+        "type": "tab",
+        "label": "Reporter",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "7df5aeb06a15c0e4",
         "type": "junction",
         "z": "a843f3ff30ad0d18",
@@ -271,6 +279,30 @@
         "elkIndex": "node-red"
     },
     {
+        "id": "f2a2a080e159b3a2",
+        "type": "prometheus-metric-config",
+        "name": "monitor_wis2_gc_delay_download_timestamp_seconds",
+        "help": "Delay to download files",
+        "labels": "centre_id, topic, report_by",
+        "mtype": "gauge"
+    },
+    {
+        "id": "0b1738558640a231",
+        "type": "prometheus-metric-config",
+        "name": "monitor_wis2_gc_volume_download_total",
+        "help": "Volume of downloaded files",
+        "labels": "centre_id, topic, report_by",
+        "mtype": "counter"
+    },
+    {
+        "id": "833dd9f884cd3f43",
+        "type": "prometheus-metric-config",
+        "name": "monitor_wis2_gc_number_download_total",
+        "help": "Number of downloaded files",
+        "labels": "centre_id, topic, report_by",
+        "mtype": "counter"
+    },
+    {
         "id": "128474dbe370587c",
         "type": "file in",
         "z": "1c6759660a32fda5",
@@ -355,13 +387,16 @@
             },
             {
                 "t": "cont",
-                "v": "LOGGER",
+                "v": "REPORTER",
                 "vt": "str"
+            },
+            {
+                "t": "else"
             }
         ],
         "checkall": "true",
         "repair": false,
-        "outputs": 4,
+        "outputs": 5,
         "x": 620,
         "y": 280,
         "wires": [
@@ -373,6 +408,9 @@
             ],
             [
                 "3668b2ec19eebb18"
+            ],
+            [
+                "287c036c9d516543"
             ],
             []
         ]
@@ -450,7 +488,7 @@
         "topic": "redis",
         "location": "global",
         "x": 190,
-        "y": 120,
+        "y": 100,
         "wires": []
     },
     {
@@ -462,8 +500,8 @@
             "1b42b9c92f4352df"
         ],
         "uncaught": false,
-        "x": 350,
-        "y": 120,
+        "x": 330,
+        "y": 140,
         "wires": [
             []
         ]
@@ -1334,6 +1372,85 @@
         ]
     },
     {
+        "id": "6e5f2709accdf542",
+        "type": "function",
+        "z": "1c6759660a32fda5",
+        "name": "Redis",
+        "func": "",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "if (!global.get('redisCluster')) {\n    const redisUrl = env.get('REDIS_URL');\n    const redisNodes = JSON.parse(redisUrl);\n\n    // Create cluster with ioredis\n    const cluster = new redis.Cluster(redisNodes);\n\n    cluster.on('ready', () => {\n        node.warn('Redis Cluster connected!');\n        global.set('redisCluster', cluster);\n    });\n\n    cluster.on('error', (err) => {\n        node.error('Cluster error: ' + err);\n    });\n}\n",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "redis",
+                "module": "ioredis"
+            }
+        ],
+        "x": 190,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "287c036c9d516543",
+        "type": "link out",
+        "z": "1c6759660a32fda5",
+        "name": "Reporter",
+        "mode": "link",
+        "links": [
+            "9763aa67f99aece4"
+        ],
+        "x": 780,
+        "y": 360,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "9763aa67f99aece4",
+        "type": "link in",
+        "z": "1c6759660a32fda5",
+        "name": "Reporter",
+        "links": [
+            "287c036c9d516543"
+        ],
+        "x": 200,
+        "y": 860,
+        "wires": [
+            [
+                "55f185e97ff146c4"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "55f185e97ff146c4",
+        "type": "change",
+        "z": "1c6759660a32fda5",
+        "name": "Configuration",
+        "rules": [
+            {
+                "t": "set",
+                "p": "reporter",
+                "pt": "global",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 860,
+        "wires": [
+            []
+        ]
+    },
+    {
         "id": "f53714198eb1e993",
         "type": "mqtt in",
         "z": "a843f3ff30ad0d18",
@@ -1350,7 +1467,8 @@
         "y": 260,
         "wires": [
             [
-                "2d4daa951d924bcf"
+                "2d4daa951d924bcf",
+                "d9fd31e373eb68d4"
             ]
         ]
     },
@@ -3618,6 +3736,22 @@
         "l": false
     },
     {
+        "id": "d9fd31e373eb68d4",
+        "type": "debug",
+        "z": "a843f3ff30ad0d18",
+        "name": "debug 45",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1070,
+        "y": 120,
+        "wires": []
+    },
+    {
         "id": "ada4f85f94febb91",
         "type": "function",
         "z": "caa031b5574b994f",
@@ -3716,7 +3850,7 @@
             "9a78cd98a069fced"
         ],
         "x": 210,
-        "y": 940,
+        "y": 960,
         "wires": [
             [
                 "55d2e511dfb5c291"
@@ -3784,7 +3918,7 @@
         "name": "StartAck",
         "links": [],
         "x": 340,
-        "y": 720,
+        "y": 740,
         "wires": [
             [
                 "673b8c81bcd0d31b"
@@ -3805,7 +3939,7 @@
         "payloadType": "json",
         "block": false,
         "x": 480,
-        "y": 720,
+        "y": 740,
         "wires": [
             [
                 "9cefeb03721f1cf7",
@@ -3826,7 +3960,7 @@
         "finalize": "",
         "libs": [],
         "x": 610,
-        "y": 720,
+        "y": 740,
         "wires": [
             [
                 "6232c0da041e4e01",
@@ -3842,7 +3976,7 @@
         "mode": "return",
         "links": [],
         "x": 1830,
-        "y": 720,
+        "y": 740,
         "wires": [],
         "l": true
     },
@@ -3934,7 +4068,7 @@
         "to": "",
         "reg": false,
         "x": 790,
-        "y": 940,
+        "y": 960,
         "wires": [
             [
                 "3dfcc087f08e3541"
@@ -3967,7 +4101,7 @@
             }
         ],
         "x": 1270,
-        "y": 940,
+        "y": 960,
         "wires": [
             [
                 "c1e88461775a3cf3",
@@ -3995,7 +4129,7 @@
         "repair": false,
         "outputs": 2,
         "x": 1400,
-        "y": 940,
+        "y": 960,
         "wires": [
             [
                 "7abde6069cced145"
@@ -4023,7 +4157,7 @@
             }
         ],
         "x": 650,
-        "y": 940,
+        "y": 960,
         "wires": [
             [
                 "98655394a299da9d",
@@ -4056,7 +4190,7 @@
         "to": "",
         "reg": false,
         "x": 360,
-        "y": 940,
+        "y": 960,
         "wires": [
             [
                 "4917cc0d5ed54eb1",
@@ -4077,7 +4211,7 @@
         "payloadType": "json",
         "block": false,
         "x": 500,
-        "y": 940,
+        "y": 960,
         "wires": [
             [
                 "bc32ee46f1310103"
@@ -4112,7 +4246,12 @@
         "rules": [
             {
                 "t": "jsonata_exp",
-                "v": "$contains(payload.method,\"Complete\") or $contains(payload.method,\"Error\")",
+                "v": "$contains(payload.method,\"Complete\")",
+                "vt": "jsonata"
+            },
+            {
+                "t": "jsonata_exp",
+                "v": "$contains(payload.method,\"Error\")",
                 "vt": "jsonata"
             },
             {
@@ -4123,12 +4262,15 @@
         ],
         "checkall": "false",
         "repair": false,
-        "outputs": 2,
+        "outputs": 3,
         "x": 840,
-        "y": 500,
+        "y": 520,
         "wires": [
             [
                 "1d9079e47ab3ba91"
+            ],
+            [
+                "9a0cd6fe75e426af"
             ],
             [
                 "507d242508715d48"
@@ -4157,7 +4299,7 @@
             "de6645a70e1afe93"
         ],
         "x": 585,
-        "y": 500,
+        "y": 520,
         "wires": [
             [
                 "4e84f9dffc97517c"
@@ -4170,11 +4312,11 @@
         "z": "caa031b5574b994f",
         "name": "Error",
         "links": [
-            "472ea609570f15f3",
-            "873388b63527db5d"
+            "873388b63527db5d",
+            "6dfb45ef726c5af9"
         ],
         "x": 210,
-        "y": 1420,
+        "y": 1440,
         "wires": [
             [
                 "e017d6ebcfd5b26d"
@@ -4206,7 +4348,7 @@
         "validateMessages": false,
         "messageTemplate": "{\n  \"type\": \"message\",\n  \"id\": \"$id\",\n  \"content\": \"$content\",\n  \"timestamp\": \"2026-02-04T09:56:51.757Z\"\n}",
         "x": 690,
-        "y": 560,
+        "y": 580,
         "wires": [
             [
                 "a6ca42c9f3a02fc7",
@@ -4247,7 +4389,7 @@
         "to": "",
         "reg": false,
         "x": 970,
-        "y": 460,
+        "y": 400,
         "wires": [
             [
                 "ac8ba5f33c4a4f6b"
@@ -4277,11 +4419,12 @@
         "binarySupport": false,
         "validateMessages": false,
         "messageTemplate": "{\n  \"type\": \"message\",\n  \"id\": \"$id\",\n  \"content\": \"$content\",\n  \"timestamp\": \"2026-02-04T09:56:51.757Z\"\n}",
-        "x": 1100,
-        "y": 460,
+        "x": 1090,
+        "y": 360,
         "wires": [
             [
-                "911f980b0e95cdae"
+                "911f980b0e95cdae",
+                "4828872b25641b41"
             ],
             [],
             []
@@ -4292,32 +4435,24 @@
         "type": "switch",
         "z": "caa031b5574b994f",
         "name": "Output",
-        "property": "payload",
+        "property": "status",
         "propertyType": "msg",
         "rules": [
             {
                 "t": "jsonata_exp",
-                "v": "$type(status.result) = \"object\" and $contains($flowContext(\"state\"),\"Complete\") and $contains(status.result.files[0].path,\"downloads\")",
-                "vt": "jsonata"
-            },
-            {
-                "t": "jsonata_exp",
-                "v": "$type(status.result) = \"object\" and $contains($flowContext(\"state\"),\"Error\")",
+                "v": "$type(status.result) = \"object\" and status.result.status = \"complete\" and $contains(status.result.files[0].path,\"downloads\")",
                 "vt": "jsonata"
             }
         ],
         "checkall": "false",
         "repair": false,
-        "outputs": 2,
-        "x": 1350,
-        "y": 440,
+        "outputs": 1,
+        "x": 1330,
+        "y": 360,
         "wires": [
             [
                 "4769789a3d942c09",
                 "bb6e6c5527813a68"
-            ],
-            [
-                "4d57e7bd8ec1cbd7"
             ]
         ]
     },
@@ -4334,10 +4469,11 @@
         "payloadType": "json",
         "block": false,
         "x": 610,
-        "y": 1400,
+        "y": 1420,
         "wires": [
             [
-                "e04457b61c5d9722"
+                "e04457b61c5d9722",
+                "3dfc4bcb3d24df06"
             ]
         ]
     },
@@ -4350,10 +4486,11 @@
         "links": [
             "9692070f0181ce4e",
             "bca9fedc5304565a",
-            "e51b855e0983bca1"
+            "e51b855e0983bca1",
+            "dfd0dea37993a540"
         ],
         "x": 485,
-        "y": 560,
+        "y": 580,
         "wires": []
     },
     {
@@ -4372,7 +4509,7 @@
         "repair": false,
         "outputs": 1,
         "x": 370,
-        "y": 560,
+        "y": 580,
         "wires": [
             [
                 "ab44c1861612ac7d"
@@ -4397,7 +4534,7 @@
         "onceDelay": "1",
         "topic": "",
         "x": 220,
-        "y": 560,
+        "y": 580,
         "wires": [
             [
                 "7d4c0b0f51f22b90"
@@ -4422,7 +4559,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 295,
-        "y": 620,
+        "y": 640,
         "wires": [
             [
                 "42b1ccacba64b751"
@@ -4450,7 +4587,7 @@
         "to": "",
         "reg": false,
         "x": 390,
-        "y": 620,
+        "y": 640,
         "wires": [
             [
                 "57b65fb40e2adb7f"
@@ -4466,7 +4603,7 @@
             "ab44c1861612ac7d"
         ],
         "x": 235,
-        "y": 620,
+        "y": 640,
         "wires": [
             [
                 "86823311d2f0831b"
@@ -4481,10 +4618,11 @@
         "mode": "link",
         "links": [
             "d39268a864ea075a",
-            "98c0307d1a976bfe"
+            "98c0307d1a976bfe",
+            "d681a3d5dc1b407f"
         ],
         "x": 485,
-        "y": 620,
+        "y": 640,
         "wires": []
     },
     {
@@ -4496,7 +4634,7 @@
             "ab44c1861612ac7d"
         ],
         "x": 585,
-        "y": 560,
+        "y": 580,
         "wires": [
             [
                 "4e84f9dffc97517c"
@@ -4512,7 +4650,7 @@
             "57b65fb40e2adb7f"
         ],
         "x": 585,
-        "y": 620,
+        "y": 640,
         "wires": [
             [
                 "4e84f9dffc97517c"
@@ -4558,7 +4696,7 @@
         "to": "",
         "reg": false,
         "x": 970,
-        "y": 540,
+        "y": 560,
         "wires": [
             [
                 "0c40f2d437251be2"
@@ -4578,7 +4716,7 @@
         "payloadType": "json",
         "block": false,
         "x": 1350,
-        "y": 540,
+        "y": 560,
         "wires": [
             [
                 "2c30bd36583f255a"
@@ -4598,7 +4736,7 @@
         "payloadType": "json",
         "block": false,
         "x": 1100,
-        "y": 540,
+        "y": 560,
         "wires": [
             [
                 "8e26e398300321ac",
@@ -4631,7 +4769,7 @@
         "to": "",
         "reg": false,
         "x": 1230,
-        "y": 540,
+        "y": 560,
         "wires": [
             [
                 "0a2911c4385cb16a",
@@ -4664,7 +4802,7 @@
         "to": "",
         "reg": false,
         "x": 1470,
-        "y": 540,
+        "y": 560,
         "wires": [
             [
                 "f3407b5c6529285b",
@@ -4682,28 +4820,14 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 1590,
-        "y": 420,
+        "x": 1570,
+        "y": 360,
         "wires": [
             [
                 "9a78cd98a069fced",
                 "60fddd182d4cdb01"
             ]
         ]
-    },
-    {
-        "id": "472ea609570f15f3",
-        "type": "link out",
-        "z": "caa031b5574b994f",
-        "name": "Error",
-        "mode": "link",
-        "links": [
-            "febdd299270156ec"
-        ],
-        "x": 1870,
-        "y": 460,
-        "wires": [],
-        "l": true
     },
     {
         "id": "9a78cd98a069fced",
@@ -4714,28 +4838,10 @@
         "links": [
             "040e2ff80605b0c9"
         ],
-        "x": 1720,
-        "y": 420,
+        "x": 1700,
+        "y": 360,
         "wires": [],
         "l": true
-    },
-    {
-        "id": "464a50135a0a634c",
-        "type": "link call",
-        "z": "caa031b5574b994f",
-        "name": "Ack",
-        "links": [
-            "bed6957b5bd71319"
-        ],
-        "linkType": "static",
-        "timeout": "30",
-        "x": 1590,
-        "y": 460,
-        "wires": [
-            [
-                "37bf9f11fa0862f1"
-            ]
-        ]
     },
     {
         "id": "f3407b5c6529285b",
@@ -4750,7 +4856,7 @@
         "payloadType": "json",
         "block": false,
         "x": 1590,
-        "y": 540,
+        "y": 560,
         "wires": [
             []
         ]
@@ -4763,8 +4869,8 @@
         "links": [
             "ab44c1861612ac7d"
         ],
-        "x": 1005,
-        "y": 380,
+        "x": 975,
+        "y": 320,
         "wires": [
             [
                 "ac8ba5f33c4a4f6b"
@@ -4779,8 +4885,8 @@
         "links": [
             "57b65fb40e2adb7f"
         ],
-        "x": 1005,
-        "y": 420,
+        "x": 975,
+        "y": 360,
         "wires": [
             [
                 "ac8ba5f33c4a4f6b"
@@ -4801,7 +4907,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1380,
-        "y": 600,
+        "y": 620,
         "wires": []
     },
     {
@@ -4817,8 +4923,8 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
-        "x": 840,
-        "y": 400,
+        "x": 640,
+        "y": 360,
         "wires": []
     },
     {
@@ -4846,7 +4952,7 @@
         "to": "",
         "reg": false,
         "x": 470,
-        "y": 1400,
+        "y": 1420,
         "wires": [
             [
                 "697aab508a8bb809"
@@ -4901,7 +5007,7 @@
         "to": "",
         "reg": false,
         "x": 750,
-        "y": 1140,
+        "y": 1160,
         "wires": [
             [
                 "4668c1bfbf82afd5",
@@ -4935,7 +5041,7 @@
         "to": "",
         "reg": false,
         "x": 750,
-        "y": 1060,
+        "y": 1080,
         "wires": [
             [
                 "7d723d9cc15c1177"
@@ -4955,7 +5061,7 @@
         "payloadType": "json",
         "block": false,
         "x": 870,
-        "y": 1060,
+        "y": 1080,
         "wires": [
             [
                 "6e26958ea82dc499"
@@ -4987,7 +5093,7 @@
         "to": "",
         "reg": false,
         "x": 990,
-        "y": 1060,
+        "y": 1080,
         "wires": [
             [
                 "39921dfd1f4e0602"
@@ -5007,7 +5113,7 @@
         "payloadType": "json",
         "block": false,
         "x": 1120,
-        "y": 1060,
+        "y": 1080,
         "wires": [
             [
                 "52435883cf148ace",
@@ -5025,7 +5131,7 @@
             "0149d4b8a664c59e"
         ],
         "x": 1560,
-        "y": 920,
+        "y": 940,
         "wires": [],
         "l": true
     },
@@ -5039,7 +5145,7 @@
             "41c60a819985992f"
         ],
         "x": 1560,
-        "y": 960,
+        "y": 980,
         "wires": [],
         "l": true
     },
@@ -5052,7 +5158,7 @@
             "8a011d3a2eeceb67"
         ],
         "x": 200,
-        "y": 1380,
+        "y": 1400,
         "wires": [
             [
                 "e017d6ebcfd5b26d"
@@ -5069,7 +5175,7 @@
             "7abde6069cced145"
         ],
         "x": 200,
-        "y": 1100,
+        "y": 1120,
         "wires": [
             [
                 "fa9df07335b8bf6c"
@@ -5092,7 +5198,7 @@
         "expiry": "",
         "broker": "bae38c3ec809a1b3",
         "x": 1020,
-        "y": 1140,
+        "y": 1160,
         "wires": []
     },
     {
@@ -5110,7 +5216,7 @@
         "expiry": "",
         "broker": "6e294e8eeec8172b",
         "x": 1020,
-        "y": 1180,
+        "y": 1200,
         "wires": []
     },
     {
@@ -5129,7 +5235,7 @@
         "repair": false,
         "outputs": 1,
         "x": 890,
-        "y": 1180,
+        "y": 1200,
         "wires": [
             [
                 "49c7c6b206e065fe"
@@ -5161,7 +5267,7 @@
         "to": "",
         "reg": false,
         "x": 330,
-        "y": 1100,
+        "y": 1120,
         "wires": [
             [
                 "0483541e8e2a6d39"
@@ -5181,7 +5287,7 @@
         "payloadType": "json",
         "block": false,
         "x": 450,
-        "y": 1100,
+        "y": 1120,
         "wires": [
             [
                 "0c9dc8d837b621d5"
@@ -5207,7 +5313,7 @@
         "repair": false,
         "outputs": 2,
         "x": 870,
-        "y": 1400,
+        "y": 1420,
         "wires": [
             [
                 "be17da13960262b3"
@@ -5243,7 +5349,7 @@
         "to": "",
         "reg": false,
         "x": 1130,
-        "y": 1380,
+        "y": 1400,
         "wires": [
             [
                 "8e7034ccd6a86316",
@@ -5264,7 +5370,7 @@
         "payloadType": "json",
         "block": false,
         "x": 1260,
-        "y": 1380,
+        "y": 1400,
         "wires": [
             []
         ]
@@ -5378,7 +5484,7 @@
         "to": "",
         "reg": false,
         "x": 1130,
-        "y": 1340,
+        "y": 1360,
         "wires": [
             [
                 "34f7ad9e2cbe77c1",
@@ -5404,7 +5510,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 1000,
-        "y": 1360,
+        "y": 1380,
         "wires": [
             [
                 "15eb8cae84d98b6e",
@@ -5417,7 +5523,7 @@
         "type": "function",
         "z": "caa031b5574b994f",
         "name": "Next",
-        "func": "const arr = msg.payload;\n\n// Default values\nmsg.retry = false;\nmsg.extracted = null;\n\nlet queueIndex = -1;\n\nfor (let i = 0; i < arr.length; i++) {\n    if (typeof arr[i] === 'string') {\n        if (arr[i].startsWith('queue-')) {\n            queueIndex = i;\n        } else if (arr[i].startsWith('wait-')) {\n            if (i > 0) {\n                const waitHref = arr[i - 1];\n                \n                // Find attempt value\n                let attemptValue = 0;\n                const attemptIndex = arr.indexOf('attempt');\n                if (attemptIndex !== -1 && attemptIndex + 1 < arr.length) {\n                    attemptValue = parseInt(arr[attemptIndex + 1]) || 0;\n                }\n                \n                // Check if error-nocache exists\n                const hasErrorNoCache = arr.includes('error-nocache');\n                \n                // Check if we should retry\n                const shouldRetry = attemptValue <= 6 && !hasErrorNoCache;\n\n                if (shouldRetry) {\n                    msg.retry = true;\n                    if (attemptIndex !== -1) {\n                        arr[attemptIndex + 1] = attemptValue + 1;\n                        msg.delay = 5 * attemptValue;\n                    }\n                    arr[i] = arr[i].replace('wait-', 'queue-');\n                    msg.extracted = waitHref;\n                }\n                \n                break; // Exit loop after processing first wait-\n            }\n        }\n    }\n}\n\n// Always convert queue- to error-\nif (queueIndex !== -1) {\n    arr[queueIndex] = arr[queueIndex].replace('queue-', 'error-');\n}\n\nmsg.payload = arr;\nreturn msg;",
+        "func": "const arr = msg.payload;\n\n// Default values\nmsg.retry = false;\nmsg.extracted = null;\n\n// Convert flat array to key-value pairs\nconst pairs = [];\nfor (let i = 0; i < arr.length; i += 2) {\n    if (i + 1 < arr.length) {\n        pairs.push({ key: arr[i], value: arr[i + 1], index: i });\n    }\n}\n\n// Find attempt value\nconst attemptPair = pairs.find(p => p.key === 'attempt');\nlet attemptValue = attemptPair ? parseInt(attemptPair.value) || 0 : 0;\n\n// Check if error-nocache exists\nconst hasErrorNoCache = pairs.some(p => p.value === 'error-nocache');\n\n// Process all queue- and wait- entries\nlet foundWait = false;\n\nfor (const pair of pairs) {\n    if (typeof pair.value === 'string') {\n        // Convert all queue- to error-\n        if (pair.value.startsWith('queue-')) {\n            arr[pair.index + 1] = pair.value.replace('queue-', 'error-');\n        }\n\n        // Process first wait- if retry conditions are met\n        if (!foundWait && pair.value.startsWith('wait-')) {\n            const shouldRetry = attemptValue <= 6 && !hasErrorNoCache;\n\n            if (shouldRetry && pair.key.startsWith('http')) {\n                msg.retry = true;\n                msg.extracted = pair.key;\n                msg.delay = 5 * attemptValue;\n\n                // Update attempt value\n                if (attemptPair) {\n                    arr[attemptPair.index + 1] = attemptValue + 1;\n                }\n\n                // Convert wait- to queue-\n                arr[pair.index + 1] = pair.value.replace('wait-', 'queue-');\n\n                foundWait = true;\n            }\n        }\n    }\n}\n\nmsg.payload = arr;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -5425,7 +5531,7 @@
         "finalize": "",
         "libs": [],
         "x": 740,
-        "y": 1400,
+        "y": 1420,
         "wires": [
             [
                 "fc4bf403e3a4f8fa",
@@ -5445,7 +5551,7 @@
         ],
         "uncaught": false,
         "x": 1650,
-        "y": 1460,
+        "y": 1480,
         "wires": [
             [
                 "227eb1ae46943b5a"
@@ -5466,7 +5572,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1280,
-        "y": 1280,
+        "y": 1300,
         "wires": []
     },
     {
@@ -5478,12 +5584,12 @@
         "tosidebar": true,
         "console": false,
         "tostatus": true,
-        "complete": "true",
-        "targetType": "full",
+        "complete": "topic",
+        "targetType": "msg",
         "statusVal": "",
         "statusType": "counter",
         "x": 1280,
-        "y": 1420,
+        "y": 1440,
         "wires": []
     },
     {
@@ -5494,13 +5600,13 @@
         "active": false,
         "tosidebar": true,
         "console": false,
-        "tostatus": false,
+        "tostatus": true,
         "complete": "true",
         "targetType": "full",
         "statusVal": "",
-        "statusType": "auto",
+        "statusType": "counter",
         "x": 1700,
-        "y": 340,
+        "y": 400,
         "wires": []
     },
     {
@@ -5528,7 +5634,7 @@
         "to": "",
         "reg": false,
         "x": 1260,
-        "y": 1060,
+        "y": 1080,
         "wires": [
             [
                 "fd712bdc50f7b784"
@@ -5548,7 +5654,7 @@
         "payloadType": "json",
         "block": false,
         "x": 1390,
-        "y": 1060,
+        "y": 1080,
         "wires": [
             [
                 "991902fcabcf4b65"
@@ -5569,24 +5675,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1780,
-        "y": 1460,
-        "wires": []
-    },
-    {
-        "id": "71eb707b5d9e991b",
-        "type": "debug",
-        "z": "caa031b5574b994f",
-        "name": "debug 62",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": true,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "counter",
-        "x": 1730,
-        "y": 520,
+        "y": 1480,
         "wires": []
     },
     {
@@ -5614,7 +5703,7 @@
         "to": "",
         "reg": false,
         "x": 1260,
-        "y": 1100,
+        "y": 1120,
         "wires": [
             [
                 "9c0112e20d69fb89"
@@ -5634,7 +5723,7 @@
         "payloadType": "json",
         "block": false,
         "x": 1380,
-        "y": 1100,
+        "y": 1120,
         "wires": [
             [
                 "60116e6d77c9cb87"
@@ -5661,7 +5750,7 @@
         "to": "",
         "reg": false,
         "x": 860,
-        "y": 580,
+        "y": 600,
         "wires": [
             []
         ]
@@ -5686,7 +5775,7 @@
         "to": "",
         "reg": false,
         "x": 850,
-        "y": 620,
+        "y": 640,
         "wires": [
             []
         ]
@@ -5705,7 +5794,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1170,
-        "y": 620,
+        "y": 640,
         "wires": []
     },
     {
@@ -5724,7 +5813,7 @@
         "repair": false,
         "outputs": 1,
         "x": 890,
-        "y": 1140,
+        "y": 1160,
         "wires": [
             [
                 "d4a6d82c3519ede4"
@@ -5745,7 +5834,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1630,
-        "y": 600,
+        "y": 620,
         "wires": []
     },
     {
@@ -5761,7 +5850,7 @@
         "payloadType": "json",
         "block": false,
         "x": 910,
-        "y": 940,
+        "y": 960,
         "wires": [
             [
                 "47d054ac822338de"
@@ -5793,7 +5882,7 @@
         "to": "",
         "reg": false,
         "x": 1030,
-        "y": 940,
+        "y": 960,
         "wires": [
             [
                 "7e85da62dad6be3d"
@@ -5813,7 +5902,7 @@
         "payloadType": "json",
         "block": false,
         "x": 1150,
-        "y": 940,
+        "y": 960,
         "wires": [
             [
                 "1a867ae19b2242d5"
@@ -5845,7 +5934,7 @@
         "to": "",
         "reg": false,
         "x": 1500,
-        "y": 1100,
+        "y": 1120,
         "wires": [
             [
                 "2fefd229b8705309"
@@ -5865,7 +5954,7 @@
         "payloadType": "json",
         "block": false,
         "x": 1620,
-        "y": 1100,
+        "y": 1120,
         "wires": [
             []
         ]
@@ -5884,7 +5973,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 940,
-        "y": 1320,
+        "y": 1340,
         "wires": []
     },
     {
@@ -6084,7 +6173,7 @@
         ],
         "uncaught": false,
         "x": 1640,
-        "y": 1280,
+        "y": 1300,
         "wires": [
             [
                 "76cef1d9c36cdbf5"
@@ -6105,7 +6194,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1800,
-        "y": 1280,
+        "y": 1300,
         "wires": []
     },
     {
@@ -6119,7 +6208,7 @@
         ],
         "uncaught": false,
         "x": 1650,
-        "y": 1400,
+        "y": 1420,
         "wires": [
             [
                 "78880311cd2c780b"
@@ -6140,7 +6229,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1790,
-        "y": 1400,
+        "y": 1420,
         "wires": []
     },
     {
@@ -6167,7 +6256,7 @@
             "460c36dde18914c0"
         ],
         "x": 1540,
-        "y": 1680,
+        "y": 1700,
         "wires": [
             []
         ]
@@ -6182,7 +6271,7 @@
         ],
         "uncaught": false,
         "x": 1640,
-        "y": 1340,
+        "y": 1360,
         "wires": [
             [
                 "72a5f446425881f2"
@@ -6203,7 +6292,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1790,
-        "y": 1340,
+        "y": 1360,
         "wires": []
     },
     {
@@ -6220,7 +6309,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1040,
-        "y": 1420,
+        "y": 1440,
         "wires": []
     },
     {
@@ -6243,7 +6332,7 @@
         "to": "",
         "reg": false,
         "x": 730,
-        "y": 720,
+        "y": 740,
         "wires": [
             [
                 "f8e71999af77f9db"
@@ -6296,7 +6385,7 @@
         "to": "",
         "reg": false,
         "x": 850,
-        "y": 720,
+        "y": 740,
         "wires": [
             [
                 "87c277225ad73c5b",
@@ -6317,7 +6406,7 @@
         "payloadType": "json",
         "block": false,
         "x": 970,
-        "y": 720,
+        "y": 740,
         "wires": [
             [
                 "45db458b73681359"
@@ -6349,7 +6438,7 @@
         "to": "",
         "reg": false,
         "x": 1100,
-        "y": 720,
+        "y": 740,
         "wires": [
             [
                 "c2de07c3074e32b9",
@@ -6370,7 +6459,7 @@
         "payloadType": "json",
         "block": false,
         "x": 1220,
-        "y": 720,
+        "y": 740,
         "wires": [
             [
                 "345502b5c720830f"
@@ -6402,7 +6491,7 @@
         "to": "",
         "reg": false,
         "x": 1340,
-        "y": 720,
+        "y": 740,
         "wires": [
             [
                 "3ad64eacbd7e7000"
@@ -6422,7 +6511,7 @@
         "payloadType": "json",
         "block": false,
         "x": 1460,
-        "y": 720,
+        "y": 740,
         "wires": [
             [
                 "22a42a503ccaa8b1"
@@ -6454,7 +6543,7 @@
         "to": "",
         "reg": false,
         "x": 1580,
-        "y": 720,
+        "y": 740,
         "wires": [
             [
                 "6873140e784b4ea3"
@@ -6474,7 +6563,7 @@
         "payloadType": "json",
         "block": false,
         "x": 1710,
-        "y": 720,
+        "y": 740,
         "wires": [
             [
                 "7181e3d4bb9a619e"
@@ -6500,8 +6589,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1230,
-        "y": 440,
+        "x": 1210,
+        "y": 360,
         "wires": [
             [
                 "05f32a62cb0bf329"
@@ -6520,7 +6609,7 @@
         ],
         "uncaught": false,
         "x": 1650,
-        "y": 1520,
+        "y": 1540,
         "wires": [
             [
                 "617acedaddfc1993"
@@ -6541,7 +6630,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1780,
-        "y": 1520,
+        "y": 1540,
         "wires": []
     },
     {
@@ -6554,7 +6643,7 @@
             "2e122a8c06dcafd7"
         ],
         "x": 1235,
-        "y": 1340,
+        "y": 1360,
         "wires": []
     },
     {
@@ -6586,8 +6675,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "counter",
-        "x": 1500,
-        "y": 340,
+        "x": 1460,
+        "y": 400,
         "wires": []
     },
     {
@@ -6602,7 +6691,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "x": 230,
-        "y": 1600,
+        "y": 1620,
         "wires": [
             [
                 "2843374246efbb12"
@@ -6625,7 +6714,7 @@
         "repair": false,
         "outputs": 1,
         "x": 620,
-        "y": 1600,
+        "y": 1620,
         "wires": [
             [
                 "5f45859e8c944cc7"
@@ -6650,7 +6739,7 @@
             }
         ],
         "x": 760,
-        "y": 1600,
+        "y": 1620,
         "wires": [
             [
                 "b548fdcb8465f667"
@@ -6677,7 +6766,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 540,
-        "y": 780,
+        "y": 800,
         "wires": []
     },
     {
@@ -6694,7 +6783,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 780,
-        "y": 780,
+        "y": 800,
         "wires": []
     },
     {
@@ -6711,7 +6800,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1040,
-        "y": 780,
+        "y": 800,
         "wires": []
     },
     {
@@ -6728,7 +6817,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1300,
-        "y": 780,
+        "y": 800,
         "wires": []
     },
     {
@@ -6745,7 +6834,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 520,
-        "y": 880,
+        "y": 900,
         "wires": []
     },
     {
@@ -6762,7 +6851,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 940,
-        "y": 880,
+        "y": 900,
         "wires": []
     },
     {
@@ -6779,7 +6868,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1400,
-        "y": 880,
+        "y": 900,
         "wires": []
     },
     {
@@ -6807,7 +6896,7 @@
         "to": "",
         "reg": false,
         "x": 1030,
-        "y": 1480,
+        "y": 1500,
         "wires": [
             [
                 "f1aa68b8b2c213e2"
@@ -6827,7 +6916,7 @@
         "payloadType": "json",
         "block": false,
         "x": 1150,
-        "y": 1480,
+        "y": 1500,
         "wires": [
             []
         ]
@@ -6912,7 +7001,7 @@
         "to": "",
         "reg": false,
         "x": 350,
-        "y": 1600,
+        "y": 1620,
         "wires": [
             [
                 "83b9019d33a80a1b"
@@ -6932,7 +7021,7 @@
         "payloadType": "json",
         "block": false,
         "x": 480,
-        "y": 1600,
+        "y": 1620,
         "wires": [
             [
                 "f13f514272a5d076"
@@ -6953,7 +7042,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 920,
-        "y": 1540,
+        "y": 1560,
         "wires": []
     },
     {
@@ -6988,7 +7077,7 @@
         "to": "",
         "reg": false,
         "x": 910,
-        "y": 1660,
+        "y": 1680,
         "wires": [
             [
                 "963710c90b7be391"
@@ -7008,7 +7097,7 @@
         "payloadType": "json",
         "block": false,
         "x": 1030,
-        "y": 1660,
+        "y": 1680,
         "wires": [
             []
         ]
@@ -7034,7 +7123,7 @@
             "b548fdcb8465f667"
         ],
         "x": 890,
-        "y": 1220,
+        "y": 1240,
         "wires": [
             []
         ]
@@ -7060,7 +7149,7 @@
             "b548fdcb8465f667"
         ],
         "x": 1560,
-        "y": 1040,
+        "y": 1060,
         "wires": [
             []
         ]
@@ -7083,7 +7172,7 @@
         "allowrate": false,
         "outputs": 1,
         "x": 340,
-        "y": 1400,
+        "y": 1420,
         "wires": [
             [
                 "3f9108575a9461d2"
@@ -7106,7 +7195,7 @@
         "repair": false,
         "outputs": 1,
         "x": 580,
-        "y": 1100,
+        "y": 1120,
         "wires": [
             [
                 "7949400d806c8645",
@@ -7145,50 +7234,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1470,
-        "y": 420,
+        "x": 1450,
+        "y": 360,
         "wires": [
             [
                 "2d1ec9b7e3ea8084"
-            ]
-        ]
-    },
-    {
-        "id": "4d57e7bd8ec1cbd7",
-        "type": "change",
-        "z": "caa031b5574b994f",
-        "name": "GID ?",
-        "rules": [
-            {
-                "t": "set",
-                "p": "gid",
-                "pt": "msg",
-                "to": "payload.result.gid",
-                "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "[ \"wis2gc:downloader:\" & $globalContext(\"worker\") & \":aria2_gid:\" & gid ] ",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1470,
-        "y": 460,
-        "wires": [
-            [
-                "464a50135a0a634c"
             ]
         ]
     },
@@ -7217,7 +7267,7 @@
         "to": "",
         "reg": false,
         "x": 910,
-        "y": 1600,
+        "y": 1620,
         "wires": [
             [
                 "06cf1d6512292e5a",
@@ -7236,7 +7286,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 1030,
-        "y": 1600,
+        "y": 1620,
         "wires": [
             [
                 "873388b63527db5d"
@@ -7253,7 +7303,7 @@
             "febdd299270156ec"
         ],
         "x": 1150,
-        "y": 1600,
+        "y": 1620,
         "wires": [],
         "l": true
     },
@@ -7271,7 +7321,7 @@
         "statusVal": "",
         "statusType": "counter",
         "x": 1120,
-        "y": 1540,
+        "y": 1560,
         "wires": []
     },
     {
@@ -7311,13 +7361,293 @@
         "to": "",
         "reg": false,
         "x": 1410,
-        "y": 980,
+        "y": 1000,
         "wires": [
             []
         ]
     },
     {
-        "id": "37bf9f11fa0862f1",
+        "id": "4c278e03fbac0aeb",
+        "type": "inject",
+        "z": "caa031b5574b994f",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "[\"attempt\",\"2\",\"https://gc.wis.cma.cn/20260303/cache/a/wis2/co-ideam/data/core/weather/surface-based-observations/synop/WIGOS_0-170-0-3206500058_20260303T100000.bufr4\",\"wait-cn-cma\",\"https://global-cache-of-japan.s3.ap-northeast-1.amazonaws.com/wis2/data/co-ideam%3Aautomaticas/WIGOS_0-170-0-3206500058_20260303T100000/1772535187/WIGOS_0-170-0-3206500058_20260303T100000.bufr4\",\"queue-jp-jma\",\"https://wis.ideam.gov.co/data/2026-03-03/wis/urn:wmo:md:co-ideam:automaticas/WIGOS_0-170-0-3206500058_20260303T100000.bufr4\",\"error-origin\",\"https://wis2globalcache.s3.amazonaws.com/data/co-ideam/data/core/weather/surface-based-observations/synop/WIGOS_0-170-0-3206500058_20260303T100000.bufr4\",\"wait-data-metoffice-noaa\",\"published\",\"1772535188131\",\"topic\",\"origin/a/wis2/co-ideam/data/core/weather/surface-based-observations/synop\",\"uuid\",\"c9dcc948-2bfe-41a1-b6fc-ccc22d2bee93\",\"wnm\",\"{\\\"id\\\":\\\"26426e60-bb4c-40ee-b8e1-03aa1d92a639\\\",\\\"type\\\":\\\"Feature\\\",\\\"conformsTo\\\":[\\\"http://wis.wmo.int/spec/wnm/1/conf/core\\\"],\\\"geometry\\\":{\\\"coordinates\\\":[-74.00627,3.51827,661],\\\"type\\\":\\\"Point\\\"},\\\"properties\\\":{\\\"data_id\\\":\\\"co-ideam:automaticas/WIGOS_0-170-0-3206500058_20260303T100000\\\",\\\"datetime\\\":\\\"2026-03-03T10:00:00Z\\\",\\\"pubtime\\\":\\\"2026-03-03T10:53:07Z\\\",\\\"integrity\\\":{\\\"method\\\":\\\"sha512\\\",\\\"value\\\":\\\"ZU2sgqVy5JySc2t3OOKGekLoEO/EMyt9reC5xQf9Ft7fzKSHrDKQxtmw1h/NSS7rnBir2nxIsi0+Aby+qMoJdA==\\\"},\\\"metadata_id\\\":\\\"urn:wmo:md:co-ideam:automaticas\\\",\\\"content\\\":{\\\"encoding\\\":\\\"base64\\\",\\\"value\\\":\\\"QlVGUgABNAQAABYAAC8AAAAAAAYAIwAH6gMDCgAAAAALAAABAMGWx1sAAQcAAAqgAAMzIwNjUwMDA1OAAAAAAAAEw///////+mIqUgpySgqYAAAAAAAAAAAAAAAA/UYagEdZSZQ3eaKXL//4////////////////////+SZ/////////+AZH/7oTuQ/J////////////////////////////////////////////////////////////////////////////////////////////////////////8AyP/xQFPsAr////////////////4Bkf/viOk+6E4BkPiOhP//AMj/fEAAQDI////+AH////////////////////////////////////////////4Dc3Nzc=\\\",\\\"size\\\":308},\\\"wigos_station_identifier\\\":\\\"0-170-0-3206500058\\\"},\\\"links\\\":[{\\\"rel\\\":\\\"canonical\\\",\\\"type\\\":\\\"application/bufr\\\",\\\"href\\\":\\\"https://wis.ideam.gov.co/data/2026-03-03/wis/urn:wmo:md:co-ideam:automaticas/WIGOS_0-170-0-3206500058_20260303T100000.bufr4\\\",\\\"length\\\":308},{\\\"rel\\\":\\\"via\\\",\\\"type\\\":\\\"text/html\\\",\\\"href\\\":\\\"https://oscar.wmo.int/surface/#/search/station/stationReportDetails/0-170-0-3206500058\\\"}],\\\"generated_by\\\":\\\"wis2box 1.1.0\\\"}\"]",
+        "payloadType": "json",
+        "x": 380,
+        "y": 1880,
+        "wires": [
+            [
+                "2856b2548b5556a1"
+            ]
+        ]
+    },
+    {
+        "id": "2856b2548b5556a1",
+        "type": "function",
+        "z": "caa031b5574b994f",
+        "name": "Next",
+        "func": "const arr = msg.payload;\n\n// Default values\nmsg.retry = false;\nmsg.extracted = null;\n\nlet queueIndex = -1;\n\nfor (let i = 0; i < arr.length; i++) {\n    if (typeof arr[i] === 'string') {\n        if (arr[i].startsWith('queue-')) {\n            queueIndex = i;\n        } else if (arr[i].startsWith('wait-')) {\n            if (i > 0) {\n                const waitHref = arr[i - 1];\n                \n                // Find attempt value\n                let attemptValue = 0;\n                const attemptIndex = arr.indexOf('attempt');\n                if (attemptIndex !== -1 && attemptIndex + 1 < arr.length) {\n                    attemptValue = parseInt(arr[attemptIndex + 1]) || 0;\n                }\n                \n                // Check if error-nocache exists\n                const hasErrorNoCache = arr.includes('error-nocache');\n                \n                // Check if we should retry\n                const shouldRetry = attemptValue <= 6 && !hasErrorNoCache;\n\n                if (shouldRetry) {\n                    msg.retry = true;\n                    if (attemptIndex !== -1) {\n                        arr[attemptIndex + 1] = attemptValue + 1;\n                        msg.delay = 5 * attemptValue;\n                    }\n                    arr[i] = arr[i].replace('wait-', 'queue-');\n                    msg.extracted = waitHref;\n                }\n                \n                break; // Exit loop after processing first wait-\n            }\n        }\n    }\n}\n\n// Always convert queue- to error-\nif (queueIndex !== -1) {\n    arr[queueIndex] = arr[queueIndex].replace('queue-', 'error-');\n}\n\nmsg.payload = arr;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 1880,
+        "wires": [
+            [
+                "452ca19bac5bb56f"
+            ]
+        ]
+    },
+    {
+        "id": "452ca19bac5bb56f",
+        "type": "debug",
+        "z": "caa031b5574b994f",
+        "name": "debug 12",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 790,
+        "y": 1880,
+        "wires": []
+    },
+    {
+        "id": "9a0cd6fe75e426af",
+        "type": "change",
+        "z": "caa031b5574b994f",
+        "name": "Gid",
+        "rules": [
+            {
+                "t": "set",
+                "p": "message",
+                "pt": "msg",
+                "to": "{\t   \"jsonrpc\":\"2.0\",\t   \"method\":\"aria2.tellStatus\",\t   \"id\": \"1\",\t   \"params\":[\"token:\" & $globalContext(\"aria-secret\") , payload.params[0].gid ]\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 970,
+        "y": 520,
+        "wires": [
+            [
+                "506e99efd94c4764"
+            ]
+        ]
+    },
+    {
+        "id": "506e99efd94c4764",
+        "type": "dynamic-websocket",
+        "z": "caa031b5574b994f",
+        "name": "Status",
+        "url": "",
+        "allowSelfSigned": false,
+        "autoReconnect": false,
+        "reconnectAttempts": 0,
+        "reconnectInterval": 5000,
+        "useExponentialBackoff": false,
+        "authType": "none",
+        "username": "",
+        "password": "",
+        "token": "",
+        "tokenLocation": "url",
+        "tokenKey": "Authorization",
+        "headers": "",
+        "transformMessages": false,
+        "messageFormat": "json",
+        "binarySupport": false,
+        "validateMessages": false,
+        "messageTemplate": "{\n  \"type\": \"message\",\n  \"id\": \"$id\",\n  \"content\": \"$content\",\n  \"timestamp\": \"2026-02-04T09:56:51.757Z\"\n}",
+        "x": 1090,
+        "y": 480,
+        "wires": [
+            [
+                "23507a2950cbc7ad",
+                "6c09c7480830a17b"
+            ],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "1d66e843a4f452a0",
+        "type": "switch",
+        "z": "caa031b5574b994f",
+        "name": "Output",
+        "property": "status",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "jsonata_exp",
+                "v": "$type(status.result) = \"object\" and status.result.status = \"error\"",
+                "vt": "jsonata"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 1,
+        "x": 1330,
+        "y": 480,
+        "wires": [
+            [
+                "e1ccb10b56d9320d",
+                "2a2eae1431bc1f8e"
+            ]
+        ]
+    },
+    {
+        "id": "6dfb45ef726c5af9",
+        "type": "link out",
+        "z": "caa031b5574b994f",
+        "name": "Error",
+        "mode": "link",
+        "links": [
+            "febdd299270156ec"
+        ],
+        "x": 1850,
+        "y": 480,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "8f3ba9eae59ece28",
+        "type": "link call",
+        "z": "caa031b5574b994f",
+        "name": "Ack",
+        "links": [
+            "bed6957b5bd71319"
+        ],
+        "linkType": "static",
+        "timeout": "30",
+        "x": 1570,
+        "y": 480,
+        "wires": [
+            [
+                "e5bda5258cfeaec4",
+                "8e9ca13f753a58a1"
+            ]
+        ]
+    },
+    {
+        "id": "dfd0dea37993a540",
+        "type": "link in",
+        "z": "caa031b5574b994f",
+        "name": "link in 15",
+        "links": [
+            "ab44c1861612ac7d"
+        ],
+        "x": 975,
+        "y": 440,
+        "wires": [
+            [
+                "506e99efd94c4764"
+            ]
+        ]
+    },
+    {
+        "id": "d681a3d5dc1b407f",
+        "type": "link in",
+        "z": "caa031b5574b994f",
+        "name": "link in 16",
+        "links": [
+            "57b65fb40e2adb7f"
+        ],
+        "x": 975,
+        "y": 480,
+        "wires": [
+            [
+                "506e99efd94c4764"
+            ]
+        ]
+    },
+    {
+        "id": "23507a2950cbc7ad",
+        "type": "change",
+        "z": "caa031b5574b994f",
+        "name": "Status",
+        "rules": [
+            {
+                "t": "set",
+                "p": "status",
+                "pt": "msg",
+                "to": "payload",
+                "tot": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1210,
+        "y": 480,
+        "wires": [
+            [
+                "1d66e843a4f452a0"
+            ]
+        ]
+    },
+    {
+        "id": "e1ccb10b56d9320d",
+        "type": "change",
+        "z": "caa031b5574b994f",
+        "name": "GID ?",
+        "rules": [
+            {
+                "t": "set",
+                "p": "gid",
+                "pt": "msg",
+                "to": "payload.result.gid",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[ \"wis2gc:downloader:\" & $globalContext(\"worker\") & \":aria2_gid:\" & gid ] ",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1450,
+        "y": 480,
+        "wires": [
+            [
+                "8f3ba9eae59ece28"
+            ]
+        ]
+    },
+    {
+        "id": "e5bda5258cfeaec4",
         "type": "change",
         "z": "caa031b5574b994f",
         "name": "inQueue - 1",
@@ -7335,13 +7665,97 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1730,
-        "y": 460,
+        "x": 1710,
+        "y": 480,
         "wires": [
             [
-                "472ea609570f15f3"
+                "6dfb45ef726c5af9"
             ]
         ]
+    },
+    {
+        "id": "2a2eae1431bc1f8e",
+        "type": "debug",
+        "z": "caa031b5574b994f",
+        "name": "debug 14",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 1460,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "8e9ca13f753a58a1",
+        "type": "debug",
+        "z": "caa031b5574b994f",
+        "name": "debug 28",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 1700,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "4828872b25641b41",
+        "type": "debug",
+        "z": "caa031b5574b994f",
+        "name": "debug 31",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1220,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "6c09c7480830a17b",
+        "type": "debug",
+        "z": "caa031b5574b994f",
+        "name": "debug 32",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1250,
+        "y": 420,
+        "wires": []
+    },
+    {
+        "id": "3dfc4bcb3d24df06",
+        "type": "debug",
+        "z": "caa031b5574b994f",
+        "name": "debug 33",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": true,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "counter",
+        "x": 710,
+        "y": 1320,
+        "wires": []
     },
     {
         "id": "5034d326b1b418b5",
@@ -7360,7 +7774,7 @@
                 "module": "ioredis"
             }
         ],
-        "x": 530,
+        "x": 510,
         "y": 200,
         "wires": [
             [
@@ -7385,7 +7799,7 @@
         "once": true,
         "onceDelay": "1",
         "topic": "",
-        "x": 250,
+        "x": 230,
         "y": 200,
         "wires": [
             [
@@ -7403,8 +7817,8 @@
         "topic": "wis2gc:cleaner:*",
         "obj": true,
         "timeout": 0,
-        "x": 250,
-        "y": 360,
+        "x": 230,
+        "y": 280,
         "wires": [
             [
                 "d1a37dc7eb2804ea"
@@ -7424,8 +7838,8 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "counter",
-        "x": 900,
-        "y": 360,
+        "x": 880,
+        "y": 280,
         "wires": []
     },
     {
@@ -7433,19 +7847,19 @@
         "type": "function",
         "z": "102b04b3eaea572e",
         "name": "K/V",
-        "func": "const arr = msg.payload;\nconst output = {};\n\nfor (let i = 0; i < arr.length; i += 2) {\n    const key = String(arr[i]);\n    const value = arr[i + 1];\n    output[key] = value;\n}\n\nmsg.payload = output;\nreturn msg;",
+        "func": "// First, convert array to object\nconst arr = msg.payload;\nconst output = {};\n\nfor (let i = 0; i < arr.length; i += 2) {\n    const key = String(arr[i]);\n    const value = arr[i + 1];\n    output[key] = value;\n}\n\n// Extract length from wnm\nlet length = null;\nif (output.wnm) {\n    try {\n        const wnmObj = JSON.parse(output.wnm);\n        if (wnmObj.links && wnmObj.links.length > 0) {\n            // Get length from first link (links[0])\n            if (wnmObj.links[0].length) {\n                length = wnmObj.links[0].length;\n            }\n        }\n    } catch (e) {\n        // Failed to parse wnm\n    }\n}\n\n// Compute difference between stored and published\nlet delay = null;\nif (output.stored && output.published) {\n    delay = parseInt(output.stored) - parseInt(output.published);\n}\n\n// Extract centre-id (4th value when split by /)\nlet centreId = null;\nif (output.topic) {\n    const topicParts = output.topic.split('/');\n    if (topicParts.length >= 4) {\n        centreId = topicParts[3];  // Index 3 is the 4th value\n    }\n}\n\n// Extract subtopic (from 7th value onwards)\nlet subtopic = null;\nif (output.topic) {\n    const topicParts = output.topic.split('/');\n    if (topicParts.length >= 6) {\n        subtopic = topicParts.slice(5).join('/');  // Index 6 onwards (7th value+)\n    }\n}\n\n// Add extracted values to output\noutput.length = length;\noutput.delay = delay;\noutput.centreId = centreId;\noutput.subtopic = subtopic;\n\nmsg.payload = output;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 510,
-        "y": 360,
+        "x": 490,
+        "y": 280,
         "wires": [
             [
                 "042423cc1cf00a73",
-                "12c8bb2eeb3f9435"
+                "15b504851c68874c"
             ]
         ]
     },
@@ -7480,12 +7894,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 640,
-        "y": 360,
+        "x": 620,
+        "y": 280,
         "wires": [
             [
-                "6f7eafd6a247b7b6",
-                "70be395a6c91d7a9"
+                "6f7eafd6a247b7b6"
             ]
         ]
     },
@@ -7501,8 +7914,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 770,
-        "y": 360,
+        "x": 750,
+        "y": 280,
         "wires": [
             [
                 "d27aeca111084bbd"
@@ -7522,7 +7935,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "counter",
-        "x": 1460,
+        "x": 1440,
         "y": 160,
         "wires": []
     },
@@ -7551,7 +7964,7 @@
         "checkall": "false",
         "repair": false,
         "outputs": 3,
-        "x": 930,
+        "x": 910,
         "y": 200,
         "wires": [
             [
@@ -7587,7 +8000,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1190,
+        "x": 1170,
         "y": 160,
         "wires": [
             [
@@ -7607,7 +8020,7 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1310,
+        "x": 1290,
         "y": 160,
         "wires": [
             [
@@ -7630,7 +8043,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 380,
+        "x": 360,
         "y": 200,
         "wires": [
             [
@@ -7650,7 +8063,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 680,
+        "x": 660,
         "y": 200,
         "wires": [
             [
@@ -7668,8 +8081,8 @@
         "topic": "wis2gc:error:*",
         "obj": true,
         "timeout": 0,
-        "x": 250,
-        "y": 500,
+        "x": 230,
+        "y": 600,
         "wires": [
             [
                 "a318dc83898cf141"
@@ -7689,28 +8102,11 @@
         "logIOScope": "I",
         "autoStart": true,
         "scope": [],
-        "x": 530,
-        "y": 500,
+        "x": 510,
+        "y": 600,
         "wires": [
             []
         ]
-    },
-    {
-        "id": "12c8bb2eeb3f9435",
-        "type": "debug",
-        "z": "102b04b3eaea572e",
-        "name": "debug 18",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": true,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "counter",
-        "x": 630,
-        "y": 420,
-        "wires": []
     },
     {
         "id": "b39a3b5b36eeb658",
@@ -7729,8 +8125,8 @@
             "986e9a2cc040c5f9",
             "f5ec7d32c5bae2ae"
         ],
-        "x": 1210,
-        "y": 400,
+        "x": 1190,
+        "y": 320,
         "wires": [
             []
         ]
@@ -7750,30 +8146,13 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 380,
-        "y": 360,
+        "x": 360,
+        "y": 280,
         "wires": [
             [
                 "657fefb1a3a5afae"
             ]
         ]
-    },
-    {
-        "id": "70be395a6c91d7a9",
-        "type": "debug",
-        "z": "102b04b3eaea572e",
-        "name": "debug 38",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "topic",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 920,
-        "y": 420,
-        "wires": []
     },
     {
         "id": "a318dc83898cf141",
@@ -7790,8 +8169,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 380,
-        "y": 500,
+        "x": 360,
+        "y": 600,
         "wires": [
             [
                 "b36c3d4ed38a5f2d"
@@ -7817,7 +8196,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1060,
+        "x": 1040,
         "y": 160,
         "wires": [
             [
@@ -7844,7 +8223,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 810,
+        "x": 790,
         "y": 200,
         "wires": [
             [
@@ -7864,7 +8243,7 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1330,
+        "x": 1310,
         "y": 200,
         "wires": [
             [
@@ -7885,7 +8264,7 @@
         "targetType": "full",
         "statusVal": "",
         "statusType": "counter",
-        "x": 1480,
+        "x": 1460,
         "y": 200,
         "wires": []
     },
@@ -7913,7 +8292,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1060,
+        "x": 1040,
         "y": 200,
         "wires": [
             [
@@ -7945,11 +8324,290 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1200,
+        "x": 1180,
         "y": 200,
         "wires": [
             [
                 "af3c7f39b3e3b23f"
+            ]
+        ]
+    },
+    {
+        "id": "a8dde0fd25512471",
+        "type": "inject",
+        "z": "102b04b3eaea572e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 1000,
+        "wires": [
+            [
+                "c30f1cbd5e7e4c3a"
+            ]
+        ]
+    },
+    {
+        "id": "c30f1cbd5e7e4c3a",
+        "type": "function",
+        "z": "102b04b3eaea572e",
+        "name": "function 4",
+        "func": "const cluster = global.get('redisCluster');\nconst multi = cluster.multi();\n\n// All keys use {test} hash tag - same slot guaranteed\nmulti.set('{test}:name', 'John');\nmulti.set('{test}:age', '30');\nmulti.incr('{test}:counter');\nmulti.get('{test}:name');\n\nmulti.exec()\n    .then(results => {\n        msg.payload = results.map(r => r[1]);\n        node.send(msg);\n        // Results: [\"OK\", \"OK\", 1, \"John\"]\n    })\n    .catch(err => {\n        node.error(err);\n    });\n\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 410,
+        "y": 1000,
+        "wires": [
+            [
+                "6b5be6783d2aca4c"
+            ]
+        ]
+    },
+    {
+        "id": "6b5be6783d2aca4c",
+        "type": "debug",
+        "z": "102b04b3eaea572e",
+        "name": "debug 37",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 1000,
+        "wires": []
+    },
+    {
+        "id": "9698de17000d53a9",
+        "type": "inject",
+        "z": "102b04b3eaea572e",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 280,
+        "y": 1100,
+        "wires": [
+            [
+                "be0e8ebdf52aad2e"
+            ]
+        ]
+    },
+    {
+        "id": "be0e8ebdf52aad2e",
+        "type": "function",
+        "z": "102b04b3eaea572e",
+        "name": "function 5",
+        "func": "const cluster = global.get('redisCluster');\n\nif (!cluster) {\n    node.error('Redis cluster not connected');\n    return null;\n}\n\nconst multi = cluster.multi();\n\n// Read the keys we wrote in the simple test\nmulti.get('{test}:name');\nmulti.get('{test}:age');\nmulti.get('{test}:counter');\n\nmulti.exec()\n    .then(results => {\n        msg.payload = {\n            name: results[0][1],\n            age: results[1][1],\n            counter: results[2][1]\n        };\n        node.send(msg);\n        node.warn('Read results: ' + JSON.stringify(msg.payload));\n    })\n    .catch(err => {\n        node.error('Redis read error: ' + err);\n    });\n\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 1100,
+        "wires": [
+            [
+                "aa87eb9cd0e76022"
+            ]
+        ]
+    },
+    {
+        "id": "aa87eb9cd0e76022",
+        "type": "debug",
+        "z": "102b04b3eaea572e",
+        "name": "debug 39",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "15b504851c68874c",
+        "type": "function",
+        "z": "102b04b3eaea572e",
+        "name": "Stats",
+        "func": "const cluster = global.get('redisCluster');\n\nif (!cluster) {\n    node.error('Redis cluster not connected');\n    return null;\n}\n\nconst data = msg.payload;\nconst windowKey = flow.get('hashstat'); // Get current window from flow context\n\nconst multi = cluster.multi();\n\n// All use {windowKey} hash tag - Overall stats\nmulti.hincrby(`{${windowKey}}:total`, 'count', 1);\nmulti.hincrby(`{${windowKey}}:total`, 'totalLength', data.length);\nmulti.hincrby(`{${windowKey}}:total`, 'totalDelay', data.delay);\n\n// Stats per combo (centre + subtopic)\nmulti.hincrby(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'count', 1);\nmulti.hincrby(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'totalLength', data.length);\nmulti.hincrby(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'totalDelay', data.delay);\n\n// Set expiry on keys (1 hour)\nmulti.expire(`{${windowKey}}:total`, 3600);\nmulti.expire(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 3600);\n\nmulti.exec()\n    .then(results => {\n        msg.payload = { success: true, commands: results.length };\n        node.send(msg);\n    })\n    .catch(err => {\n        node.error('Redis write error: ' + err);\n    });\n\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 320,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "0114eaab13d782d9",
+        "type": "function",
+        "z": "5ff6c20513455391",
+        "name": "HashStat",
+        "func": "function getTimestamp(offsetSeconds = 0) {\n    const now = new Date();\n    now.setSeconds(now.getSeconds() + offsetSeconds);\n\n    const seconds = Math.floor(now.getSeconds() / 30) * 30;\n\n    return 'wis2gc:stats:' +\n        now.getFullYear() +\n        String(now.getMonth() + 1).padStart(2, '0') +\n        String(now.getDate()).padStart(2, '0') +\n        String(now.getHours()).padStart(2, '0') +\n        String(now.getMinutes()).padStart(2, '0') +\n        String(seconds).padStart(2, '0');\n}\n\nfunction scheduleNext() {\n    const now = new Date();\n    const seconds = now.getSeconds();\n    const ms = now.getMilliseconds();\n\n    // Calculate ms until next 30-second mark\n    const nextTick = ((30 - (seconds % 30)) * 1000) - ms;\n\n    const timer = setTimeout(() => {\n        // Store current timestamp in flow context\n        const currentTimestamp = getTimestamp(0);\n        flow.set('hashstat', currentTimestamp);\n\n        // Send message with timestamp -30 seconds\n        const previousTimestamp = getTimestamp(-30);\n        node.send({ payload: previousTimestamp });\n\n        // Schedule next update\n        scheduleNext();\n    }, nextTick);\n\n    // Store timer in context so it can be cleared if needed\n    context.set('timer', timer);\n}\n\n// Check if already running, if not start\nif (!context.get('timer')) {\n    scheduleNext();\n}\n\n// Don't return anything",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 140,
+        "wires": [
+            [
+                "784bbefb40c345ff"
+            ]
+        ]
+    },
+    {
+        "id": "4c068ca18d8cf9da",
+        "type": "inject",
+        "z": "5ff6c20513455391",
+        "name": "Start",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 210,
+        "y": 140,
+        "wires": [
+            [
+                "9bf83f610940c63a"
+            ]
+        ]
+    },
+    {
+        "id": "784bbefb40c345ff",
+        "type": "function",
+        "z": "5ff6c20513455391",
+        "name": "Metrics",
+        "func": "const cluster = global.get('redisCluster');\nconst global_cache = global.get('cache-name');\n\nif (!cluster) {\n    node.error('Redis cluster not connected');\n    return null;\n}\n\n// Get the window key (from previous 10-second interval in msg.payload)\nconst windowKey = msg.payload; // e.g., \"wis2gc:cleaner:20260305173020\"\n\nconst multi = cluster.multi();\n\n// Get total stats\nmulti.hgetall(`{${windowKey}}:total`);\n\n// Get all combo keys\nmulti.keys(`{${windowKey}}:combo:*`);\n\nmulti.exec()\n    .then(results => {\n        const totalStats = results[0][1];\n        const comboKeys = results[1][1];\n\n        // Fetch detailed stats for each combo\n        const multi2 = cluster.multi();\n        comboKeys.forEach(key => multi2.hgetall(key));\n\n        return multi2.exec().then(detailResults => {\n            const comboDetails = detailResults.map(r => r[1]);\n\n            // Process combos and send on outputs 1, 2, 3\n            comboKeys.forEach((key, idx) => {\n                // Parse key: \"{wis2gc:cleaner:20260305173020}:combo:de-dwd-gts-to-wis2:core/I/S/S/A/03/LFPW\"\n                // Split by ':' and find 'combo' position\n                const parts = key.split(':');\n                const comboIndex = parts.indexOf('combo');\n\n                // centre_id is right after 'combo'\n                const centre_id = parts[comboIndex + 1];\n\n                // topic is everything after centre_id\n                const topic = parts.slice(comboIndex + 2).join(':');\n\n                const stats = comboDetails[idx];\n                const count = parseInt(stats.count) || 0;\n                const totalLength = parseInt(stats.totalLength) || 0;\n                const avgDelay = stats.count ? Math.round(parseInt(stats.totalDelay) / parseInt(stats.count) / 1000) : 0;\n\n                // Output 1: Count\n                const msg1 = {\n                    payload: {\n                        \"op\": \"inc\",\n                        \"labels\": {\n                            \"centre_id\": centre_id,\n                            \"topic\": topic,\n                            \"report_by\": global_cache\n                        },\n                        \"val\": count\n                    }\n                };\n\n                // Output 2: Total Length\n                const msg2 = {\n                    payload: {\n                        \"op\": \"inc\",\n                        \"labels\": {\n                            \"centre_id\": centre_id,\n                            \"topic\": topic,\n                            \"report_by\": global_cache\n                        },\n                        \"val\": totalLength\n                    }\n                };\n\n                // Output 3: Average Delay\n                const msg3 = {\n                    payload: {\n                        \"op\": \"set\",\n                        \"labels\": {\n                            \"centre_id\": centre_id,\n                            \"topic\": topic,\n                            \"report_by\": global_cache\n                        },\n                        \"val\": avgDelay\n                    }\n                };\n\n                // Send to outputs 1, 2, 3\n                node.send([msg1, msg2, msg3, null, null, null]);\n            });\n\n            // Process total stats for outputs 4, 5, 6\n            const totalCount = parseInt(totalStats.count) || 0;\n            const totalLength = parseInt(totalStats.totalLength) || 0;\n            const avgDelay = totalStats.count ? Math.round(parseInt(totalStats.totalDelay) / parseInt(totalStats.count) / 1000) : 0;\n            \n            // Output 4: Total Count\n            const total1 = {\n                payload: {\n                    \"op\": \"inc\",\n                    \"val\": totalCount,\n                    \"labels\": {\n                        \"report_by\": global_cache\n                    }\n                }\n            };\n\n            // Output 5: Total Length\n            const total2 = {\n                payload: {\n                    \"op\": \"inc\",\n                    \"val\": totalLength,\n                    \"labels\": {\n                        \"report_by\": global_cache\n                    }                }\n            };\n\n            // Output 6: Average Delay\n            const total3 = {\n                payload: {\n                    \"op\": \"set\",\n                    \"val\": avgDelay,\n                    \"labels\": {\n                        \"report_by\": global_cache\n                    }                }\n            };\n\n            // Send total stats on outputs 4, 5, 6\n            node.send([null, null, null, total1, total2, total3]);\n        });\n    })\n    .catch(err => {\n        node.error('Redis read error: ' + err);\n    });\n\nreturn null;",
+        "outputs": 6,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 140,
+        "wires": [
+            [
+                "c99c758c05d58fe6"
+            ],
+            [
+                "b33f448a366ba16a"
+            ],
+            [
+                "41789583be323001"
+            ],
+            [],
+            [],
+            []
+        ]
+    },
+    {
+        "id": "41789583be323001",
+        "type": "prometheus-exporter",
+        "z": "5ff6c20513455391",
+        "name": "Delay",
+        "metric": "f2a2a080e159b3a2",
+        "x": 830,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "b33f448a366ba16a",
+        "type": "prometheus-exporter",
+        "z": "5ff6c20513455391",
+        "name": "Volume",
+        "metric": "0b1738558640a231",
+        "x": 840,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "c99c758c05d58fe6",
+        "type": "prometheus-exporter",
+        "z": "5ff6c20513455391",
+        "name": "Number",
+        "metric": "833dd9f884cd3f43",
+        "x": 840,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "9bf83f610940c63a",
+        "type": "switch",
+        "z": "5ff6c20513455391",
+        "name": "Reporter ?",
+        "property": "$globalContext(\"reporter\")",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 350,
+        "y": 140,
+        "wires": [
+            [
+                "0114eaab13d782d9"
             ]
         ]
     }
