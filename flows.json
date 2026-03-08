@@ -303,6 +303,28 @@
         "mtype": "counter"
     },
     {
+        "id": "d6421ec43be2d98a",
+        "type": "logIO-logger",
+        "name": "InputWNM",
+        "logLevel": "debug",
+        "isTimestampUTC": true,
+        "logMeta": "none",
+        "logMetaOptions": "",
+        "logOutput": "file",
+        "fileFileName": "inputwnm-%DATE%.log",
+        "fileDirName": "/logs",
+        "fileDatePattern": "YYYY-MM-DD-HH",
+        "fileIsJsonFormat": false,
+        "fileZippedArchive": false,
+        "fileMaxSize": "100",
+        "fileMaxSizeUnit": "m",
+        "fileMaxFiles": "10",
+        "fileMaxFilesUnit": "",
+        "consoleIsJsonFormat": false,
+        "elkUrl": "http://localhost:9200",
+        "elkIndex": "node-red"
+    },
+    {
         "id": "128474dbe370587c",
         "type": "file in",
         "z": "1c6759660a32fda5",
@@ -1932,7 +1954,8 @@
         "y": 580,
         "wires": [
             [
-                "78570a5e600b8b91"
+                "78570a5e600b8b91",
+                "53db81d697a2493a"
             ]
         ]
     },
@@ -3750,6 +3773,25 @@
         "x": 1070,
         "y": 120,
         "wires": []
+    },
+    {
+        "id": "53db81d697a2493a",
+        "type": "logIO",
+        "z": "a843f3ff30ad0d18",
+        "name": "WNM",
+        "active": true,
+        "logger": "d6421ec43be2d98a",
+        "complete": "true",
+        "targetType": "full",
+        "logIOMode": "inline",
+        "logIOScope": "I",
+        "autoStart": true,
+        "scope": [],
+        "x": 510,
+        "y": 500,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "ada4f85f94febb91",
@@ -5619,7 +5661,7 @@
                 "t": "set",
                 "p": "payload",
                 "pt": "msg",
-                "to": "[ \"wis2gc:cleaner:\" & $globalContext(\"worker\"), $string(payload) ]",
+                "to": "[ \"wis2gc:cleaner-reporter:\" & $globalContext(\"worker\"), $string(payload) ]",
                 "tot": "jsonata"
             },
             {
@@ -7814,7 +7856,7 @@
         "server": "029ff868be3010db",
         "command": "psubscribe",
         "name": "Cleaner",
-        "topic": "wis2gc:cleaner:*",
+        "topic": "wis2gc:cleaner-reporter:*",
         "obj": true,
         "timeout": 0,
         "x": 230,
@@ -8517,7 +8559,7 @@
         "repeat": "",
         "crontab": "",
         "once": true,
-        "onceDelay": 0.1,
+        "onceDelay": "2",
         "topic": "",
         "payload": "",
         "payloadType": "date",
@@ -8609,6 +8651,85 @@
             [
                 "0114eaab13d782d9"
             ]
+        ]
+    },
+    {
+        "id": "4dda7432857f6b17",
+        "type": "redis-in",
+        "z": "5ff6c20513455391",
+        "server": "029ff868be3010db",
+        "command": "psubscribe",
+        "name": "Reporter",
+        "topic": "wis2gc:cleaner-reporter:*",
+        "obj": true,
+        "timeout": 0,
+        "x": 200,
+        "y": 240,
+        "wires": [
+            [
+                "a94892868ef6cf36"
+            ]
+        ]
+    },
+    {
+        "id": "0033c1ddec3576fe",
+        "type": "function",
+        "z": "5ff6c20513455391",
+        "name": "K/V",
+        "func": "// First, convert array to object\nconst arr = msg.payload;\nconst output = {};\n\nfor (let i = 0; i < arr.length; i += 2) {\n    const key = String(arr[i]);\n    const value = arr[i + 1];\n    output[key] = value;\n}\n\n// Extract length from wnm\nlet length = null;\nif (output.wnm) {\n    try {\n        const wnmObj = JSON.parse(output.wnm);\n        if (wnmObj.links && wnmObj.links.length > 0) {\n            // Get length from first link (links[0])\n            if (wnmObj.links[0].length) {\n                length = wnmObj.links[0].length;\n            }\n        }\n    } catch (e) {\n        // Failed to parse wnm\n    }\n}\n\n// Compute difference between stored and published\nlet delay = null;\nif (output.stored && output.published) {\n    delay = parseInt(output.stored) - parseInt(output.published);\n}\n\n// Extract centre-id (4th value when split by /)\nlet centreId = null;\nif (output.topic) {\n    const topicParts = output.topic.split('/');\n    if (topicParts.length >= 4) {\n        centreId = topicParts[3];  // Index 3 is the 4th value\n    }\n}\n\n// Extract subtopic (from 7th value onwards)\nlet subtopic = null;\nif (output.topic) {\n    const topicParts = output.topic.split('/');\n    if (topicParts.length >= 6) {\n        subtopic = topicParts.slice(5).join('/');  // Index 6 onwards (7th value+)\n    }\n}\n\n// Add extracted values to output\noutput.length = length;\noutput.delay = delay;\noutput.centreId = centreId;\noutput.subtopic = subtopic;\n\nmsg.payload = output;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 490,
+        "y": 240,
+        "wires": [
+            [
+                "ee27c853195bc2e1"
+            ]
+        ]
+    },
+    {
+        "id": "a94892868ef6cf36",
+        "type": "switch",
+        "z": "5ff6c20513455391",
+        "name": "Reporter ?",
+        "property": "$globalContext(\"reporter\")",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 350,
+        "y": 240,
+        "wires": [
+            [
+                "0033c1ddec3576fe"
+            ]
+        ]
+    },
+    {
+        "id": "ee27c853195bc2e1",
+        "type": "function",
+        "z": "5ff6c20513455391",
+        "name": "Stats",
+        "func": "const cluster = global.get('redisCluster');\n\nif (!cluster) {\n    node.error('Redis cluster not connected');\n    return null;\n}\n\nconst data = msg.payload;\nconst windowKey = flow.get('hashstat'); // Get current window from flow context\n\nconst multi = cluster.multi();\n\n// All use {windowKey} hash tag - Overall stats\nmulti.hincrby(`{${windowKey}}:total`, 'count', 1);\nmulti.hincrby(`{${windowKey}}:total`, 'totalLength', data.length);\nmulti.hincrby(`{${windowKey}}:total`, 'totalDelay', data.delay);\n\n// Stats per combo (centre + subtopic)\nmulti.hincrby(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'count', 1);\nmulti.hincrby(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'totalLength', data.length);\nmulti.hincrby(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'totalDelay', data.delay);\n\n// Set expiry on keys (1 hour)\nmulti.expire(`{${windowKey}}:total`, 3600);\nmulti.expire(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 3600);\n\nmulti.exec()\n    .then(results => {\n        msg.payload = { success: true, commands: results.length };\n        node.send(msg);\n    })\n    .catch(err => {\n        node.error('Redis write error: ' + err);\n    });\n\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 240,
+        "wires": [
+            []
         ]
     }
 ]
