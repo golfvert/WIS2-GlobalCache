@@ -24,6 +24,8 @@ COPY flows.json  /data/flows.json
 
 # Copy Node-RED runtime only
 COPY --from=build /usr/src/node-red/ /usr/src/node-red/
+COPY custom-nodes/@golfvert/node-red-previous-node /usr/src/node-red/node_modules/@golfvert/node-red-previous-node
+
 
 # Ensure /data is writable by ANY runtime UID
 RUN chmod -R 0777 /data
