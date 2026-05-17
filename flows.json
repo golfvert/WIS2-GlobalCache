@@ -300,36 +300,11 @@
         "sendError": false,
         "encoding": "none",
         "allProps": false,
-        "x": 450,
-        "y": 220,
+        "x": 410,
+        "y": 420,
         "wires": [
             [
                 "ff93196a03c5d817"
-            ]
-        ]
-    },
-    {
-        "id": "5144ad1d8dba5084",
-        "type": "inject",
-        "z": "1c6759660a32fda5",
-        "name": "Init",
-        "props": [
-            {
-                "p": "filename",
-                "v": "CONFIGURATION",
-                "vt": "env"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "0.5",
-        "topic": "",
-        "x": 210,
-        "y": 220,
-        "wires": [
-            [
-                "78d502b560d7183e"
             ]
         ]
     },
@@ -339,8 +314,8 @@
         "z": "1c6759660a32fda5",
         "property": "payload",
         "name": "",
-        "x": 570,
-        "y": 220,
+        "x": 530,
+        "y": 420,
         "wires": [
             [
                 "94801092b09a3155",
@@ -389,8 +364,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 6,
-        "x": 740,
-        "y": 280,
+        "x": 700,
+        "y": 480,
         "wires": [
             [
                 "3b607bab1ce4d22d"
@@ -446,24 +421,10 @@
             },
             {
                 "t": "set",
-                "p": "test-mode-duration",
-                "pt": "global",
-                "to": "$type(payload.global.\"test-mode-duration\") = \"number\" ? payload.global.\"test-mode-duration\" : 0",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
                 "p": "redis",
                 "pt": "msg",
                 "to": "$eval($env(\"REDIS_URL\"))",
                 "tot": "jsonata"
-            },
-            {
-                "t": "set",
-                "p": "aria2-inqueue",
-                "pt": "global",
-                "to": "payload.global.aria2-inqueue",
-                "tot": "msg"
             }
         ],
         "action": "",
@@ -471,8 +432,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 730,
-        "y": 180,
+        "x": 690,
+        "y": 380,
         "wires": [
             [
                 "663b11c07aa86b7a",
@@ -490,7 +451,7 @@
         "topic": "redis",
         "location": "global",
         "x": 190,
-        "y": 100,
+        "y": 60,
         "wires": []
     },
     {
@@ -503,7 +464,7 @@
         ],
         "uncaught": false,
         "x": 330,
-        "y": 160,
+        "y": 120,
         "wires": [
             []
         ]
@@ -517,8 +478,8 @@
         "links": [
             "a163ad330996d35d"
         ],
-        "x": 910,
-        "y": 240,
+        "x": 870,
+        "y": 440,
         "wires": [],
         "l": true
     },
@@ -531,7 +492,7 @@
             "3b607bab1ce4d22d"
         ],
         "x": 200,
-        "y": 600,
+        "y": 800,
         "wires": [
             [
                 "065f44d8bb59a1fd",
@@ -550,8 +511,8 @@
         "links": [
             "f0c2751b37f6b71f"
         ],
-        "x": 910,
-        "y": 280,
+        "x": 870,
+        "y": 480,
         "wires": [],
         "l": true
     },
@@ -564,7 +525,7 @@
             "d115a1b70e3c60df"
         ],
         "x": 210,
-        "y": 740,
+        "y": 940,
         "wires": [
             [
                 "b6dda43fbcd85817",
@@ -650,7 +611,7 @@
         "to": "",
         "reg": false,
         "x": 370,
-        "y": 560,
+        "y": 760,
         "wires": [
             [
                 "d5fd7ba9ba7e7a48"
@@ -671,7 +632,7 @@
         "rh": 0,
         "inputs": 1,
         "x": 510,
-        "y": 560,
+        "y": 760,
         "wires": [
             []
         ]
@@ -690,7 +651,7 @@
         "rh": 0,
         "inputs": 1,
         "x": 510,
-        "y": 600,
+        "y": 800,
         "wires": [
             []
         ]
@@ -771,7 +732,7 @@
         "to": "",
         "reg": false,
         "x": 370,
-        "y": 600,
+        "y": 800,
         "wires": [
             [
                 "65a4682d5ce9b9db"
@@ -807,13 +768,6 @@
             },
             {
                 "t": "set",
-                "p": "test-mode-duration",
-                "pt": "global",
-                "to": "$type(payload.global.\"test-mode-duration\") = \"number\" ? payload.global.\"test-mode-duration\" : 0",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
                 "p": "priority-global-cache",
                 "pt": "global",
                 "to": "$type(payload.subscriber.\"priority-global-cache\") = \"array\" ? payload.subscriber.\"priority-global-cache\" : null",
@@ -845,7 +799,7 @@
         "to": "",
         "reg": false,
         "x": 380,
-        "y": 640,
+        "y": 840,
         "wires": [
             [
                 "b36a39df4b2c4b55"
@@ -877,7 +831,7 @@
         "to": "",
         "reg": false,
         "x": 370,
-        "y": 700,
+        "y": 900,
         "wires": [
             [
                 "1b42b9c92f4352df"
@@ -903,6 +857,13 @@
                 "pt": "global",
                 "to": "payload.downloader.aria-url",
                 "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "aria-inqueue",
+                "pt": "global",
+                "to": "payload.downloader.aria-inqueue",
+                "tot": "msg"
             }
         ],
         "action": "",
@@ -911,7 +872,7 @@
         "to": "",
         "reg": false,
         "x": 370,
-        "y": 740,
+        "y": 940,
         "wires": [
             []
         ]
@@ -933,8 +894,8 @@
                 "module": "ioredis"
             }
         ],
-        "x": 910,
-        "y": 120,
+        "x": 870,
+        "y": 320,
         "wires": [
             [
                 "3fd8e56922539926"
@@ -954,7 +915,7 @@
         "payloadType": "json",
         "block": false,
         "x": 520,
-        "y": 700,
+        "y": 900,
         "wires": [
             []
         ]
@@ -1028,7 +989,7 @@
         "to": "",
         "reg": false,
         "x": 400,
-        "y": 780,
+        "y": 980,
         "wires": [
             [
                 "b59dbe190ca901ca",
@@ -1118,8 +1079,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1050,
-        "y": 160,
+        "x": 1010,
+        "y": 360,
         "wires": [
             [
                 "805250af5c884534"
@@ -1139,8 +1100,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 1,
-        "x": 1190,
-        "y": 160,
+        "x": 1150,
+        "y": 360,
         "wires": [
             []
         ]
@@ -1158,8 +1119,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 1,
-        "x": 1190,
-        "y": 200,
+        "x": 1150,
+        "y": 400,
         "wires": [
             []
         ]
@@ -1246,8 +1207,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1050,
-        "y": 200,
+        "x": 1010,
+        "y": 400,
         "wires": [
             [
                 "38b9e676ddfde232"
@@ -1269,8 +1230,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 900,
-        "y": 200,
+        "x": 860,
+        "y": 400,
         "wires": [
             [
                 "3b8d720865dd94ec"
@@ -1292,8 +1253,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 900,
-        "y": 160,
+        "x": 860,
+        "y": 360,
         "wires": [
             [
                 "aec8ec1c7813d445"
@@ -1315,8 +1276,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 1060,
-        "y": 120,
+        "x": 1020,
+        "y": 320,
         "wires": [
             [
                 "8f4133e85592931a"
@@ -1332,8 +1293,8 @@
         "links": [
             "c2ef9f8fba06325d"
         ],
-        "x": 900,
-        "y": 320,
+        "x": 860,
+        "y": 520,
         "wires": [],
         "l": true
     },
@@ -1346,7 +1307,7 @@
             "3668b2ec19eebb18"
         ],
         "x": 190,
-        "y": 920,
+        "y": 1120,
         "wires": [
             [
                 "25ac402a9f85e34b"
@@ -1371,8 +1332,8 @@
                 "t": "set",
                 "p": "keep-in-cache",
                 "pt": "global",
-                "to": "payload.cleaner.keep-in-cache",
-                "tot": "msg"
+                "to": "$exists(\"payload.cleaner.keep-in-cache\") ? payload.cleaner.\"keep-in-cache\" : false",
+                "tot": "jsonata"
             },
             {
                 "t": "set",
@@ -1393,10 +1354,10 @@
         "to": "",
         "reg": false,
         "x": 360,
-        "y": 920,
+        "y": 1120,
         "wires": [
             [
-                "d9f629d5b51a605a"
+                "bd8f8b9b4e439529"
             ]
         ]
     },
@@ -1419,8 +1380,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1190,
-        "y": 120,
+        "x": 1150,
+        "y": 320,
         "wires": [
             []
         ]
@@ -1443,7 +1404,7 @@
             }
         ],
         "x": 190,
-        "y": 160,
+        "y": 120,
         "wires": [
             []
         ]
@@ -1457,8 +1418,8 @@
         "links": [
             "9763aa67f99aece4"
         ],
-        "x": 900,
-        "y": 360,
+        "x": 860,
+        "y": 560,
         "wires": [],
         "l": true
     },
@@ -1471,7 +1432,7 @@
             "287c036c9d516543"
         ],
         "x": 200,
-        "y": 980,
+        "y": 1180,
         "wires": [
             [
                 "55f185e97ff146c4"
@@ -1511,7 +1472,7 @@
         "to": "",
         "reg": false,
         "x": 360,
-        "y": 980,
+        "y": 1180,
         "wires": [
             [
                 "9c9026da609199a8"
@@ -1527,8 +1488,8 @@
         "links": [
             "4ff0e0b350b60479"
         ],
-        "x": 900,
-        "y": 400,
+        "x": 860,
+        "y": 600,
         "wires": [],
         "l": true
     },
@@ -1549,8 +1510,8 @@
                 "module": "crypto"
             }
         ],
-        "x": 330,
-        "y": 220,
+        "x": 290,
+        "y": 420,
         "wires": [
             [
                 "128474dbe370587c"
@@ -1566,7 +1527,7 @@
             "51ff616a0b410052"
         ],
         "x": 200,
-        "y": 1040,
+        "y": 1240,
         "wires": [
             [
                 "be30358e32b38eac"
@@ -1606,7 +1567,7 @@
         "to": "",
         "reg": false,
         "x": 360,
-        "y": 1040,
+        "y": 1240,
         "wires": [
             [
                 "7296650db5397b96"
@@ -1634,11 +1595,11 @@
         "topic": "",
         "payload": "",
         "payloadType": "date",
-        "x": 190,
-        "y": 480,
+        "x": 210,
+        "y": 640,
         "wires": [
             [
-                "91e10ebd880f5147"
+                "23ce24c124386b7c"
             ]
         ]
     },
@@ -1666,8 +1627,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 320,
-        "y": 480,
+        "x": 480,
+        "y": 640,
         "wires": [
             [
                 "7fb07cd1226c36af"
@@ -1686,8 +1647,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 450,
-        "y": 480,
+        "x": 610,
+        "y": 640,
         "wires": [
             []
         ]
@@ -1705,7 +1666,7 @@
         "payloadType": "json",
         "block": false,
         "x": 530,
-        "y": 640,
+        "y": 840,
         "wires": [
             []
         ]
@@ -1723,7 +1684,7 @@
         "payloadType": "json",
         "block": false,
         "x": 670,
-        "y": 780,
+        "y": 980,
         "wires": [
             []
         ]
@@ -1740,8 +1701,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 510,
-        "y": 920,
+        "x": 650,
+        "y": 1120,
         "wires": [
             []
         ]
@@ -1759,7 +1720,7 @@
         "payloadType": "json",
         "block": false,
         "x": 510,
-        "y": 980,
+        "y": 1180,
         "wires": [
             []
         ]
@@ -1777,7 +1738,7 @@
         "payloadType": "json",
         "block": false,
         "x": 510,
-        "y": 1040,
+        "y": 1240,
         "wires": [
             []
         ]
@@ -1798,7 +1759,7 @@
         "repair": false,
         "outputs": 1,
         "x": 1055,
-        "y": 560,
+        "y": 760,
         "wires": [
             [
                 "244b379575d5653c"
@@ -1826,7 +1787,7 @@
         "repair": false,
         "outputs": 1,
         "x": 1055,
-        "y": 620,
+        "y": 820,
         "wires": [
             [
                 "b4eda2dd5f255c3c"
@@ -1857,7 +1818,7 @@
         "repair": false,
         "outputs": 1,
         "x": 1055,
-        "y": 680,
+        "y": 880,
         "wires": [
             [
                 "aefeea0d2c59acde"
@@ -1876,10 +1837,11 @@
             "eda1d9b89c62703b",
             "b3841f66b9e5eefa",
             "ef1953a3c2d06e9d",
-            "1d563caff43066a1"
+            "1d563caff43066a1",
+            "07ad0baf7e59f967"
         ],
         "x": 970,
-        "y": 560,
+        "y": 760,
         "wires": [
             [
                 "f3c8b225584944ae"
@@ -1902,7 +1864,7 @@
         "autoStart": true,
         "scope": [],
         "x": 1280,
-        "y": 560,
+        "y": 760,
         "wires": [
             []
         ]
@@ -1920,7 +1882,7 @@
             "50ff53bf687ee138"
         ],
         "x": 970,
-        "y": 620,
+        "y": 820,
         "wires": [
             [
                 "1f8ceb1df55ececd"
@@ -1943,7 +1905,7 @@
         "autoStart": true,
         "scope": [],
         "x": 1290,
-        "y": 620,
+        "y": 820,
         "wires": [
             []
         ]
@@ -1962,7 +1924,7 @@
         "autoStart": true,
         "scope": [],
         "x": 1300,
-        "y": 680,
+        "y": 880,
         "wires": [
             []
         ]
@@ -1982,7 +1944,7 @@
             "ca364788f8a59612"
         ],
         "x": 970,
-        "y": 680,
+        "y": 880,
         "wires": [
             [
                 "96d3af64c93b3b3d"
@@ -2000,8 +1962,8 @@
         "links": [
             "735b65418467fb43"
         ],
-        "x": 745,
-        "y": 360,
+        "x": 705,
+        "y": 560,
         "wires": [],
         "icon": "font-awesome/fa-info"
     },
@@ -2010,8 +1972,8 @@
         "type": "previous-node",
         "z": "1c6759660a32fda5",
         "name": "",
-        "x": 695,
-        "y": 360,
+        "x": 655,
+        "y": 560,
         "wires": [
             [
                 "935ba99d18f04f78"
@@ -2044,7 +2006,7 @@
         "to": "",
         "reg": false,
         "x": 1150,
-        "y": 560,
+        "y": 760,
         "wires": [
             [
                 "6298cf4e7bd76a5c"
@@ -2076,7 +2038,7 @@
         "to": "",
         "reg": false,
         "x": 1150,
-        "y": 620,
+        "y": 820,
         "wires": [
             [
                 "e0394f5343d8f0e3"
@@ -2108,7 +2070,7 @@
         "to": "",
         "reg": false,
         "x": 1150,
-        "y": 680,
+        "y": 880,
         "wires": [
             [
                 "c22bd570c213d585"
@@ -2131,7 +2093,7 @@
         "repair": false,
         "outputs": 1,
         "x": 550,
-        "y": 820,
+        "y": 1020,
         "wires": [
             [
                 "s3-config-change"
@@ -2200,7 +2162,7 @@
         "to": "",
         "reg": false,
         "x": 670,
-        "y": 820,
+        "y": 1020,
         "wires": [
             []
         ]
@@ -2223,10 +2185,282 @@
         "to": "",
         "reg": false,
         "x": 550,
-        "y": 780,
+        "y": 980,
         "wires": [
             [
                 "7dac53323143c7b0"
+            ]
+        ]
+    },
+    {
+        "id": "bd8f8b9b4e439529",
+        "type": "switch",
+        "z": "1c6759660a32fda5",
+        "name": "Keep ?",
+        "property": "keep-in-cache",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "istype",
+                "v": "number",
+                "vt": "number"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 520,
+        "y": 1120,
+        "wires": [
+            [
+                "d9f629d5b51a605a"
+            ]
+        ]
+    },
+    {
+        "id": "validator-inject",
+        "type": "inject",
+        "z": "1c6759660a32fda5",
+        "name": "Check Config",
+        "props": [
+            {
+                "p": "filename",
+                "v": "CONFIGURATION",
+                "vt": "env"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "0.3",
+        "topic": "",
+        "x": 240,
+        "y": 200,
+        "wires": [
+            [
+                "validator-file-read"
+            ]
+        ]
+    },
+    {
+        "id": "validator-file-read",
+        "type": "file in",
+        "z": "1c6759660a32fda5",
+        "name": "Config",
+        "filename": "filename",
+        "filenameType": "msg",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 390,
+        "y": 200,
+        "wires": [
+            [
+                "validator-yaml"
+            ]
+        ]
+    },
+    {
+        "id": "validator-yaml",
+        "type": "yaml",
+        "z": "1c6759660a32fda5",
+        "property": "payload",
+        "name": "",
+        "x": 510,
+        "y": 200,
+        "wires": [
+            [
+                "validator-function"
+            ]
+        ]
+    },
+    {
+        "id": "validator-function",
+        "type": "function",
+        "z": "1c6759660a32fda5",
+        "name": "Validate",
+        "func": "\nconst cfg = msg.payload;\nconst errors   = [];\nconst warnings = [];\nconst infos    = [];\n\n// ─── Helpers ────────────────────────────────────────────────────────────────\n\nconst isString  = v => typeof v === 'string' && v.trim().length > 0;\nconst isNumber  = v => typeof v === 'number';\nconst isBool    = v => typeof v === 'boolean';\nconst isArray   = v => Array.isArray(v);\nconst isObject  = v => v !== null && typeof v === 'object' && !Array.isArray(v);\n\nconst BROKER_PROTOCOLS = /^(mqtt|mqtts|ws|wss):\\/\\/.+/;\nconst URL_RE           = /^https?:\\/\\/.+/;\nconst S3_URL_RE        = /^https?:\\/\\/[^:\\/]+(:\\d+)?$/;\n\nconst isValidMqttTopic = (t, path) => {\n    if (typeof t !== 'string' || t.length === 0) return 'empty or not a string';\n    const parts = t.split('/');\n    if (parts.length < 1) return 'empty topic';\n\n    // Helper: valid intermediate segment — alphanumeric + single hyphens (no leading/trailing/double), no underscore, no dot\n    const isValidSegment = s => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(s);\n\n    for (let i = 0; i < parts.length; i++) {\n        const part = parts[i];\n        const isLast = i === parts.length - 1;\n\n        if (part === '#') {\n            if (!isLast) return `'#' at level ${i+1} must be the last level`;\n            continue;\n        }\n\n        switch (i) {\n            case 0: // first level: origin, cache, monitor or +\n                if (!['origin','cache','monitor','+'].includes(part))\n                    return `level 1 must be 'origin', 'cache', 'monitor' or '+' (got '${part}')`;\n                break;\n            case 1: // second level: must be 'a', no +\n                if (part !== 'a')\n                    return `level 2 must be 'a' (got '${part}')${part === '+' ? ' — + not allowed here' : ''}`;\n                break;\n            case 2: // third level: must be 'wis2', no +\n                if (part !== 'wis2')\n                    return `level 3 must be 'wis2' (got '${part}')${part === '+' ? ' — + not allowed here' : ''}`;\n                break;\n            case 3: // fourth level: must contain at least one '-', or be +\n                if (part === '+') break;\n                if (!isValidSegment(part) || !part.includes('-'))\n                    return `level 4 must contain at least one '-' and be alphanumeric-hyphen (got '${part}')`;\n                break;\n            case 4: // fifth level: data, metadata or +\n                if (!['data','metadata','+'].includes(part))\n                    return `level 5 must be 'data', 'metadata' or '+' (got '${part}')`;\n                break;\n            default: // deeper levels: valid segment or +, last may be # (handled above)\n                if (part === '+') break;\n                if (isLast) {\n                    if (!/^[a-z]+$/.test(part))\n                        return `last level must be lowercase a-z only (got '${part}')`;\n                } else {\n                    if (!isValidSegment(part))\n                        return `level ${i+1} '${part}' is invalid — use lowercase alphanumeric with single hyphens only`;\n                }\n        }\n    }\n    return null; // null = valid\n};\n\nconst checkBroker = (broker, path) => {\n    if (!isString(broker.broker))           errors.push(`${path}.broker: missing or empty`);\n    else if (!BROKER_PROTOCOLS.test(broker.broker))\n                                            errors.push(`${path}.broker: invalid protocol (${broker.broker}) — must be mqtt/mqtts/ws/wss`);\n    if (!isString(broker.username))         warnings.push(`${path}.username: missing`);\n    if (!isString(broker.password))         warnings.push(`${path}.password: missing`);\n    if (broker.version !== undefined && ![3,4,5].includes(broker.version))\n                                            errors.push(`${path}.version: must be 3, 4 or 5 (got ${broker.version})`);\n    if (broker.verifycert !== undefined && !isBool(broker.verifycert))\n                                            errors.push(`${path}.verifycert: must be boolean`);\n};\n\n// ─── Root ───────────────────────────────────────────────────────────────────\n\nif (!isObject(cfg)) {\n    errors.push('Configuration root is not a valid YAML object');\n    msg.payload = { valid: false, errors, warnings, infos };\n    return msg;\n}\n\n// Declare roles early so all sections can reference it\nconst roles = isObject(cfg.global) && typeof cfg.global.roles === 'string'\n    ? cfg.global.roles.split(',').map(r => r.trim())\n    : [];\n\n// ─── global ─────────────────────────────────────────────────────────────────\n\nconst VALID_ROLES = ['SUBSCRIBER','DOWNLOADER','CLEANER','REPORTER','REPLAYER'];\n\nif (!isObject(cfg.global)) {\n    errors.push('global: section missing');\n} else {\n    const g = cfg.global;\n\n    // roles\n    if (!isString(g.roles)) {\n        errors.push('global.roles: missing or empty');\n    } else {\n        const roles = g.roles.split(',').map(r => r.trim());\n        const unknown = roles.filter(r => !VALID_ROLES.includes(r));\n        if (unknown.length) errors.push(`global.roles: unknown role(s): ${unknown.join(', ')}`);\n        infos.push(`global.roles: ${roles.join(', ')}`);\n\n        // cross-check: required sections per role\n        if (roles.includes('SUBSCRIBER')   && !isObject(cfg.subscriber))  errors.push('global.roles includes SUBSCRIBER but subscriber: section is missing');\n        if (roles.includes('DOWNLOADER')   && !isObject(cfg.downloader))  errors.push('global.roles includes DOWNLOADER but downloader: section is missing');\n        // cleaner section absence is handled in the cleaner validation block\n        // reporter section is optional — no check needed\n        if (roles.includes('REPLAYER')     && !isObject(cfg.replayer))    errors.push('global.roles includes REPLAYER but replayer: section is missing');\n    }\n\n    // worker\n    if (!isString(g.worker))              errors.push('global.worker: missing or empty');\n\n    // queue\n    if (!isString(g.queue))               errors.push('global.queue: missing or empty');\n\n    // log-level\n    const VALID_LOG = ['info','warn','debug'];\n    if (!isString(g['log-level']))        warnings.push('global.log-level: missing, will default to no logging');\n    else if (!VALID_LOG.includes(g['log-level']))\n                                          errors.push(`global.log-level: invalid value '${g['log-level']}' — must be info/warn/debug`);\n\n\n    // test-mode-duration\n    if (g['test-mode-duration'] !== undefined && !isNumber(g['test-mode-duration']))\n                                          errors.push('global.test-mode-duration: must be a number');\n\n    // global-cache\n    if (g['global-cache'] !== undefined && !isBool(g['global-cache']))\n                                          errors.push('global.global-cache: must be boolean');\n\n    // localbroker\n    if (!isArray(g.localbroker) || g.localbroker.length === 0) {\n        warnings.push('global.localbroker: missing or empty — no local MQTT broker configured (PUB1/PUB2 will not connect)');\n    } else {\n        g.localbroker.forEach((b, i) => checkBroker(b, `global.localbroker[${i}]`));\n        if (g.localbroker.length > 2) warnings.push('global.localbroker: more than 2 brokers defined — only PUB1 and PUB2 are wired in the flow');\n    }\n}\n\n// ─── subscriber ─────────────────────────────────────────────────────────────\n\nif (isObject(cfg.subscriber)) {\n    const s = cfg.subscriber;\n\n    // globalbroker\n    if (!isArray(s.globalbroker) || s.globalbroker.length === 0) {\n        errors.push('subscriber.globalbroker: missing or empty — nothing to subscribe to');\n    } else {\n        s.globalbroker.forEach((b, i) => checkBroker(b, `subscriber.globalbroker[${i}]`));\n        if (s.globalbroker.length > 2) warnings.push('subscriber.globalbroker: more than 2 brokers defined — only GB1 and GB2 are wired in the flow');\n    }\n\n    // priority-global-cache\n    if (s['priority-global-cache'] !== undefined) {\n        if (!isArray(s['priority-global-cache'])) errors.push('subscriber.priority-global-cache: must be an array');\n        else if (s['priority-global-cache'].some(v => !isString(v)))\n            errors.push('subscriber.priority-global-cache: all entries must be strings');\n    }\n\n    // mqtt\n    if (!isObject(s.mqtt)) {\n        errors.push('subscriber.mqtt: section missing');\n    } else {\n        const m = s.mqtt;\n\n        // whitelist — required, must be non-empty array of valid MQTT topics\n        if (!isArray(m.whitelist) || m.whitelist.length === 0)\n            errors.push('subscriber.mqtt.whitelist: missing or empty — nothing will be subscribed');\n        else {\n            m.whitelist.forEach((t, i) => {\n                if (!isString(t))              errors.push(`subscriber.mqtt.whitelist[${i}]: must be a string`);\n                else { const err = isValidMqttTopic(t); if (err) errors.push(`subscriber.mqtt.whitelist[${i}]: '${t}' — ${err}`); }\n            });\n            infos.push(`subscriber.mqtt.whitelist: ${m.whitelist.length} topic(s)`);\n        }\n\n        // blacklist — optional, but if present must be array of valid MQTT topics\n        if (m.blacklist !== undefined) {\n            if (!isArray(m.blacklist)) errors.push('subscriber.mqtt.blacklist: must be an array');\n            else {\n                m.blacklist.forEach((t, i) => {\n                    if (!isString(t))              errors.push(`subscriber.mqtt.blacklist[${i}]: must be a string`);\n                    else if (!/^[a-zA-Z0-9\\-\\/\\+#]+$/.test(t)) errors.push(`subscriber.mqtt.blacklist[${i}]: '${t}' — only alphanumeric, -, +, # and / allowed`);\n                });\n                infos.push(`subscriber.mqtt.blacklist: ${m.blacklist.length} topic(s)`);\n            }\n        }\n\n        // global-replay\n        if (m['global-replay'] !== undefined && m['global-replay'] !== null) {\n            if (!isString(m['global-replay'])) errors.push('subscriber.mqtt.global-replay: must be a string or null');\n            else infos.push(`subscriber.mqtt.global-replay: ${m['global-replay']}`);\n        }\n    }\n}\n\n// ─── downloader ─────────────────────────────────────────────────────────────\n\nif (isObject(cfg.downloader)) {\n    const d = cfg.downloader;\n\n    if (!isString(d['aria-secret']))       errors.push('downloader.aria-secret: missing or empty — required');\n    if (!isString(d['aria-url']))          errors.push('downloader.aria-url: missing or empty');\n    else if (!d['aria-url'].startsWith('ws://') && !d['aria-url'].startsWith('wss://'))\n                                           errors.push(`downloader.aria-url: must start with ws:// or wss:// (got ${d['aria-url']})`);\n    if (!isNumber(d['aria-inqueue']))       errors.push('downloader.aria-inqueue: missing or not a number — must be a positive integer');\n    else if (d['aria-inqueue'] <= 0)        errors.push('downloader.aria-inqueue: must be greater than 0');\n    if (!isString(d['cache-name']))         warnings.push('downloader.cache-name: missing');\n    if (!isString(d['download-url']))      errors.push('downloader.download-url: missing or empty');\n    else if (!URL_RE.test(d['download-url']))\n                                           errors.push(`downloader.download-url: invalid URL (${d['download-url']})`);\n\n    // rename-to-xxx flags: xxx must be one of date, topic, s3\n    const VALID_RENAME = ['date', 'topic', 's3'];\n    const renameKeys = Object.keys(d).filter(k => k.startsWith('rename-to-'));\n    renameKeys.forEach(k => {\n        const suffix = k.replace('rename-to-', '');\n        if (!VALID_RENAME.includes(suffix))\n            errors.push(`downloader.${k}: invalid suffix '${suffix}' — must be one of: ${VALID_RENAME.join(', ')}`);\n        if (!isBool(d[k]))\n            errors.push(`downloader.${k}: must be boolean`);\n    });\n\n    const renameDate  = d['rename-to-date']  === true;\n    const renameTopic = d['rename-to-topic'] === true;\n    const renameS3    = d['rename-to-s3']    === true;\n    const renameCount = [renameDate, renameTopic, renameS3].filter(Boolean).length;\n    if (renameCount > 1) errors.push('downloader: only one of rename-to-date / rename-to-topic / rename-to-s3 can be true at a time');\n    else if (renameCount === 1) infos.push(`downloader.rename-to: ${renameDate ? 'date' : renameTopic ? 'topic' : 's3'}`);\n\n    // s3access — required only if rename-to-s3 is true\n    if (renameS3) {\n        if (!isObject(d.s3access)) {\n            errors.push('downloader.s3access: required when rename-to-s3 is true but section is missing');\n        } else {\n            const s3 = d.s3access;\n            if (!isString(s3.url))         errors.push('downloader.s3access.url: missing or empty');\n            else if (!S3_URL_RE.test(s3.url))\n                                           errors.push(`downloader.s3access.url: invalid format (${s3.url}) — expected http(s)://host:port`);\n            if (!isString(s3.accesskey))   errors.push('downloader.s3access.accesskey: missing or empty');\n            if (!isString(s3.secretkey))   errors.push('downloader.s3access.secretkey: missing or empty');\n            if (!isString(s3.bucket))      errors.push('downloader.s3access.bucket: missing or empty');\n            if (!isString(s3.region))      warnings.push('downloader.s3access.region: missing — minio may use a default');\n        }\n    } else if (isObject(d.s3access)) {\n        warnings.push('downloader.s3access: defined but rename-to-s3 is not true — section will be ignored');\n    }\n}\n\n// ─── cleaner ─────────────────────────────────────────────────────────────────\n\nif (roles.includes('CLEANER')) {\n    if (!isObject(cfg.cleaner)) {\n        warnings.push('cleaner: section missing — files will never be cleaned from cache; consider using rename-to-s3 in the downloader section instead');\n    } else {\n        const c = cfg.cleaner;\n        if (c['keep-in-cache'] === undefined)\n            errors.push('cleaner.keep-in-cache: mandatory when cleaner section is present');\n        else if (!isNumber(c['keep-in-cache']))\n            errors.push('cleaner.keep-in-cache: must be a number (seconds)');\n        else if (c['keep-in-cache'] <= 0)\n            warnings.push('cleaner.keep-in-cache: value is <= 0 — files will be deleted immediately');\n    }\n}\n\n// ─── replayer ────────────────────────────────────────────────────────────────\n\nif (isObject(cfg.replayer)) {\n    const r = cfg.replayer;\n    if (!isString(r['global-replay-url']))  errors.push('replayer.global-replay-url: missing or empty');\n    else if (!URL_RE.test(r['global-replay-url']))\n                                            errors.push(`replayer.global-replay-url: invalid URL (${r['global-replay-url']})`);\n}\n\n// ─── cross-check: global-replay requires REPLAYER role ───────────────────────\n\nif (isObject(cfg.subscriber) && isObject(cfg.subscriber.mqtt)) {\n    const gr = cfg.subscriber.mqtt['global-replay'];\n    if (gr && gr !== 'null' && !roles.includes('REPLAYER'))\n        warnings.push('subscriber.mqtt.global-replay is set but REPLAYER is not in global.roles');\n}\n\n// ─── Unknown / unused fields ─────────────────────────────────────────────────\n\n// Fields actually consumed by the flow (from analysis of all change/switch/function nodes)\nconst KNOWN_GLOBAL = ['roles','worker','queue','log-level','global-cache','test-mode-duration','localbroker'];\nconst KNOWN_SUBSCRIBER = ['globalbroker','priority-global-cache','mqtt'];\nconst KNOWN_SUBSCRIBER_MQTT = ['whitelist','blacklist','global-replay'];\nconst KNOWN_DOWNLOADER = ['aria-secret','aria-url','aria-inqueue','cache-name','download-url','rename-to-date','rename-to-topic','rename-to-s3','s3access'];\nconst KNOWN_S3ACCESS = ['url','accesskey','secretkey','bucket','region'];\nconst KNOWN_CLEANER = ['keep-in-cache'];\nconst KNOWN_REPLAYER = ['global-replay-url'];\nconst KNOWN_REPORTER = [];\n\nconst checkUnknown = (obj, known, path) => {\n    if (!isObject(obj)) return;\n    Object.keys(obj).forEach(k => {\n        if (!known.includes(k))\n            warnings.push(`${path}.${k}: present in config but not used by the flow`);\n    });\n};\n\ncheckUnknown(cfg.global,     KNOWN_GLOBAL,      'global');\ncheckUnknown(cfg.subscriber, KNOWN_SUBSCRIBER,   'subscriber');\nif (isObject(cfg.subscriber && cfg.subscriber.mqtt))\n    checkUnknown(cfg.subscriber.mqtt, KNOWN_SUBSCRIBER_MQTT, 'subscriber.mqtt');\ncheckUnknown(cfg.downloader, KNOWN_DOWNLOADER,   'downloader');\nif (isObject(cfg.downloader) && isObject(cfg.downloader.s3access))\n    checkUnknown(cfg.downloader.s3access, KNOWN_S3ACCESS, 'downloader.s3access');\ncheckUnknown(cfg.cleaner,    KNOWN_CLEANER,      'cleaner');\ncheckUnknown(cfg.replayer,   KNOWN_REPLAYER,     'replayer');\n// reporter section intentionally has no required fields\n\n// Top-level unknown sections\nconst KNOWN_SECTIONS = ['global','subscriber','downloader','cleaner','replayer','reporter'];\nif (isObject(cfg)) {\n    Object.keys(cfg).forEach(k => {\n        if (!KNOWN_SECTIONS.includes(k))\n            warnings.push(`${k}: unknown top-level section — not used by the flow`);\n    });\n}\n\n// ─── Result ──────────────────────────────────────────────────────────────────\n\nconst valid = errors.length === 0;\n\nmsg.payload = { valid, errors, warnings, infos };\nmsg.topic   = valid ? 'CONFIG_VALID' : 'CONFIG_INVALID';\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 200,
+        "wires": [
+            [
+                "validator-switch"
+            ]
+        ]
+    },
+    {
+        "id": "validator-switch",
+        "type": "switch",
+        "z": "1c6759660a32fda5",
+        "name": "Valid ?",
+        "property": "payload.valid",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "false"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 770,
+        "y": 200,
+        "wires": [
+            [
+                "validator-ok"
+            ],
+            [
+                "validator-fail"
+            ]
+        ]
+    },
+    {
+        "id": "validator-ok",
+        "type": "change",
+        "z": "1c6759660a32fda5",
+        "name": "yaml",
+        "rules": [
+            {
+                "t": "set",
+                "p": "config_valid",
+                "pt": "global",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "payload.detail",
+                "pt": "msg",
+                "to": "\"✅ Configuration is valid. Warnings: \" & $string($count(payload.warnings)) & \" | Infos: \" & $string($count(payload.infos))",
+                "tot": "jsonata"
+            }
+        ],
+        "x": 890,
+        "y": 180,
+        "wires": [
+            [
+                "2e47c9209c1d68f7",
+                "79b1b9c62a12669d"
+            ]
+        ]
+    },
+    {
+        "id": "validator-fail",
+        "type": "change",
+        "z": "1c6759660a32fda5",
+        "name": "yaml",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload.detail",
+                "pt": "msg",
+                "to": "\"❌ Configuration INVALID. Errors: \" & $string($count(payload.errors)) & \" — \" & $join(payload.errors, ' | ')",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "config_valid",
+                "pt": "global",
+                "to": "false",
+                "tot": "bool"
+            }
+        ],
+        "x": 890,
+        "y": 220,
+        "wires": [
+            [
+                "2e47c9209c1d68f7"
+            ]
+        ]
+    },
+    {
+        "id": "07ad0baf7e59f967",
+        "type": "link out",
+        "z": "1c6759660a32fda5",
+        "name": "link out 16",
+        "mode": "link",
+        "links": [
+            "735b65418467fb43"
+        ],
+        "x": 1035,
+        "y": 200,
+        "wires": [],
+        "icon": "font-awesome/fa-info"
+    },
+    {
+        "id": "2e47c9209c1d68f7",
+        "type": "previous-node",
+        "z": "1c6759660a32fda5",
+        "name": "",
+        "x": 985,
+        "y": 200,
+        "wires": [
+            [
+                "07ad0baf7e59f967"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "79b1b9c62a12669d",
+        "type": "link out",
+        "z": "1c6759660a32fda5",
+        "name": "link out 17",
+        "mode": "link",
+        "links": [
+            "1f8891b3f87a9d31"
+        ],
+        "x": 985,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "1f8891b3f87a9d31",
+        "type": "link in",
+        "z": "1c6759660a32fda5",
+        "name": "link in 12",
+        "links": [
+            "79b1b9c62a12669d"
+        ],
+        "x": 205,
+        "y": 420,
+        "wires": [
+            [
+                "78d502b560d7183e"
+            ]
+        ]
+    },
+    {
+        "id": "23ce24c124386b7c",
+        "type": "switch",
+        "z": "1c6759660a32fda5",
+        "name": "Ready  ?",
+        "property": "$globalContext(\"config_valid\")",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 340,
+        "y": 640,
+        "wires": [
+            [
+                "91e10ebd880f5147"
             ]
         ]
     },
@@ -3176,7 +3410,7 @@
         "type": "switch",
         "z": "a843f3ff30ad0d18",
         "name": "Ready  ?",
-        "property": "( $globalContext(\"subscriber\") = true ) and ( $globalContext(\"redis_ready\") = true )",
+        "property": "( $globalContext(\"subscriber\") = true ) and ( $globalContext(\"redis_ready\") = true ) and ( $globalContext(\"config_valid\") = true )",
         "propertyType": "jsonata",
         "rules": [
             {
@@ -5654,7 +5888,7 @@
         "type": "switch",
         "z": "caa031b5574b994f",
         "name": "Length ?",
-        "property": "length > 0 and $flowContext(\"inQueue\") < $globalContext(\"aria2-inqueue\")",
+        "property": "length > 0 and $flowContext(\"inQueue\") < $globalContext(\"aria-inqueue\")",
         "propertyType": "jsonata",
         "rules": [
             {
@@ -6017,7 +6251,7 @@
         "type": "switch",
         "z": "caa031b5574b994f",
         "name": "Ready  ?",
-        "property": "( $globalContext(\"downloader\") = true ) and ( $globalContext(\"redis_ready\") = true )",
+        "property": "( $globalContext(\"downloader\") = true ) and ( $globalContext(\"redis_ready\") = true ) and ( $globalContext(\"config_valid\") = true )",
         "propertyType": "jsonata",
         "rules": [
             {
@@ -8118,7 +8352,7 @@
         "type": "switch",
         "z": "102b04b3eaea572e",
         "name": "Cleaner ?",
-        "property": "$globalContext(\"cleaner\") and ( $globalContext(\"redis_ready\") = true )",
+        "property": "$globalContext(\"cleaner\") and ( $globalContext(\"redis_ready\") = true ) and ( $globalContext(\"config_valid\") = true )",
         "propertyType": "jsonata",
         "rules": [
             {
@@ -8449,16 +8683,13 @@
         "y": 220,
         "wires": [
             [
-                "c99c758c05d58fe6",
-                "eda1d9b89c62703b"
+                "c99c758c05d58fe6"
             ],
             [
-                "b33f448a366ba16a",
-                "eda1d9b89c62703b"
+                "b33f448a366ba16a"
             ],
             [
-                "41789583be323001",
-                "eda1d9b89c62703b"
+                "41789583be323001"
             ],
             [],
             [],
@@ -8500,7 +8731,7 @@
         "type": "switch",
         "z": "5ff6c20513455391",
         "name": "Reporter ?",
-        "property": "$globalContext(\"reporter\")",
+        "property": "$globalContext(\"reporter\") and ( $globalContext(\"config_valid\") = true )",
         "propertyType": "jsonata",
         "rules": [
             {
@@ -8596,20 +8827,6 @@
         "wires": [
             []
         ]
-    },
-    {
-        "id": "eda1d9b89c62703b",
-        "type": "link out",
-        "z": "5ff6c20513455391",
-        "name": "Info",
-        "mode": "link",
-        "links": [
-            "735b65418467fb43"
-        ],
-        "x": 755,
-        "y": 100,
-        "wires": [],
-        "icon": "font-awesome/fa-info"
     },
     {
         "id": "f5e4242028499e58",
@@ -8910,7 +9127,7 @@
         "type": "switch",
         "z": "5751c69be6006c9c",
         "name": "Ready  ?",
-        "property": "( $globalContext(\"replayer\") = true ) and ( $globalContext(\"redis_ready\") = true )",
+        "property": "( $globalContext(\"replayer\") = true ) and ( $globalContext(\"redis_ready\") = true ) and ( $globalContext(\"config_valid\") = true )",
         "propertyType": "jsonata",
         "rules": [
             {
