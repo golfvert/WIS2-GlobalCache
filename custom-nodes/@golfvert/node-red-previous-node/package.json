@@ -1,0 +1,12 @@
+{
+  "name": "@golfvert/node-red-previous-node",
+  "version": "1.0.0",
+  "description": "Get previous node information",
+  "main": "previous-node.js",
+  "keywords": ["node-red"],
+  "node-red": {
+    "nodes": {
+      "previous-node": "previous-node.js"
+    }
+  }
+}

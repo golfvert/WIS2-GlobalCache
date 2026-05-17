@@ -1,0 +1,31 @@
+<script type="text/javascript">
+    RED.nodes.registerType('previous-node', {
+        category: 'function',
+        color: '#ea967b',
+        defaults: {
+            name: {value: ""}
+        },
+        inputs: 1,
+        outputs: 1,
+        icon: "font-awesome/fa-binoculars",
+        label: function() {
+            return this.name || "previous node";
+        }
+    });
+</script>
+
+<script type="text/html" data-template-name="previous-node">
+    <div class="form-row">
+        <label for="node-input-name"><i class="fa fa-tag"></i> Name</label>
+        <input type="text" id="node-input-name" placeholder="Name">
+    </div>
+</script>
+
+<script type="text/html" data-help-name="previous-node">
+    <p>Adds the previous node's name to the message.</p>
+    <h3>Output</h3>
+    <dl class="message-properties">
+        <dt>sourceNode <span class="property-type">string</span></dt>
+        <dd>Name of the previous node (or type if unnamed)</dd>
+    </dl>
+</script>
