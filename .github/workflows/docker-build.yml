@@ -6,6 +6,7 @@ on:
   push:
     paths:
       - 'image:tag'
+  workflow_call:
 
 jobs:
   build-and-push:
