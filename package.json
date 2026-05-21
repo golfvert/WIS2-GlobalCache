@@ -39,7 +39,7 @@
         "node-red-contrib-prometheus-exporter": "~1.0.5"
     },
     "engines": {
-        "node": ">=22"
+        "node": ">=20"
     },
     "node-red": {
         "settings": {

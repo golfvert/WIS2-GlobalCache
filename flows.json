@@ -1,5 +1,13 @@
 [
     {
+        "id": "3437842c2bd2e3b8",
+        "type": "tab",
+        "label": "CI/CD",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
         "id": "1c6759660a32fda5",
         "type": "tab",
         "label": "Setup",
@@ -287,6 +295,79 @@
         "consoleIsJsonFormat": false,
         "elkUrl": "http://localhost:9200",
         "elkIndex": "node-red"
+    },
+    {
+        "id": "725d2f2da90c742b",
+        "type": "global-config",
+        "env": [
+            {
+                "name": "container",
+                "value": "wis2gc",
+                "type": "str"
+            },
+            {
+                "name": "directory",
+                "value": "/data/projects/wis2gc",
+                "type": "str"
+            }
+        ],
+        "modules": {}
+    },
+    {
+        "id": "15d0ec9bc2ce2c9c",
+        "type": "inject",
+        "z": "3437842c2bd2e3b8",
+        "name": "Update image:tag",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 60,
+        "wires": [
+            [
+                "d92bb90dbc47cc63"
+            ]
+        ]
+    },
+    {
+        "id": "d92bb90dbc47cc63",
+        "type": "function",
+        "z": "3437842c2bd2e3b8",
+        "name": "Tag",
+        "func": "// ── Configuration ─────────────────────────────────────────────\nconst IMAGE_NAME = env.get(\"container\");\nconst TAG_DIR = env.get(\"directory\");\nconst TAG_FILE = `${TAG_DIR}/image:tag`;\n// ──────────────────────────────────────────────────────────────\n\nconst now = new Date();\nconst curY = now.getFullYear();\nconst curM = now.getMonth() + 1;  // 1-12\n\nlet newTag;\n\nif (!fs.existsSync(TAG_FILE)) {\n    // File does not exist: create with YYYY.MM.1\n    newTag = `${curY}.${curM}.1`;\n\n} else {\n    const content = fs.readFileSync(TAG_FILE, 'utf8').trim();\n    // Expected format: imagename:YYYY.MM.patch\n    const match = content.match(/:(\\d+)\\.(\\d+)\\.(\\d+)$/);\n\n    if (!match) {\n        // Unreadable format: reset\n        newTag = `${curY}.${curM}.1`;\n\n    } else {\n        let [, fileY, fileM, fileP] = match.map(Number);\n\n        if (fileY === curY && fileM === curM) {\n            // Same year and month: bump patch\n            newTag = `${curY}.${curM}.${fileP + 1}`;\n\n        } else {\n            // Different month or year: compute next month\n            let nextY = fileY;\n            let nextM = fileM + 1;\n            if (nextM > 12) {\n                nextY += 1;\n                nextM = 1;\n            }\n            newTag = `${nextY}.${nextM}.1`;\n        }\n    }\n}\n\nconst fileContent = `${IMAGE_NAME}:${newTag}`;\nfs.writeFileSync(TAG_FILE, fileContent, 'utf8');\n\nmsg.payload = fileContent;\nnode.status({ fill: \"green\", shape: \"dot\", text: fileContent });\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [
+            {
+                "var": "fs",
+                "module": "fs"
+            },
+            {
+                "var": "path",
+                "module": "path"
+            }
+        ],
+        "x": 330,
+        "y": 60,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "128474dbe370587c",
