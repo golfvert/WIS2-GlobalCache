@@ -5075,9 +5075,7 @@
         "x": 1880,
         "y": 100,
         "wires": [
-            [
-                "ce50bec30b2972fd"
-            ]
+            []
         ]
     },
     {
@@ -8195,22 +8193,6 @@
         "y": 900,
         "wires": [],
         "icon": "font-awesome/fa-bug"
-    },
-    {
-        "id": "ce50bec30b2972fd",
-        "type": "debug",
-        "z": "caa031b5574b994f",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "false",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 2030,
-        "y": 160,
-        "wires": []
     },
     {
         "id": "5034d326b1b418b5",
