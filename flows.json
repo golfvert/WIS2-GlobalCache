@@ -59,8 +59,8 @@
         "id": "7df5aeb06a15c0e4",
         "type": "junction",
         "z": "a843f3ff30ad0d18",
-        "x": 760,
-        "y": 280,
+        "x": 730,
+        "y": 380,
         "wires": [
             [
                 "03c6799d92d6d702"
@@ -71,8 +71,8 @@
         "id": "b9ece7ebef6b02b6",
         "type": "junction",
         "z": "a843f3ff30ad0d18",
-        "x": 740,
-        "y": 280,
+        "x": 710,
+        "y": 380,
         "wires": [
             [
                 "7df5aeb06a15c0e4"
@@ -856,6 +856,13 @@
             },
             {
                 "t": "set",
+                "p": "lastMqttId",
+                "pt": "global",
+                "to": "0-0",
+                "tot": "str"
+            },
+            {
+                "t": "set",
                 "p": "subscriber",
                 "pt": "global",
                 "to": "true",
@@ -1415,6 +1422,13 @@
                 "pt": "global",
                 "to": "$exists(\"payload.cleaner.keep-in-cache\") ? payload.cleaner.\"keep-in-cache\" : false",
                 "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "lastErrorId",
+                "pt": "global",
+                "to": "0-0",
+                "tot": "str"
             },
             {
                 "t": "set",
@@ -2019,8 +2033,9 @@
             "fddf8cb492464947",
             "f2a6341d51439b93",
             "abc0185ff9bc6d64",
-            "0d4423a01144c3c1",
-            "ca364788f8a59612"
+            "ca364788f8a59612",
+            "411f08083f4fc6c6",
+            "46f6746bf163a9af"
         ],
         "x": 970,
         "y": 880,
@@ -2612,24 +2627,6 @@
         "l": false
     },
     {
-        "id": "7393b90c797c185f",
-        "type": "redis-in",
-        "z": "a843f3ff30ad0d18",
-        "server": "029ff868be3010db",
-        "command": "psubscribe",
-        "name": "Sub",
-        "topic": "wis2gc:mqtt:*",
-        "obj": true,
-        "timeout": 0,
-        "x": 150,
-        "y": 440,
-        "wires": [
-            [
-                "cdea0b315445225b"
-            ]
-        ]
-    },
-    {
         "id": "dd26e12524ceb0cf",
         "type": "change",
         "z": "a843f3ff30ad0d18",
@@ -2653,8 +2650,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1310,
-        "y": 120,
+        "x": 1340,
+        "y": 60,
         "wires": [
             [
                 "deed215fd6e4f8f2"
@@ -2699,38 +2696,6 @@
         "wires": [
             [
                 "53702cb0bee173b8"
-            ]
-        ]
-    },
-    {
-        "id": "eefc0d32b16117f3",
-        "type": "change",
-        "z": "a843f3ff30ad0d18",
-        "name": "Prepare",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "[ \"wis2gc:mqtt:\" & $globalContext(\"queue\") & \":\" & mqtttopic2, $string(mqttpayload2) ]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "topic",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1360,
-        "y": 200,
-        "wires": [
-            [
-                "7157bb2dd11e8234"
             ]
         ]
     },
@@ -2799,7 +2764,7 @@
         "y": 120,
         "wires": [
             [
-                "dd26e12524ceb0cf"
+                "1cfa006462a7100e"
             ]
         ]
     },
@@ -2868,7 +2833,7 @@
         "y": 200,
         "wires": [
             [
-                "eefc0d32b16117f3"
+                "0c4059084477c553"
             ]
         ]
     },
@@ -2929,24 +2894,6 @@
         ]
     },
     {
-        "id": "7157bb2dd11e8234",
-        "type": "redis-command",
-        "z": "a843f3ff30ad0d18",
-        "server": "029ff868be3010db",
-        "command": "PUBLISH",
-        "name": "Pub",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 1490,
-        "y": 200,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "aa5146ce5de05959",
         "type": "redis-command",
         "z": "a843f3ff30ad0d18",
@@ -2978,8 +2925,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1440,
-        "y": 120,
+        "x": 1470,
+        "y": 60,
         "wires": [
             []
         ]
@@ -3009,7 +2956,7 @@
         "type": "switch",
         "z": "a843f3ff30ad0d18",
         "name": "Q & S ?",
-        "property": "$contains(topic,$globalContext(\"queue\")) and $globalContext(\"subscriber\") = true",
+        "property": "$globalContext(\"subscriber\") = true",
         "propertyType": "jsonata",
         "rules": [
             {
@@ -3019,8 +2966,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 280,
-        "y": 440,
+        "x": 1020,
+        "y": 320,
         "wires": [
             [
                 "d5b0409ae997d1aa",
@@ -3052,8 +2999,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1430,
-        "y": 940,
+        "x": 1450,
+        "y": 1000,
         "wires": [
             [
                 "cf3cd2d23ae9970f"
@@ -3082,8 +3029,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1020,
-        "y": 960,
+        "x": 1040,
+        "y": 1020,
         "wires": [
             [
                 "460770b0f9fe7592"
@@ -3105,8 +3052,8 @@
         "stream": false,
         "addname": "",
         "property": "href",
-        "x": 1160,
-        "y": 940,
+        "x": 1180,
+        "y": 1000,
         "wires": [
             [
                 "2b64a788c7b26962"
@@ -3137,8 +3084,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1150,
-        "y": 980,
+        "x": 1170,
+        "y": 1040,
         "wires": [
             [
                 "cf3cd2d23ae9970f"
@@ -3167,8 +3114,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1020,
-        "y": 860,
+        "x": 1040,
+        "y": 920,
         "wires": [
             [
                 "08c0776947743372"
@@ -3190,8 +3137,8 @@
         "stream": false,
         "addname": "",
         "property": "href",
-        "x": 1160,
-        "y": 840,
+        "x": 1180,
+        "y": 900,
         "wires": [
             [
                 "df1b85c0fddf7292"
@@ -3215,8 +3162,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 1,
-        "x": 1300,
-        "y": 840,
+        "x": 1320,
+        "y": 900,
         "wires": [
             [
                 "03d07a850695bf10"
@@ -3232,8 +3179,8 @@
         "links": [
             "e436b9c9fec0bef9"
         ],
-        "x": 510,
-        "y": 860,
+        "x": 530,
+        "y": 920,
         "wires": [],
         "l": true
     },
@@ -3246,8 +3193,8 @@
         "links": [
             "48d3546eb5fbdea5"
         ],
-        "x": 540,
-        "y": 900,
+        "x": 560,
+        "y": 960,
         "wires": [],
         "l": true
     },
@@ -3259,8 +3206,8 @@
         "links": [
             "dc534fdddf9115b5"
         ],
-        "x": 785,
-        "y": 860,
+        "x": 805,
+        "y": 920,
         "wires": [
             [
                 "acb0448c7afb2240"
@@ -3275,8 +3222,8 @@
         "links": [
             "61b10c4bfce3925e"
         ],
-        "x": 785,
-        "y": 960,
+        "x": 805,
+        "y": 1020,
         "wires": [
             [
                 "625fa4f97eeb84d6"
@@ -3300,8 +3247,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 1,
-        "x": 1300,
-        "y": 940,
+        "x": 1320,
+        "y": 1000,
         "wires": [
             [
                 "914f3f9e75a3e351"
@@ -3332,11 +3279,12 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1690,
-        "y": 840,
+        "x": 1710,
+        "y": 900,
         "wires": [
             [
-                "a34872baa44258e7"
+                "a34872baa44258e7",
+                "7a7d11902f19fcdb"
             ]
         ]
     },
@@ -3350,8 +3298,8 @@
             "b26a9ecefc1fe050",
             "eda5e2883ada43f9"
         ],
-        "x": 1395,
-        "y": 840,
+        "x": 1415,
+        "y": 900,
         "wires": []
     },
     {
@@ -3364,8 +3312,8 @@
             "b26a9ecefc1fe050",
             "eda5e2883ada43f9"
         ],
-        "x": 1115,
-        "y": 880,
+        "x": 1135,
+        "y": 940,
         "wires": []
     },
     {
@@ -3377,8 +3325,8 @@
             "03d07a850695bf10",
             "63abeb1af471385d"
         ],
-        "x": 1595,
-        "y": 840,
+        "x": 1615,
+        "y": 900,
         "wires": [
             [
                 "46b244fbdbb29b75",
@@ -3395,8 +3343,8 @@
             "03d07a850695bf10",
             "63abeb1af471385d"
         ],
-        "x": 1595,
-        "y": 880,
+        "x": 1615,
+        "y": 940,
         "wires": [
             [
                 "0bb92d3863dcdad7"
@@ -3422,8 +3370,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1690,
-        "y": 880,
+        "x": 1710,
+        "y": 940,
         "wires": [
             [
                 "54710069ff7a89e7"
@@ -3442,8 +3390,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1810,
-        "y": 880,
+        "x": 1830,
+        "y": 940,
         "wires": [
             []
         ]
@@ -3460,8 +3408,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1810,
-        "y": 840,
+        "x": 1830,
+        "y": 900,
         "wires": [
             []
         ]
@@ -3478,8 +3426,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1570,
-        "y": 980,
+        "x": 1590,
+        "y": 1040,
         "wires": [
             []
         ]
@@ -3519,8 +3467,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 630,
-        "y": 820,
+        "x": 650,
+        "y": 880,
         "wires": [
             []
         ]
@@ -3549,8 +3497,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1690,
-        "y": 800,
+        "x": 1710,
+        "y": 860,
         "wires": [
             [
                 "b8c8b78c2eb72dc5"
@@ -3569,8 +3517,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1810,
-        "y": 800,
+        "x": 1830,
+        "y": 860,
         "wires": [
             []
         ]
@@ -3587,8 +3535,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 620,
-        "y": 440,
+        "x": 590,
+        "y": 540,
         "wires": [
             [
                 "b9ece7ebef6b02b6",
@@ -3630,8 +3578,8 @@
         "links": [
             "8f84ee1a7fccf7c0"
         ],
-        "x": 560,
-        "y": 780,
+        "x": 580,
+        "y": 840,
         "wires": [],
         "l": true
     },
@@ -3643,8 +3591,8 @@
         "links": [
             "02d9925417bfe1f2"
         ],
-        "x": 785,
-        "y": 720,
+        "x": 805,
+        "y": 780,
         "wires": [
             [
                 "0891e56b3292c801"
@@ -3689,8 +3637,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 870,
-        "y": 720,
+        "x": 890,
+        "y": 780,
         "wires": [
             [
                 "7c932e7afd807cf0",
@@ -3712,8 +3660,8 @@
         "correl": "",
         "expiry": "",
         "broker": "bae38c3ec809a1b3",
-        "x": 1130,
-        "y": 660,
+        "x": 1150,
+        "y": 720,
         "wires": []
     },
     {
@@ -3730,8 +3678,8 @@
         "correl": "",
         "expiry": "",
         "broker": "6e294e8eeec8172b",
-        "x": 1130,
-        "y": 760,
+        "x": 1150,
+        "y": 820,
         "wires": []
     },
     {
@@ -3749,8 +3697,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 1000,
-        "y": 760,
+        "x": 1020,
+        "y": 820,
         "wires": [
             [
                 "0cc23587a0ece51a"
@@ -3772,8 +3720,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 1000,
-        "y": 680,
+        "x": 1020,
+        "y": 740,
         "wires": [
             [
                 "3d6996ab912ce343",
@@ -3805,8 +3753,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1130,
-        "y": 700,
+        "x": 1150,
+        "y": 760,
         "wires": [
             [
                 "e6443f5d3b5503b9"
@@ -3825,8 +3773,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1250,
-        "y": 700,
+        "x": 1270,
+        "y": 760,
         "wires": [
             []
         ]
@@ -3888,8 +3836,8 @@
                 "t": "set",
                 "p": "wnmtopic",
                 "pt": "msg",
-                "to": "$split(topic,\":\")[3]",
-                "tot": "jsonata"
+                "to": "topic",
+                "tot": "msg"
             },
             {
                 "t": "set",
@@ -3939,8 +3887,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 890,
-        "y": 440,
+        "x": 860,
+        "y": 540,
         "wires": [
             [
                 "e04b46130b5aef38"
@@ -3974,8 +3922,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 3,
-        "x": 340,
-        "y": 840,
+        "x": 360,
+        "y": 900,
         "wires": [
             [
                 "c12ae5d72cbceb70",
@@ -4014,8 +3962,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 510,
-        "y": 820,
+        "x": 530,
+        "y": 880,
         "wires": [
             [
                 "e4d3fac4c6c469c0"
@@ -4067,8 +4015,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 880,
-        "y": 860,
+        "x": 900,
+        "y": 920,
         "wires": [
             [
                 "a94a6d748aa14378"
@@ -4120,8 +4068,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 880,
-        "y": 960,
+        "x": 900,
+        "y": 1020,
         "wires": [
             [
                 "50fc1eedfc6c38b3"
@@ -4140,8 +4088,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 210,
-        "y": 840,
+        "x": 230,
+        "y": 900,
         "wires": [
             [
                 "cbb3106e5cbb5f56"
@@ -4165,8 +4113,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 755,
-        "y": 320,
+        "x": 725,
+        "y": 420,
         "wires": [
             [
                 "03c6799d92d6d702"
@@ -4191,8 +4139,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 755,
-        "y": 360,
+        "x": 725,
+        "y": 460,
         "wires": [
             [
                 "03c6799d92d6d702"
@@ -4217,8 +4165,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 755,
-        "y": 400,
+        "x": 725,
+        "y": 500,
         "wires": [
             [
                 "03c6799d92d6d702"
@@ -4243,8 +4191,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 755,
-        "y": 440,
+        "x": 725,
+        "y": 540,
         "wires": [
             [
                 "03c6799d92d6d702"
@@ -4269,8 +4217,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 755,
-        "y": 480,
+        "x": 725,
+        "y": 580,
         "wires": [
             [
                 "03c6799d92d6d702"
@@ -4295,8 +4243,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 755,
-        "y": 520,
+        "x": 725,
+        "y": 620,
         "wires": [
             [
                 "03c6799d92d6d702"
@@ -4321,8 +4269,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 755,
-        "y": 560,
+        "x": 725,
+        "y": 660,
         "wires": [
             [
                 "03c6799d92d6d702"
@@ -4347,8 +4295,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 755,
-        "y": 600,
+        "x": 725,
+        "y": 700,
         "wires": [
             [
                 "03c6799d92d6d702"
@@ -4382,11 +4330,11 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 450,
-        "y": 440,
+        "x": 1190,
+        "y": 320,
         "wires": [
             [
-                "4ae91f6f2721511e"
+                "32f06040cbdb17ea"
             ]
         ]
     },
@@ -4402,8 +4350,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1020,
-        "y": 440,
+        "x": 990,
+        "y": 540,
         "wires": [
             [
                 "a78990a6467f55e2"
@@ -4430,8 +4378,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1160,
-        "y": 440,
+        "x": 1130,
+        "y": 540,
         "wires": [
             [
                 "dfcd92f87b0b313b"
@@ -4463,8 +4411,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1330,
-        "y": 440,
+        "x": 1300,
+        "y": 540,
         "wires": [
             [
                 "4ba20af2486d4cb3"
@@ -4480,8 +4428,8 @@
         "links": [
             "f1bfb46b496769da"
         ],
-        "x": 1425,
-        "y": 440,
+        "x": 1395,
+        "y": 540,
         "wires": []
     },
     {
@@ -4492,8 +4440,8 @@
         "links": [
             "4ba20af2486d4cb3"
         ],
-        "x": 125,
-        "y": 840,
+        "x": 145,
+        "y": 900,
         "wires": [
             [
                 "5e3d36a879d79a9a"
@@ -4509,8 +4457,8 @@
         "links": [
             "7f8a8e775bcd0fcb"
         ],
-        "x": 385,
-        "y": 380,
+        "x": 1125,
+        "y": 260,
         "wires": [],
         "icon": "font-awesome/fa-bug"
     },
@@ -4519,8 +4467,8 @@
         "type": "previous-node",
         "z": "a843f3ff30ad0d18",
         "name": "",
-        "x": 845,
-        "y": 280,
+        "x": 815,
+        "y": 380,
         "wires": [
             [
                 "c36071f90c484a6e"
@@ -4533,8 +4481,8 @@
         "type": "previous-node",
         "z": "a843f3ff30ad0d18",
         "name": "",
-        "x": 845,
-        "y": 340,
+        "x": 815,
+        "y": 440,
         "wires": [
             [
                 "50ff53bf687ee138"
@@ -4551,8 +4499,8 @@
         "links": [
             "d1da644c2763c559"
         ],
-        "x": 905,
-        "y": 280,
+        "x": 875,
+        "y": 380,
         "wires": [],
         "icon": "font-awesome/fa-warning"
     },
@@ -4565,10 +4513,288 @@
         "links": [
             "d1da644c2763c559"
         ],
-        "x": 905,
-        "y": 340,
+        "x": 875,
+        "y": 440,
         "wires": [],
         "icon": "font-awesome/fa-warning"
+    },
+    {
+        "id": "0c4059084477c553",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "name": "Prepare",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[ \"wis2gc:mqtt:\" & $globalContext(\"queue\"), \"MAXLEN\", \"~\", \"10000\", \"*\", \"topic\", mqtttopic1, \"payload\", $string(mqttpayload1), \"timestamp\", $string($millis()) ]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1360,
+        "y": 200,
+        "wires": [
+            [
+                "7f773b572de8736a"
+            ]
+        ]
+    },
+    {
+        "id": "7f773b572de8736a",
+        "type": "redis-command",
+        "z": "a843f3ff30ad0d18",
+        "server": "029ff868be3010db",
+        "command": "XADD",
+        "name": "XADD",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 1490,
+        "y": 200,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1cfa006462a7100e",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "name": "Prepare",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[ \"wis2gc:mqtt:\" & $globalContext(\"queue\"), \"MAXLEN\", \"~\", \"10000\", \"*\", \"topic\", mqtttopic1, \"payload\", $string(mqttpayload1), \"timestamp\", $string($millis()) ]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1320,
+        "y": 120,
+        "wires": [
+            [
+                "3163664ec7373ab3"
+            ]
+        ]
+    },
+    {
+        "id": "3163664ec7373ab3",
+        "type": "redis-command",
+        "z": "a843f3ff30ad0d18",
+        "server": "029ff868be3010db",
+        "command": "XADD",
+        "name": "XADD",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 1450,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "db3cfca0aa343e41",
+        "type": "inject",
+        "z": "a843f3ff30ad0d18",
+        "name": "Poll",
+        "props": [],
+        "repeat": "1",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 0.5,
+        "topic": "",
+        "x": 190,
+        "y": 320,
+        "wires": [
+            [
+                "70047ca072fc72e3"
+            ]
+        ]
+    },
+    {
+        "id": "e92cce1f69df0c76",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "name": "Read",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[ \"COUNT\", \"1000\", \"STREAMS\", \"wis2gc:mqtt:\" & $globalContext(\"queue\"), $globalContext(\"lastMqttId\") ]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "x": 470,
+        "y": 320,
+        "wires": [
+            [
+                "20cc8b2097fd628c"
+            ]
+        ]
+    },
+    {
+        "id": "20cc8b2097fd628c",
+        "type": "redis-command",
+        "z": "a843f3ff30ad0d18",
+        "server": "029ff868be3010db",
+        "command": "XREAD",
+        "name": "XREAD",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 600,
+        "y": 320,
+        "wires": [
+            [
+                "1d3d6cd78a542f57"
+            ]
+        ]
+    },
+    {
+        "id": "1d3d6cd78a542f57",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "name": "Read ?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 730,
+        "y": 320,
+        "wires": [
+            [
+                "16ac765b539447f5"
+            ]
+        ]
+    },
+    {
+        "id": "16ac765b539447f5",
+        "type": "function",
+        "z": "a843f3ff30ad0d18",
+        "name": "Process",
+        "func": "// Safety checks\nif (!msg.payload || !Array.isArray(msg.payload) || msg.payload.length === 0) {\n    return;\n}\n\nconst input = msg.payload[0];\nif (!input || !Array.isArray(input) || input.length < 2) {\n    return;\n}\n\nconst streamName = input[0];\nconst entries = input[1];\n\nif (!entries || !Array.isArray(entries) || entries.length === 0) {\n    return;\n}\n\nfor (const entry of entries) {\n    if (!entry || !Array.isArray(entry) || entry.length < 2) {\n        continue;\n    }\n\n    const entryId = entry[0];\n    const fields = entry[1];\n\n    if (!fields || !Array.isArray(fields) || fields.length < 2) {\n        continue;\n    }\n\n    // Convert flat array to object\n    const obj = {};\n    for (let i = 0; i < fields.length; i += 2) {\n        if (i + 1 < fields.length) {\n            obj[fields[i]] = fields[i + 1];\n        }\n    }\n\n    // Skip if no topic or payload field\n    if (!obj.topic || obj.payload === undefined) {\n        continue;\n    }\n\n    // Parse payload if it was stringified JSON\n    let payload;\n    try {\n        payload = JSON.parse(obj.payload);\n    } catch {\n        payload = obj.payload;\n    }\n\n    // Send each message individually\n    node.send({\n        topic: obj.topic,\n        payload: payload,\n        timestamp: obj.timestamp,\n        entryId: entryId\n    });\n}\n\n// Update lastMqttId\nif (entries.length > 0) {\n    const lastEntry = entries[entries.length - 1];\n    if (lastEntry && Array.isArray(lastEntry) && lastEntry.length > 0) {\n        const lastId = lastEntry[0];\n        global.set('lastMqttId', lastId);\n    }\n}",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 870,
+        "y": 320,
+        "wires": [
+            [
+                "cdea0b315445225b"
+            ]
+        ]
+    },
+    {
+        "id": "32f06040cbdb17ea",
+        "type": "link out",
+        "z": "a843f3ff30ad0d18",
+        "name": "link out 18",
+        "mode": "link",
+        "links": [
+            "462ba2ae3f77d1a4"
+        ],
+        "x": 1315,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "462ba2ae3f77d1a4",
+        "type": "link in",
+        "z": "a843f3ff30ad0d18",
+        "name": "link in 18",
+        "links": [
+            "32f06040cbdb17ea"
+        ],
+        "x": 475,
+        "y": 540,
+        "wires": [
+            [
+                "4ae91f6f2721511e"
+            ]
+        ]
+    },
+    {
+        "id": "70047ca072fc72e3",
+        "type": "switch",
+        "z": "a843f3ff30ad0d18",
+        "name": "Subscriber  ?",
+        "property": "subscriber",
+        "propertyType": "global",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 330,
+        "y": 320,
+        "wires": [
+            [
+                "e92cce1f69df0c76"
+            ]
+        ]
+    },
+    {
+        "id": "7a7d11902f19fcdb",
+        "type": "debug",
+        "z": "a843f3ff30ad0d18",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1950,
+        "y": 1160,
+        "wires": []
     },
     {
         "id": "ada4f85f94febb91",
@@ -4675,7 +4901,7 @@
             "9a78cd98a069fced"
         ],
         "x": 160,
-        "y": 800,
+        "y": 860,
         "wires": [
             [
                 "55d2e511dfb5c291"
@@ -4798,7 +5024,7 @@
         "name": "FinAck",
         "mode": "return",
         "links": [],
-        "x": 1410,
+        "x": 1490,
         "y": 660,
         "wires": [],
         "l": true
@@ -4891,7 +5117,7 @@
         "to": "",
         "reg": false,
         "x": 730,
-        "y": 800,
+        "y": 860,
         "wires": [
             [
                 "3dfcc087f08e3541"
@@ -4928,7 +5154,7 @@
             }
         ],
         "x": 1210,
-        "y": 800,
+        "y": 860,
         "wires": [
             [
                 "c1e88461775a3cf3",
@@ -4967,7 +5193,7 @@
         "repair": false,
         "outputs": 4,
         "x": 1340,
-        "y": 800,
+        "y": 860,
         "wires": [
             [
                 "7abde6069cced145",
@@ -5001,7 +5227,7 @@
             }
         ],
         "x": 590,
-        "y": 800,
+        "y": 860,
         "wires": [
             [
                 "98655394a299da9d"
@@ -5033,7 +5259,7 @@
         "to": "",
         "reg": false,
         "x": 300,
-        "y": 800,
+        "y": 860,
         "wires": [
             [
                 "4917cc0d5ed54eb1"
@@ -5053,7 +5279,7 @@
         "payloadType": "json",
         "block": false,
         "x": 440,
-        "y": 800,
+        "y": 860,
         "wires": [
             [
                 "bc32ee46f1310103"
@@ -5707,7 +5933,7 @@
             "0149d4b8a664c59e"
         ],
         "x": 1500,
-        "y": 760,
+        "y": 820,
         "wires": [],
         "l": true
     },
@@ -5721,7 +5947,7 @@
             "41c60a819985992f"
         ],
         "x": 1500,
-        "y": 800,
+        "y": 860,
         "wires": [],
         "l": true
     },
@@ -5737,8 +5963,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1350,
-        "y": 980,
+        "x": 1340,
+        "y": 1100,
         "wires": [
             []
         ]
@@ -5806,7 +6032,7 @@
         "payloadType": "json",
         "block": false,
         "x": 850,
-        "y": 800,
+        "y": 860,
         "wires": [
             [
                 "47d054ac822338de"
@@ -5838,7 +6064,7 @@
         "to": "",
         "reg": false,
         "x": 970,
-        "y": 800,
+        "y": 860,
         "wires": [
             [
                 "7e85da62dad6be3d"
@@ -5858,7 +6084,7 @@
         "payloadType": "json",
         "block": false,
         "x": 1090,
-        "y": 800,
+        "y": 860,
         "wires": [
             [
                 "1a867ae19b2242d5"
@@ -6070,6 +6296,13 @@
             },
             {
                 "t": "set",
+                "p": "clean_gid",
+                "pt": "msg",
+                "to": "topic",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
                 "p": "topic",
                 "pt": "msg",
                 "to": "[ $globalContext(\"queue\"), $globalContext(\"queue\"), payload.stream_id]",
@@ -6222,13 +6455,14 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1050,
+        "x": 1015,
         "y": 660,
         "wires": [
             [
-                "22a42a503ccaa8b1"
+                "cc592c3b63bd0a30"
             ]
-        ]
+        ],
+        "l": false
     },
     {
         "id": "22a42a503ccaa8b1",
@@ -6254,7 +6488,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1170,
+        "x": 1290,
         "y": 660,
         "wires": [
             [
@@ -6274,13 +6508,14 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1290,
+        "x": 1385,
         "y": 660,
         "wires": [
             [
                 "7181e3d4bb9a619e"
             ]
-        ]
+        ],
+        "l": false
     },
     {
         "id": "911f980b0e95cdae",
@@ -6422,7 +6657,7 @@
         "to": "",
         "reg": false,
         "x": 1350,
-        "y": 860,
+        "y": 920,
         "wires": [
             []
         ]
@@ -6720,7 +6955,7 @@
         "mode": "link",
         "links": [],
         "x": 1500,
-        "y": 840,
+        "y": 900,
         "wires": [],
         "l": true
     },
@@ -6753,8 +6988,8 @@
             "873388b63527db5d",
             "6dfb45ef726c5af9"
         ],
-        "x": 150,
-        "y": 1200,
+        "x": 140,
+        "y": 1380,
         "wires": [
             [
                 "e017d6ebcfd5b26d"
@@ -6774,8 +7009,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 570,
-        "y": 1180,
+        "x": 560,
+        "y": 1360,
         "wires": [
             [
                 "e04457b61c5d9722"
@@ -6806,8 +7041,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 430,
-        "y": 1180,
+        "x": 420,
+        "y": 1360,
         "wires": [
             [
                 "697aab508a8bb809"
@@ -6859,8 +7094,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 710,
-        "y": 1020,
+        "x": 700,
+        "y": 1140,
         "wires": [
             [
                 "4668c1bfbf82afd5",
@@ -6893,8 +7128,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 710,
-        "y": 980,
+        "x": 700,
+        "y": 1100,
         "wires": [
             [
                 "7d723d9cc15c1177"
@@ -6913,8 +7148,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 830,
-        "y": 980,
+        "x": 820,
+        "y": 1100,
         "wires": [
             [
                 "6e26958ea82dc499"
@@ -6945,8 +7180,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 950,
-        "y": 980,
+        "x": 940,
+        "y": 1100,
         "wires": [
             [
                 "39921dfd1f4e0602"
@@ -6965,8 +7200,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1080,
-        "y": 980,
+        "x": 1070,
+        "y": 1100,
         "wires": [
             [
                 "52435883cf148ace"
@@ -6981,8 +7216,8 @@
         "links": [
             "8a011d3a2eeceb67"
         ],
-        "x": 160,
-        "y": 1160,
+        "x": 150,
+        "y": 1340,
         "wires": [
             [
                 "e017d6ebcfd5b26d"
@@ -6998,8 +7233,8 @@
         "links": [
             "7abde6069cced145"
         ],
-        "x": 160,
-        "y": 1000,
+        "x": 150,
+        "y": 1120,
         "wires": [
             [
                 "fa9df07335b8bf6c"
@@ -7021,8 +7256,8 @@
         "correl": "",
         "expiry": "",
         "broker": "bae38c3ec809a1b3",
-        "x": 980,
-        "y": 1020,
+        "x": 970,
+        "y": 1140,
         "wires": []
     },
     {
@@ -7039,8 +7274,8 @@
         "correl": "",
         "expiry": "",
         "broker": "6e294e8eeec8172b",
-        "x": 980,
-        "y": 1060,
+        "x": 970,
+        "y": 1180,
         "wires": []
     },
     {
@@ -7058,8 +7293,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 850,
-        "y": 1060,
+        "x": 840,
+        "y": 1180,
         "wires": [
             [
                 "49c7c6b206e065fe"
@@ -7090,8 +7325,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 290,
-        "y": 1000,
+        "x": 280,
+        "y": 1120,
         "wires": [
             [
                 "0483541e8e2a6d39"
@@ -7110,8 +7345,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 410,
-        "y": 1000,
+        "x": 400,
+        "y": 1120,
         "wires": [
             [
                 "0c9dc8d837b621d5"
@@ -7145,14 +7380,14 @@
         "checkall": "true",
         "repair": false,
         "outputs": 3,
-        "x": 830,
-        "y": 1180,
+        "x": 820,
+        "y": 1360,
         "wires": [
             [
                 "be17da13960262b3"
             ],
             [
-                "526082e64dd5c354"
+                "69fecbd2e0adadb4"
             ],
             []
         ]
@@ -7181,8 +7416,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1100,
-        "y": 1160,
+        "x": 1090,
+        "y": 1340,
         "wires": [
             [
                 "8e7034ccd6a86316",
@@ -7202,8 +7437,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1230,
-        "y": 1160,
+        "x": 1220,
+        "y": 1340,
         "wires": [
             []
         ]
@@ -7316,8 +7551,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1100,
-        "y": 1120,
+        "x": 1090,
+        "y": 1300,
         "wires": [
             [
                 "dcdb15c44538c891",
@@ -7342,8 +7577,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 970,
-        "y": 1140,
+        "x": 960,
+        "y": 1320,
         "wires": [
             [
                 "15eb8cae84d98b6e",
@@ -7363,8 +7598,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 700,
-        "y": 1180,
+        "x": 690,
+        "y": 1360,
         "wires": [
             [
                 "fc4bf403e3a4f8fa"
@@ -7402,8 +7637,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1220,
-        "y": 980,
+        "x": 1210,
+        "y": 1100,
         "wires": [
             [
                 "fd712bdc50f7b784"
@@ -7425,8 +7660,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 850,
-        "y": 1020,
+        "x": 840,
+        "y": 1140,
         "wires": [
             [
                 "d4a6d82c3519ede4"
@@ -7442,8 +7677,8 @@
         "links": [
             "2e122a8c06dcafd7"
         ],
-        "x": 1195,
-        "y": 1120,
+        "x": 1185,
+        "y": 1300,
         "wires": []
     },
     {
@@ -7458,7 +7693,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "x": 150,
-        "y": 1320,
+        "y": 1520,
         "wires": [
             [
                 "72fd4a3df5f5e9e7"
@@ -7481,7 +7716,7 @@
         "repair": false,
         "outputs": 1,
         "x": 720,
-        "y": 1320,
+        "y": 1520,
         "wires": [
             [
                 "5f45859e8c944cc7"
@@ -7506,7 +7741,7 @@
             }
         ],
         "x": 860,
-        "y": 1320,
+        "y": 1520,
         "wires": [
             [],
             [
@@ -7515,56 +7750,6 @@
             [
                 "ecfec011b1672be5"
             ]
-        ]
-    },
-    {
-        "id": "526082e64dd5c354",
-        "type": "change",
-        "z": "caa031b5574b994f",
-        "name": "Error",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "[ \"wis2gc:error:\" & $globalContext(\"queue\") & \":\" & $globalContext(\"worker\") , $string(payload) ]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "topic",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 970,
-        "y": 1200,
-        "wires": [
-            [
-                "f1aa68b8b2c213e2"
-            ]
-        ]
-    },
-    {
-        "id": "f1aa68b8b2c213e2",
-        "type": "redis-command",
-        "z": "caa031b5574b994f",
-        "server": "029ff868be3010db",
-        "command": "PUBLISH",
-        "name": "Error",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 1090,
-        "y": 1200,
-        "wires": [
-            []
         ]
     },
     {
@@ -7592,7 +7777,7 @@
         "to": "",
         "reg": false,
         "x": 450,
-        "y": 1320,
+        "y": 1520,
         "wires": [
             [
                 "83b9019d33a80a1b"
@@ -7612,7 +7797,7 @@
         "payloadType": "json",
         "block": false,
         "x": 580,
-        "y": 1320,
+        "y": 1520,
         "wires": [
             [
                 "f13f514272a5d076"
@@ -7651,7 +7836,7 @@
         "to": "",
         "reg": false,
         "x": 1010,
-        "y": 1380,
+        "y": 1580,
         "wires": [
             [
                 "963710c90b7be391"
@@ -7671,7 +7856,7 @@
         "payloadType": "json",
         "block": false,
         "x": 1130,
-        "y": 1380,
+        "y": 1580,
         "wires": [
             []
         ]
@@ -7693,8 +7878,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 300,
-        "y": 1180,
+        "x": 290,
+        "y": 1360,
         "wires": [
             [
                 "3f9108575a9461d2"
@@ -7716,8 +7901,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 540,
-        "y": 1000,
+        "x": 530,
+        "y": 1120,
         "wires": [
             [
                 "d430de06ba1e6656",
@@ -7751,7 +7936,7 @@
         "to": "",
         "reg": false,
         "x": 1010,
-        "y": 1320,
+        "y": 1520,
         "wires": [
             [
                 "06cf1d6512292e5a"
@@ -7769,7 +7954,7 @@
         "linkType": "static",
         "timeout": "30",
         "x": 1130,
-        "y": 1320,
+        "y": 1520,
         "wires": [
             [
                 "873388b63527db5d"
@@ -7786,7 +7971,7 @@
             "febdd299270156ec"
         ],
         "x": 1250,
-        "y": 1320,
+        "y": 1520,
         "wires": [],
         "l": true
     },
@@ -7814,8 +7999,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 720,
-        "y": 940,
+        "x": 710,
+        "y": 1060,
         "wires": [
             [
                 "173e41885095af2a"
@@ -7834,8 +8019,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 850,
-        "y": 940,
+        "x": 840,
+        "y": 1060,
         "wires": [
             []
         ]
@@ -7856,7 +8041,7 @@
         "repair": false,
         "outputs": 1,
         "x": 300,
-        "y": 1320,
+        "y": 1520,
         "wires": [
             [
                 "2843374246efbb12"
@@ -7873,7 +8058,7 @@
             "d1da644c2763c559"
         ],
         "x": 1515,
-        "y": 720,
+        "y": 760,
         "wires": [],
         "icon": "font-awesome/fa-warning"
     },
@@ -7942,8 +8127,8 @@
         "links": [
             "d1da644c2763c559"
         ],
-        "x": 1255,
-        "y": 1080,
+        "x": 1245,
+        "y": 1260,
         "wires": [],
         "icon": "font-awesome/fa-warning"
     },
@@ -7956,8 +8141,8 @@
         "links": [
             "d1da644c2763c559"
         ],
-        "x": 1255,
-        "y": 1200,
+        "x": 1245,
+        "y": 1380,
         "wires": [],
         "icon": "font-awesome/fa-warning"
     },
@@ -7966,8 +8151,8 @@
         "type": "previous-node",
         "z": "caa031b5574b994f",
         "name": "",
-        "x": 805,
-        "y": 1100,
+        "x": 795,
+        "y": 1220,
         "wires": [
             [
                 "ef1953a3c2d06e9d"
@@ -7984,8 +8169,8 @@
         "links": [
             "735b65418467fb43"
         ],
-        "x": 855,
-        "y": 1100,
+        "x": 845,
+        "y": 1220,
         "wires": [],
         "icon": "font-awesome/fa-info"
     },
@@ -8008,8 +8193,8 @@
         "type": "previous-node",
         "z": "caa031b5574b994f",
         "name": "",
-        "x": 1195,
-        "y": 1080,
+        "x": 1185,
+        "y": 1260,
         "wires": [
             [
                 "5d5dfebe816e4bba"
@@ -8022,8 +8207,8 @@
         "type": "previous-node",
         "z": "caa031b5574b994f",
         "name": "",
-        "x": 1195,
-        "y": 1200,
+        "x": 1185,
+        "y": 1380,
         "wires": [
             [
                 "2455679c2e499a2f"
@@ -8037,7 +8222,7 @@
         "z": "caa031b5574b994f",
         "name": "",
         "x": 1455,
-        "y": 720,
+        "y": 760,
         "wires": [
             [
                 "131da11d640a6716"
@@ -8083,7 +8268,7 @@
         "rules": [
             {
                 "t": "regex",
-                "v": "^\\d+-\\d+$",
+                "v": "^\\d+-\\d+-\\d+$",
                 "vt": "str",
                 "case": false
             },
@@ -8126,7 +8311,7 @@
         "links": [
             "27de7c8ceb8ed6f2"
         ],
-        "x": 1305,
+        "x": 1385,
         "y": 700,
         "wires": [
             [
@@ -8159,7 +8344,7 @@
         ],
         "uncaught": false,
         "x": 1340,
-        "y": 900,
+        "y": 960,
         "wires": [
             [
                 "b632c75a30bcbb2b"
@@ -8172,7 +8357,7 @@
         "z": "caa031b5574b994f",
         "name": "",
         "x": 1435,
-        "y": 900,
+        "y": 960,
         "wires": [
             [
                 "ca364788f8a59612"
@@ -8190,9 +8375,107 @@
             "7f8a8e775bcd0fcb"
         ],
         "x": 1485,
-        "y": 900,
+        "y": 960,
         "wires": [],
         "icon": "font-awesome/fa-bug"
+    },
+    {
+        "id": "69fecbd2e0adadb4",
+        "type": "change",
+        "z": "caa031b5574b994f",
+        "name": "Error",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[ \"wis2gc:error:\" & $globalContext(\"queue\") & \":\" & $globalContext(\"worker\"), \"MAXLEN\", \"~\", \"1000\", \"*\", \"error\", $string(payload), \"timestamp\", $string($millis()) ]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "x": 960,
+        "y": 1380,
+        "wires": [
+            [
+                "xadd_error_node"
+            ]
+        ]
+    },
+    {
+        "id": "xadd_error_node",
+        "type": "redis-command",
+        "z": "caa031b5574b994f",
+        "server": "029ff868be3010db",
+        "command": "XADD",
+        "name": "Error",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 1080,
+        "y": 1380,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "cc592c3b63bd0a30",
+        "type": "change",
+        "z": "caa031b5574b994f",
+        "name": "Clean",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "clean_gid",
+                "tot": "msg"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1110,
+        "y": 660,
+        "wires": [
+            [
+                "0a2dcb9e916b337c"
+            ]
+        ]
+    },
+    {
+        "id": "0a2dcb9e916b337c",
+        "type": "redis-command",
+        "z": "caa031b5574b994f",
+        "server": "029ff868be3010db",
+        "command": "DEL",
+        "name": "DEL",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 1205,
+        "y": 660,
+        "wires": [
+            [
+                "22a42a503ccaa8b1"
+            ]
+        ],
+        "l": false
     },
     {
         "id": "5034d326b1b418b5",
@@ -8470,24 +8753,6 @@
         ]
     },
     {
-        "id": "99b85efa705a02bc",
-        "type": "redis-in",
-        "z": "102b04b3eaea572e",
-        "server": "029ff868be3010db",
-        "command": "psubscribe",
-        "name": "Error",
-        "topic": "wis2gc:error:*",
-        "obj": true,
-        "timeout": 0,
-        "x": 230,
-        "y": 360,
-        "wires": [
-            [
-                "a318dc83898cf141"
-            ]
-        ]
-    },
-    {
         "id": "d1a37dc7eb2804ea",
         "type": "switch",
         "z": "102b04b3eaea572e",
@@ -8507,29 +8772,6 @@
         "wires": [
             [
                 "657fefb1a3a5afae"
-            ]
-        ]
-    },
-    {
-        "id": "a318dc83898cf141",
-        "type": "switch",
-        "z": "102b04b3eaea572e",
-        "name": "Cleaner ?",
-        "property": "$globalContext(\"cleaner\")",
-        "propertyType": "jsonata",
-        "rules": [
-            {
-                "t": "true"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 360,
-        "y": 360,
-        "wires": [
-            [
-                "72d5913e4cf6f9c1"
             ]
         ]
     },
@@ -8670,7 +8912,178 @@
         ]
     },
     {
-        "id": "0d4423a01144c3c1",
+        "id": "cleanup_inject_simple",
+        "type": "inject",
+        "z": "102b04b3eaea572e",
+        "name": "Clean",
+        "props": [],
+        "repeat": "21600",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 230,
+        "y": 480,
+        "wires": [
+            [
+                "2ae60817cedd9bde"
+            ]
+        ]
+    },
+    {
+        "id": "cleanup_function_simple",
+        "type": "function",
+        "z": "102b04b3eaea572e",
+        "name": "Clean Redis",
+        "func": "const redis = global.get('redisCluster');\nconst THRESHOLD = 12 * 3600; // 12 hours in seconds\n\nif (!redis) {\n    node.error('Redis cluster not found in global context');\n    msg.payload = { error: 'Redis cluster not available' };\n    return msg;\n}\n\nconst stats = {\n    totalDeleted: 0,\n    byType: {\n        hash: 0,\n        string: 0,\n        other: 0\n    },\n    byPattern: {\n        'stream_id': 0,\n        'stream_id:expire': 0,\n        'aria2_gid': 0,\n        'aria2_gid:expire': 0,\n        'downloader_id': 0,\n        'complete': 0\n    },\n    errors: 0\n};\n\nconst patterns = [\n    'wis2gc:downloader:*:stream_id:*',\n    'wis2gc:downloader:*:aria2_gid:*',\n    'wis2gc:downloader:downloader_id:*',\n    'wis2gc:downloader:complete:*'\n];\n\nconst getPatternName = (key) => {\n    if (key.includes(':stream_id:') && key.endsWith(':expire')) return 'stream_id:expire';\n    if (key.includes(':stream_id:')) return 'stream_id';\n    if (key.includes(':aria2_gid:') && key.endsWith(':expire')) return 'aria2_gid:expire';\n    if (key.includes(':aria2_gid:')) return 'aria2_gid';\n    if (key.includes(':downloader_id:')) return 'downloader_id';\n    if (key.includes(':complete:')) return 'complete';\n    return 'other';\n};\n\nconst processPattern = async (pattern) => {\n    const masterNodes = redis.nodes('master');\n\n    for (const masterNode of masterNodes) {\n        let cursor = '0';\n\n        do {\n            try {\n                const [newCursor, keys] = await masterNode.scan(cursor, 'MATCH', pattern, 'COUNT', 100);\n                cursor = newCursor;\n\n                for (const key of keys) {\n                    try {\n                        const pipeline = masterNode.pipeline();\n                        pipeline.ttl(key);\n                        pipeline.object('IDLETIME', key);\n                        pipeline.type(key);\n\n                        const results = await pipeline.exec();\n\n                        if (!results || results.some(r => r[0])) {\n                            continue;\n                        }\n\n                        const ttl = results[0][1];\n                        const idle = results[1][1];\n                        const type = results[2][1];\n\n                        if (ttl === -1 && idle > THRESHOLD) {\n                            await redis.del(key);\n\n                            stats.totalDeleted++;\n\n                            if (type === 'hash') {\n                                stats.byType.hash++;\n                            } else if (type === 'string') {\n                                stats.byType.string++;\n                            } else {\n                                stats.byType.other++;\n                            }\n\n                            const patternName = getPatternName(key);\n                            if (stats.byPattern[patternName] !== undefined) {\n                                stats.byPattern[patternName]++;\n                            }\n                        }\n                    } catch (err) {\n                        stats.errors++;\n                    }\n                }\n            } catch (err) {\n                node.warn(`Error scanning: ${err.message}`);\n                break;\n            }\n        } while (cursor !== '0');\n    }\n};\n\n(async () => {\n    try {\n        const startTime = Date.now();\n        node.status({ fill: 'blue', shape: 'dot', text: 'Cleaning...' });\n\n        for (const pattern of patterns) {\n            await processPattern(pattern);\n        }\n\n        const duration = ((Date.now() - startTime) / 1000).toFixed(2);\n\n        node.status({\n            fill: 'green',\n            shape: 'dot',\n            text: `Deleted ${stats.totalDeleted} keys`\n        });\n\n        msg.payload = {\n            ...stats,\n            duration: `${duration}s`,\n            timestamp: new Date().toISOString()\n        };\n\n        node.send(msg);\n\n        setTimeout(() => node.status({}), 5000);\n\n    } catch (err) {\n        node.status({ fill: 'red', shape: 'dot', text: 'Error' });\n        node.error(`Cleanup failed: ${err.message}`);\n        msg.payload = {\n            error: err.message,\n            stats: stats\n        };\n        node.send(msg);\n    }\n})();\n\nreturn null;",
+        "outputs": 1,
+        "timeout": "300",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 520,
+        "y": 480,
+        "wires": [
+            [
+                "16843fc39d8d2908"
+            ]
+        ]
+    },
+    {
+        "id": "86db091ec0bc5107",
+        "type": "inject",
+        "z": "102b04b3eaea572e",
+        "name": "Poll Errors",
+        "props": [],
+        "repeat": "5",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 250,
+        "y": 380,
+        "wires": [
+            [
+                "bc606cd68ed70ca1"
+            ]
+        ]
+    },
+    {
+        "id": "d0c8b0be856355d3",
+        "type": "change",
+        "z": "102b04b3eaea572e",
+        "name": "Read",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[ \"COUNT\", \"100\", \"STREAMS\", \"wis2gc:error:\" & $globalContext(\"queue\") & \":\" & $globalContext(\"worker\"), $globalContext(\"lastErrorId\") ]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "x": 540,
+        "y": 380,
+        "wires": [
+            [
+                "f8db455e64558271"
+            ]
+        ]
+    },
+    {
+        "id": "f8db455e64558271",
+        "type": "redis-command",
+        "z": "102b04b3eaea572e",
+        "server": "029ff868be3010db",
+        "command": "XREAD",
+        "name": "XREAD",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 670,
+        "y": 380,
+        "wires": [
+            [
+                "1268ac50f3832247"
+            ]
+        ]
+    },
+    {
+        "id": "1268ac50f3832247",
+        "type": "switch",
+        "z": "102b04b3eaea572e",
+        "name": "Read ?",
+        "property": "payload",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "nnull"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 800,
+        "y": 380,
+        "wires": [
+            [
+                "83e1371b32e9608f"
+            ]
+        ]
+    },
+    {
+        "id": "83e1371b32e9608f",
+        "type": "function",
+        "z": "102b04b3eaea572e",
+        "name": "Process Errors",
+        "func": "const input = msg.payload[0];\nconst streamName = input[0];\nconst entries = input[1];\n\nconst messages = [];\n\nfor (const entry of entries) {\n    const entryId = entry[0];\n    const fields = entry[1];\n    \n    // Convert flat array to object\n    const obj = {};\n    for (let i = 0; i < fields.length; i += 2) {\n        obj[fields[i]] = fields[i + 1];\n    }\n    \n    // Parse error back to object/array if it was stringified\n    let errorData;\n    try {\n        errorData = JSON.parse(obj.error);\n    } catch {\n        errorData = obj.error;\n    }\n    \n    messages.push({\n        topic: streamName,\n        payload: errorData,\n        timestamp: obj.timestamp,\n        entryId: entryId\n    });\n}\n\n// Update lastErrorId with the last entry ID\nif (entries && entries.length > 0) {\n    const lastEntry = entries[entries.length - 1];\n    const lastId = lastEntry[0];\n    global.set('lastErrorId', lastId);\n}\n\nreturn [messages];",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 380,
+        "wires": [
+            [
+                "fbb02586af0f3189"
+            ]
+        ]
+    },
+    {
+        "id": "bc606cd68ed70ca1",
+        "type": "switch",
+        "z": "102b04b3eaea572e",
+        "name": "Cleaner ?",
+        "property": "$globalContext(\"cleaner\")",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 400,
+        "y": 380,
+        "wires": [
+            [
+                "d0c8b0be856355d3"
+            ]
+        ]
+    },
+    {
+        "id": "411f08083f4fc6c6",
         "type": "link out",
         "z": "102b04b3eaea572e",
         "name": "Debug",
@@ -8678,24 +9091,75 @@
         "links": [
             "7f8a8e775bcd0fcb"
         ],
-        "x": 515,
-        "y": 360,
+        "x": 1135,
+        "y": 380,
         "wires": [],
         "icon": "font-awesome/fa-bug"
     },
     {
-        "id": "72d5913e4cf6f9c1",
+        "id": "fbb02586af0f3189",
         "type": "previous-node",
         "z": "102b04b3eaea572e",
         "name": "",
-        "x": 455,
-        "y": 360,
+        "x": 1075,
+        "y": 380,
         "wires": [
             [
-                "0d4423a01144c3c1"
+                "411f08083f4fc6c6"
             ]
         ],
         "l": false
+    },
+    {
+        "id": "46f6746bf163a9af",
+        "type": "link out",
+        "z": "102b04b3eaea572e",
+        "name": "Debug",
+        "mode": "link",
+        "links": [
+            "7f8a8e775bcd0fcb"
+        ],
+        "x": 685,
+        "y": 480,
+        "wires": [],
+        "icon": "font-awesome/fa-bug"
+    },
+    {
+        "id": "16843fc39d8d2908",
+        "type": "previous-node",
+        "z": "102b04b3eaea572e",
+        "name": "",
+        "x": 625,
+        "y": 480,
+        "wires": [
+            [
+                "46f6746bf163a9af"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "2ae60817cedd9bde",
+        "type": "switch",
+        "z": "102b04b3eaea572e",
+        "name": "Cleaner ?",
+        "property": "$globalContext(\"cleaner\")",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 370,
+        "y": 480,
+        "wires": [
+            [
+                "cleanup_function_simple"
+            ]
+        ]
     },
     {
         "id": "0114eaab13d782d9",
