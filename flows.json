@@ -2627,38 +2627,6 @@
         "l": false
     },
     {
-        "id": "dd26e12524ceb0cf",
-        "type": "change",
-        "z": "a843f3ff30ad0d18",
-        "name": "Prepare",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "[ \"wis2gc:mqtt:\" & $globalContext(\"queue\") & \":\" & mqtttopic1, $string(mqttpayload1) ]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "topic",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1340,
-        "y": 60,
-        "wires": [
-            [
-                "deed215fd6e4f8f2"
-            ]
-        ]
-    },
-    {
         "id": "6effc579c4b9bbf3",
         "type": "mqtt in",
         "z": "a843f3ff30ad0d18",
@@ -2911,24 +2879,6 @@
             [
                 "573d857dca13c79d"
             ]
-        ]
-    },
-    {
-        "id": "deed215fd6e4f8f2",
-        "type": "redis-command",
-        "z": "a843f3ff30ad0d18",
-        "server": "029ff868be3010db",
-        "command": "PUBLISH",
-        "name": "Pub",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 1470,
-        "y": 60,
-        "wires": [
-            []
         ]
     },
     {
@@ -3283,8 +3233,7 @@
         "y": 900,
         "wires": [
             [
-                "a34872baa44258e7",
-                "7a7d11902f19fcdb"
+                "a34872baa44258e7"
             ]
         ]
     },
@@ -4647,7 +4596,7 @@
                 "t": "set",
                 "p": "topic",
                 "pt": "msg",
-                "to": "[ \"COUNT\", \"1000\", \"STREAMS\", \"wis2gc:mqtt:\" & $globalContext(\"queue\"), $globalContext(\"lastMqttId\") ]",
+                "to": "[ \"COUNT\", \"500\", \"STREAMS\", \"wis2gc:mqtt:\" & $globalContext(\"queue\"), $globalContext(\"lastMqttId\") ]",
                 "tot": "jsonata"
             },
             {
@@ -4780,23 +4729,6 @@
         ]
     },
     {
-        "id": "7a7d11902f19fcdb",
-        "type": "debug",
-        "z": "a843f3ff30ad0d18",
-        "name": "debug 2",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "topic",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1950,
-        "y": 1160,
-        "wires": []
-    },
-    {
         "id": "ada4f85f94febb91",
         "type": "function",
         "z": "caa031b5574b994f",
@@ -4840,7 +4772,7 @@
                 "t": "set",
                 "p": "topic",
                 "pt": "msg",
-                "to": "[ \"wis2gc:downloader:\" & $globalContext(\"worker\") & \":stream_id:\" & stream_id, \"stream_id\", stream_id, \"downloader_id\", downloads.downloader_id, \"href\", downloads.href , \"filename\", filename]",
+                "to": "[\t   \"wis2gc:downloader:\" & $globalContext(\"worker\") & \":stream_id:\" & stream_id,\t   \"stream_id\",\t   stream_id,\t   \"downloader_id\",\t   downloads.downloader_id,\t   \"download_entry_id\", \t   downloads.id,\t   \"href\",\t   downloads.href ,\t   \"filename\",\t   filename\t]",
                 "tot": "jsonata"
             },
             {
@@ -6305,7 +6237,7 @@
                 "t": "set",
                 "p": "topic",
                 "pt": "msg",
-                "to": "[ $globalContext(\"queue\"), $globalContext(\"queue\"), payload.stream_id]",
+                "to": "[ $globalContext(\"queue\"), $globalContext(\"queue\"), payload.download_entry_id ]",
                 "tot": "jsonata"
             },
             {
