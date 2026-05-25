@@ -1,7 +1,5 @@
 name: Build and Push Docker Image
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-  
+
 on:
   push:
     paths:
@@ -11,7 +9,8 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -33,6 +32,7 @@ jobs:
         with:
           driver-opts: |
             image=moby/buildkit:latest
+
       - name: Log in to Docker Hub
         uses: docker/login-action@v3
         with:
