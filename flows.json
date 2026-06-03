@@ -4879,7 +4879,7 @@
                 "t": "set",
                 "p": "topic",
                 "pt": "msg",
-                "to": "[ \"wis2gc:mqtt:\" & $globalContext(\"queue\"), \"MAXLEN\", \"~\", \"10000\", \"*\", \"topic\", mqtttopic1, \"payload\", $string(mqttpayload1), \"timestamp\", $string($millis()) ]",
+                "to": "[ \"wis2gc:mqtt:\" & $globalContext(\"queue\"), \"MAXLEN\", \"~\", \"10000\", \"*\", \"topic\", mqtttopic2, \"payload\", $string(mqttpayload2), \"timestamp\", $string($millis()) ]",
                 "tot": "jsonata"
             },
             {
