@@ -46,3 +46,25 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.image.outputs.name }}:${{ steps.image.outputs.tag }}
+      
+      - name: Notify Slack on success
+        if: success()
+        uses: slackapi/slack-github-action@v2.1.1
+        with:
+          webhook: ${{ secrets.SLACK_WEBHOOK_URL }}
+          webhook-type: incoming-webhook
+          payload: |
+            {
+              "text": "✅ *Docker image built and pushed successfully!*",
+              "attachments": [
+                {
+                  "color": "good",
+                  "fields": [
+                    { "title": "Image", "value": "${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.image.outputs.name }}:${{ steps.image.outputs.tag }}", "short": true },
+                    { "title": "Branch", "value": "${{ github.ref_name }}", "short": true },
+                    { "title": "Triggered by", "value": "${{ github.actor }}", "short": true },
+                    { "title": "Workflow run", "value": "<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View run>", "short": true }
+                  ]
+                }
+              ]
+            }
