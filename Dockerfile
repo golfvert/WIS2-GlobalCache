@@ -8,7 +8,7 @@ RUN apk add --no-cache \
     adduser -h /usr/src/node-red -D -H node-red -u 1000 && \
     chmod -R 0777 /usr/src/node-red /data
 
-FROM nodered/node-red:4.1.4-22 AS build
+FROM nodered/node-red:5.0.0-minimal AS build
 COPY package.json .
 RUN npm install \
         --unsafe-perm --no-update-notifier \

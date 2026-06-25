@@ -347,7 +347,7 @@
         "type": "function",
         "z": "3437842c2bd2e3b8",
         "name": "Tag",
-        "func": "// ── Configuration ─────────────────────────────────────────────\nconst IMAGE_NAME = env.get(\"container\");\nconst TAG_DIR = env.get(\"directory\");\nconst TAG_FILE = `${TAG_DIR}/image:tag`;\n// ──────────────────────────────────────────────────────────────\n\nconst now = new Date();\nconst curY = now.getFullYear();\nconst curM = now.getMonth() + 1;  // 1-12\n\nlet newTag;\n\nif (!fs.existsSync(TAG_FILE)) {\n    // File does not exist: create with YYYY.MM.1\n    newTag = `${curY}.${curM}.1`;\n\n} else {\n    const content = fs.readFileSync(TAG_FILE, 'utf8').trim();\n    // Expected format: imagename:YYYY.MM.patch\n    const match = content.match(/:(\\d+)\\.(\\d+)\\.(\\d+)$/);\n\n    if (!match) {\n        // Unreadable format: reset\n        newTag = `${curY}.${curM}.1`;\n\n    } else {\n        let [, fileY, fileM, fileP] = match.map(Number);\n\n        if (fileY === curY && fileM === curM) {\n            // Same year and month: bump patch\n            newTag = `${curY}.${curM}.${fileP + 1}`;\n\n        } else {\n            // Different month or year: compute next month\n            let nextY = fileY;\n            let nextM = fileM + 1;\n            if (nextM > 12) {\n                nextY += 1;\n                nextM = 1;\n            }\n            newTag = `${nextY}.${nextM}.1`;\n        }\n    }\n}\n\nconst fileContent = `${IMAGE_NAME}:${newTag}`;\nfs.writeFileSync(TAG_FILE, fileContent, 'utf8');\n\nmsg.payload = fileContent;\nnode.status({ fill: \"green\", shape: \"dot\", text: fileContent });\nreturn msg;",
+        "func": "// ── Configuration ─────────────────────────────────────────────\nconst IMAGE_NAME = env.get(\"container\");\nconst TAG_DIR = env.get(\"directory\");\nconst TAG_FILE = `${TAG_DIR}/image:tag`;\n// ──────────────────────────────────────────────────────────────\n\nconst now = new Date();\nconst curY = now.getFullYear();\nconst curM = now.getMonth() + 1;  // 1-12\n\nlet newTag;\n\nif (!fs.existsSync(TAG_FILE)) {\n    // File does not exist: create with YYYY.MM.1\n    newTag = `${curY}.${curM}.1`;\n\n} else {\n    const content = fs.readFileSync(TAG_FILE, 'utf8').trim();\n    // Expected format: imagename:YYYY.MM.patch\n    const match = content.match(/:(\\d+)\\.(\\d+)\\.(\\d+)$/);\n\n    if (!match) {\n        // Unreadable format: reset\n        newTag = `${curY}.${curM}.1`;\n\n    } else {\n        let [, fileY, fileM, fileP] = match.map(Number);\n\n        if (fileY === curY && fileM === curM) {\n            // Same year and month: bump patch\n            newTag = `${curY}.${curM}.${fileP + 1}`;\n\n        } else {\n            newTag = `${curY}.${curM}.1`;\n        }\n    }\n}\n\nconst fileContent = `${IMAGE_NAME}:${newTag}`;\nfs.writeFileSync(TAG_FILE, fileContent, 'utf8');\n\nmsg.payload = fileContent;\nnode.status({ fill: \"green\", shape: \"dot\", text: fileContent });\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -583,9 +583,9 @@
         "y": 760,
         "wires": [
             [
-                "065f44d8bb59a1fd",
-                "0cf15be34a1c1b08",
-                "d8206db29d0e7696"
+                "d8206db29d0e7696",
+                "483cc04477132899",
+                "04d9b70c3ed7d203"
             ]
         ],
         "l": true
@@ -698,7 +698,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 370,
+        "x": 490,
         "y": 720,
         "wires": [
             [
@@ -719,7 +719,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 1,
-        "x": 510,
+        "x": 630,
         "y": 720,
         "wires": [
             []
@@ -738,7 +738,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 1,
-        "x": 510,
+        "x": 630,
         "y": 760,
         "wires": [
             []
@@ -819,7 +819,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 370,
+        "x": 490,
         "y": 760,
         "wires": [
             [
@@ -900,7 +900,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 380,
+        "x": 360,
         "y": 800,
         "wires": [
             [
@@ -1434,7 +1434,7 @@
                 "t": "set",
                 "p": "keep-in-cache",
                 "pt": "global",
-                "to": "$exists(\"payload.cleaner.keep-in-cache\") ? payload.cleaner.\"keep-in-cache\" : false",
+                "to": "$exists(payload.cleaner.\"keep-in-cache\") ? payload.cleaner.\"keep-in-cache\" : false",
                 "tot": "jsonata"
             },
             {
@@ -1639,49 +1639,10 @@
         "y": 1200,
         "wires": [
             [
-                "be30358e32b38eac"
+                "62f1f1baa600d1ea"
             ]
         ],
         "l": true
-    },
-    {
-        "id": "be30358e32b38eac",
-        "type": "change",
-        "z": "1c6759660a32fda5",
-        "name": "Configuration",
-        "rules": [
-            {
-                "t": "set",
-                "p": "replayer",
-                "pt": "global",
-                "to": "true",
-                "tot": "bool"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "[ \"wis2gc:setup:\" & $globalContext(\"queue\"), $globalContext(\"worker\") & \":replayer\" , true ]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 360,
-        "y": 1200,
-        "wires": [
-            [
-                "7296650db5397b96"
-            ]
-        ]
     },
     {
         "id": "f2bce2db3a5fb7b4",
@@ -2225,7 +2186,7 @@
                 "t": "set",
                 "p": "s3_port",
                 "pt": "global",
-                "to": "$number($match(payload.downloader.s3access.url, /:(\\d+)$/)[0].groups[0])",
+                "to": "$number($match(payload.downloader.s3access.url, /:(\\\\d+)(\\/|$)/)[0].groups[0])",
                 "tot": "jsonata"
             },
             {
@@ -2704,7 +2665,7 @@
         "links": [
             "5635a92d13ca3f9f"
         ],
-        "x": 425,
+        "x": 545,
         "y": 680,
         "wires": [
             [
@@ -2959,6 +2920,144 @@
         "y": 1480,
         "wires": [],
         "l": true
+    },
+    {
+        "id": "483cc04477132899",
+        "type": "switch",
+        "z": "1c6759660a32fda5",
+        "name": "GB 1 ?",
+        "property": "$type(payload.subscriber.globalbroker[0].broker) = \"string\"",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 340,
+        "y": 720,
+        "wires": [
+            [
+                "065f44d8bb59a1fd"
+            ]
+        ]
+    },
+    {
+        "id": "04d9b70c3ed7d203",
+        "type": "switch",
+        "z": "1c6759660a32fda5",
+        "name": "GB 2 ?",
+        "property": "$type(payload.subscriber.globalbroker[1].broker) = \"string\"",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 340,
+        "y": 760,
+        "wires": [
+            [
+                "0cf15be34a1c1b08"
+            ]
+        ]
+    },
+    {
+        "id": "62f1f1baa600d1ea",
+        "type": "change",
+        "z": "1c6759660a32fda5",
+        "name": "Configuration",
+        "rules": [
+            {
+                "t": "set",
+                "p": "replayer",
+                "pt": "global",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "global-replay-url",
+                "pt": "global",
+                "to": "$exists(payload.replayer.\"global-replay-url\") ? payload.replayer.\"global-replay-url\" : \"https://wis2-grep.weather.gc.ca/processes/wis2-grep-subscriber/execution\"",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[ \"wis2gc:setup:\" & $globalContext(\"queue\"), $globalContext(\"worker\") & \":replayer\" , true ]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 360,
+        "y": 1200,
+        "wires": [
+            [
+                "7296650db5397b96"
+            ]
+        ]
+    },
+    {
+        "id": "1fb843030300902c",
+        "type": "change",
+        "z": "1c6759660a32fda5",
+        "name": "Extract",
+        "rules": [
+            {
+                "t": "set",
+                "p": "method",
+                "pt": "msg",
+                "to": "POST",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "headers",
+                "pt": "msg",
+                "to": "[\"accept: application/json\", \"Content-Type: application/json\"]",
+                "tot": "json"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{ \"inputs\": { \"datetime\": from & \"/\" & to, \"subscriber-id\": $globalContext(\"uuid\"), \"topic\": topics } }",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "url",
+                "pt": "msg",
+                "to": "$globalContext(\"global-replay-url\")",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1240,
+        "y": 120,
+        "wires": [
+            []
+        ]
     },
     {
         "id": "f53714198eb1e993",
@@ -4135,7 +4234,7 @@
         "type": "function",
         "z": "a843f3ff30ad0d18",
         "name": "Black & GRep",
-        "func": "let topic = msg.topic;\nconst blacklist = global.get('blacklist');\n\n// If topic starts with replay/a/wis2/, remove first 4 levels\nif (topic.startsWith('replay/a/wis2/')) {\n    const parts = topic.split('/');\n    // Remove first 4 parts: replay, a, wis2, and the next item\n    topic = parts.slice(5).join('/');\n}\n\n// If blacklist is false/null/undefined or empty array, allow all messages\nif (!blacklist || blacklist.length === 0) {\n    return msg;\n}\n\nfunction isBlacklisted(topic, pattern) {\n    // Split both into parts\n    const topicParts = topic.split('/');\n    const patternParts = pattern.split('/');\n\n    for (let i = 0; i < patternParts.length; i++) {\n        const patternPart = patternParts[i];\n        const topicPart = topicParts[i];\n\n        if (patternPart === '#') {\n            // # matches everything remaining - always true\n            return true;\n        }\n\n        if (topicPart === undefined) {\n            // Topic is shorter than pattern - no match\n            return false;\n        }\n\n        if (patternPart === '+') {\n            // + matches exactly one level - continue\n            continue;\n        }\n\n        if (patternPart !== topicPart) {\n            // Literal mismatch - no match\n            return false;\n        }\n    }\n\n    // Pattern exhausted - match only if topic is also exhausted\n    return topicParts.length === patternParts.length;\n}\n\n// Check if topic matches any blacklist entry\nconst blocked = blacklist.some(pattern => isBlacklisted(topic, pattern));\n\n// If blocked, return null (silently drop message)\n// If not blocked, pass message through\nreturn blocked ? null : msg;",
+        "func": "let topic = msg.topic;\nconst blacklist = global.get('blacklist');\n\n// If topic starts with replay/a/wis2/, remove first 4 levels\nif (topic.startsWith('replay/a/wis2/')) {\n    const parts = topic.split('/');\n    // Remove first 4 parts: replay, a, wis2, and the next item\n    topic = parts.slice(4).join('/');\n}\n\n// If blacklist is false/null/undefined or empty array, allow all messages\nif (!blacklist || blacklist.length === 0) {\n    return msg;\n}\n\nfunction isBlacklisted(topic, pattern) {\n    // Split both into parts\n    const topicParts = topic.split('/');\n    const patternParts = pattern.split('/');\n\n    for (let i = 0; i < patternParts.length; i++) {\n        const patternPart = patternParts[i];\n        const topicPart = topicParts[i];\n\n        if (patternPart === '#') {\n            // # matches everything remaining - always true\n            return true;\n        }\n\n        if (topicPart === undefined) {\n            // Topic is shorter than pattern - no match\n            return false;\n        }\n\n        if (patternPart === '+') {\n            // + matches exactly one level - continue\n            continue;\n        }\n\n        if (patternPart !== topicPart) {\n            // Literal mismatch - no match\n            return false;\n        }\n    }\n\n    // Pattern exhausted - match only if topic is also exhausted\n    return topicParts.length === patternParts.length;\n}\n\n// Check if topic matches any blacklist entry\nconst blocked = blacklist.some(pattern => isBlacklisted(topic, pattern));\n\n// If blocked, return null (silently drop message)\n// If not blocked, pass message through\nreturn blocked ? null : msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -4155,7 +4254,7 @@
         "type": "function",
         "z": "a843f3ff30ad0d18",
         "name": "Black &. GRep",
-        "func": "let topic = msg.topic;\nconst blacklist = global.get('blacklist');\n\n// If topic starts with replay/a/wis2/, remove first 4 levels\nif (topic.startsWith('replay/a/wis2/')) {\n    const parts = topic.split('/');\n    // Remove first 4 parts: replay, a, wis2, and the next item\n    topic = parts.slice(5).join('/');\n}\n\n// If blacklist is false/null/undefined or empty array, allow all messages\nif (!blacklist || blacklist.length === 0) {\n    return msg;\n}\n\nfunction isBlacklisted(topic, pattern) {\n    // Split both into parts\n    const topicParts = topic.split('/');\n    const patternParts = pattern.split('/');\n\n    for (let i = 0; i < patternParts.length; i++) {\n        const patternPart = patternParts[i];\n        const topicPart = topicParts[i];\n\n        if (patternPart === '#') {\n            // # matches everything remaining - always true\n            return true;\n        }\n\n        if (topicPart === undefined) {\n            // Topic is shorter than pattern - no match\n            return false;\n        }\n\n        if (patternPart === '+') {\n            // + matches exactly one level - continue\n            continue;\n        }\n\n        if (patternPart !== topicPart) {\n            // Literal mismatch - no match\n            return false;\n        }\n    }\n\n    // Pattern exhausted - match only if topic is also exhausted\n    return topicParts.length === patternParts.length;\n}\n\n// Check if topic matches any blacklist entry\nconst blocked = blacklist.some(pattern => isBlacklisted(topic, pattern));\n\n// If blocked, return null (silently drop message)\n// If not blocked, pass message through\nreturn blocked ? null : msg;",
+        "func": "let topic = msg.topic;\nconst blacklist = global.get('blacklist');\n\n// If topic starts with replay/a/wis2/, remove first 4 levels\nif (topic.startsWith('replay/a/wis2/')) {\n    const parts = topic.split('/');\n    // Remove first 4 parts: replay, a, wis2, and the next item\n    topic = parts.slice(4).join('/');\n}\n\n// If blacklist is false/null/undefined or empty array, allow all messages\nif (!blacklist || blacklist.length === 0) {\n    return msg;\n}\n\nfunction isBlacklisted(topic, pattern) {\n    // Split both into parts\n    const topicParts = topic.split('/');\n    const patternParts = pattern.split('/');\n\n    for (let i = 0; i < patternParts.length; i++) {\n        const patternPart = patternParts[i];\n        const topicPart = topicParts[i];\n\n        if (patternPart === '#') {\n            // # matches everything remaining - always true\n            return true;\n        }\n\n        if (topicPart === undefined) {\n            // Topic is shorter than pattern - no match\n            return false;\n        }\n\n        if (patternPart === '+') {\n            // + matches exactly one level - continue\n            continue;\n        }\n\n        if (patternPart !== topicPart) {\n            // Literal mismatch - no match\n            return false;\n        }\n    }\n\n    // Pattern exhausted - match only if topic is also exhausted\n    return topicParts.length === patternParts.length;\n}\n\n// Check if topic matches any blacklist entry\nconst blocked = blacklist.some(pattern => isBlacklisted(topic, pattern));\n\n// If blocked, return null (silently drop message)\n// If not blocked, pass message through\nreturn blocked ? null : msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -5112,8 +5211,8 @@
         "type": "switch",
         "z": "a843f3ff30ad0d18",
         "name": "Subscriber  ?",
-        "property": "subscriber",
-        "propertyType": "global",
+        "property": "$globalContext(\"subscriber\") = true and $globalContext(\"process-mode\") = \"run\"",
+        "propertyType": "jsonata",
         "rules": [
             {
                 "t": "true"
@@ -5684,7 +5783,7 @@
         "type": "function",
         "z": "caa031b5574b994f",
         "name": "Hash",
-        "func": "const method = msg.method;\nconst hashing = msg.hash;\nconst download = global.get(\"download-url\");\nconst worker = global.get(\"worker\");\nconst renameToDate = global.get(\"rename-to-date\");\nconst renameToTopic = global.get(\"rename-to-topic\");\nconst renameToS3 = global.get(\"rename-to-s3\");\n\nlet filepath = msg.status.result.files[0].path;\ntry {\n    msg.length = fs.statSync(filepath).size;\n} catch (err) {\n    msg.length = 0;\n}\n\n// Function to handle renaming logic\nconst handleRename = () => {\n    let renamed = false;\n\n    if (renameToDate && msg.wnmpubtime) {\n        try {\n            const baseDir = path.dirname(filepath);\n            const filename = path.basename(filepath);\n\n            const formatted = new Date(msg.wnmpubtime).toISOString().slice(0, 13).replace('T', '/').replace(/-/g, '/');\n            const dateDir = path.join(baseDir, formatted);\n\n            fs.mkdirSync(dateDir, { recursive: true });\n\n            const newFilepath = path.join(dateDir, filename);\n\n            if (fs.existsSync(newFilepath)) {\n                msg.payload = \"FAIL\";\n                fs.unlinkSync(filepath);\n                return { renamed: false, failed: true };\n            }\n\n            fs.renameSync(filepath, newFilepath);\n            filepath = newFilepath;\n            renamed = true;\n        } catch (err) {\n            throw new Error(\"Failed to move file to date directory: \" + err.message);\n        }\n    } else if (renameToTopic && msg.wnmtopic) {\n        try {\n            const baseDir = path.dirname(filepath);\n            const filename = path.basename(filepath);\n\n            const topicParts = msg.wnmtopic.split('/');\n            const relevantParts = topicParts.slice(3);\n            const topicPath = relevantParts.join('/');\n\n            const topicDir = path.join(baseDir, topicPath);\n\n            fs.mkdirSync(topicDir, { recursive: true });\n\n            const newFilepath = path.join(topicDir, filename);\n\n            if (fs.existsSync(newFilepath)) {\n                msg.payload = \"FAIL\";\n                fs.unlinkSync(filepath);\n                return { renamed: false, failed: true };\n            }\n\n            fs.renameSync(filepath, newFilepath);\n            filepath = newFilepath;\n            renamed = true;\n        } catch (err) {\n            throw new Error(\"Failed to move file to topic directory: \" + err.message);\n        }\n    } else if (renameToS3) {\n        const s3Client = new minio.Client({\n            endPoint: global.get(\"s3_endpoint\"),\n            port: global.get(\"s3_port\"),\n            useSSL: global.get(\"s3_ssl\"),\n            accessKey: global.get(\"s3_accesskey\"),\n            secretKey: global.get(\"s3_secretkey\"),\n            region: global.get(\"s3_region\")\n        });\n        const s3Bucket = global.get(\"s3_bucket\");\n        const objectName = path.basename(filepath);\n        return new Promise((resolve, reject) => {\n            s3Client.fPutObject(s3Bucket, objectName, filepath, {}, (err) => {\n                if (err) {\n                    reject(new Error(\"Failed to upload to S3: \" + err.message));\n                    return;\n                }\n                fs.unlink(filepath, (unlinkErr) => {\n                    if (unlinkErr) {\n                        node.warn(\"Uploaded to S3 but failed to delete local file: \" + unlinkErr.message);\n                    }\n                    resolve({ renamed: true, failed: false });\n                });\n            });\n        });\n    }\n\n    return { renamed, failed: false };\n};\n\n// If method is null, skip hashing but still try to rename\nif (method === null || method === undefined) {\n    return Promise.resolve(handleRename()).then(result => {\n        if (result.failed) {\n            return msg;\n        }\n\n        if (!result.renamed && (renameToDate || renameToTopic || renameToS3)) {\n            node.warn(`File NOT renamed: ${filepath} | renameToDate: ${renameToDate}, wnmpubtime: ${msg.wnmpubtime ? 'present' : 'MISSING'} | renameToTopic: ${renameToTopic}, wnmtopic: ${msg.wnmtopic ? msg.wnmtopic : 'MISSING'} | renameToS3: ${renameToS3}`);\n        }\n\n        msg.payload = \"HASH_OK\";\n        if (renameToS3) {\n            msg.localhref = download + \"/\" + path.basename(filepath);\n        } else {\n            msg.localhref = download + \"/\" + worker + filepath;\n        }\n        return msg;\n    }).catch(err => {\n        node.error(err.message);\n        msg.payload = \"FAIL\";\n        return msg;\n    });\n}\n\n// Hash validation with rename\nreturn new Promise((resolve, reject) => {\n    const hashfile = crypto.createHash(method);\n    const stream = fs.createReadStream(filepath);\n\n    stream.on(\"data\", chunk => hashfile.update(chunk));\n    stream.on(\"end\", () => {\n        const digestBase64 = hashfile.digest(\"base64\");\n\n        if (digestBase64 == hashing || hashing == 0) {\n            msg.payload = \"HASH_OK\";\n\n            Promise.resolve(handleRename()).then(result => {\n                if (result.failed) {\n                    resolve(msg);\n                    return;\n                }\n\n                if (!result.renamed && (renameToDate || renameToTopic || renameToS3)) {\n                    node.warn(`File NOT renamed: ${filepath} | renameToDate: ${renameToDate}, wnmpubtime: ${msg.wnmpubtime ? 'present' : 'MISSING'} | renameToTopic: ${renameToTopic}, wnmtopic: ${msg.wnmtopic ? msg.wnmtopic : 'MISSING'} | renameToS3: ${renameToS3}`);\n                }\n\n                if (renameToS3) {\n                    msg.localhref = download + \"/\" + path.basename(filepath);\n                } else {\n                    msg.localhref = download + \"/\" + worker + filepath;\n                }\n                resolve(msg);\n            }).catch(err => {\n                node.error(err.message);\n                msg.payload = \"FAIL\";\n                reject(msg);\n            });\n        } else {\n            msg.payload = \"HASH_NOK\";\n            fs.unlink(filepath, (err) => {\n                if (err) node.error(\"Failed to delete file with incorrect hash: \" + err.message);\n                resolve(msg);\n            });\n        }\n    });\n    stream.on(\"error\", err => {\n        node.error(\"Failed to read or hash the file: \" + err.message);\n        msg.payload = null;\n        reject(msg);\n    });\n});",
+        "func": "const method = msg.method;\nconst hashing = msg.hash;\nconst download = global.get(\"download-url\");\nconst worker = global.get(\"worker\");\nconst renameToDate = global.get(\"rename-to-date\");\nconst renameToTopic = global.get(\"rename-to-topic\");\nconst renameToS3 = global.get(\"rename-to-s3\");\n\nlet filepath = msg.status.result.files[0].path;\ntry {\n    msg.length = fs.statSync(filepath).size;\n} catch (err) {\n    msg.length = 0;\n}\n\n// Function to handle renaming logic\nconst handleRename = () => {\n    let renamed = false;\n\n    if (renameToDate && msg.wnmpubtime) {\n        try {\n            const baseDir = path.dirname(filepath);\n            const filename = path.basename(filepath);\n\n            const formatted = new Date(msg.wnmpubtime).toISOString().slice(0, 13).replace('T', '/').replace(/-/g, '/');\n            const dateDir = path.join(baseDir, formatted);\n\n            fs.mkdirSync(dateDir, { recursive: true });\n\n            const newFilepath = path.join(dateDir, filename);\n\n            if (fs.existsSync(newFilepath)) {\n                msg.payload = \"FAIL\";\n                fs.unlinkSync(filepath);\n                return { renamed: false, failed: true };\n            }\n\n            fs.renameSync(filepath, newFilepath);\n            filepath = newFilepath;\n            renamed = true;\n        } catch (err) {\n            throw new Error(\"Failed to move file to date directory: \" + err.message);\n        }\n    } else if (renameToTopic && msg.wnmtopic) {\n        try {\n            const baseDir = path.dirname(filepath);\n            const filename = path.basename(filepath);\n\n            const topicParts = msg.wnmtopic.split('/');\n            const relevantParts = topicParts.slice(3);\n            const topicPath = relevantParts.join('/');\n\n            const topicDir = path.join(baseDir, topicPath);\n\n            fs.mkdirSync(topicDir, { recursive: true });\n\n            const newFilepath = path.join(topicDir, filename);\n\n            if (fs.existsSync(newFilepath)) {\n                msg.payload = \"FAIL\";\n                fs.unlinkSync(filepath);\n                return { renamed: false, failed: true };\n            }\n\n            fs.renameSync(filepath, newFilepath);\n            filepath = newFilepath;\n            renamed = true;\n        } catch (err) {\n            throw new Error(\"Failed to move file to topic directory: \" + err.message);\n        }\n    } else if (renameToS3) {\n        const s3Client = new minio.Client({\n            endPoint: global.get(\"s3_endpoint\"),\n            port: global.get(\"s3_port\"),\n            useSSL: global.get(\"s3_ssl\"),\n            accessKey: global.get(\"s3_accesskey\"),\n            secretKey: global.get(\"s3_secretkey\"),\n            region: global.get(\"s3_region\")\n        });\n        const s3Bucket = global.get(\"s3_bucket\");\n        const objectName = path.basename(filepath);\n        return new Promise((resolve, reject) => {\n            s3Client.fPutObject(s3Bucket, objectName, filepath, {}, (err) => {\n                if (err) {\n                    reject(new Error(\"Failed to upload to S3: \" + err.message));\n                    return;\n                }\n                fs.unlink(filepath, (unlinkErr) => {\n                    if (unlinkErr) {\n                        node.warn(\"Uploaded to S3 but failed to delete local file: \" + unlinkErr.message);\n                    }\n                    resolve({ renamed: true, failed: false });\n                });\n            });\n        });\n    }\n\n    return { renamed, failed: false };\n};\n\n// If method is null, skip hashing but still try to rename\nif (method === null || method === undefined) {\n    return Promise.resolve(handleRename()).then(result => {\n        if (result.failed) {\n            return msg;\n        }\n\n        if (!result.renamed && (renameToDate || renameToTopic || renameToS3)) {\n            node.warn(`File NOT renamed: ${filepath} | renameToDate: ${renameToDate}, wnmpubtime: ${msg.wnmpubtime ? 'present' : 'MISSING'} | renameToTopic: ${renameToTopic}, wnmtopic: ${msg.wnmtopic ? msg.wnmtopic : 'MISSING'} | renameToS3: ${renameToS3}`);\n        }\n\n        msg.payload = \"HASH_OK\";\n        if (renameToS3) {\n            msg.localhref = download + \"/\" + path.basename(filepath);\n        } else {\n            msg.localhref = download + \"/\" + worker + filepath;\n        }\n        return msg;\n    }).catch(err => {\n        node.error(err.message);\n        msg.payload = \"FAIL\";\n        return msg;\n    });\n}\n\n// Hash validation with rename\nlet hashfile;\ntry {\n    hashfile = crypto.createHash(method);\n} catch (err) {\n    msg.payload = \"HASH_NOK\";\n    return msg;\n}\n\n// Hash validation with rename\nreturn new Promise((resolve, reject) => {\n    const stream = fs.createReadStream(filepath);\n    stream.on(\"data\", chunk => hashfile.update(chunk));\n    stream.on(\"end\", () => {\n        const digestBase64 = hashfile.digest(\"base64\");\n\n        if (digestBase64 == hashing || hashing == 0) {\n            msg.payload = \"HASH_OK\";\n\n            Promise.resolve(handleRename()).then(result => {\n                if (result.failed) {\n                    resolve(msg);\n                    return;\n                }\n\n                if (!result.renamed && (renameToDate || renameToTopic || renameToS3)) {\n                    node.warn(`File NOT renamed: ${filepath} | renameToDate: ${renameToDate}, wnmpubtime: ${msg.wnmpubtime ? 'present' : 'MISSING'} | renameToTopic: ${renameToTopic}, wnmtopic: ${msg.wnmtopic ? msg.wnmtopic : 'MISSING'} | renameToS3: ${renameToS3}`);\n                }\n\n                if (renameToS3) {\n                    msg.localhref = download + \"/\" + path.basename(filepath);\n                } else {\n                    msg.localhref = download + \"/\" + worker + filepath;\n                }\n                resolve(msg);\n            }).catch(err => {\n                node.error(err.message);\n                msg.payload = \"FAIL\";\n                reject(msg);\n            });\n        } else {\n            msg.payload = \"HASH_NOK\";\n            fs.unlink(filepath, (err) => {\n                if (err) node.error(\"Failed to delete file with incorrect hash: \" + err.message);\n                resolve(msg);\n            });\n        }\n    });\n    stream.on(\"error\", err => {\n        node.error(\"Failed to read or hash the file: \" + err.message);\n        msg.payload = null;\n        reject(msg);\n    });\n});",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -6080,8 +6179,8 @@
         "type": "switch",
         "z": "caa031b5574b994f",
         "name": "Downloader ?",
-        "property": "downloader",
-        "propertyType": "global",
+        "property": "$globalContext(\"downloader\") = true and $globalContext(\"process-mode\") = \"run\"",
+        "propertyType": "jsonata",
         "rules": [
             {
                 "t": "true"
@@ -8110,8 +8209,8 @@
         "y": 1300,
         "wires": [
             [
-                "dcdb15c44538c891",
-                "107baa40af9e88b4"
+                "107baa40af9e88b4",
+                "baae52af9a7b9e74"
             ]
         ]
     },
@@ -8146,7 +8245,7 @@
         "type": "function",
         "z": "caa031b5574b994f",
         "name": "Next",
-        "func": "const arr = msg.payload;\n\n// Default values\nmsg.retry = \"RETRY_NOK\";  // Changed from false\nmsg.extracted = null;\n\nlet queueIndex = -1;\nlet hasComplete = false;\n\nfor (let i = 0; i < arr.length; i++) {\n    if (typeof arr[i] === 'string') {\n        // Check for complete-\n        if (arr[i].startsWith('complete-')) {\n            hasComplete = true;\n        }\n\n        if (arr[i].startsWith('queue-')) {\n            queueIndex = i;\n        } else if (arr[i].startsWith('wait-')) {\n            // Check if previous index exists and is a string starting with http\n            if (i > 0 && typeof arr[i - 1] === 'string' && arr[i - 1].startsWith('http')) {\n                const waitHref = arr[i - 1];\n\n                // Find attempt value\n                let attemptValue = 0;\n                const attemptIndex = arr.indexOf('attempt');\n                if (attemptIndex !== -1 && attemptIndex + 1 < arr.length) {\n                    attemptValue = parseInt(arr[attemptIndex + 1]) || 0;\n                }\n\n                // Check if error-nocache exists\n                const hasErrorNoCache = arr.includes('error-nocache');\n\n                // Check if we should retry\n                const shouldRetry = attemptValue <= 6 && !hasErrorNoCache;\n\n                if (shouldRetry) {\n                    msg.retry = \"RETRY_OK\";  // Changed from true\n                    if (attemptIndex !== -1) {\n                        arr[attemptIndex + 1] = String(attemptValue + 1);\n                        msg.delay = 5 * attemptValue;\n                    }\n                    arr[i] = arr[i].replace('wait-', 'queue-');\n                    msg.extracted = waitHref;\n                }\n\n                break; // Exit loop after processing first wait-\n            }\n        }\n    }\n}\n\n// If complete- was found, override retry status\nif (hasComplete) {\n    msg.retry = \"RETRY_NONEED\";\n}\n\n// Always convert queue- to error-\nif (queueIndex !== -1) {\n    arr[queueIndex] = arr[queueIndex].replace('queue-', 'error-');\n}\n\nmsg.payload = arr;\nreturn msg;",
+        "func": "const arr = msg.payload;\n\n// Default values\nmsg.retry = \"RETRY_NOK\";  // Changed from false\nmsg.extracted = null;\n\nlet queueIndex = -1;\nlet hasComplete = false;\n\nfor (let i = 0; i < arr.length; i++) {\n    if (typeof arr[i] === 'string') {\n        // Check for complete-\n        if (arr[i].startsWith('complete-')) {\n            hasComplete = true;\n        }\n\n        if (arr[i].startsWith('queue-')) {\n            queueIndex = i;\n        } else if (arr[i].startsWith('wait-')) {\n            // Check if previous index exists and is a string starting with http\n            if (i > 0 && typeof arr[i - 1] === 'string' && arr[i - 1].startsWith('http')) {\n                const waitHref = arr[i - 1];\n\n                // Find attempt value\n                let attemptValue = 0;\n                const attemptIndex = arr.indexOf('attempt');\n                if (attemptIndex !== -1 && attemptIndex + 1 < arr.length) {\n                    attemptValue = parseInt(arr[attemptIndex + 1]) || 0;\n                }\n\n                // Check if error-nocache exists\n                const hasErrorNoCache = arr.includes('error-nocache');\n\n                // Check if we should retry\n                const shouldRetry = attemptValue <= 6 && !hasErrorNoCache;\n\n                if (shouldRetry) {\n                    msg.retry = \"RETRY_OK\";  // Changed from true\n                    if (attemptIndex !== -1) {\n                        arr[attemptIndex + 1] = String(attemptValue + 1);\n                        msg.delay = 5 * attemptValue;\n                    } else {\n                        arr.push('attempt', '1');  // re-create the missing field\n                        msg.delay = 5;             // minimum first-retry delay\n                    }\n                    arr[i] = arr[i].replace('wait-', 'queue-');\n                    msg.extracted = waitHref;\n                }\n\n                break; // Exit loop after processing first wait-\n            }\n        }\n    }\n}\n\n// If complete- was found, override retry status\nif (hasComplete) {\n    msg.retry = \"RETRY_NONEED\";\n}\n\n// Always convert queue- to error-\nif (queueIndex !== -1) {\n    arr[queueIndex] = arr[queueIndex].replace('queue-', 'error-');\n}\n\nmsg.payload = arr;\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -8232,7 +8331,7 @@
         "links": [
             "2e122a8c06dcafd7"
         ],
-        "x": 1185,
+        "x": 1355,
         "y": 1300,
         "wires": []
     },
@@ -8823,7 +8922,7 @@
         "rules": [
             {
                 "t": "regex",
-                "v": "^\\d+-\\d+-\\d+$",
+                "v": "^\\d+-\\d+-\\d+(-\\d+)?$",
                 "vt": "str",
                 "case": false
             },
@@ -9031,6 +9130,33 @@
             ]
         ],
         "l": false
+    },
+    {
+        "id": "baae52af9a7b9e74",
+        "type": "change",
+        "z": "caa031b5574b994f",
+        "name": "inQueue + 1",
+        "rules": [
+            {
+                "t": "set",
+                "p": "inQueue",
+                "pt": "flow",
+                "to": "$flowContext(\"inQueue\") + 1",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1250,
+        "y": 1300,
+        "wires": [
+            [
+                "dcdb15c44538c891"
+            ]
+        ]
     },
     {
         "id": "5034d326b1b418b5",
@@ -10043,12 +10169,29 @@
         "y": 80,
         "wires": [
             [
-                "968d1d5f1948e874"
+                "e3b0788194a2af48"
             ]
         ]
     },
     {
-        "id": "968d1d5f1948e874",
+        "id": "97a4f0f2771ea2b3",
+        "type": "link in",
+        "z": "5751c69be6006c9c",
+        "name": "Replayer",
+        "links": [
+            "f088edce0c3f6a60"
+        ],
+        "x": 240,
+        "y": 80,
+        "wires": [
+            [
+                "0a97f7690cd3ef92"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "e3b0788194a2af48",
         "type": "change",
         "z": "5751c69be6006c9c",
         "name": "Extract",
@@ -10078,8 +10221,8 @@
                 "t": "set",
                 "p": "url",
                 "pt": "msg",
-                "to": "https://wis2-grep.weather.gc.ca/processes/wis2-grep-subscriber/execution",
-                "tot": "str"
+                "to": "$globalContext(\"global-replay-url\")",
+                "tot": "jsonata"
             }
         ],
         "action": "",
@@ -10094,22 +10237,5 @@
                 "71d475d0d4f7977f"
             ]
         ]
-    },
-    {
-        "id": "97a4f0f2771ea2b3",
-        "type": "link in",
-        "z": "5751c69be6006c9c",
-        "name": "Replayer",
-        "links": [
-            "f088edce0c3f6a60"
-        ],
-        "x": 240,
-        "y": 80,
-        "wires": [
-            [
-                "0a97f7690cd3ef92"
-            ]
-        ],
-        "l": true
     }
 ]

@@ -33,7 +33,7 @@
     ],
     "dependencies": {
         "@golfvert/node-red-redis": "~1.1.0",
-        "node-red": "4.1.4",
+        "node-red": "5.0.0",
         "node-red-contrib-dynamic-websocket": "~1.1.0",
         "@zigasebenik/node-red-log-io": "~1.3.3",
         "node-red-contrib-prometheus-exporter": "~1.0.5"
