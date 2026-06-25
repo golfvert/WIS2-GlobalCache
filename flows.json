@@ -314,6 +314,38 @@
         "modules": {}
     },
     {
+        "id": "d265551416fe184b",
+        "type": "prometheus-metric-config",
+        "name": "wmo_wis2_gc_downloaded_total",
+        "help": "Total number of files downloaded by the Global Cache",
+        "labels": "centre_id, report_by",
+        "mtype": "counter"
+    },
+    {
+        "id": "e2c731c0b72b7626",
+        "type": "prometheus-metric-config",
+        "name": "wmo_wis2_gc_last_download_timestamp_seconds",
+        "help": "Timestamp (Unix seconds) of the last successful file download",
+        "labels": "centre_id, report_by",
+        "mtype": "gauge"
+    },
+    {
+        "id": "e334fa93f70afdfd",
+        "type": "prometheus-metric-config",
+        "name": "wmo_wis2_gc_integrity_failed_total",
+        "help": "Total number of messages that failed the integrity check",
+        "labels": "centre_id, report_by",
+        "mtype": "counter"
+    },
+    {
+        "id": "be8bb278185f55ef",
+        "type": "prometheus-metric-config",
+        "name": "wmo_wis2_gc_downloaded_errors_total",
+        "help": "Total number of file download errors",
+        "labels": "centre_id, report_by",
+        "mtype": "counter"
+    },
+    {
         "id": "15d0ec9bc2ce2c9c",
         "type": "inject",
         "z": "3437842c2bd2e3b8",
@@ -347,7 +379,7 @@
         "type": "function",
         "z": "3437842c2bd2e3b8",
         "name": "Tag",
-        "func": "// ── Configuration ─────────────────────────────────────────────\nconst IMAGE_NAME = env.get(\"container\");\nconst TAG_DIR = env.get(\"directory\");\nconst TAG_FILE = `${TAG_DIR}/image:tag`;\n// ──────────────────────────────────────────────────────────────\n\nconst now = new Date();\nconst curY = now.getFullYear();\nconst curM = now.getMonth() + 1;  // 1-12\n\nlet newTag;\n\nif (!fs.existsSync(TAG_FILE)) {\n    // File does not exist: create with YYYY.MM.1\n    newTag = `${curY}.${curM}.1`;\n\n} else {\n    const content = fs.readFileSync(TAG_FILE, 'utf8').trim();\n    // Expected format: imagename:YYYY.MM.patch\n    const match = content.match(/:(\\d+)\\.(\\d+)\\.(\\d+)$/);\n\n    if (!match) {\n        // Unreadable format: reset\n        newTag = `${curY}.${curM}.1`;\n\n    } else {\n        let [, fileY, fileM, fileP] = match.map(Number);\n\n        if (fileY === curY && fileM === curM) {\n            // Same year and month: bump patch\n            newTag = `${curY}.${curM}.${fileP + 1}`;\n\n        } else {\n            newTag = `${curY}.${curM}.1`;\n        }\n    }\n}\n\nconst fileContent = `${IMAGE_NAME}:${newTag}`;\nfs.writeFileSync(TAG_FILE, fileContent, 'utf8');\n\nmsg.payload = fileContent;\nnode.status({ fill: \"green\", shape: \"dot\", text: fileContent });\nreturn msg;",
+        "func": "// ── Configuration ─────────────────────────────────────────────\nconst IMAGE_NAME = env.get(\"NODE_RED_CONTAINER_NAME\");\nconst TAG_DIR = env.get(\"NODE_RED_CONTAINER_DIRECTORY\");\nconst TAG_FILE = `${TAG_DIR}/image:tag`;\n// ──────────────────────────────────────────────────────────────\n\nconst now = new Date();\nconst curY = now.getFullYear();\nconst curM = now.getMonth() + 1;  // 1-12\n\nlet newTag;\n\nif (!fs.existsSync(TAG_FILE)) {\n    // File does not exist: create with YYYY.MM.1\n    newTag = `${curY}.${curM}.1`;\n\n} else {\n    const content = fs.readFileSync(TAG_FILE, 'utf8').trim();\n    // Expected format: imagename:YYYY.MM.patch\n    const match = content.match(/:(\\d+)\\.(\\d+)\\.(\\d+)$/);\n\n    if (!match) {\n        // Unreadable format: reset\n        newTag = `${curY}.${curM}.1`;\n\n    } else {\n        let [, fileY, fileM, fileP] = match.map(Number);\n\n        if (fileY === curY && fileM === curM) {\n            // Same year and month: bump patch\n            newTag = `${curY}.${curM}.${fileP + 1}`;\n\n        } else {\n            newTag = `${curY}.${curM}.1`;\n        }\n    }\n}\n\nconst fileContent = `${IMAGE_NAME}:${newTag}`;\nfs.writeFileSync(TAG_FILE, fileContent, 'utf8');\n\nmsg.payload = fileContent;\nnode.status({ fill: \"green\", shape: \"dot\", text: fileContent });\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -3716,7 +3748,7 @@
                 "t": "set",
                 "p": "topic",
                 "pt": "msg",
-                "to": "[ \"wis2gc:downloader:downloader_id:\" & downloader_id , href , \"queue-\" & source , \"wnm\", $string(wnm), \"topic\", wnmtopic, \"published\", $millis(), \"attempt\", 1 ]",
+                "to": "[ \"wis2gc:downloader:downloader_id:\" & downloader_id, href, \"queue-\" & source,   \"wnm\", $string(wnm), \"topic\", wnmtopic, \"published\", wnm.properties.pubtime, \"attempt\", 1 ]",
                 "tot": "jsonata"
             },
             {
@@ -6586,7 +6618,7 @@
         "links": [
             "0149d4b8a664c59e"
         ],
-        "x": 1500,
+        "x": 1520,
         "y": 820,
         "wires": [],
         "l": true
@@ -6600,7 +6632,7 @@
         "links": [
             "41c60a819985992f"
         ],
-        "x": 1500,
+        "x": 1520,
         "y": 860,
         "wires": [],
         "l": true
@@ -7311,7 +7343,7 @@
         "to": "",
         "reg": false,
         "x": 1350,
-        "y": 920,
+        "y": 940,
         "wires": [
             []
         ]
@@ -7608,7 +7640,7 @@
         "name": "File Exists",
         "mode": "link",
         "links": [],
-        "x": 1500,
+        "x": 1520,
         "y": 900,
         "wires": [],
         "l": true
@@ -7642,11 +7674,12 @@
             "873388b63527db5d",
             "6dfb45ef726c5af9"
         ],
-        "x": 140,
+        "x": 130,
         "y": 1380,
         "wires": [
             [
-                "e017d6ebcfd5b26d"
+                "e017d6ebcfd5b26d",
+                "fe79eca7c30f4be3"
             ]
         ],
         "l": true
@@ -7870,11 +7903,12 @@
         "links": [
             "8a011d3a2eeceb67"
         ],
-        "x": 150,
+        "x": 140,
         "y": 1340,
         "wires": [
             [
-                "e017d6ebcfd5b26d"
+                "e017d6ebcfd5b26d",
+                "e84fcaddef70ece8"
             ]
         ],
         "l": true
@@ -8711,8 +8745,8 @@
         "links": [
             "d1da644c2763c559"
         ],
-        "x": 1515,
-        "y": 760,
+        "x": 1535,
+        "y": 780,
         "wires": [],
         "icon": "font-awesome/fa-warning"
     },
@@ -8875,8 +8909,8 @@
         "type": "previous-node",
         "z": "caa031b5574b994f",
         "name": "",
-        "x": 1455,
-        "y": 760,
+        "x": 1475,
+        "y": 780,
         "wires": [
             [
                 "131da11d640a6716"
@@ -8998,7 +9032,7 @@
         ],
         "uncaught": false,
         "x": 1340,
-        "y": 960,
+        "y": 980,
         "wires": [
             [
                 "b632c75a30bcbb2b"
@@ -9011,7 +9045,7 @@
         "z": "caa031b5574b994f",
         "name": "",
         "x": 1435,
-        "y": 960,
+        "y": 980,
         "wires": [
             [
                 "ca364788f8a59612"
@@ -9029,7 +9063,7 @@
             "7f8a8e775bcd0fcb"
         ],
         "x": 1485,
-        "y": 960,
+        "y": 980,
         "wires": [],
         "icon": "font-awesome/fa-bug"
     },
@@ -9157,6 +9191,103 @@
                 "dcdb15c44538c891"
             ]
         ]
+    },
+    {
+        "id": "0bb2f4eaccb182c1",
+        "type": "link in",
+        "z": "caa031b5574b994f",
+        "name": "link in 21",
+        "links": [
+            "ad8a9179675c4114",
+            "6e8a51bde60eebd0"
+        ],
+        "x": 1255,
+        "y": 1060,
+        "wires": [
+            [
+                "fd712bdc50f7b784"
+            ]
+        ]
+    },
+    {
+        "id": "e84fcaddef70ece8",
+        "type": "change",
+        "z": "caa031b5574b994f",
+        "name": "Bad hash",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[\"wis2gc:cleaner-reporter:\" & $globalContext(\"worker\"), $string([\"type\",\"integrity_fail\",\"topic\",wnmtopic])]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "x": 300,
+        "y": 1320,
+        "wires": [
+            [
+                "ad8a9179675c4114"
+            ]
+        ]
+    },
+    {
+        "id": "ad8a9179675c4114",
+        "type": "link out",
+        "z": "caa031b5574b994f",
+        "name": "link out 11",
+        "mode": "link",
+        "links": [
+            "0bb2f4eaccb182c1"
+        ],
+        "x": 395,
+        "y": 1320,
+        "wires": []
+    },
+    {
+        "id": "fe79eca7c30f4be3",
+        "type": "change",
+        "z": "caa031b5574b994f",
+        "name": "Error",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[\"wis2gc:cleaner-reporter:\" & $globalContext(\"worker\"), $string([\"type\",\"download_error\",\"topic\",$exists(wnmtopic) ? wnmtopic : \"\"])]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "x": 290,
+        "y": 1400,
+        "wires": [
+            [
+                "6e8a51bde60eebd0"
+            ]
+        ]
+    },
+    {
+        "id": "6e8a51bde60eebd0",
+        "type": "link out",
+        "z": "caa031b5574b994f",
+        "name": "link out 20",
+        "mode": "link",
+        "links": [
+            "0bb2f4eaccb182c1"
+        ],
+        "x": 375,
+        "y": 1400,
+        "wires": []
     },
     {
         "id": "5034d326b1b418b5",
@@ -9855,10 +9986,10 @@
         "finalize": "",
         "libs": [],
         "x": 460,
-        "y": 220,
+        "y": 320,
         "wires": [
             [
-                "784bbefb40c345ff"
+                "24ddb5fcccf4e13b"
             ]
         ]
     },
@@ -9884,71 +10015,12 @@
         "payload": "",
         "payloadType": "date",
         "x": 170,
-        "y": 220,
+        "y": 320,
         "wires": [
             [
                 "9bf83f610940c63a"
             ]
         ]
-    },
-    {
-        "id": "784bbefb40c345ff",
-        "type": "function",
-        "z": "5ff6c20513455391",
-        "name": "Metrics",
-        "func": "const cluster = global.get('redisCluster');\nconst global_cache = global.get('cache-name');\n\nif (!cluster) {\n    node.error('Redis cluster not connected');\n    return null;\n}\n\n// Get the window key (from previous 10-second interval in msg.payload)\nconst windowKey = msg.payload; // e.g., \"wis2gc:cleaner:20260305173020\"\n\nconst multi = cluster.multi();\n\n// Get total stats\nmulti.hgetall(`{${windowKey}}:total`);\n\n// Get all combo keys\nmulti.keys(`{${windowKey}}:combo:*`);\n\nmulti.exec()\n    .then(results => {\n        const totalStats = results[0][1];\n        const comboKeys = results[1][1];\n\n        // Fetch detailed stats for each combo\n        const multi2 = cluster.multi();\n        comboKeys.forEach(key => multi2.hgetall(key));\n\n        return multi2.exec().then(detailResults => {\n            const comboDetails = detailResults.map(r => r[1]);\n\n            // Process combos and send on outputs 1, 2, 3\n            comboKeys.forEach((key, idx) => {\n                // Parse key: \"{wis2gc:cleaner:20260305173020}:combo:de-dwd-gts-to-wis2:core/I/S/S/A/03/LFPW\"\n                // Split by ':' and find 'combo' position\n                const parts = key.split(':');\n                const comboIndex = parts.indexOf('combo');\n\n                // centre_id is right after 'combo'\n                const centre_id = parts[comboIndex + 1];\n\n                // topic is everything after centre_id\n                const topic = parts.slice(comboIndex + 2).join(':');\n\n                const stats = comboDetails[idx];\n                const count = parseInt(stats.count) || 0;\n                const totalLength = parseInt(stats.totalLength) || 0;\n                const avgDelay = stats.count ? Math.round(parseInt(stats.totalDelay) / parseInt(stats.count) / 1000) : 0;\n\n                // Output 1: Count\n                const msg1 = {\n                    payload: {\n                        \"op\": \"inc\",\n                        \"labels\": {\n                            \"centre_id\": centre_id,\n                            \"topic\": topic,\n                            \"report_by\": global_cache\n                        },\n                        \"val\": count\n                    }\n                };\n\n                // Output 2: Total Length\n                const msg2 = {\n                    payload: {\n                        \"op\": \"inc\",\n                        \"labels\": {\n                            \"centre_id\": centre_id,\n                            \"topic\": topic,\n                            \"report_by\": global_cache\n                        },\n                        \"val\": totalLength\n                    }\n                };\n\n                // Output 3: Average Delay\n                const msg3 = {\n                    payload: {\n                        \"op\": \"set\",\n                        \"labels\": {\n                            \"centre_id\": centre_id,\n                            \"topic\": topic,\n                            \"report_by\": global_cache\n                        },\n                        \"val\": avgDelay\n                    }\n                };\n\n                // Send to outputs 1, 2, 3\n                node.send([msg1, msg2, msg3, null, null, null]);\n            });\n\n            // Process total stats for outputs 4, 5, 6\n            const totalCount = parseInt(totalStats.count) || 0;\n            const totalLength = parseInt(totalStats.totalLength) || 0;\n            const avgDelay = totalStats.count ? Math.round(parseInt(totalStats.totalDelay) / parseInt(totalStats.count) / 1000) : 0;\n            \n            // Output 4: Total Count\n            const total1 = {\n                payload: {\n                    \"op\": \"inc\",\n                    \"val\": totalCount,\n                    \"labels\": {\n                        \"report_by\": global_cache\n                    }\n                }\n            };\n\n            // Output 5: Total Length\n            const total2 = {\n                payload: {\n                    \"op\": \"inc\",\n                    \"val\": totalLength,\n                    \"labels\": {\n                        \"report_by\": global_cache\n                    }                }\n            };\n\n            // Output 6: Average Delay\n            const total3 = {\n                payload: {\n                    \"op\": \"set\",\n                    \"val\": avgDelay,\n                    \"labels\": {\n                        \"report_by\": global_cache\n                    }                }\n            };\n\n            // Send total stats on outputs 4, 5, 6\n            node.send([null, null, null, total1, total2, total3]);\n        });\n    })\n    .catch(err => {\n        node.error('Redis read error: ' + err);\n    });\n\nreturn null;",
-        "outputs": 6,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 620,
-        "y": 220,
-        "wires": [
-            [
-                "c99c758c05d58fe6"
-            ],
-            [
-                "b33f448a366ba16a"
-            ],
-            [
-                "41789583be323001"
-            ],
-            [],
-            [],
-            []
-        ]
-    },
-    {
-        "id": "41789583be323001",
-        "type": "prometheus-exporter",
-        "z": "5ff6c20513455391",
-        "name": "Delay",
-        "metric": "f2a2a080e159b3a2",
-        "x": 790,
-        "y": 220,
-        "wires": []
-    },
-    {
-        "id": "b33f448a366ba16a",
-        "type": "prometheus-exporter",
-        "z": "5ff6c20513455391",
-        "name": "Volume",
-        "metric": "0b1738558640a231",
-        "x": 800,
-        "y": 180,
-        "wires": []
-    },
-    {
-        "id": "c99c758c05d58fe6",
-        "type": "prometheus-exporter",
-        "z": "5ff6c20513455391",
-        "name": "Number",
-        "metric": "833dd9f884cd3f43",
-        "x": 800,
-        "y": 140,
-        "wires": []
     },
     {
         "id": "9bf83f610940c63a",
@@ -9966,7 +10038,7 @@
         "repair": false,
         "outputs": 1,
         "x": 310,
-        "y": 220,
+        "y": 320,
         "wires": [
             [
                 "0114eaab13d782d9"
@@ -9984,30 +10056,10 @@
         "obj": true,
         "timeout": 0,
         "x": 160,
-        "y": 100,
+        "y": 120,
         "wires": [
             [
                 "a94892868ef6cf36"
-            ]
-        ]
-    },
-    {
-        "id": "0033c1ddec3576fe",
-        "type": "function",
-        "z": "5ff6c20513455391",
-        "name": "K/V",
-        "func": "// First, convert array to object\nconst arr = msg.payload;\nconst output = {};\n\nfor (let i = 0; i < arr.length; i += 2) {\n    const key = String(arr[i]);\n    const value = arr[i + 1];\n    output[key] = value;\n}\n\n// Get length directly from payload key\nlet length = output.length ? parseInt(output.length) : 0;\n\n// Compute difference between stored and published\nlet delay = null;\nif (output.stored && output.published) {\n    delay = parseInt(output.stored) - parseInt(output.published);\n}\n\n// Extract centre-id (4th value when split by /)\nlet centreId = null;\nif (output.topic) {\n    const topicParts = output.topic.split('/');\n    if (topicParts.length >= 4) {\n        centreId = topicParts[3];  // Index 3 is the 4th value\n    }\n}\n\n// Extract subtopic (from 7th value onwards)\nlet subtopic = null;\nif (output.topic) {\n    const topicParts = output.topic.split('/');\n    if (topicParts.length >= 6) {\n        subtopic = topicParts.slice(5).join('/');  // Index 6 onwards (7th value+)\n    }\n}\n\n// Add extracted values to output\noutput.length = length;\noutput.delay = delay;\noutput.centreId = centreId;\noutput.subtopic = subtopic;\n\nmsg.payload = output;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 450,
-        "y": 100,
-        "wires": [
-            [
-                "ee27c853195bc2e1"
             ]
         ]
     },
@@ -10027,29 +10079,235 @@
         "repair": false,
         "outputs": 1,
         "x": 310,
-        "y": 100,
+        "y": 120,
         "wires": [
             [
-                "0033c1ddec3576fe"
+                "5eda3a133db03150"
             ]
         ]
     },
     {
-        "id": "ee27c853195bc2e1",
+        "id": "5eda3a133db03150",
         "type": "function",
         "z": "5ff6c20513455391",
-        "name": "Stats",
-        "func": "const cluster = global.get('redisCluster');\n\nif (!cluster) {\n    node.error('Redis cluster not connected');\n    return null;\n}\n\nconst data = msg.payload;\nconst windowKey = flow.get('hashstat'); // Get current window from flow context\n\nconst multi = cluster.multi();\n\n// All use {windowKey} hash tag - Overall stats\nmulti.hincrby(`{${windowKey}}:total`, 'count', 1);\nmulti.hincrby(`{${windowKey}}:total`, 'totalLength', data.length);\nmulti.hincrby(`{${windowKey}}:total`, 'totalDelay', data.delay);\n\n// Stats per combo (centre + subtopic)\nmulti.hincrby(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'count', 1);\nmulti.hincrby(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'totalLength', data.length);\nmulti.hincrby(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'totalDelay', data.delay);\n\n// Set expiry on keys (1 hour)\nmulti.expire(`{${windowKey}}:total`, 3600);\nmulti.expire(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 3600);\n\nmulti.exec()\n    .then(results => {\n        msg.payload = { success: true, commands: results.length };\n        node.send(msg);\n    })\n    .catch(err => {\n        node.error('Redis write error: ' + err);\n    });\n\nreturn null;",
+        "name": "K/V",
+        "func": "// First, convert array to object\nconst arr = msg.payload;\nconst output = {};\n\nfor (let i = 0; i < arr.length; i += 2) {\n    const key = String(arr[i]);\n    const value = arr[i + 1];\n    output[key] = value;\n}\n\n// Get length directly from payload key\nlet length = output.length ? parseInt(output.length) : 0;\n\n// Compute difference between stored and published\nlet delay = null;\nif (output.stored && output.published) {\n    delay = parseInt(output.stored) - new Date(output.published).getTime(); \n}\n\n// Extract centre-id (4th value when split by /)\nlet centreId = null;\nif (output.topic) {\n    const topicParts = output.topic.split('/');\n    if (topicParts.length >= 4) {\n        centreId = topicParts[3];  // Index 3 is the 4th value\n    }\n}\n\n// Extract subtopic (from 7th value onwards)\nlet subtopic = null;\nif (output.topic) {\n    const topicParts = output.topic.split('/');\n    if (topicParts.length >= 6) {\n        subtopic = topicParts.slice(5, 8).join('/');\n    }\n}\n\n// Add extracted values to output\noutput.length = length;\noutput.delay = delay;\noutput.lastTimestamp = output.stored ? Math.floor(parseInt(output.stored) / 1000) : null;\noutput.centreId = centreId;\noutput.subtopic = subtopic;\n\nmsg.payload = output;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 570,
-        "y": 100,
+        "x": 450,
+        "y": 120,
+        "wires": [
+            [
+                "7c9b8e862cac33e8"
+            ]
+        ]
+    },
+    {
+        "id": "a3ff30abf87630d1",
+        "type": "function",
+        "z": "5ff6c20513455391",
+        "name": "Stats",
+        "func": "const cluster = global.get('redisCluster');\n\nif (!cluster) {\n    node.error('Redis cluster not connected');\n    return null;\n}\n\nconst data = msg.payload;\nconst windowKey = flow.get('hashstat');\n\nconst multi = cluster.multi();\n\n// Total stats (all combos combined)\nmulti.hincrby(`{${windowKey}}:total`, 'count', 1);\nmulti.hincrby(`{${windowKey}}:total`, 'totalLength', data.length);\nmulti.hincrby(`{${windowKey}}:total`, 'totalDelay', data.delay);\n\n// Per-combo stats (centre_id + subtopic)\nmulti.hincrby(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'count', 1);\nmulti.hincrby(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'totalLength', data.length);\nmulti.hincrby(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'totalDelay', data.delay);\n\n// Last download absolute timestamp (seconds) — overwrite with latest in this window\nmulti.hset(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'lastTimestamp', data.lastTimestamp || 0);\n\n// Expiry\nmulti.expire(`{${windowKey}}:total`, 3600);\nmulti.expire(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 3600);\n\nmulti.exec()\n    .then(results => {\n        msg.payload = { success: true, commands: results.length };\n        node.send(msg);\n    })\n    .catch(err => {\n        node.error('Redis write error: ' + err);\n    });\n\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 160,
         "wires": [
             []
+        ]
+    },
+    {
+        "id": "24ddb5fcccf4e13b",
+        "type": "function",
+        "z": "5ff6c20513455391",
+        "name": "Metrics",
+        "func": "const cluster = global.get('redisCluster');\nconst global_cache = global.get('cache-name');\n\nif (!cluster) {\n    node.error('Redis cluster not connected');\n    return null;\n}\n\n// Get the window key (from previous 10-second interval in msg.payload)\nconst windowKey = msg.payload; // e.g., \"wis2gc:cleaner:20260305173020\"\n\nconst multi = cluster.multi();\n\n// Get total stats\nmulti.hgetall(`{${windowKey}}:total`);\n\n// Get all combo keys\nmulti.keys(`{${windowKey}}:combo:*`);\n\nmulti.exec()\n    .then(results => {\n        const totalStats = results[0][1];\n        const comboKeys = results[1][1];\n\n        // Fetch detailed stats for each combo\n        const multi2 = cluster.multi();\n        comboKeys.forEach(key => multi2.hgetall(key));\n\n        return multi2.exec().then(detailResults => {\n            const comboDetails = detailResults.map(r => r[1]);\n\n            // Process combos and send on outputs 1, 2, 3\n            comboKeys.forEach((key, idx) => {\n                // Parse key: \"{wis2gc:cleaner:20260305173020}:combo:de-dwd-gts-to-wis2:core/I/S/S/A/03/LFPW\"\n                // Split by ':' and find 'combo' position\n                const parts = key.split(':');\n                const comboIndex = parts.indexOf('combo');\n\n                // centre_id is right after 'combo'\n                const centre_id = parts[comboIndex + 1];\n\n                // topic is everything after centre_id\n                const topic = parts.slice(comboIndex + 2).join(':');\n\n                const stats = comboDetails[idx];\n                const count = parseInt(stats.count) || 0;\n                const totalLength = parseInt(stats.totalLength) || 0;\n                const avgDelay = stats.count ? Math.round(parseInt(stats.totalDelay) / parseInt(stats.count) / 1000) : 0;\n\n                // Output 1: Count\n                const msg1 = {\n                    payload: {\n                        \"op\": \"inc\",\n                        \"labels\": {\n                            \"centre_id\": centre_id,\n                            \"topic\": topic,\n                            \"report_by\": global_cache\n                        },\n                        \"val\": count\n                    }\n                };\n\n                // Output 2: Total Length\n                const msg2 = {\n                    payload: {\n                        \"op\": \"inc\",\n                        \"labels\": {\n                            \"centre_id\": centre_id,\n                            \"topic\": topic,\n                            \"report_by\": global_cache\n                        },\n                        \"val\": totalLength\n                    }\n                };\n\n                // Output 3: Average Delay\n                const msg3 = {\n                    payload: {\n                        \"op\": \"set\",\n                        \"labels\": {\n                            \"centre_id\": centre_id,\n                            \"topic\": topic,\n                            \"report_by\": global_cache\n                        },\n                        \"val\": avgDelay\n                    }\n                };\n\n                // Send to outputs 1, 2, 3\n                node.send([msg1, msg2, msg3, null, null, null]);\n            });\n\n            // WMO spec metrics: aggregate per centre_id (no topic label)\n            const perCentre = {};\n            comboKeys.forEach((key, idx) => {\n                const parts = key.split(':');\n                const ci = parts.indexOf('combo');\n                const centre_id = parts[ci + 1];\n                const stats = comboDetails[idx];\n                if (!perCentre[centre_id]) {\n                    perCentre[centre_id] = { count: 0, lastTimestamp: 0 };\n                }\n                perCentre[centre_id].count += parseInt(stats.count) || 0;\n                perCentre[centre_id].lastTimestamp = Math.max(\n                    perCentre[centre_id].lastTimestamp,\n                    parseInt(stats.lastTimestamp) || 0\n                );\n            });\n\n            // Output 4: wmo_wis2_gc_downloaded_total (per centre_id)\n            // Output 5: wmo_wis2_gc_last_download_timestamp_seconds (per centre_id)\n            Object.entries(perCentre).forEach(([centre_id, agg]) => {\n                const wmo1 = { payload: { \"op\": \"inc\", \"labels\": { \"centre_id\": centre_id, \"report_by\": global_cache }, \"val\": agg.count } };\n                const wmo2 = { payload: { \"op\": \"set\", \"labels\": { \"centre_id\": centre_id, \"report_by\": global_cache }, \"val\": agg.lastTimestamp } };\n                node.send([null, null, null, wmo1, wmo2, null]);\n            });\n        });\n    })\n    .catch(err => {\n        node.error('Redis read error: ' + err);\n    });\n\nreturn null;",
+        "outputs": 6,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 320,
+        "wires": [
+            [
+                "c99c758c05d58fe6"
+            ],
+            [
+                "b33f448a366ba16a"
+            ],
+            [
+                "41789583be323001"
+            ],
+            [
+                "f2914324c9dc9527"
+            ],
+            [
+                "01e162b7a068107d"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "f2914324c9dc9527",
+        "type": "prometheus-exporter",
+        "z": "5ff6c20513455391",
+        "name": "Downloaded",
+        "metric": "d265551416fe184b",
+        "x": 770,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "01e162b7a068107d",
+        "type": "prometheus-exporter",
+        "z": "5ff6c20513455391",
+        "name": "Timestamp",
+        "metric": "e2c731c0b72b7626",
+        "x": 770,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "41789583be323001",
+        "type": "prometheus-exporter",
+        "z": "5ff6c20513455391",
+        "name": "Delay",
+        "metric": "f2a2a080e159b3a2",
+        "x": 750,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "b33f448a366ba16a",
+        "type": "prometheus-exporter",
+        "z": "5ff6c20513455391",
+        "name": "Volume",
+        "metric": "0b1738558640a231",
+        "x": 760,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "c99c758c05d58fe6",
+        "type": "prometheus-exporter",
+        "z": "5ff6c20513455391",
+        "name": "Number",
+        "metric": "833dd9f884cd3f43",
+        "x": 760,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "7c9b8e862cac33e8",
+        "type": "switch",
+        "z": "5ff6c20513455391",
+        "name": "Type ?",
+        "property": "payload.type",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "integrity_fail",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "download_error",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 570,
+        "y": 120,
+        "wires": [
+            [
+                "6feb253b0a352b41"
+            ],
+            [
+                "a02bcc4a5d7904d0"
+            ],
+            [
+                "a3ff30abf87630d1"
+            ]
+        ]
+    },
+    {
+        "id": "18421357db3ddac5",
+        "type": "prometheus-exporter",
+        "z": "5ff6c20513455391",
+        "name": "Error",
+        "metric": "be8bb278185f55ef",
+        "x": 830,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "343ec55594149861",
+        "type": "prometheus-exporter",
+        "z": "5ff6c20513455391",
+        "name": "Hash",
+        "metric": "e334fa93f70afdfd",
+        "x": 830,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "6feb253b0a352b41",
+        "type": "change",
+        "z": "5ff6c20513455391",
+        "name": "Hash",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"op\":\"inc\",\t   \"labels\":{\t       \"centre_id\":$split(wnmtopic,\"/\")[3],\t       \"report_by\":$globalContext(\"cache-name\")\t   },\t   \"val\":1\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "x": 710,
+        "y": 80,
+        "wires": [
+            [
+                "343ec55594149861"
+            ]
+        ]
+    },
+    {
+        "id": "a02bcc4a5d7904d0",
+        "type": "change",
+        "z": "5ff6c20513455391",
+        "name": "Error",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\t   \"op\":\"inc\",\t   \"labels\":{\t       \"centre_id\":$split(wnmtopic,\"/\")[3],\t       \"report_by\":$globalContext(\"cache-name\")\t   },\t   \"val\":1\t}",
+                "tot": "jsonata"
+            }
+        ],
+        "x": 710,
+        "y": 120,
+        "wires": [
+            [
+                "18421357db3ddac5"
+            ]
         ]
     },
     {
