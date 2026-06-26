@@ -59,7 +59,7 @@
         "id": "7df5aeb06a15c0e4",
         "type": "junction",
         "z": "a843f3ff30ad0d18",
-        "x": 730,
+        "x": 510,
         "y": 380,
         "wires": [
             [
@@ -71,7 +71,7 @@
         "id": "b9ece7ebef6b02b6",
         "type": "junction",
         "z": "a843f3ff30ad0d18",
-        "x": 710,
+        "x": 490,
         "y": 380,
         "wires": [
             [
@@ -209,7 +209,7 @@
     {
         "id": "f2a2a080e159b3a2",
         "type": "prometheus-metric-config",
-        "name": "monitor_wis2_gc_delay_download_timestamp_seconds",
+        "name": "monitor_wis2_gc_delay_download_seconds",
         "help": "Delay to download files",
         "labels": "centre_id, topic, report_by",
         "mtype": "gauge"
@@ -343,6 +343,14 @@
         "name": "wmo_wis2_gc_downloaded_errors_total",
         "help": "Total number of file download errors",
         "labels": "centre_id, report_by",
+        "mtype": "counter"
+    },
+    {
+        "id": "b6eaa80da4be2167",
+        "type": "prometheus-metric-config",
+        "name": "monitor_wis2_gc_source_download_total",
+        "help": "Number of files successfully downloaded per source",
+        "labels": "centre_id, source, report_by",
         "mtype": "counter"
     },
     {
@@ -3046,52 +3054,6 @@
         ]
     },
     {
-        "id": "1fb843030300902c",
-        "type": "change",
-        "z": "1c6759660a32fda5",
-        "name": "Extract",
-        "rules": [
-            {
-                "t": "set",
-                "p": "method",
-                "pt": "msg",
-                "to": "POST",
-                "tot": "str"
-            },
-            {
-                "t": "set",
-                "p": "headers",
-                "pt": "msg",
-                "to": "[\"accept: application/json\", \"Content-Type: application/json\"]",
-                "tot": "json"
-            },
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "{ \"inputs\": { \"datetime\": from & \"/\" & to, \"subscriber-id\": $globalContext(\"uuid\"), \"topic\": topics } }",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
-                "p": "url",
-                "pt": "msg",
-                "to": "$globalContext(\"global-replay-url\")",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1240,
-        "y": 120,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "f53714198eb1e993",
         "type": "mqtt in",
         "z": "a843f3ff30ad0d18",
@@ -4017,7 +3979,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 590,
+        "x": 370,
         "y": 540,
         "wires": [
             [
@@ -4369,7 +4331,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 860,
+        "x": 640,
         "y": 540,
         "wires": [
             [
@@ -4595,7 +4557,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 725,
+        "x": 505,
         "y": 420,
         "wires": [
             [
@@ -4621,7 +4583,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 725,
+        "x": 505,
         "y": 460,
         "wires": [
             [
@@ -4647,7 +4609,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 725,
+        "x": 505,
         "y": 500,
         "wires": [
             [
@@ -4673,7 +4635,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 725,
+        "x": 505,
         "y": 540,
         "wires": [
             [
@@ -4699,7 +4661,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 725,
+        "x": 505,
         "y": 580,
         "wires": [
             [
@@ -4725,7 +4687,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 725,
+        "x": 505,
         "y": 620,
         "wires": [
             [
@@ -4751,7 +4713,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 725,
+        "x": 505,
         "y": 660,
         "wires": [
             [
@@ -4777,7 +4739,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 725,
+        "x": 505,
         "y": 700,
         "wires": [
             [
@@ -4832,7 +4794,7 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 990,
+        "x": 770,
         "y": 540,
         "wires": [
             [
@@ -4860,7 +4822,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 1130,
+        "x": 910,
         "y": 540,
         "wires": [
             [
@@ -4893,7 +4855,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1300,
+        "x": 1060,
         "y": 540,
         "wires": [
             [
@@ -4910,7 +4872,7 @@
         "links": [
             "f1bfb46b496769da"
         ],
-        "x": 1395,
+        "x": 1155,
         "y": 540,
         "wires": []
     },
@@ -4949,7 +4911,7 @@
         "type": "previous-node",
         "z": "a843f3ff30ad0d18",
         "name": "",
-        "x": 815,
+        "x": 595,
         "y": 380,
         "wires": [
             [
@@ -4963,7 +4925,7 @@
         "type": "previous-node",
         "z": "a843f3ff30ad0d18",
         "name": "",
-        "x": 815,
+        "x": 595,
         "y": 440,
         "wires": [
             [
@@ -4981,7 +4943,7 @@
         "links": [
             "d1da644c2763c559"
         ],
-        "x": 875,
+        "x": 655,
         "y": 380,
         "wires": [],
         "icon": "font-awesome/fa-warning"
@@ -4995,7 +4957,7 @@
         "links": [
             "d1da644c2763c559"
         ],
-        "x": 875,
+        "x": 655,
         "y": 440,
         "wires": [],
         "icon": "font-awesome/fa-warning"
@@ -5230,7 +5192,7 @@
         "links": [
             "32f06040cbdb17ea"
         ],
-        "x": 475,
+        "x": 255,
         "y": 540,
         "wires": [
             [
@@ -8329,7 +8291,8 @@
         "y": 1100,
         "wires": [
             [
-                "fd712bdc50f7b784"
+                "fd712bdc50f7b784",
+                "fa9a0e3feb7c1616"
             ]
         ]
     },
@@ -9290,6 +9253,23 @@
         "wires": []
     },
     {
+        "id": "fa9a0e3feb7c1616",
+        "type": "debug",
+        "z": "caa031b5574b994f",
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1380,
+        "y": 1140,
+        "wires": []
+    },
+    {
         "id": "5034d326b1b418b5",
         "type": "function",
         "z": "102b04b3eaea572e",
@@ -10091,7 +10071,7 @@
         "type": "function",
         "z": "5ff6c20513455391",
         "name": "K/V",
-        "func": "// First, convert array to object\nconst arr = msg.payload;\nconst output = {};\n\nfor (let i = 0; i < arr.length; i += 2) {\n    const key = String(arr[i]);\n    const value = arr[i + 1];\n    output[key] = value;\n}\n\n// Get length directly from payload key\nlet length = output.length ? parseInt(output.length) : 0;\n\n// Compute difference between stored and published\nlet delay = null;\nif (output.stored && output.published) {\n    delay = parseInt(output.stored) - new Date(output.published).getTime(); \n}\n\n// Extract centre-id (4th value when split by /)\nlet centreId = null;\nif (output.topic) {\n    const topicParts = output.topic.split('/');\n    if (topicParts.length >= 4) {\n        centreId = topicParts[3];  // Index 3 is the 4th value\n    }\n}\n\n// Extract subtopic (from 7th value onwards)\nlet subtopic = null;\nif (output.topic) {\n    const topicParts = output.topic.split('/');\n    if (topicParts.length >= 6) {\n        subtopic = topicParts.slice(5, 8).join('/');\n    }\n}\n\n// Add extracted values to output\noutput.length = length;\noutput.delay = delay;\noutput.lastTimestamp = output.stored ? Math.floor(parseInt(output.stored) / 1000) : null;\noutput.centreId = centreId;\noutput.subtopic = subtopic;\n\nmsg.payload = output;\nreturn msg;\n",
+        "func": "// First, convert array to object\nconst arr = msg.payload;\nconst output = {};\n\nfor (let i = 0; i < arr.length; i += 2) {\n    const key = String(arr[i]);\n    const value = arr[i + 1];\n    output[key] = value;\n}\n\n// Get length directly from payload key\nlet length = output.length ? parseInt(output.length) : 0;\n\n// Compute difference between stored and published\nlet delay = null;\nif (output.stored && output.published) {\n    delay = parseInt(output.stored) - new Date(output.published).getTime(); \n}\n\n// Extract centre-id (4th value when split by /)\nlet centreId = null;\nif (output.topic) {\n    const topicParts = output.topic.split('/');\n    if (topicParts.length >= 4) {\n        centreId = topicParts[3];  // Index 3 is the 4th value\n    }\n}\n\n// Extract subtopic (from 7th value onwards)\nlet subtopic = null;\nif (output.topic) {\n    const topicParts = output.topic.split('/');\n    if (topicParts.length >= 6) {\n        subtopic = topicParts.slice(5, 8).join('/');\n    }\n}\n\n// Extract source from href value (\"complete-origin\", \"complete-fr-meteofrance\", etc.)\nlet source = null;\nfor (const [k, v] of Object.entries(output)) {\n    if (typeof v === 'string' && v.startsWith('complete-')) {\n        source = v.slice(9); // strip \"complete-\"\n        break;\n    }\n}\n\n// Add extracted values to output\noutput.length = length;\noutput.delay = delay;\noutput.lastTimestamp = output.stored ? Math.floor(parseInt(output.stored) / 1000) : null;\noutput.centreId = centreId;\noutput.subtopic = subtopic;\noutput.source = source;\n\nmsg.payload = output;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -10111,7 +10091,7 @@
         "type": "function",
         "z": "5ff6c20513455391",
         "name": "Stats",
-        "func": "const cluster = global.get('redisCluster');\n\nif (!cluster) {\n    node.error('Redis cluster not connected');\n    return null;\n}\n\nconst data = msg.payload;\nconst windowKey = flow.get('hashstat');\n\nconst multi = cluster.multi();\n\n// Total stats (all combos combined)\nmulti.hincrby(`{${windowKey}}:total`, 'count', 1);\nmulti.hincrby(`{${windowKey}}:total`, 'totalLength', data.length);\nmulti.hincrby(`{${windowKey}}:total`, 'totalDelay', data.delay);\n\n// Per-combo stats (centre_id + subtopic)\nmulti.hincrby(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'count', 1);\nmulti.hincrby(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'totalLength', data.length);\nmulti.hincrby(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'totalDelay', data.delay);\n\n// Last download absolute timestamp (seconds) — overwrite with latest in this window\nmulti.hset(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'lastTimestamp', data.lastTimestamp || 0);\n\n// Expiry\nmulti.expire(`{${windowKey}}:total`, 3600);\nmulti.expire(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 3600);\n\nmulti.exec()\n    .then(results => {\n        msg.payload = { success: true, commands: results.length };\n        node.send(msg);\n    })\n    .catch(err => {\n        node.error('Redis write error: ' + err);\n    });\n\nreturn null;",
+        "func": "const cluster = global.get('redisCluster');\n\nif (!cluster) {\n    node.error('Redis cluster not connected');\n    return null;\n}\n\nconst data = msg.payload;\nconst windowKey = flow.get('hashstat');\n\nconst multi = cluster.multi();\n\n// Total stats (all combos combined)\nmulti.hincrby(`{${windowKey}}:total`, 'count', 1);\nmulti.hincrby(`{${windowKey}}:total`, 'totalLength', data.length);\nmulti.hincrby(`{${windowKey}}:total`, 'totalDelay', data.delay);\n\n// Per-combo stats (centre_id + subtopic)\nmulti.hincrby(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'count', 1);\nmulti.hincrby(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'totalLength', data.length);\nmulti.hincrby(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'totalDelay', data.delay);\n\n// Last download absolute timestamp (seconds) — overwrite with latest in this window\nmulti.hset(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 'lastTimestamp', data.lastTimestamp || 0);\n\n// Expiry\nmulti.expire(`{${windowKey}}:total`, 3600);\nmulti.expire(`{${windowKey}}:combo:${data.centreId}:${data.subtopic}`, 3600);\n\n// Per-source count\nif (data.source) {\n    const srcKey = `{${windowKey}}:src:${data.centreId}:${data.source}`;\n    multi.hincrby(srcKey, 'count', 1);\n    multi.expire(srcKey, 3600);\n}\nmulti.exec()\n    .then(results => {\n        msg.payload = { success: true, commands: results.length };\n        node.send(msg);\n    })\n    .catch(err => {\n        node.error('Redis write error: ' + err);\n    });\n\nreturn null;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -10129,8 +10109,8 @@
         "type": "function",
         "z": "5ff6c20513455391",
         "name": "Metrics",
-        "func": "const cluster = global.get('redisCluster');\nconst global_cache = global.get('cache-name');\n\nif (!cluster) {\n    node.error('Redis cluster not connected');\n    return null;\n}\n\n// Get the window key (from previous 10-second interval in msg.payload)\nconst windowKey = msg.payload; // e.g., \"wis2gc:cleaner:20260305173020\"\n\nconst multi = cluster.multi();\n\n// Get total stats\nmulti.hgetall(`{${windowKey}}:total`);\n\n// Get all combo keys\nmulti.keys(`{${windowKey}}:combo:*`);\n\nmulti.exec()\n    .then(results => {\n        const totalStats = results[0][1];\n        const comboKeys = results[1][1];\n\n        // Fetch detailed stats for each combo\n        const multi2 = cluster.multi();\n        comboKeys.forEach(key => multi2.hgetall(key));\n\n        return multi2.exec().then(detailResults => {\n            const comboDetails = detailResults.map(r => r[1]);\n\n            // Process combos and send on outputs 1, 2, 3\n            comboKeys.forEach((key, idx) => {\n                // Parse key: \"{wis2gc:cleaner:20260305173020}:combo:de-dwd-gts-to-wis2:core/I/S/S/A/03/LFPW\"\n                // Split by ':' and find 'combo' position\n                const parts = key.split(':');\n                const comboIndex = parts.indexOf('combo');\n\n                // centre_id is right after 'combo'\n                const centre_id = parts[comboIndex + 1];\n\n                // topic is everything after centre_id\n                const topic = parts.slice(comboIndex + 2).join(':');\n\n                const stats = comboDetails[idx];\n                const count = parseInt(stats.count) || 0;\n                const totalLength = parseInt(stats.totalLength) || 0;\n                const avgDelay = stats.count ? Math.round(parseInt(stats.totalDelay) / parseInt(stats.count) / 1000) : 0;\n\n                // Output 1: Count\n                const msg1 = {\n                    payload: {\n                        \"op\": \"inc\",\n                        \"labels\": {\n                            \"centre_id\": centre_id,\n                            \"topic\": topic,\n                            \"report_by\": global_cache\n                        },\n                        \"val\": count\n                    }\n                };\n\n                // Output 2: Total Length\n                const msg2 = {\n                    payload: {\n                        \"op\": \"inc\",\n                        \"labels\": {\n                            \"centre_id\": centre_id,\n                            \"topic\": topic,\n                            \"report_by\": global_cache\n                        },\n                        \"val\": totalLength\n                    }\n                };\n\n                // Output 3: Average Delay\n                const msg3 = {\n                    payload: {\n                        \"op\": \"set\",\n                        \"labels\": {\n                            \"centre_id\": centre_id,\n                            \"topic\": topic,\n                            \"report_by\": global_cache\n                        },\n                        \"val\": avgDelay\n                    }\n                };\n\n                // Send to outputs 1, 2, 3\n                node.send([msg1, msg2, msg3, null, null, null]);\n            });\n\n            // WMO spec metrics: aggregate per centre_id (no topic label)\n            const perCentre = {};\n            comboKeys.forEach((key, idx) => {\n                const parts = key.split(':');\n                const ci = parts.indexOf('combo');\n                const centre_id = parts[ci + 1];\n                const stats = comboDetails[idx];\n                if (!perCentre[centre_id]) {\n                    perCentre[centre_id] = { count: 0, lastTimestamp: 0 };\n                }\n                perCentre[centre_id].count += parseInt(stats.count) || 0;\n                perCentre[centre_id].lastTimestamp = Math.max(\n                    perCentre[centre_id].lastTimestamp,\n                    parseInt(stats.lastTimestamp) || 0\n                );\n            });\n\n            // Output 4: wmo_wis2_gc_downloaded_total (per centre_id)\n            // Output 5: wmo_wis2_gc_last_download_timestamp_seconds (per centre_id)\n            Object.entries(perCentre).forEach(([centre_id, agg]) => {\n                const wmo1 = { payload: { \"op\": \"inc\", \"labels\": { \"centre_id\": centre_id, \"report_by\": global_cache }, \"val\": agg.count } };\n                const wmo2 = { payload: { \"op\": \"set\", \"labels\": { \"centre_id\": centre_id, \"report_by\": global_cache }, \"val\": agg.lastTimestamp } };\n                node.send([null, null, null, wmo1, wmo2, null]);\n            });\n        });\n    })\n    .catch(err => {\n        node.error('Redis read error: ' + err);\n    });\n\nreturn null;",
-        "outputs": 6,
+        "func": "const cluster = global.get('redisCluster');\nconst global_cache = global.get('cache-name');\n\nif (!cluster) {\n    node.error('Redis cluster not connected');\n    return null;\n}\n\nconst windowKey = msg.payload;\n\nconst multi = cluster.multi();\nmulti.hgetall(`{${windowKey}}:total`);\nmulti.keys(`{${windowKey}}:combo:*`);\nmulti.keys(`{${windowKey}}:src:*`);\n\nmulti.exec()\n    .then(results => {\n        const totalStats = results[0][1];\n        const comboKeys = results[1][1] || [];\n        const srcKeys = results[2][1] || [];\n\n        const multi2 = cluster.multi();\n        comboKeys.forEach(key => multi2.hgetall(key));\n        srcKeys.forEach(key => multi2.hgetall(key));\n\n        return multi2.exec().then(detailResults => {\n            const comboDetails = detailResults.slice(0, comboKeys.length).map(r => r[1]);\n            const srcDetails = detailResults.slice(comboKeys.length).map(r => r[1]);\n\n            // monitor_* metrics: per combo (outputs 1-3)\n            comboKeys.forEach((key, idx) => {\n                const parts = key.split(':');\n                const comboIndex = parts.indexOf('combo');\n                const centre_id = parts[comboIndex + 1];\n                const topic = parts.slice(comboIndex + 2).join(':');\n\n                const stats = comboDetails[idx];\n                const count = parseInt(stats.count) || 0;\n                const totalLength = parseInt(stats.totalLength) || 0;\n                const avgDelay = stats.count\n                    ? Math.round(parseInt(stats.totalDelay) / parseInt(stats.count) / 1000)\n                    : 0;\n\n                const msg1 = { payload: { \"op\": \"inc\", \"labels\": { \"centre_id\": centre_id, \"topic\": topic, \"report_by\": global_cache }, \"val\": count } };\n                const msg2 = { payload: { \"op\": \"inc\", \"labels\": { \"centre_id\": centre_id, \"topic\": topic, \"report_by\": global_cache }, \"val\": totalLength } };\n                const msg3 = { payload: { \"op\": \"set\", \"labels\": { \"centre_id\": centre_id, \"topic\": topic, \"report_by\": global_cache }, \"val\": avgDelay } };\n\n                node.send([msg1, msg2, msg3, null, null, null]);\n            });\n\n            // monitor_wis2_gc_source_download_total: per centre_id + source (output 4)\n            srcKeys.forEach((key, idx) => {\n                const parts = key.split(':');\n                const si = parts.indexOf('src');\n                const centre_id = parts[si + 1];\n                const source = parts.slice(si + 2).join(':');\n                const count = parseInt(srcDetails[idx]?.count) || 0;\n                if (count > 0) {\n                    node.send([null, null, null,\n                        { payload: { \"op\": \"inc\", \"labels\": { \"centre_id\": centre_id, \"source\": source, \"report_by\": global_cache }, \"val\": count } },\n                        null, null\n                    ]);\n                }\n            });\n\n            // wmo_* metrics: per centre_id (outputs 5-6)\n            const perCentre = {};\n            comboKeys.forEach((key, idx) => {\n                const parts = key.split(':');\n                const ci = parts.indexOf('combo');\n                const centre_id = parts[ci + 1];\n                const stats = comboDetails[idx];\n                if (!perCentre[centre_id]) perCentre[centre_id] = { count: 0, lastTimestamp: 0 };\n                perCentre[centre_id].count += parseInt(stats.count) || 0;\n                perCentre[centre_id].lastTimestamp = Math.max(\n                    perCentre[centre_id].lastTimestamp,\n                    parseInt(stats.lastTimestamp) || 0\n                );\n            });\n\n            Object.entries(perCentre).forEach(([centre_id, agg]) => {\n                const wmo1 = { payload: { \"op\": \"inc\", \"labels\": { \"centre_id\": centre_id, \"report_by\": global_cache }, \"val\": agg.count } };\n                const wmo2 = { payload: { \"op\": \"set\", \"labels\": { \"centre_id\": centre_id, \"report_by\": global_cache }, \"val\": agg.lastTimestamp } };\n                node.send([null, null, null, null, wmo1, wmo2]);\n            });\n        });\n    })\n    .catch(err => {\n        node.error('Redis read error: ' + err);\n    });\n\nreturn null;",
+        "outputs": 7,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
@@ -10149,6 +10129,9 @@
                 "41789583be323001"
             ],
             [
+                "05cb5922ea25daf9"
+            ],
+            [
                 "f2914324c9dc9527"
             ],
             [
@@ -10164,7 +10147,7 @@
         "name": "Downloaded",
         "metric": "d265551416fe184b",
         "x": 770,
-        "y": 340,
+        "y": 380,
         "wires": []
     },
     {
@@ -10174,7 +10157,7 @@
         "name": "Timestamp",
         "metric": "e2c731c0b72b7626",
         "x": 770,
-        "y": 380,
+        "y": 420,
         "wires": []
     },
     {
@@ -10309,6 +10292,16 @@
                 "18421357db3ddac5"
             ]
         ]
+    },
+    {
+        "id": "05cb5922ea25daf9",
+        "type": "prometheus-exporter",
+        "z": "5ff6c20513455391",
+        "name": "Source",
+        "metric": "b6eaa80da4be2167",
+        "x": 760,
+        "y": 340,
+        "wires": []
     },
     {
         "id": "71d475d0d4f7977f",
