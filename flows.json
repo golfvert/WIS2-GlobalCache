@@ -658,7 +658,7 @@
             [
                 "b6dda43fbcd85817",
                 "9a2bf9794f77b2fd",
-                "83baaa0d22cdd87e"
+                "ec251329e6d67f9d"
             ]
         ],
         "l": true
@@ -1063,83 +1063,6 @@
         ]
     },
     {
-        "id": "83baaa0d22cdd87e",
-        "type": "change",
-        "z": "1c6759660a32fda5",
-        "name": "Configuration",
-        "rules": [
-            {
-                "t": "set",
-                "p": "cache-name",
-                "pt": "global",
-                "to": "payload.downloader.cache-name",
-                "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "download-url",
-                "pt": "global",
-                "to": "payload.downloader.download-url",
-                "tot": "msg"
-            },
-            {
-                "t": "set",
-                "p": "rename-to-date",
-                "pt": "global",
-                "to": "payload.downloader.\"rename-to\" = \"date\" ? true : false",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
-                "p": "rename-to-topic",
-                "pt": "global",
-                "to": "payload.downloader.\"rename-to\" = \"topic\" ? true : false",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
-                "p": "rename-to-s3",
-                "pt": "global",
-                "to": "payload.downloader.\"rename-to\" = \"s3\" ? true : false",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
-                "p": "downloader",
-                "pt": "global",
-                "to": "true",
-                "tot": "bool"
-            },
-            {
-                "t": "set",
-                "p": "lastId",
-                "pt": "global",
-                "to": "0-0",
-                "tot": "str"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "[ \"wis2gc:setup:\" & $globalContext(\"queue\"), $globalContext(\"worker\") & \":downloader\" , true ]",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 400,
-        "y": 960,
-        "wires": [
-            [
-                "b59dbe190ca901ca",
-                "5115f76dbabd9e9b"
-            ]
-        ]
-    },
-    {
         "id": "aec8ec1c7813d445",
         "type": "change",
         "z": "1c6759660a32fda5",
@@ -1449,7 +1372,7 @@
             "3668b2ec19eebb18"
         ],
         "x": 190,
-        "y": 1080,
+        "y": 1100,
         "wires": [
             [
                 "25ac402a9f85e34b"
@@ -1503,7 +1426,7 @@
         "to": "",
         "reg": false,
         "x": 360,
-        "y": 1080,
+        "y": 1100,
         "wires": [
             [
                 "bd8f8b9b4e439529"
@@ -1581,7 +1504,7 @@
             "287c036c9d516543"
         ],
         "x": 200,
-        "y": 1140,
+        "y": 1160,
         "wires": [
             [
                 "55f185e97ff146c4"
@@ -1621,7 +1544,7 @@
         "to": "",
         "reg": false,
         "x": 360,
-        "y": 1140,
+        "y": 1160,
         "wires": [
             [
                 "9c9026da609199a8"
@@ -1676,7 +1599,7 @@
             "51ff616a0b410052"
         ],
         "x": 200,
-        "y": 1200,
+        "y": 1220,
         "wires": [
             [
                 "62f1f1baa600d1ea"
@@ -1793,8 +1716,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 670,
-        "y": 960,
+        "x": 690,
+        "y": 1000,
         "wires": [
             []
         ]
@@ -1812,7 +1735,7 @@
         "payloadType": "json",
         "block": false,
         "x": 650,
-        "y": 1080,
+        "y": 1100,
         "wires": [
             []
         ]
@@ -1830,7 +1753,7 @@
         "payloadType": "json",
         "block": false,
         "x": 510,
-        "y": 1140,
+        "y": 1160,
         "wires": [
             []
         ]
@@ -1848,7 +1771,7 @@
         "payloadType": "json",
         "block": false,
         "x": 510,
-        "y": 1200,
+        "y": 1220,
         "wires": [
             []
         ]
@@ -1946,7 +1869,8 @@
             "935ba99d18f04f78",
             "ef1953a3c2d06e9d",
             "07ad0baf7e59f967",
-            "d67bedf331afec26"
+            "d67bedf331afec26",
+            "0aee0c2aa27f59ba"
         ],
         "x": 970,
         "y": 740,
@@ -2201,8 +2125,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 550,
-        "y": 1000,
+        "x": 570,
+        "y": 1040,
         "wires": [
             [
                 "s3-config-change"
@@ -2270,8 +2194,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 670,
-        "y": 1000,
+        "x": 690,
+        "y": 1040,
         "wires": [
             []
         ]
@@ -2293,8 +2217,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 550,
-        "y": 960,
+        "x": 570,
+        "y": 1000,
         "wires": [
             [
                 "7dac53323143c7b0"
@@ -2319,7 +2243,7 @@
         "repair": false,
         "outputs": 1,
         "x": 520,
-        "y": 1080,
+        "y": 1100,
         "wires": [
             [
                 "d9f629d5b51a605a"
@@ -2390,7 +2314,7 @@
         "type": "function",
         "z": "1c6759660a32fda5",
         "name": "Validate",
-        "func": "const cfg = msg.payload;\nconst errors   = [];\nconst warnings = [];\nconst infos    = [];\n\nconst isString  = v => typeof v === 'string' && v.trim().length > 0;\nconst isNumber  = v => typeof v === 'number';\nconst isBool    = v => typeof v === 'boolean';\nconst isArray   = v => Array.isArray(v);\nconst isObject  = v => v !== null && typeof v === 'object' && !Array.isArray(v);\n\nconst BROKER_PROTOCOLS = /^(mqtt|mqtts|ws|wss):\\/\\/.+/;\nconst URL_RE    = /^https?:\\/\\/.+/;\nconst S3_URL_RE = /^https?:\\/\\/[^\\/]+(:\\d+)?(\\/.*)?$/;\n\nconst isValidMqttTopic = (t) => {\n    if (typeof t !== 'string' || t.length === 0) return 'empty or not a string';\n    const parts = t.split('/');\n    const isValidSegment = s => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(s);\n\n    for (let i = 0; i < parts.length; i++) {\n        const part = parts[i];\n        const isLast = i === parts.length - 1;\n\n        if (part === '#') {\n            if (!isLast) return `'#' at level ${i+1} must be the last level`;\n            continue;\n        }\n\n        switch (i) {\n            case 0:\n                if (!['origin','cache','monitor','+'].includes(part))\n                    return `level 1 must be 'origin', 'cache', 'monitor' or '+' (got '${part}')`;\n                break;\n            case 1:\n                if (part !== 'a')\n                    return `level 2 must be 'a' (got '${part}')${part === '+' ? ' — + not allowed here' : ''}`;\n                break;\n            case 2:\n                if (part !== 'wis2')\n                    return `level 3 must be 'wis2' (got '${part}')${part === '+' ? ' — + not allowed here' : ''}`;\n                break;\n            case 3:\n                if (part === '+') break;\n                if (!isValidSegment(part) || !part.includes('-'))\n                    return `level 4 must contain at least one '-' and be alphanumeric-hyphen (got '${part}')`;\n                break;\n            case 4:\n                if (!['data','metadata','+'].includes(part))\n                    return `level 5 must be 'data', 'metadata' or '+' (got '${part}')`;\n                break;\n            default:\n                if (part === '+') break;\n                if (isLast) {\n                    if (!isValidSegment(part))\n                        return `last level must be lowercase alphanumeric with optional hyphens (got '${part}')`;\n                } else {\n                    if (!isValidSegment(part))\n                        return `level ${i+1} '${part}' is invalid — use lowercase alphanumeric with optional hyphens only`;\n                }\n        }\n    }\n    return null;\n};\n\nconst checkBroker = (broker, path) => {\n    if (!isString(broker.broker))           errors.push(`${path}.broker: missing or empty`);\n    else if (!BROKER_PROTOCOLS.test(broker.broker))\n                                            errors.push(`${path}.broker: invalid protocol (${broker.broker}) — must be mqtt/mqtts/ws/wss`);\n    if (!isString(broker.username))         warnings.push(`${path}.username: missing`);\n    if (!isString(broker.password))         warnings.push(`${path}.password: missing`);\n    if (broker.version !== undefined && ![3,4,5].includes(broker.version))\n                                            errors.push(`${path}.version: must be 3, 4 or 5 (got ${broker.version})`);\n    if (broker.verifycert !== undefined && !isBool(broker.verifycert))\n                                            errors.push(`${path}.verifycert: must be boolean`);\n};\n\nif (!isObject(cfg)) {\n    errors.push('Configuration root is not a valid YAML object');\n    msg.payload = { valid: false, errors, warnings, infos };\n    return msg;\n}\n\nconst roles = isObject(cfg.global) && typeof cfg.global.roles === 'string'\n    ? cfg.global.roles.split(',').map(r => r.trim())\n    : [];\n\n// ─── global ─────────────────────────────────────────────────────────────────\n\nconst VALID_ROLES = ['SUBSCRIBER','DOWNLOADER','CLEANER','REPORTER','REPLAYER'];\n\nif (!isObject(cfg.global)) {\n    errors.push('global: section missing');\n} else {\n    const g = cfg.global;\n\n    if (!isString(g.roles)) {\n        errors.push('global.roles: missing or empty');\n    } else {\n        const unknown = roles.filter(r => !VALID_ROLES.includes(r));\n        if (unknown.length) errors.push(`global.roles: unknown role(s): ${unknown.join(', ')}`);\n        infos.push(`global.roles: ${roles.join(', ')}`);\n\n        if (roles.includes('SUBSCRIBER') && !isObject(cfg.subscriber)) errors.push('global.roles includes SUBSCRIBER but subscriber: section is missing');\n        if (roles.includes('DOWNLOADER') && !isObject(cfg.downloader)) errors.push('global.roles includes DOWNLOADER but downloader: section is missing');\n        if (roles.includes('REPLAYER')   && !isObject(cfg.replayer))   errors.push('global.roles includes REPLAYER but replayer: section is missing');\n    }\n\n    if (!isString(g.worker)) errors.push('global.worker: missing or empty');\n    if (!isString(g.queue))  errors.push('global.queue: missing or empty');\n\n    const VALID_LOG = ['info','warn','debug'];\n    if (!isString(g['log-level']))                errors.push('global.log-level: missing, will default to no logging');\n    else if (!VALID_LOG.includes(g['log-level'])) errors.push(`global.log-level: invalid value '${g['log-level']}' — must be info/warn/debug`);\n\n    if (g['test-mode-duration'] !== undefined && !isNumber(g['test-mode-duration']))\n        errors.push('global.test-mode-duration: must be a number');\n\n    if (g['global-cache'] !== undefined && !isBool(g['global-cache']))\n        errors.push('global.global-cache: must be boolean');\n\n    if (!isArray(g.localbroker) || g.localbroker.length === 0) {\n        warnings.push('global.localbroker: missing or empty — no local MQTT broker configured (PUB1/PUB2 will not connect)');\n    } else {\n        g.localbroker.forEach((b, i) => checkBroker(b, `global.localbroker[${i}]`));\n        if (g.localbroker.length > 2) warnings.push('global.localbroker: more than 2 brokers defined — only PUB1 and PUB2 are wired in the flow');\n    }\n}\n\n// ─── subscriber ─────────────────────────────────────────────────────────────\n\nif (isObject(cfg.subscriber)) {\n    const s = cfg.subscriber;\n\n    if (!isArray(s.globalbroker) || s.globalbroker.length === 0) {\n        errors.push('subscriber.globalbroker: missing or empty — nothing to subscribe to');\n    } else {\n        s.globalbroker.forEach((b, i) => checkBroker(b, `subscriber.globalbroker[${i}]`));\n        if (s.globalbroker.length > 2) warnings.push('subscriber.globalbroker: more than 2 brokers defined — only GB1 and GB2 are wired in the flow');\n    }\n\n    if (s['priority-global-cache'] !== undefined) {\n        if (!isArray(s['priority-global-cache'])) errors.push('subscriber.priority-global-cache: must be an array');\n        else if (s['priority-global-cache'].some(v => !isString(v)))\n            errors.push('subscriber.priority-global-cache: all entries must be strings');\n    }\n\n    if (!isObject(s.mqtt)) {\n        errors.push('subscriber.mqtt: section missing');\n    } else {\n        const m = s.mqtt;\n\n        if (!isArray(m.whitelist) || m.whitelist.length === 0) {\n            errors.push('subscriber.mqtt.whitelist: missing or empty — nothing will be subscribed');\n        } else {\n            m.whitelist.forEach((t, i) => {\n                if (!isString(t)) errors.push(`subscriber.mqtt.whitelist[${i}]: must be a string`);\n                else { const err = isValidMqttTopic(t); if (err) errors.push(`subscriber.mqtt.whitelist[${i}]: '${t}' — ${err}`); }\n            });\n            infos.push(`subscriber.mqtt.whitelist: ${m.whitelist.length} topic(s)`);\n        }\n\n        if (m.blacklist !== undefined) {\n            if (!isArray(m.blacklist)) errors.push('subscriber.mqtt.blacklist: must be an array');\n            else {\n                m.blacklist.forEach((t, i) => {\n                    if (!isString(t)) errors.push(`subscriber.mqtt.blacklist[${i}]: must be a string`);\n                    else if (!/^[a-zA-Z0-9\\-\\/\\+#]+$/.test(t)) errors.push(`subscriber.mqtt.blacklist[${i}]: '${t}' — only alphanumeric, -, +, # and / allowed`);\n                });\n                infos.push(`subscriber.mqtt.blacklist: ${m.blacklist.length} topic(s)`);\n            }\n        }\n\n        if (m['global-replay'] !== undefined && m['global-replay'] !== null) {\n            if (!isString(m['global-replay'])) errors.push('subscriber.mqtt.global-replay: must be a string or null');\n            else infos.push(`subscriber.mqtt.global-replay: ${m['global-replay']}`);\n        }\n    }\n}\n\n// ─── downloader ─────────────────────────────────────────────────────────────\n\nif (isObject(cfg.downloader)) {\n    const d = cfg.downloader;\n\n    if (!isString(d['aria-secret']))  errors.push('downloader.aria-secret: missing or empty — required');\n    if (!isString(d['aria-url']))     errors.push('downloader.aria-url: missing or empty');\n    else if (!d['aria-url'].startsWith('ws://') && !d['aria-url'].startsWith('wss://'))\n        errors.push(`downloader.aria-url: must start with ws:// or wss:// (got ${d['aria-url']})`);\n    if (!isNumber(d['aria-inqueue'])) errors.push('downloader.aria-inqueue: missing or not a number — must be a positive integer');\n    else if (d['aria-inqueue'] <= 0)  errors.push('downloader.aria-inqueue: must be greater than 0');\n    if (!isString(d['cache-name']))   warnings.push('downloader.cache-name: missing');\n    if (!isString(d['download-url'])) errors.push('downloader.download-url: missing or empty');\n    else if (!URL_RE.test(d['download-url']))\n        errors.push(`downloader.download-url: invalid URL (${d['download-url']})`);\n\n    const VALID_RENAME = ['date', 'topic', 's3'];\n    const renameTo = d['rename-to'];\n    let renameS3 = false;\n    if (renameTo === undefined) {\n        infos.push('downloader.rename-to: not set — no renaming');\n    } else if (renameTo === false) {\n        infos.push('downloader.rename-to: false — no renaming');\n    } else if (typeof renameTo === 'string' && VALID_RENAME.includes(renameTo)) {\n        infos.push(`downloader.rename-to: ${renameTo}`);\n        renameS3 = renameTo === 's3';\n    } else {\n        errors.push(`downloader.rename-to: invalid value '${renameTo}' — must be 'date', 'topic', 's3' or false`);\n    }\n\n    if (renameS3) {\n        if (!isObject(d.s3access)) {\n            errors.push(\"downloader.s3access: required when rename-to is 's3' but section is missing\");\n        } else {\n            const s3 = d.s3access;\n            if (!isString(s3.url))       errors.push('downloader.s3access.url: missing or empty');\n            else if (!S3_URL_RE.test(s3.url))\n                errors.push(`downloader.s3access.url: invalid format (${s3.url}) — expected http(s)://host(:port)`);\n            if (!isString(s3.accesskey)) errors.push('downloader.s3access.accesskey: missing or empty');\n            if (!isString(s3.secretkey)) errors.push('downloader.s3access.secretkey: missing or empty');\n            if (!isString(s3.bucket))    errors.push('downloader.s3access.bucket: missing or empty');\n            if (!isString(s3.region))    warnings.push('downloader.s3access.region: missing — minio may use a default');\n        }\n    } else if (isObject(d.s3access)) {\n        warnings.push(\"downloader.s3access: defined but rename-to is not 's3' — section will be ignored\");\n    }\n}\n\n// ─── cleaner ─────────────────────────────────────────────────────────────────\n\nif (roles.includes('CLEANER')) {\n    if (!isObject(cfg.cleaner)) {\n        warnings.push('cleaner: section missing — files will never be cleaned from cache; consider using rename-to s3 in the downloader section instead');\n    } else {\n        const c = cfg.cleaner;\n        if (c['keep-in-cache'] === undefined)\n            errors.push('cleaner.keep-in-cache: mandatory when cleaner section is present');\n        else if (!isNumber(c['keep-in-cache']))\n            errors.push('cleaner.keep-in-cache: must be a number (seconds)');\n        else if (c['keep-in-cache'] <= 0)\n            warnings.push('cleaner.keep-in-cache: value is <= 0 — files will be deleted immediately');\n    }\n}\n\n// ─── replayer ────────────────────────────────────────────────────────────────\n\nif (isObject(cfg.replayer)) {\n    const r = cfg.replayer;\n    if (!isString(r['global-replay-url']))  errors.push('replayer.global-replay-url: missing or empty');\n    else if (!URL_RE.test(r['global-replay-url']))\n        errors.push(`replayer.global-replay-url: invalid URL (${r['global-replay-url']})`);\n}\n\n// ─── cross-checks ────────────────────────────────────────────────────────────\n\nif (isObject(cfg.subscriber) && isObject(cfg.subscriber.mqtt)) {\n    const gr = cfg.subscriber.mqtt['global-replay'];\n    if (gr && gr !== 'null' && !roles.includes('REPLAYER'))\n        warnings.push('subscriber.mqtt.global-replay is set but REPLAYER is not in global.roles');\n}\n\n// ─── Unknown / unused fields ─────────────────────────────────────────────────\n\nconst KNOWN_GLOBAL          = ['roles','worker','queue','log-level','global-cache','test-mode-duration','localbroker'];\nconst KNOWN_SUBSCRIBER      = ['globalbroker','priority-global-cache','mqtt'];\nconst KNOWN_SUBSCRIBER_MQTT = ['whitelist','blacklist','global-replay'];\nconst KNOWN_DOWNLOADER      = ['aria-secret','aria-url','aria-inqueue','cache-name','download-url','rename-to','s3access'];\nconst KNOWN_S3ACCESS        = ['url','accesskey','secretkey','bucket','region'];\nconst KNOWN_CLEANER         = ['keep-in-cache'];\nconst KNOWN_REPLAYER        = ['global-replay-url'];\n\nconst checkUnknown = (obj, known, path) => {\n    if (!isObject(obj)) return;\n    Object.keys(obj).forEach(k => {\n        if (!known.includes(k))\n            warnings.push(`${path}.${k}: present in config but not used by the flow`);\n    });\n};\n\ncheckUnknown(cfg.global,     KNOWN_GLOBAL,          'global');\ncheckUnknown(cfg.subscriber, KNOWN_SUBSCRIBER,       'subscriber');\nif (isObject(cfg.subscriber) && isObject(cfg.subscriber.mqtt))\n    checkUnknown(cfg.subscriber.mqtt, KNOWN_SUBSCRIBER_MQTT, 'subscriber.mqtt');\ncheckUnknown(cfg.downloader, KNOWN_DOWNLOADER,       'downloader');\nif (isObject(cfg.downloader) && isObject(cfg.downloader.s3access))\n    checkUnknown(cfg.downloader.s3access, KNOWN_S3ACCESS, 'downloader.s3access');\ncheckUnknown(cfg.cleaner,    KNOWN_CLEANER,          'cleaner');\ncheckUnknown(cfg.replayer,   KNOWN_REPLAYER,         'replayer');\n\nconst KNOWN_SECTIONS = ['global','subscriber','downloader','cleaner','replayer','reporter'];\nObject.keys(cfg).forEach(k => {\n    if (!KNOWN_SECTIONS.includes(k))\n        warnings.push(`${k}: unknown top-level section — not used by the flow`);\n});\n\n// ─── Result ──────────────────────────────────────────────────────────────────\n\nconst valid = errors.length === 0;\nmsg.payload = { valid, errors, warnings, infos };\nmsg.topic   = valid ? 'CONFIG_VALID' : 'CONFIG_INVALID';\n\nreturn msg;",
+        "func": "const cfg = msg.payload;\nconst errors = [];\nconst warnings = [];\nconst infos = [];\n\nconst isString = v => typeof v === 'string' && v.trim().length > 0;\nconst isNumber = v => typeof v === 'number';\nconst isBool = v => typeof v === 'boolean';\nconst isArray = v => Array.isArray(v);\nconst isObject = v => v !== null && typeof v === 'object' && !Array.isArray(v);\n\nconst BROKER_PROTOCOLS = /^(mqtt|mqtts|ws|wss):\\/\\/.+/;\nconst URL_RE = /^https?:\\/\\/.+/;\nconst S3_URL_RE = /^https?:\\/\\/[^\\/]+(:\\d+)?(\\/.*)?$/;\n\nconst isValidMqttTopic = (t) => {\n    if (typeof t !== 'string' || t.length === 0) return 'empty or not a string';\n    const parts = t.split('/');\n    const isValidSegment = s => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(s);\n\n    for (let i = 0; i < parts.length; i++) {\n        const part = parts[i];\n        const isLast = i === parts.length - 1;\n\n        if (part === '#') {\n            if (!isLast) return `'#' at level ${i + 1} must be the last level`;\n            continue;\n        }\n\n        switch (i) {\n            case 0:\n                if (!['origin', 'cache', 'monitor', '+'].includes(part))\n                    return `level 1 must be 'origin', 'cache', 'monitor' or '+' (got '${part}')`;\n                break;\n            case 1:\n                if (part !== 'a')\n                    return `level 2 must be 'a' (got '${part}')${part === '+' ? ' — + not allowed here' : ''}`;\n                break;\n            case 2:\n                if (part !== 'wis2')\n                    return `level 3 must be 'wis2' (got '${part}')${part === '+' ? ' — + not allowed here' : ''}`;\n                break;\n            case 3:\n                if (part === '+') break;\n                if (!isValidSegment(part) || !part.includes('-'))\n                    return `level 4 must contain at least one '-' and be alphanumeric-hyphen (got '${part}')`;\n                break;\n            case 4:\n                if (!['data', 'metadata', '+'].includes(part))\n                    return `level 5 must be 'data', 'metadata' or '+' (got '${part}')`;\n                break;\n            default:\n                if (part === '+') break;\n                if (isLast) {\n                    if (!isValidSegment(part))\n                        return `last level must be lowercase alphanumeric with optional hyphens (got '${part}')`;\n                } else {\n                    if (!isValidSegment(part))\n                        return `level ${i + 1} '${part}' is invalid — use lowercase alphanumeric with optional hyphens only`;\n                }\n        }\n    }\n    return null;\n};\n\nconst checkBroker = (broker, path) => {\n    if (!isString(broker.broker)) errors.push(`${path}.broker: missing or empty`);\n    else if (!BROKER_PROTOCOLS.test(broker.broker))\n        errors.push(`${path}.broker: invalid protocol (${broker.broker}) — must be mqtt/mqtts/ws/wss`);\n    if (!isString(broker.username)) warnings.push(`${path}.username: missing`);\n    if (!isString(broker.password)) warnings.push(`${path}.password: missing`);\n    if (broker.version !== undefined && ![3, 4, 5].includes(broker.version))\n        errors.push(`${path}.version: must be 3, 4 or 5 (got ${broker.version})`);\n    if (broker.verifycert !== undefined && !isBool(broker.verifycert))\n        errors.push(`${path}.verifycert: must be boolean`);\n};\n\nif (!isObject(cfg)) {\n    errors.push('Configuration root is not a valid YAML object');\n    msg.payload = { valid: false, errors, warnings, infos };\n    return msg;\n}\n\nconst roles = isObject(cfg.global) && typeof cfg.global.roles === 'string'\n    ? cfg.global.roles.split(',').map(r => r.trim())\n    : [];\n\n// ─── global ─────────────────────────────────────────────────────────────────\n\nconst VALID_ROLES = ['SUBSCRIBER', 'DOWNLOADER', 'CLEANER', 'REPORTER', 'REPLAYER'];\n\nif (!isObject(cfg.global)) {\n    errors.push('global: section missing');\n} else {\n    const g = cfg.global;\n\n    if (!isString(g.roles)) {\n        errors.push('global.roles: missing or empty');\n    } else {\n        const unknown = roles.filter(r => !VALID_ROLES.includes(r));\n        if (unknown.length) errors.push(`global.roles: unknown role(s): ${unknown.join(', ')}`);\n        infos.push(`global.roles: ${roles.join(', ')}`);\n\n        if (roles.includes('SUBSCRIBER') && !isObject(cfg.subscriber)) errors.push('global.roles includes SUBSCRIBER but subscriber: section is missing');\n        if (roles.includes('DOWNLOADER') && !isObject(cfg.downloader)) errors.push('global.roles includes DOWNLOADER but downloader: section is missing');\n        if (roles.includes('REPLAYER') && !isObject(cfg.replayer)) errors.push('global.roles includes REPLAYER but replayer: section is missing');\n    }\n\n    if (!isString(g.worker)) errors.push('global.worker: missing or empty');\n    if (roles.some(r => ['SUBSCRIBER', 'DOWNLOADER', 'CLEANER'].includes(r))) {\n        if (!isString(g.queue)) errors.push('global.queue: missing or empty');\n    }\n\n    const VALID_LOG = ['info', 'warn', 'debug'];\n    if (!isString(g['log-level'])) errors.push('global.log-level: missing, will default to no logging');\n    else if (!VALID_LOG.includes(g['log-level'])) errors.push(`global.log-level: invalid value '${g['log-level']}' — must be info/warn/debug`);\n\n    if (g['test-mode-duration'] !== undefined && !isNumber(g['test-mode-duration']))\n        errors.push('global.test-mode-duration: must be a number');\n\n    if (g['global-cache'] !== undefined && !isBool(g['global-cache']))\n        errors.push('global.global-cache: must be boolean');\n\n    if (!isArray(g.localbroker) || g.localbroker.length === 0) {\n        warnings.push('global.localbroker: missing or empty — no local MQTT broker configured (PUB1/PUB2 will not connect)');\n    } else {\n        g.localbroker.forEach((b, i) => checkBroker(b, `global.localbroker[${i}]`));\n        if (g.localbroker.length > 2) warnings.push('global.localbroker: more than 2 brokers defined — only PUB1 and PUB2 are wired in the flow');\n    }\n}\n\n// ─── subscriber ─────────────────────────────────────────────────────────────\n\nif (isObject(cfg.subscriber)) {\n    const s = cfg.subscriber;\n\n    if (!isArray(s.globalbroker) || s.globalbroker.length === 0) {\n        errors.push('subscriber.globalbroker: missing or empty — nothing to subscribe to');\n    } else {\n        s.globalbroker.forEach((b, i) => checkBroker(b, `subscriber.globalbroker[${i}]`));\n        if (s.globalbroker.length > 2) warnings.push('subscriber.globalbroker: more than 2 brokers defined — only GB1 and GB2 are wired in the flow');\n    }\n\n    if (s['priority-global-cache'] !== undefined) {\n        if (!isArray(s['priority-global-cache'])) errors.push('subscriber.priority-global-cache: must be an array');\n        else if (s['priority-global-cache'].some(v => !isString(v)))\n            errors.push('subscriber.priority-global-cache: all entries must be strings');\n    }\n\n    if (!isObject(s.mqtt)) {\n        errors.push('subscriber.mqtt: section missing');\n    } else {\n        const m = s.mqtt;\n\n        if (!isArray(m.whitelist) || m.whitelist.length === 0) {\n            errors.push('subscriber.mqtt.whitelist: missing or empty — nothing will be subscribed');\n        } else {\n            m.whitelist.forEach((t, i) => {\n                if (!isString(t)) errors.push(`subscriber.mqtt.whitelist[${i}]: must be a string`);\n                else { const err = isValidMqttTopic(t); if (err) errors.push(`subscriber.mqtt.whitelist[${i}]: '${t}' — ${err}`); }\n            });\n            infos.push(`subscriber.mqtt.whitelist: ${m.whitelist.length} topic(s)`);\n        }\n\n        if (m.blacklist !== undefined) {\n            if (!isArray(m.blacklist)) errors.push('subscriber.mqtt.blacklist: must be an array');\n            else {\n                m.blacklist.forEach((t, i) => {\n                    if (!isString(t)) errors.push(`subscriber.mqtt.blacklist[${i}]: must be a string`);\n                    else if (!/^[a-zA-Z0-9\\-\\/\\+#]+$/.test(t)) errors.push(`subscriber.mqtt.blacklist[${i}]: '${t}' — only alphanumeric, -, +, # and / allowed`);\n                });\n                infos.push(`subscriber.mqtt.blacklist: ${m.blacklist.length} topic(s)`);\n            }\n        }\n\n        if (m['global-replay'] !== undefined && m['global-replay'] !== null) {\n            if (!isString(m['global-replay'])) errors.push('subscriber.mqtt.global-replay: must be a string or null');\n            else infos.push(`subscriber.mqtt.global-replay: ${m['global-replay']}`);\n        }\n    }\n}\n\n// ─── downloader ─────────────────────────────────────────────────────────────\n\nif (isObject(cfg.downloader)) {\n    const d = cfg.downloader;\n\n    if (!isString(d['aria-secret'])) errors.push('downloader.aria-secret: missing or empty — required');\n    if (!isString(d['aria-url'])) errors.push('downloader.aria-url: missing or empty');\n    else if (!d['aria-url'].startsWith('ws://') && !d['aria-url'].startsWith('wss://'))\n        errors.push(`downloader.aria-url: must start with ws:// or wss:// (got ${d['aria-url']})`);\n    if (!isNumber(d['aria-inqueue'])) errors.push('downloader.aria-inqueue: missing or not a number — must be a positive integer');\n    else if (d['aria-inqueue'] <= 0) errors.push('downloader.aria-inqueue: must be greater than 0');\n    if (!isString(d['cache-name'])) warnings.push('downloader.cache-name: missing');\n    if (!isString(d['download-url'])) errors.push('downloader.download-url: missing or empty');\n    else if (!URL_RE.test(d['download-url']))\n        errors.push(`downloader.download-url: invalid URL (${d['download-url']})`);\n\n    const VALID_RENAME = ['date', 'topic', 's3'];\n    const renameTo = d['rename-to'];\n    let renameS3 = false;\n    if (renameTo === undefined) {\n        infos.push('downloader.rename-to: not set — no renaming');\n    } else if (renameTo === false) {\n        infos.push('downloader.rename-to: false — no renaming');\n    } else if (typeof renameTo === 'string' && VALID_RENAME.includes(renameTo)) {\n        infos.push(`downloader.rename-to: ${renameTo}`);\n        renameS3 = renameTo === 's3';\n    } else {\n        errors.push(`downloader.rename-to: invalid value '${renameTo}' — must be 'date', 'topic', 's3' or false`);\n    }\n\n    if (renameS3) {\n        if (!isObject(d.s3access)) {\n            errors.push(\"downloader.s3access: required when rename-to is 's3' but section is missing\");\n        } else {\n            const s3 = d.s3access;\n            if (!isString(s3.url)) errors.push('downloader.s3access.url: missing or empty');\n            else if (!S3_URL_RE.test(s3.url))\n                errors.push(`downloader.s3access.url: invalid format (${s3.url}) — expected http(s)://host(:port)`);\n            if (!isString(s3.accesskey)) errors.push('downloader.s3access.accesskey: missing or empty');\n            if (!isString(s3.secretkey)) errors.push('downloader.s3access.secretkey: missing or empty');\n            if (!isString(s3.bucket)) errors.push('downloader.s3access.bucket: missing or empty');\n            if (!isString(s3.region)) warnings.push('downloader.s3access.region: missing — minio may use a default');\n        }\n    } else if (isObject(d.s3access)) {\n        warnings.push(\"downloader.s3access: defined but rename-to is not 's3' — section will be ignored\");\n    }\n\n    if (d.credentials !== undefined) {\n        if (!isObject(d.credentials)) {\n            errors.push('downloader.credentials: must be an object keyed by topic');\n        } else {\n            Object.entries(d.credentials).forEach(([topic, creds]) => {\n                const topicErr = isValidMqttTopic(topic);\n                if (topicErr) {\n                    errors.push(`downloader.credentials['${topic}']: invalid topic — ${topicErr}`);\n                    return;\n                }\n                const parts = topic.split('/');\n                if (parts[0] !== 'origin')\n                    errors.push(`downloader.credentials['${topic}']: topic must start with 'origin' (got '${parts[0]}')`);\n                if (parts[5] !== 'recommended')\n                    errors.push(`downloader.credentials['${topic}']: topic must have 'recommended' at level 6 (got '${parts[5]}')`);\n                if (!isObject(creds)) {\n                    errors.push(`downloader.credentials['${topic}']: value must be an object with 'username' and 'password'`);\n                } else {\n                    const unknown = Object.keys(creds).filter(k => !['username', 'password'].includes(k));\n                    if (unknown.length)\n                        errors.push(`downloader.credentials['${topic}']: unknown key(s): ${unknown.join(', ')} — only 'username' and 'password' are allowed`);\n                    if (!isString(creds.username)) errors.push(`downloader.credentials['${topic}'].username: missing or empty`);\n                    if (!isString(creds.password)) errors.push(`downloader.credentials['${topic}'].password: missing or empty`);\n                }\n            });\n            infos.push(`downloader.credentials: ${Object.keys(d.credentials).length} topic(s) with credentials`);\n        }\n    }\n}\n\n// ─── cleaner ─────────────────────────────────────────────────────────────────\n\nif (roles.includes('CLEANER')) {\n    if (!isObject(cfg.cleaner)) {\n        warnings.push('cleaner: section missing — files will never be cleaned from cache; consider using rename-to s3 in the downloader section instead');\n    } else {\n        const c = cfg.cleaner;\n        if (c['keep-in-cache'] === undefined)\n            errors.push('cleaner.keep-in-cache: mandatory when cleaner section is present');\n        else if (!isNumber(c['keep-in-cache']))\n            errors.push('cleaner.keep-in-cache: must be a number (seconds)');\n        else if (c['keep-in-cache'] <= 0)\n            warnings.push('cleaner.keep-in-cache: value is <= 0 — files will be deleted immediately');\n    }\n}\n\n// ─── replayer ────────────────────────────────────────────────────────────────\n\nif (isObject(cfg.replayer)) {\n    const r = cfg.replayer;\n    if (!isString(r['global-replay-url'])) errors.push('replayer.global-replay-url: missing or empty');\n    else if (!URL_RE.test(r['global-replay-url']))\n        errors.push(`replayer.global-replay-url: invalid URL (${r['global-replay-url']})`);\n}\n\n// ─── cross-checks ────────────────────────────────────────────────────────────\n\nif (isObject(cfg.subscriber) && isObject(cfg.subscriber.mqtt)) {\n    const gr = cfg.subscriber.mqtt['global-replay'];\n    if (gr && gr !== 'null' && !roles.includes('REPLAYER'))\n        warnings.push('subscriber.mqtt.global-replay is set but REPLAYER is not in global.roles');\n}\n\n// ─── Unknown / unused fields ─────────────────────────────────────────────────\n\nconst KNOWN_GLOBAL = ['roles', 'worker', 'queue', 'log-level', 'global-cache', 'test-mode-duration', 'localbroker'];\nconst KNOWN_SUBSCRIBER = ['globalbroker', 'priority-global-cache', 'mqtt'];\nconst KNOWN_SUBSCRIBER_MQTT = ['whitelist', 'blacklist', 'global-replay'];\nconst KNOWN_DOWNLOADER = ['aria-secret', 'aria-url', 'aria-inqueue', 'cache-name', 'download-url', 'rename-to', 's3access', 'credentials'];\nconst KNOWN_S3ACCESS = ['url', 'accesskey', 'secretkey', 'bucket', 'region'];\nconst KNOWN_CLEANER = ['keep-in-cache'];\nconst KNOWN_REPLAYER = ['global-replay-url'];\n\nconst checkUnknown = (obj, known, path) => {\n    if (!isObject(obj)) return;\n    Object.keys(obj).forEach(k => {\n        if (!known.includes(k))\n            warnings.push(`${path}.${k}: present in config but not used by the flow`);\n    });\n};\n\ncheckUnknown(cfg.global, KNOWN_GLOBAL, 'global');\ncheckUnknown(cfg.subscriber, KNOWN_SUBSCRIBER, 'subscriber');\nif (isObject(cfg.subscriber) && isObject(cfg.subscriber.mqtt))\n    checkUnknown(cfg.subscriber.mqtt, KNOWN_SUBSCRIBER_MQTT, 'subscriber.mqtt');\ncheckUnknown(cfg.downloader, KNOWN_DOWNLOADER, 'downloader');\nif (isObject(cfg.downloader) && isObject(cfg.downloader.s3access))\n    checkUnknown(cfg.downloader.s3access, KNOWN_S3ACCESS, 'downloader.s3access');\ncheckUnknown(cfg.cleaner, KNOWN_CLEANER, 'cleaner');\ncheckUnknown(cfg.replayer, KNOWN_REPLAYER, 'replayer');\n\nconst KNOWN_SECTIONS = ['global', 'subscriber', 'downloader', 'cleaner', 'replayer', 'reporter'];\nObject.keys(cfg).forEach(k => {\n    if (!KNOWN_SECTIONS.includes(k))\n        warnings.push(`${k}: unknown top-level section — not used by the flow`);\n});\n\n// ─── Result ──────────────────────────────────────────────────────────────────\n\nconst valid = errors.length === 0;\nmsg.payload = { valid, errors, warnings, infos };\nmsg.topic = valid ? 'CONFIG_VALID' : 'CONFIG_INVALID';\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -2589,11 +2513,11 @@
         "repair": false,
         "outputs": 1,
         "x": 460,
-        "y": 1480,
+        "y": 1500,
         "wires": [
             [
-                "c955dc299a12614a",
-                "eeca55e8996b39fc"
+                "eeca55e8996b39fc",
+                "b0d6f69da79d4efe"
             ]
         ]
     },
@@ -2620,7 +2544,7 @@
         "repair": false,
         "outputs": 2,
         "x": 760,
-        "y": 1420,
+        "y": 1440,
         "wires": [
             [
                 "4b04613d7a09a8c8"
@@ -2650,7 +2574,7 @@
         "to": "",
         "reg": false,
         "x": 1080,
-        "y": 1380,
+        "y": 1400,
         "wires": [
             [
                 "5635a92d13ca3f9f"
@@ -2677,7 +2601,7 @@
         "to": "",
         "reg": false,
         "x": 1090,
-        "y": 1420,
+        "y": 1440,
         "wires": [
             [
                 "5635a92d13ca3f9f"
@@ -2694,7 +2618,7 @@
             "e6caed93a9ccdbe7"
         ],
         "x": 1205,
-        "y": 1400,
+        "y": 1420,
         "wires": []
     },
     {
@@ -2703,7 +2627,8 @@
         "z": "1c6759660a32fda5",
         "name": "link in 19",
         "links": [
-            "5635a92d13ca3f9f"
+            "5635a92d13ca3f9f",
+            "f19b041d1ba77045"
         ],
         "x": 545,
         "y": 680,
@@ -2730,7 +2655,7 @@
         "repair": false,
         "outputs": 1,
         "x": 930,
-        "y": 1380,
+        "y": 1400,
         "wires": [
             [
                 "029eb604bdd1e003"
@@ -2753,33 +2678,10 @@
         "repair": false,
         "outputs": 1,
         "x": 930,
-        "y": 1420,
-        "wires": [
-            [
-                "7dbeb8da2ba67aca"
-            ]
-        ]
-    },
-    {
-        "id": "8b17afbf157184d0",
-        "type": "function",
-        "z": "1c6759660a32fda5",
-        "name": "Updates",
-        "func": "// ── Reused from config validator ────────────────────────────────────────────\n\nconst isString = v => typeof v === 'string' && v.trim().length > 0;\n\nconst isValidMqttTopic = (t) => {\n    if (typeof t !== 'string' || t.length === 0) return 'empty or not a string';\n    const parts = t.split('/');\n    const isValidSegment = s => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(s);\n    for (let i = 0; i < parts.length; i++) {\n        const part = parts[i];\n        const isLast = i === parts.length - 1;\n        if (part === '#') {\n            if (!isLast) return `'#' at level ${i+1} must be the last level`;\n            continue;\n        }\n        switch (i) {\n            case 0:\n                if (!['origin','cache','monitor','+'].includes(part))\n                    return `level 1 must be 'origin', 'cache', 'monitor' or '+' (got '${part}')`;\n                break;\n            case 1:\n                if (part !== 'a')\n                    return `level 2 must be 'a' (got '${part}')${part === '+' ? ' — + not allowed here' : ''}`;\n                break;\n            case 2:\n                if (part !== 'wis2')\n                    return `level 3 must be 'wis2' (got '${part}')${part === '+' ? ' — + not allowed here' : ''}`;\n                break;\n            case 3:\n                if (part === '+') break;\n                if (!isValidSegment(part) || !part.includes('-'))\n                    return `level 4 must contain at least one '-' and be alphanumeric-hyphen (got '${part}')`;\n                break;\n            case 4:\n                if (!['data','metadata','+'].includes(part))\n                    return `level 5 must be 'data', 'metadata' or '+' (got '${part}')`;\n                break;\n            default:\n                if (part === '+') break;\n                if (isLast) {\n                    if (!isValidSegment(part))\n                        return `last level must be lowercase alphanumeric with optional hyphens (got '${part}')`;\n                } else {\n                    if (!isValidSegment(part))\n                        return `level ${i+1} '${part}' is invalid — use lowercase alphanumeric with optional hyphens only`;\n                }\n        }\n    }\n    return null;\n};\n\nconst validateWhitelist = (items) => {\n    const errs = [];\n    items.forEach((t, i) => {\n        if (!isString(t)) errs.push(`whitelist[${i}]: must be a string`);\n        else { const err = isValidMqttTopic(t); if (err) errs.push(`whitelist[${i}]: '${t}' — ${err}`); }\n    });\n    return errs;\n};\n\nconst validateBlacklist = (items) => {\n    const errs = [];\n    items.forEach((t, i) => {\n        if (!isString(t)) errs.push(`blacklist[${i}]: must be a string`);\n        else if (!/^[a-zA-Z0-9\\-\\/\\+#]+$/.test(t)) errs.push(`blacklist[${i}]: '${t}' — only alphanumeric, -, +, # and / allowed`);\n    });\n    return errs;\n};\n\nconst validateReplay = (value) => {\n    if (typeof value !== 'object' || Array.isArray(value)) return 'must be an object with from and to.';\n    if (value.from === undefined) return 'from is required.';\n    if (value.to === undefined) return 'to is required.';\n    if (typeof value.from !== 'number' || value.from < 0) return 'from must be a positive number (minutes).';\n    if (typeof value.to !== 'number' || value.to < 0) return 'to must be a positive number (minutes).';\n    if (value.from <= value.to) return 'from must be greater than to.';\n    return null;\n};\n\n// ── Schema ───────────────────────────────────────────────────────────────────\n\nconst schema = {\n    'process-mode':  { type: 'enum',   valid: ['run', 'halt'],           default: 'run',  track_change: true, roles: null,           keep_replay: false },\n    'log-level':     { type: 'enum',   valid: ['info', 'warn', 'debug'], default: 'info', track_change: true, roles: null,           keep_replay: false },\n    'whitelist':     { type: 'array',                                     default: [],     track_change: true, roles: ['SUBSCRIBER'], keep_replay: true  },\n    'blacklist':     { type: 'array',                                     default: [],     track_change: true, roles: ['SUBSCRIBER'], keep_replay: false },\n    'global-replay': { type: 'string',                                    default: null,   track_change: true, roles: ['REPLAYER'],   keep_replay: false },\n    'replay':        { type: 'replay',                                    default: null,   track_change: true, roles: ['REPLAYER'],   keep_replay: false }\n};\n\n// ── Role check ───────────────────────────────────────────────────────────────\n\nconst isAllowed = (def) => def.roles === null || def.roles.some(r => global.get(r.toLowerCase()) == true);\n\n// ── Main ─────────────────────────────────────────────────────────────────────\n\nconst body = msg.payload;\nif (typeof body !== 'object' || Array.isArray(body)) {\n    msg.statusCode = 400;\n    msg.payload = { error: 'Body must be a JSON object.' };\n    return [msg, null];\n}\n\nconst changes  = {};\nconst errors   = [];\nconst events   = [];\n\nfor (const [key, value] of Object.entries(body)) {\n    const def = schema[key];\n    if (!def) {\n        errors.push(key + ': unknown key.');\n        continue;\n    }\n\n    if (!isAllowed(def)) {\n        errors.push(key + ': not available for current roles.');\n        continue;\n    }\n\n    if (def.type === 'enum') {\n        const strVal = (typeof value === 'string' ? value : '').trim().toLowerCase();\n        if (!def.valid.includes(strVal)) {\n            errors.push(key + ': invalid value. Must be one of: ' + def.valid.join(', ') + '.');\n            continue;\n        }\n        const previous = global.get(key);\n        global.set(key, strVal);\n        const changed = previous !== strVal;\n        changes[key] = { value: strVal, changed };\n        events.push({ key, value: strVal, previous, changed });\n\n    } else if (def.type === 'string') {\n        const strVal = (typeof value === 'string' ? value : '').trim();\n        if (strVal.length === 0) {\n            errors.push(key + ': must be a non-empty string.');\n            continue;\n        }\n        const previous = global.get(key);\n        global.set(key, strVal);\n        const changed = previous !== strVal;\n        changes[key] = { value: strVal, changed };\n        events.push({ key, value: strVal, previous, changed });\n\n    } else if (def.type === 'replay') {\n        const err = validateReplay(value);\n        if (err) {\n            errors.push('replay: ' + err);\n            continue;\n        }\n        const millis = Date.now();\n        const from = new Date(millis - value.from * 60 * 1000).toISOString();\n        const to = value.to === 0 ? '..' : new Date(millis - value.to * 60 * 1000).toISOString();\n        changes[key] = { value: { from, to } };\n        events.push({ key, value: { from, to, fromMinutes: value.from, toMinutes: value.to }, changed: true });\n\n    } else if (def.type === 'array') {\n        if (!Array.isArray(value)) {\n            errors.push(key + ': must be an array of strings.');\n            continue;\n        }\n        const items = value.map(t => (typeof t === 'string' ? t.trim() : '')).filter(t => t.length > 0);\n        if (items.length === 0) {\n            errors.push(key + ': array must not be empty.');\n            continue;\n        }\n        const validationErrors = key === 'whitelist' ? validateWhitelist(items) : validateBlacklist(items);\n        if (validationErrors.length > 0) {\n            errors.push(...validationErrors);\n            continue;\n        }\n        if (def.keep_replay) {\n            const current = global.get('topic') || [];\n            const replayTopics = current.filter(t => t.topic.startsWith('replay/a/wis2'));\n            const previousStrings = current.filter(t => !t.topic.startsWith('replay/a/wis2')).map(t => t.topic).sort().join(',');\n            const newStrings = items.slice().sort().join(',');\n            const changed = previousStrings !== newStrings;\n            const qos = global.get('qos') || 0;\n            const newTopics = [...items.map(t => ({ topic: t, qos })), ...replayTopics];\n            global.set('topic', newTopics);\n            changes[key] = { value: newTopics, changed };\n            events.push({ key, value: newTopics, previous: current, changed });\n        } else {\n            const previous = global.get(key) || [];\n            const changed = JSON.stringify(previous.slice().sort()) !== JSON.stringify(items.slice().sort());\n            global.set(key, items);\n            changes[key] = { value: items, changed };\n            events.push({ key, value: items, previous, changed });\n        }\n    }\n}\n\nif (errors.length > 0 && Object.keys(changes).length === 0) {\n    msg.statusCode = 400;\n    msg.payload = { errors };\n    return [msg, null];\n}\n\nmsg.statusCode = 200;\nmsg.payload = { changes, ...(errors.length > 0 && { errors }) };\n\nconst changeMsgs = events.map(e => ({ payload: e, topic: e.key }));\nconst out2 = changeMsgs.length === 1 ? changeMsgs[0] : changeMsgs.length > 1 ? changeMsgs : null;\n\nreturn [msg, out2];",
-        "outputs": 2,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 320,
         "y": 1440,
         "wires": [
             [
-                "c28e7b27bb911a04"
-            ],
-            [
-                "7b0525ef3667eb54"
+                "7dbeb8da2ba67aca"
             ]
         ]
     },
@@ -2794,10 +2696,10 @@
         "skipBodyParsing": false,
         "swaggerDoc": "",
         "x": 190,
-        "y": 1440,
+        "y": 1460,
         "wires": [
             [
-                "8b17afbf157184d0"
+                "b2f749ba8536f6bc"
             ]
         ]
     },
@@ -2809,53 +2711,8 @@
         "statusCode": "",
         "headers": {},
         "x": 450,
-        "y": 1420,
+        "y": 1440,
         "wires": []
-    },
-    {
-        "id": "c955dc299a12614a",
-        "type": "switch",
-        "z": "1c6759660a32fda5",
-        "name": "Action ?",
-        "property": "topic",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "eq",
-                "v": "process-mode",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "whitelist",
-                "vt": "str"
-            },
-            {
-                "t": "eq",
-                "v": "replay",
-                "vt": "str"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 4,
-        "x": 600,
-        "y": 1480,
-        "wires": [
-            [
-                "b712d85691267149"
-            ],
-            [
-                "a7b4e9d5237e6174"
-            ],
-            [
-                "f088edce0c3f6a60"
-            ],
-            []
-        ]
     },
     {
         "id": "get_http_in",
@@ -2879,7 +2736,7 @@
         "type": "function",
         "z": "1c6759660a32fda5",
         "name": "Config",
-        "func": "const schema = {\n    'process-mode': { default: 'run',  roles: null, get: () => global.get('process-mode') ?? 'run'  },\n    'log-level':    { default: 'info', roles: null, get: () => global.get('log-level')    ?? 'info' },\n    'worker':       { default: null,   roles: null, get: () => global.get('worker')        ?? null   },\n    'queue':        { default: null,   roles: null, get: () => global.get('queue')         ?? null   },\n    'whitelist':    { default: [],     roles: ['SUBSCRIBER'], get: () => (global.get('topic') || []).filter(t => !t.topic.startsWith('replay/a/wis2')).map(t => t.topic) },\n    'blacklist':    { default: [],     roles: ['SUBSCRIBER'], get: () => global.get('blacklist') ?? [] },\n    'global-replay':{ default: null,   roles: ['REPLAYER'],   get: () => global.get('global-replay') ?? null }\n};\n\nconst isAllowed = (def) => def.roles === null || def.roles.some(r => global.get(r.toLowerCase()) == true);\n\nconst key = msg.req.query.key;\n\nif (key) {\n    if (!schema[key]) {\n        msg.statusCode = 400;\n        msg.payload = { error: 'Unknown key: ' + key };\n        return msg;\n    }\n    if (!isAllowed(schema[key])) {\n        msg.statusCode = 403;\n        msg.payload = { error: key + ': not available for current roles.' };\n        return msg;\n    }\n    msg.statusCode = 200;\n    msg.payload = { [key]: schema[key].get() };\n    return msg;\n}\n\nconst result = {};\nfor (const [k, def] of Object.entries(schema)) {\n    if (!isAllowed(def)) continue;\n    result[k] = def.get();\n}\nmsg.statusCode = 200;\nmsg.payload = result;\nreturn msg;",
+        "func": "const schema = {\n    'process-mode': { default: 'run', roles: null, get: () => global.get('process-mode') ?? 'run' },\n    'log-level': { default: 'info', roles: null, get: () => global.get('log-level') ?? 'info' },\n    'worker': { default: null, roles: null, get: () => global.get('worker') ?? null },\n    'queue': { default: null, roles: null, get: () => global.get('queue') ?? null },\n    'whitelist': { default: [], roles: ['SUBSCRIBER'], get: () => (global.get('topic') || []).filter(t => !t.topic.startsWith('replay/a/wis2')).map(t => t.topic) },\n    'blacklist': { default: [], roles: ['SUBSCRIBER'], get: () => global.get('blacklist') ?? [] },\n    'global-replay': { default: null, roles: ['REPLAYER'], get: () => global.get('global-replay') ?? null },\n    'credentials': { default: {}, roles: ['DOWNLOADER'], get: () => global.get('download-creds') ?? {} },\n};\n\nconst isAllowed = (def) => def.roles === null || def.roles.some(r => global.get(r.toLowerCase()) == true);\n\nconst key = msg.req.query.key;\n\nif (key) {\n    if (!schema[key]) {\n        msg.statusCode = 400;\n        msg.payload = { error: 'Unknown key: ' + key };\n        return msg;\n    }\n    if (!isAllowed(schema[key])) {\n        msg.statusCode = 403;\n        msg.payload = { error: key + ': not available for current roles.' };\n        return msg;\n    }\n    msg.statusCode = 200;\n    msg.payload = { [key]: schema[key].get() };\n    return msg;\n}\n\nconst result = {};\nfor (const [k, def] of Object.entries(schema)) {\n    if (!isAllowed(def)) continue;\n    result[k] = def.get();\n}\nmsg.statusCode = 200;\nmsg.payload = result;\nreturn msg;",
         "outputs": 1,
         "timeout": "",
         "noerr": 0,
@@ -2911,7 +2768,7 @@
         "z": "1c6759660a32fda5",
         "name": "",
         "x": 565,
-        "y": 1400,
+        "y": 1420,
         "wires": [
             [
                 "d67bedf331afec26"
@@ -2929,23 +2786,9 @@
             "735b65418467fb43"
         ],
         "x": 615,
-        "y": 1400,
+        "y": 1420,
         "wires": [],
         "icon": "font-awesome/fa-info"
-    },
-    {
-        "id": "f088edce0c3f6a60",
-        "type": "link out",
-        "z": "1c6759660a32fda5",
-        "name": "Replayer",
-        "mode": "link",
-        "links": [
-            "97a4f0f2771ea2b3"
-        ],
-        "x": 760,
-        "y": 1540,
-        "wires": [],
-        "l": true
     },
     {
         "id": "a7b4e9d5237e6174",
@@ -2957,7 +2800,7 @@
             "1130afe3374e04fd"
         ],
         "x": 760,
-        "y": 1480,
+        "y": 1500,
         "wires": [],
         "l": true
     },
@@ -3024,7 +2867,7 @@
                 "t": "set",
                 "p": "global-replay-url",
                 "pt": "global",
-                "to": "$exists(payload.replayer.\"global-replay-url\") ? payload.replayer.\"global-replay-url\" : \"https://wis2-grep.weather.gc.ca/processes/wis2-grep-subscriber/execution\"",
+                "to": "$exists(payload.replayer.\"global-replay-url\") ? payload.replayer.\"global-replay-url\" : false",
                 "tot": "jsonata"
             },
             {
@@ -3046,11 +2889,382 @@
         "to": "",
         "reg": false,
         "x": 360,
-        "y": 1200,
+        "y": 1220,
         "wires": [
             [
                 "7296650db5397b96"
             ]
+        ]
+    },
+    {
+        "id": "c98b7bf308a72aa7",
+        "type": "http in",
+        "z": "1c6759660a32fda5",
+        "name": "Replayer",
+        "url": "/replayer",
+        "method": "post",
+        "upload": false,
+        "skipBodyParsing": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 1660,
+        "wires": [
+            [
+                "d3825413c971a294"
+            ]
+        ]
+    },
+    {
+        "id": "d3825413c971a294",
+        "type": "switch",
+        "z": "1c6759660a32fda5",
+        "name": "Primary?",
+        "property": "$globalContext(\"replayer-primary\")",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 2,
+        "x": 340,
+        "y": 1660,
+        "wires": [
+            [
+                "956d90f4f52ba3bc"
+            ],
+            [
+                "047d004f744e77fb"
+            ]
+        ]
+    },
+    {
+        "id": "047d004f744e77fb",
+        "type": "change",
+        "z": "1c6759660a32fda5",
+        "name": "403",
+        "rules": [
+            {
+                "t": "set",
+                "p": "statusCode",
+                "pt": "msg",
+                "to": "403",
+                "tot": "num"
+            },
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "{\"error\":\"Not the primary replayer\"}",
+                "tot": "json"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 470,
+        "y": 1700,
+        "wires": [
+            [
+                "0b5df4de94e08951"
+            ]
+        ]
+    },
+    {
+        "id": "956d90f4f52ba3bc",
+        "type": "function",
+        "z": "1c6759660a32fda5",
+        "name": "Replayer",
+        "func": "const validateReplay = (value) => {\n    if (typeof value !== 'object' || Array.isArray(value)) return 'must be an object with from and to.';\n    if (value.from === undefined) return 'from is required.';\n    if (value.to   === undefined) return 'to is required.';\n    if (typeof value.from !== 'number' || value.from < 0) return 'from must be a positive number (minutes).';\n    if (typeof value.to   !== 'number' || value.to   < 0) return 'to must be a positive number (minutes).';\n    if (value.from <= value.to) return 'from must be greater than to.';\n    return null;\n};\n\nconst schema = {\n    'global-replay': { type: 'string' },\n    'replay':        { type: 'replay' },\n};\n\nconst body = msg.payload;\nif (typeof body !== 'object' || Array.isArray(body)) {\n    msg.statusCode = 400;\n    msg.payload = { error: 'Body must be a JSON object.' };\n    return [msg, null];\n}\n\nconst changes = {};\nconst errors  = [];\nconst events  = [];\n\nfor (const [key, value] of Object.entries(body)) {\n    if (!schema[key]) { errors.push(key + ': unknown key.'); continue; }\n\n    if (key === 'global-replay') {\n        const strVal = (typeof value === 'string' ? value : '').trim();\n        if (!strVal) { errors.push('global-replay: must be a non-empty string.'); continue; }\n        const previous = global.get('global-replay');\n        global.set('global-replay', strVal);\n        const changed = previous !== strVal;\n        changes[key] = { value: strVal, changed };\n        events.push({ key, value: strVal, previous, changed });\n\n    } else if (key === 'replay') {\n        const err = validateReplay(value);\n        if (err) { errors.push('replay: ' + err); continue; }\n        const millis = Date.now();\n        const from = new Date(millis - value.from * 60 * 1000).toISOString();\n        const to   = value.to === 0 ? '..' : new Date(millis - value.to * 60 * 1000).toISOString();\n        changes[key] = { value: { from, to } };\n        events.push({ key, value: { from, to, fromMinutes: value.from, toMinutes: value.to }, changed: true });\n    }\n}\n\nif (errors.length > 0 && Object.keys(changes).length === 0) {\n    msg.statusCode = 400;\n    msg.payload = { errors };\n    return [msg, null];\n}\n\nmsg.statusCode = 200;\nmsg.payload = { changes, ...(errors.length > 0 && { errors }) };\n\nconst changeMsgs = events.map(e => ({ payload: e, topic: e.key }));\nconst out2 = changeMsgs.length === 1 ? changeMsgs[0] : changeMsgs.length > 1 ? changeMsgs : null;\n\nreturn [msg, out2];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 1640,
+        "wires": [
+            [
+                "0b5df4de94e08951",
+                "f088edce0c3f6a60"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "0b5df4de94e08951",
+        "type": "http response",
+        "z": "1c6759660a32fda5",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 650,
+        "y": 1700,
+        "wires": []
+    },
+    {
+        "id": "f088edce0c3f6a60",
+        "type": "link out",
+        "z": "1c6759660a32fda5",
+        "name": "Replayer",
+        "mode": "link",
+        "links": [
+            "97a4f0f2771ea2b3"
+        ],
+        "x": 660,
+        "y": 1640,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "ec251329e6d67f9d",
+        "type": "change",
+        "z": "1c6759660a32fda5",
+        "name": "Configuration",
+        "rules": [
+            {
+                "t": "set",
+                "p": "cache-name",
+                "pt": "global",
+                "to": "payload.downloader.cache-name",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "download-url",
+                "pt": "global",
+                "to": "payload.downloader.download-url",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "rename-to-date",
+                "pt": "global",
+                "to": "payload.downloader.\"rename-to\" = \"date\" ? true : false",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "rename-to-topic",
+                "pt": "global",
+                "to": "payload.downloader.\"rename-to\" = \"topic\" ? true : false",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "rename-to-s3",
+                "pt": "global",
+                "to": "payload.downloader.\"rename-to\" = \"s3\" ? true : false",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "downloader",
+                "pt": "global",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "lastId",
+                "pt": "global",
+                "to": "0-0",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[ \"wis2gc:setup:\" & $globalContext(\"queue\"), $globalContext(\"worker\") & \":downloader\" , true ]",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 400,
+        "y": 960,
+        "wires": [
+            [
+                "5115f76dbabd9e9b",
+                "b59dbe190ca901ca",
+                "cred-config-prep"
+            ]
+        ]
+    },
+    {
+        "id": "b2f749ba8536f6bc",
+        "type": "function",
+        "z": "1c6759660a32fda5",
+        "name": "Updates",
+        "func": "// ── Reused from config validator ────────────────────────────────────────────\n\nconst isString = v => typeof v === 'string' && v.trim().length > 0;\n\nconst isValidMqttTopic = (t) => {\n    if (typeof t !== 'string' || t.length === 0) return 'empty or not a string';\n    const parts = t.split('/');\n    const isValidSegment = s => /^[a-z0-9]+(-[a-z0-9]+)*$/.test(s);\n    for (let i = 0; i < parts.length; i++) {\n        const part = parts[i];\n        const isLast = i === parts.length - 1;\n        if (part === '#') {\n            if (!isLast) return `'#' at level ${i+1} must be the last level`;\n            continue;\n        }\n        switch (i) {\n            case 0:\n                if (!['origin','cache','monitor','+'].includes(part))\n                    return `level 1 must be 'origin', 'cache', 'monitor' or '+' (got '${part}')`;\n                break;\n            case 1:\n                if (part !== 'a')\n                    return `level 2 must be 'a' (got '${part}')${part === '+' ? ' — + not allowed here' : ''}`;\n                break;\n            case 2:\n                if (part !== 'wis2')\n                    return `level 3 must be 'wis2' (got '${part}')${part === '+' ? ' — + not allowed here' : ''}`;\n                break;\n            case 3:\n                if (part === '+') break;\n                if (!isValidSegment(part) || !part.includes('-'))\n                    return `level 4 must contain at least one '-' and be alphanumeric-hyphen (got '${part}')`;\n                break;\n            case 4:\n                if (!['data','metadata','+'].includes(part))\n                    return `level 5 must be 'data', 'metadata' or '+' (got '${part}')`;\n                break;\n            default:\n                if (part === '+') break;\n                if (isLast) {\n                    if (!isValidSegment(part))\n                        return `last level must be lowercase alphanumeric with optional hyphens (got '${part}')`;\n                } else {\n                    if (!isValidSegment(part))\n                        return `level ${i+1} '${part}' is invalid — use lowercase alphanumeric with optional hyphens only`;\n                }\n        }\n    }\n    return null;\n};\n\nconst validateCredentialTopic = (topic) => {\n    if (!isString(topic)) return 'topic: missing or empty';\n    const err = isValidMqttTopic(topic);\n    if (err) return `topic: ${err}`;\n    const parts = topic.split('/');\n    if (parts[0] !== 'origin') return `topic: must start with 'origin' (got '${parts[0]}')`;\n    if (parts[5] !== 'recommended') return `topic: must have 'recommended' at level 6 (got '${parts[5] || 'undefined'}')`;\n    return null;\n};\n\nconst validateWhitelist = (items) => {\n    const errs = [];\n    items.forEach((t, i) => {\n        if (!isString(t)) errs.push(`whitelist[${i}]: must be a string`);\n        else { const err = isValidMqttTopic(t); if (err) errs.push(`whitelist[${i}]: '${t}' — ${err}`); }\n    });\n    return errs;\n};\n\nconst validateBlacklist = (items) => {\n    const errs = [];\n    items.forEach((t, i) => {\n        if (!isString(t)) errs.push(`blacklist[${i}]: must be a string`);\n        else if (!/^[a-zA-Z0-9\\-\\/\\+#]+$/.test(t)) errs.push(`blacklist[${i}]: '${t}' — only alphanumeric, -, +, # and / allowed`);\n    });\n    return errs;\n};\n\n// ── Schema ───────────────────────────────────────────────────────────────────\n\nconst schema = {\n    'process-mode': { type: 'enum',  valid: ['run', 'halt'],           default: 'run',  roles: null,           keep_replay: false },\n    'log-level':    { type: 'enum',  valid: ['info', 'warn', 'debug'], default: 'info', roles: null,           keep_replay: false },\n    'whitelist':    { type: 'array',                                    default: [],     roles: ['SUBSCRIBER'], keep_replay: true  },\n    'blacklist':    { type: 'array',                                    default: [],     roles: ['SUBSCRIBER'], keep_replay: false },\n    'credentials':  { type: 'crud',                                                      roles: ['DOWNLOADER'],                     },\n};\n\n// ── Role check ───────────────────────────────────────────────────────────────\n\nconst isAllowed = (def) => def.roles === null || def.roles.some(r => global.get(r.toLowerCase()) == true);\n\n// ── Main ─────────────────────────────────────────────────────────────────────\n\nconst body = msg.payload;\nif (typeof body !== 'object' || Array.isArray(body)) {\n    msg.statusCode = 400;\n    msg.payload = { error: 'Body must be a JSON object.' };\n    return [msg, null];\n}\n\nconst changes = {};\nconst errors  = [];\nconst events  = [];\n\nfor (const [key, value] of Object.entries(body)) {\n    const def = schema[key];\n    if (!def) {\n        errors.push(key + ': unknown key.');\n        continue;\n    }\n\n    if (!isAllowed(def)) {\n        errors.push(key + ': not available for current roles.');\n        continue;\n    }\n\n    if (def.type === 'enum') {\n        const strVal = (typeof value === 'string' ? value : '').trim().toLowerCase();\n        if (!def.valid.includes(strVal)) {\n            errors.push(key + ': invalid value. Must be one of: ' + def.valid.join(', ') + '.');\n            continue;\n        }\n        const previous = global.get(key);\n        global.set(key, strVal);\n        const changed = previous !== strVal;\n        changes[key] = { value: strVal, changed };\n        events.push({ key, value: strVal, previous, changed });\n\n    } else if (def.type === 'array') {\n        if (!Array.isArray(value)) {\n            errors.push(key + ': must be an array of strings.');\n            continue;\n        }\n        const items = value.map(t => (typeof t === 'string' ? t.trim() : '')).filter(t => t.length > 0);\n        if (items.length === 0) {\n            errors.push(key + ': array must not be empty.');\n            continue;\n        }\n        const validationErrors = key === 'whitelist' ? validateWhitelist(items) : validateBlacklist(items);\n        if (validationErrors.length > 0) {\n            errors.push(...validationErrors);\n            continue;\n        }\n        if (def.keep_replay) {\n            const current = global.get('topic') || [];\n            const replayTopics = current.filter(t => t.topic.startsWith('replay/a/wis2'));\n            const previousStrings = current.filter(t => !t.topic.startsWith('replay/a/wis2')).map(t => t.topic).sort().join(',');\n            const newStrings = items.slice().sort().join(',');\n            const changed = previousStrings !== newStrings;\n            const qos = global.get('qos') || 0;\n            const newTopics = [...items.map(t => ({ topic: t, qos })), ...replayTopics];\n            global.set('topic', newTopics);\n            changes[key] = { value: newTopics, changed };\n            events.push({ key, value: newTopics, previous: current, changed });\n        } else {\n            const previous = global.get(key) || [];\n            const changed = JSON.stringify(previous.slice().sort()) !== JSON.stringify(items.slice().sort());\n            global.set(key, items);\n            changes[key] = { value: items, changed };\n            events.push({ key, value: items, previous, changed });\n        }\n\n    } else if (def.type === 'crud') {\n        if (typeof value !== 'object' || Array.isArray(value) || value === null) {\n            errors.push(key + ': must be an object with op and topic.');\n            continue;\n        }\n        const { op, topic, username, password } = value;\n        const VALID_OPS = ['create', 'update', 'delete'];\n        if (!VALID_OPS.includes(op)) {\n            errors.push(key + ': op must be one of: ' + VALID_OPS.join(', ') + '.');\n            continue;\n        }\n        const topicErr = validateCredentialTopic(topic);\n        if (topicErr) { errors.push(`${key}.${topicErr}`); continue; }\n        if ((op === 'create' || op === 'update') && !isString(username))   { errors.push(`${key}.username: missing or empty`);   continue; }\n        if ((op === 'create' || op === 'update') && !isString(password)) { errors.push(`${key}.password: missing or empty`); continue; }\n        changes[key] = { op, topic, changed: true };\n        events.push({ key, value: { op, topic, username, password }, previous: null, changed: true });\n    }\n}\n\nif (errors.length > 0 && Object.keys(changes).length === 0) {\n    msg.statusCode = 400;\n    msg.payload = { errors };\n    return [msg, null];\n}\n\nmsg.statusCode = 200;\nmsg.payload = { changes, ...(errors.length > 0 && { errors }) };\n\nconst changeMsgs = events.map(e => ({ payload: e, topic: e.key }));\nconst out2 = changeMsgs.length === 1 ? changeMsgs[0] : changeMsgs.length > 1 ? changeMsgs : null;\n\nreturn [msg, out2];",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 320,
+        "y": 1460,
+        "wires": [
+            [
+                "c28e7b27bb911a04"
+            ],
+            [
+                "7b0525ef3667eb54"
+            ]
+        ]
+    },
+    {
+        "id": "b0d6f69da79d4efe",
+        "type": "switch",
+        "z": "1c6759660a32fda5",
+        "name": "Action ?",
+        "property": "topic",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "process-mode",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "whitelist",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "credentials",
+                "vt": "str"
+            },
+            {
+                "t": "else"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 4,
+        "x": 600,
+        "y": 1500,
+        "wires": [
+            [
+                "b712d85691267149"
+            ],
+            [
+                "a7b4e9d5237e6174"
+            ],
+            [
+                "02a4f430ad19de4e"
+            ],
+            []
+        ]
+    },
+    {
+        "id": "cred-config-prep",
+        "type": "function",
+        "z": "1c6759660a32fda5",
+        "name": "Credentials",
+        "func": "const creds = (msg.payload && msg.payload.downloader && msg.payload.downloader.credentials) || null;\nif (!creds || typeof creds !== 'object' || Object.keys(creds).length === 0) {\n    return null;\n}\nconst params = [ 'wis2gc:downloader:credentials' ];\nfor (const [topic, val] of Object.entries(creds)) {\n    params.push(topic, JSON.stringify(val));\n}\nmsg.topic = params;\ndelete msg.payload;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 960,
+        "wires": [
+            [
+                "cred-config-hset"
+            ]
+        ]
+    },
+    {
+        "id": "cred-config-hset",
+        "type": "redis-command",
+        "z": "1c6759660a32fda5",
+        "server": "029ff868be3010db",
+        "command": "HSET",
+        "name": "HSET",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 730,
+        "y": 960,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "02a4f430ad19de4e",
+        "type": "function",
+        "z": "1c6759660a32fda5",
+        "name": "Credentials",
+        "func": "const { op, topic, username, password } = msg.payload.value;\ndelete msg.payload;\n\nif (op === 'create' || op === 'update') {\n    msg.topic = [ 'wis2gc:downloader:credentials', topic, JSON.stringify({ username, password }) ];\n    return [ msg, null ];\n\n} else if (op === 'delete') {\n    msg.topic = [ 'wis2gc:downloader:credentials', topic ];\n    return [ null, msg ];\n}\n\nreturn null;",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 1540,
+        "wires": [
+            [
+                "4e3516e728d0abf9"
+            ],
+            [
+                "4911751d714ac8a9"
+            ]
+        ]
+    },
+    {
+        "id": "4e3516e728d0abf9",
+        "type": "redis-command",
+        "z": "1c6759660a32fda5",
+        "server": "029ff868be3010db",
+        "command": "HSET",
+        "name": "HSET",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 920,
+        "y": 1520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4911751d714ac8a9",
+        "type": "redis-command",
+        "z": "1c6759660a32fda5",
+        "server": "029ff868be3010db",
+        "command": "HDEL",
+        "name": "HDEL",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 920,
+        "y": 1560,
+        "wires": [
+            []
         ]
     },
     {
@@ -3805,7 +4019,7 @@
                 "t": "set",
                 "p": "topic",
                 "pt": "msg",
-                "to": "[ $globalContext(\"queue\"),\"*\",\"downloader_id\",downloader_id,\"href\", href ]",
+                "to": "[ $globalContext(\"queue\"),\"*\",\"downloader_id\",downloader_id,\"href\", href, \"topic\", wnmtopic  ]",
                 "tot": "jsonata"
             }
         ],
@@ -4228,7 +4442,7 @@
         "type": "function",
         "z": "a843f3ff30ad0d18",
         "name": "Black & GRep",
-        "func": "let topic = msg.topic;\nconst blacklist = global.get('blacklist');\n\n// If topic starts with replay/a/wis2/, remove first 4 levels\nif (topic.startsWith('replay/a/wis2/')) {\n    const parts = topic.split('/');\n    // Remove first 4 parts: replay, a, wis2, and the next item\n    topic = parts.slice(4).join('/');\n}\n\n// If blacklist is false/null/undefined or empty array, allow all messages\nif (!blacklist || blacklist.length === 0) {\n    return msg;\n}\n\nfunction isBlacklisted(topic, pattern) {\n    // Split both into parts\n    const topicParts = topic.split('/');\n    const patternParts = pattern.split('/');\n\n    for (let i = 0; i < patternParts.length; i++) {\n        const patternPart = patternParts[i];\n        const topicPart = topicParts[i];\n\n        if (patternPart === '#') {\n            // # matches everything remaining - always true\n            return true;\n        }\n\n        if (topicPart === undefined) {\n            // Topic is shorter than pattern - no match\n            return false;\n        }\n\n        if (patternPart === '+') {\n            // + matches exactly one level - continue\n            continue;\n        }\n\n        if (patternPart !== topicPart) {\n            // Literal mismatch - no match\n            return false;\n        }\n    }\n\n    // Pattern exhausted - match only if topic is also exhausted\n    return topicParts.length === patternParts.length;\n}\n\n// Check if topic matches any blacklist entry\nconst blocked = blacklist.some(pattern => isBlacklisted(topic, pattern));\n\n// If blocked, return null (silently drop message)\n// If not blocked, pass message through\nreturn blocked ? null : msg;",
+        "func": "let topic = msg.topic;\nconst blacklist = global.get('blacklist');\n\n// If topic starts with replay/a/wis2/, remove first 4 levels\nif (topic.startsWith('replay/a/wis2/')) {\n    const parts = topic.split('/');\n    // Remove first 5 parts: replay, a, wis2, GRep centre-id and the uuid\n    topic = parts.slice(5).join('/');\n}\n\n// If blacklist is false/null/undefined or empty array, allow all messages\nif (!blacklist || blacklist.length === 0) {\n    return msg;\n}\n\nfunction isBlacklisted(topic, pattern) {\n    // Split both into parts\n    const topicParts = topic.split('/');\n    const patternParts = pattern.split('/');\n\n    for (let i = 0; i < patternParts.length; i++) {\n        const patternPart = patternParts[i];\n        const topicPart = topicParts[i];\n\n        if (patternPart === '#') {\n            // # matches everything remaining - always true\n            return true;\n        }\n\n        if (topicPart === undefined) {\n            // Topic is shorter than pattern - no match\n            return false;\n        }\n\n        if (patternPart === '+') {\n            // + matches exactly one level - continue\n            continue;\n        }\n\n        if (patternPart !== topicPart) {\n            // Literal mismatch - no match\n            return false;\n        }\n    }\n\n    // Pattern exhausted - match only if topic is also exhausted\n    return topicParts.length === patternParts.length;\n}\n\n// Check if topic matches any blacklist entry\nconst blocked = blacklist.some(pattern => isBlacklisted(topic, pattern));\n\n// If blocked, return null (silently drop message)\n// If not blocked, pass message through\nreturn blocked ? null : msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -5411,7 +5625,8 @@
         "z": "a843f3ff30ad0d18",
         "name": "link in 20",
         "links": [
-            "a7b4e9d5237e6174"
+            "a7b4e9d5237e6174",
+            "69e474d4865a541b"
         ],
         "x": 145,
         "y": 1120,
@@ -5456,8 +5671,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 1380,
-        "y": 120,
+        "x": 1370,
+        "y": 240,
         "wires": [
             [
                 "0bada05834d6eeb5"
@@ -5495,7 +5710,7 @@
                 "t": "set",
                 "p": "message",
                 "pt": "msg",
-                "to": "{\t  \"jsonrpc\": \"2.0\",\t  \"method\": \"aria2.addUri\",\t  \"id\": stream_id,\t  \"params\": [\t    \"token:\" & $globalContext(\"aria-secret\"),\t    [downloads.href],\t    {\t      \"out\": filename,\t      \"disk-cache\" : 0\t    }\t  ]\t}",
+                "to": "{\t  \"jsonrpc\": \"2.0\",\t  \"method\": \"aria2.addUri\",\t  \"id\": stream_id,\t  \"params\": [\t    \"token:\" & $globalContext(\"aria-secret\"),\t    [downloads.href],\t    $merge([\t      { \"out\": filename, \"disk-cache\": 0 },\t      $exists($globalContext(\"download-creds\")[downloads.topic]) ? {  \t              \"http-user\": $globalContext(\"download-creds\")[downloads.topic].username,\t              \"http-passwd\": $globalContext(\"download-creds\")[downloads.topic].password \t            } : {}\t    ])\t  ]\t}",
                 "tot": "jsonata"
             }
         ],
@@ -5504,8 +5719,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1500,
-        "y": 120,
+        "x": 1490,
+        "y": 240,
         "wires": [
             [
                 "6ae21a0a60ee3e18",
@@ -5532,8 +5747,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1250,
-        "y": 120,
+        "x": 1240,
+        "y": 240,
         "wires": [
             [
                 "ada4f85f94febb91"
@@ -5548,8 +5763,8 @@
         "links": [
             "9a78cd98a069fced"
         ],
-        "x": 160,
-        "y": 860,
+        "x": 150,
+        "y": 980,
         "wires": [
             [
                 "55d2e511dfb5c291"
@@ -5569,8 +5784,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1620,
-        "y": 120,
+        "x": 1610,
+        "y": 240,
         "wires": [
             [
                 "0327cbb343879ddb",
@@ -5602,8 +5817,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1760,
-        "y": 100,
+        "x": 1750,
+        "y": 220,
         "wires": [
             [
                 "426a07d4ae58705a"
@@ -5616,8 +5831,8 @@
         "z": "caa031b5574b994f",
         "name": "StartAck",
         "links": [],
-        "x": 160,
-        "y": 640,
+        "x": 150,
+        "y": 760,
         "wires": [
             [
                 "673b8c81bcd0d31b"
@@ -5637,8 +5852,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 300,
-        "y": 640,
+        "x": 290,
+        "y": 760,
         "wires": [
             [
                 "9cefeb03721f1cf7"
@@ -5657,8 +5872,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 430,
-        "y": 640,
+        "x": 420,
+        "y": 760,
         "wires": [
             [
                 "6232c0da041e4e01"
@@ -5672,8 +5887,8 @@
         "name": "FinAck",
         "mode": "return",
         "links": [],
-        "x": 1490,
-        "y": 660,
+        "x": 1480,
+        "y": 780,
         "wires": [],
         "l": true
     },
@@ -5764,8 +5979,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 730,
-        "y": 860,
+        "x": 720,
+        "y": 980,
         "wires": [
             [
                 "3dfcc087f08e3541"
@@ -5801,8 +6016,8 @@
                 "module": "minio"
             }
         ],
-        "x": 1210,
-        "y": 860,
+        "x": 1200,
+        "y": 980,
         "wires": [
             [
                 "c1e88461775a3cf3",
@@ -5840,8 +6055,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 4,
-        "x": 1340,
-        "y": 860,
+        "x": 1330,
+        "y": 980,
         "wires": [
             [
                 "7abde6069cced145",
@@ -5874,8 +6089,8 @@
                 "module": "crypto"
             }
         ],
-        "x": 590,
-        "y": 860,
+        "x": 580,
+        "y": 980,
         "wires": [
             [
                 "98655394a299da9d"
@@ -5906,8 +6121,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 300,
-        "y": 860,
+        "x": 290,
+        "y": 980,
         "wires": [
             [
                 "4917cc0d5ed54eb1"
@@ -5926,8 +6141,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 440,
-        "y": 860,
+        "x": 430,
+        "y": 980,
         "wires": [
             [
                 "bc32ee46f1310103"
@@ -5946,8 +6161,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1880,
-        "y": 100,
+        "x": 1870,
+        "y": 220,
         "wires": [
             []
         ]
@@ -5979,8 +6194,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 3,
-        "x": 600,
-        "y": 420,
+        "x": 590,
+        "y": 540,
         "wires": [
             [
                 "1d9079e47ab3ba91"
@@ -6002,8 +6217,8 @@
         "links": [
             "e11d499878526ee0"
         ],
-        "x": 1725,
-        "y": 140,
+        "x": 1715,
+        "y": 260,
         "wires": []
     },
     {
@@ -6014,8 +6229,8 @@
         "links": [
             "de6645a70e1afe93"
         ],
-        "x": 345,
-        "y": 420,
+        "x": 335,
+        "y": 540,
         "wires": [
             [
                 "4e84f9dffc97517c"
@@ -6045,8 +6260,8 @@
         "binarySupport": false,
         "validateMessages": false,
         "messageTemplate": "{\n  \"type\": \"message\",\n  \"id\": \"$id\",\n  \"content\": \"$content\",\n  \"timestamp\": \"2026-02-04T09:56:51.757Z\"\n}",
-        "x": 450,
-        "y": 480,
+        "x": 440,
+        "y": 600,
         "wires": [
             [
                 "a6ca42c9f3a02fc7"
@@ -6085,8 +6300,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 730,
-        "y": 300,
+        "x": 720,
+        "y": 420,
         "wires": [
             [
                 "ac8ba5f33c4a4f6b"
@@ -6116,8 +6331,8 @@
         "binarySupport": false,
         "validateMessages": false,
         "messageTemplate": "{\n  \"type\": \"message\",\n  \"id\": \"$id\",\n  \"content\": \"$content\",\n  \"timestamp\": \"2026-02-04T09:56:51.757Z\"\n}",
-        "x": 850,
-        "y": 260,
+        "x": 840,
+        "y": 380,
         "wires": [
             [
                 "911f980b0e95cdae"
@@ -6143,8 +6358,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 1,
-        "x": 1130,
-        "y": 260,
+        "x": 1120,
+        "y": 380,
         "wires": [
             [
                 "bb6e6c5527813a68",
@@ -6164,8 +6379,8 @@
             "e51b855e0983bca1",
             "dfd0dea37993a540"
         ],
-        "x": 535,
-        "y": 220,
+        "x": 525,
+        "y": 340,
         "wires": []
     },
     {
@@ -6183,8 +6398,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 420,
-        "y": 220,
+        "x": 410,
+        "y": 340,
         "wires": [
             [
                 "ab44c1861612ac7d"
@@ -6208,8 +6423,8 @@
         "once": true,
         "onceDelay": "1",
         "topic": "",
-        "x": 270,
-        "y": 220,
+        "x": 260,
+        "y": 340,
         "wires": [
             [
                 "7d4c0b0f51f22b90"
@@ -6233,8 +6448,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 335,
-        "y": 280,
+        "x": 325,
+        "y": 400,
         "wires": [
             [
                 "42b1ccacba64b751"
@@ -6268,8 +6483,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 440,
-        "y": 280,
+        "x": 430,
+        "y": 400,
         "wires": [
             [
                 "57b65fb40e2adb7f"
@@ -6284,8 +6499,8 @@
         "links": [
             "ab44c1861612ac7d"
         ],
-        "x": 285,
-        "y": 280,
+        "x": 275,
+        "y": 400,
         "wires": [
             [
                 "86823311d2f0831b"
@@ -6303,8 +6518,8 @@
             "98c0307d1a976bfe",
             "d681a3d5dc1b407f"
         ],
-        "x": 535,
-        "y": 280,
+        "x": 525,
+        "y": 400,
         "wires": []
     },
     {
@@ -6315,8 +6530,8 @@
         "links": [
             "ab44c1861612ac7d"
         ],
-        "x": 345,
-        "y": 480,
+        "x": 335,
+        "y": 600,
         "wires": [
             [
                 "4e84f9dffc97517c"
@@ -6331,8 +6546,8 @@
         "links": [
             "57b65fb40e2adb7f"
         ],
-        "x": 345,
-        "y": 540,
+        "x": 335,
+        "y": 660,
         "wires": [
             [
                 "4e84f9dffc97517c"
@@ -6377,8 +6592,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 730,
-        "y": 460,
+        "x": 720,
+        "y": 580,
         "wires": [
             [
                 "0c40f2d437251be2"
@@ -6397,8 +6612,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1110,
-        "y": 460,
+        "x": 1100,
+        "y": 580,
         "wires": [
             [
                 "2c30bd36583f255a"
@@ -6417,8 +6632,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 860,
-        "y": 460,
+        "x": 850,
+        "y": 580,
         "wires": [
             [
                 "8e26e398300321ac"
@@ -6449,8 +6664,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 990,
-        "y": 460,
+        "x": 980,
+        "y": 580,
         "wires": [
             [
                 "0a2911c4385cb16a"
@@ -6481,8 +6696,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1230,
-        "y": 460,
+        "x": 1220,
+        "y": 580,
         "wires": [
             [
                 "f3407b5c6529285b"
@@ -6499,8 +6714,8 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 1410,
-        "y": 260,
+        "x": 1400,
+        "y": 380,
         "wires": [
             [
                 "9a78cd98a069fced"
@@ -6516,8 +6731,8 @@
         "links": [
             "040e2ff80605b0c9"
         ],
-        "x": 1540,
-        "y": 260,
+        "x": 1530,
+        "y": 380,
         "wires": [],
         "l": true
     },
@@ -6533,8 +6748,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1350,
-        "y": 460,
+        "x": 1340,
+        "y": 580,
         "wires": [
             []
         ]
@@ -6547,8 +6762,8 @@
         "links": [
             "ab44c1861612ac7d"
         ],
-        "x": 735,
-        "y": 220,
+        "x": 725,
+        "y": 340,
         "wires": [
             [
                 "ac8ba5f33c4a4f6b"
@@ -6563,8 +6778,8 @@
         "links": [
             "57b65fb40e2adb7f"
         ],
-        "x": 735,
-        "y": 260,
+        "x": 725,
+        "y": 380,
         "wires": [
             [
                 "ac8ba5f33c4a4f6b"
@@ -6580,8 +6795,8 @@
         "links": [
             "0149d4b8a664c59e"
         ],
-        "x": 1520,
-        "y": 820,
+        "x": 1510,
+        "y": 940,
         "wires": [],
         "l": true
     },
@@ -6594,8 +6809,8 @@
         "links": [
             "41c60a819985992f"
         ],
-        "x": 1520,
-        "y": 860,
+        "x": 1510,
+        "y": 980,
         "wires": [],
         "l": true
     },
@@ -6611,8 +6826,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1340,
-        "y": 1100,
+        "x": 1330,
+        "y": 1220,
         "wires": [
             []
         ]
@@ -6636,8 +6851,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 620,
-        "y": 500,
+        "x": 610,
+        "y": 620,
         "wires": [
             []
         ]
@@ -6661,8 +6876,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 610,
-        "y": 540,
+        "x": 600,
+        "y": 660,
         "wires": [
             []
         ]
@@ -6679,8 +6894,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 850,
-        "y": 860,
+        "x": 840,
+        "y": 980,
         "wires": [
             [
                 "47d054ac822338de"
@@ -6711,8 +6926,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 970,
-        "y": 860,
+        "x": 960,
+        "y": 980,
         "wires": [
             [
                 "7e85da62dad6be3d"
@@ -6731,8 +6946,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1090,
-        "y": 860,
+        "x": 1080,
+        "y": 980,
         "wires": [
             [
                 "1a867ae19b2242d5"
@@ -6751,8 +6966,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 950,
-        "y": 120,
+        "x": 940,
+        "y": 240,
         "wires": [
             [
                 "b2931cadba805b08"
@@ -6783,8 +6998,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 800,
-        "y": 120,
+        "x": 790,
+        "y": 240,
         "wires": [
             [
                 "c55b979d0e1b905c"
@@ -6808,8 +7023,8 @@
         "once": false,
         "onceDelay": "5",
         "topic": "",
-        "x": 160,
-        "y": 120,
+        "x": 150,
+        "y": 240,
         "wires": [
             [
                 "4bfd2d6284313475"
@@ -6828,8 +7043,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 420,
-        "y": 120,
+        "x": 410,
+        "y": 240,
         "wires": [
             [
                 "fbdbf4e206d546e4"
@@ -6851,8 +7066,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 670,
-        "y": 120,
+        "x": 660,
+        "y": 240,
         "wires": [
             [
                 "f7462c19fdb55dd6"
@@ -6871,8 +7086,8 @@
         "initialize": "// Code added here will be run once\n// whenever the node is started.\n\nflow.set(\"inQueue\",0)",
         "finalize": "",
         "libs": [],
-        "x": 540,
-        "y": 120,
+        "x": 530,
+        "y": 240,
         "wires": [
             [
                 "d1b34fca7ee751ca"
@@ -6894,8 +7109,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 1110,
-        "y": 120,
+        "x": 1100,
+        "y": 240,
         "wires": [
             [
                 "660c058098466121"
@@ -6921,8 +7136,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 550,
-        "y": 640,
+        "x": 540,
+        "y": 760,
         "wires": [
             [
                 "853bf782c01c5496"
@@ -6981,8 +7196,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 790,
-        "y": 640,
+        "x": 780,
+        "y": 760,
         "wires": [
             [
                 "87c277225ad73c5b",
@@ -7003,8 +7218,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 930,
-        "y": 580,
+        "x": 920,
+        "y": 700,
         "wires": [
             []
         ]
@@ -7033,8 +7248,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 930,
-        "y": 620,
+        "x": 920,
+        "y": 740,
         "wires": [
             [
                 "c2de07c3074e32b9"
@@ -7053,8 +7268,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1050,
-        "y": 620,
+        "x": 1040,
+        "y": 740,
         "wires": [
             []
         ]
@@ -7083,8 +7298,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 930,
-        "y": 660,
+        "x": 920,
+        "y": 780,
         "wires": [
             [
                 "3ad64eacbd7e7000"
@@ -7103,8 +7318,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1015,
-        "y": 660,
+        "x": 1005,
+        "y": 780,
         "wires": [
             [
                 "cc592c3b63bd0a30"
@@ -7136,8 +7351,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1290,
-        "y": 660,
+        "x": 1280,
+        "y": 780,
         "wires": [
             [
                 "6873140e784b4ea3"
@@ -7156,8 +7371,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1385,
-        "y": 660,
+        "x": 1375,
+        "y": 780,
         "wires": [
             [
                 "7181e3d4bb9a619e"
@@ -7184,8 +7399,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 970,
-        "y": 260,
+        "x": 960,
+        "y": 380,
         "wires": [
             [
                 "05f32a62cb0bf329"
@@ -7200,8 +7415,8 @@
         "links": [
             "dcdb15c44538c891"
         ],
-        "x": 1415,
-        "y": 80,
+        "x": 1405,
+        "y": 200,
         "wires": [
             [
                 "0bada05834d6eeb5"
@@ -7223,8 +7438,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 290,
-        "y": 120,
+        "x": 280,
+        "y": 240,
         "wires": [
             [
                 "defc4f68ca99d44f"
@@ -7240,8 +7455,8 @@
             "defc4f68ca99d44f"
         ],
         "uncaught": false,
-        "x": 420,
-        "y": 80,
+        "x": 410,
+        "y": 200,
         "wires": [
             []
         ]
@@ -7277,8 +7492,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1290,
-        "y": 260,
+        "x": 1280,
+        "y": 380,
         "wires": [
             [
                 "2d1ec9b7e3ea8084"
@@ -7304,8 +7519,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1350,
-        "y": 940,
+        "x": 1340,
+        "y": 1060,
         "wires": [
             []
         ]
@@ -7329,8 +7544,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 730,
-        "y": 420,
+        "x": 720,
+        "y": 540,
         "wires": [
             [
                 "506e99efd94c4764"
@@ -7360,8 +7575,8 @@
         "binarySupport": false,
         "validateMessages": false,
         "messageTemplate": "{\n  \"type\": \"message\",\n  \"id\": \"$id\",\n  \"content\": \"$content\",\n  \"timestamp\": \"2026-02-04T09:56:51.757Z\"\n}",
-        "x": 850,
-        "y": 380,
+        "x": 840,
+        "y": 500,
         "wires": [
             [
                 "23507a2950cbc7ad"
@@ -7387,8 +7602,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 1,
-        "x": 1120,
-        "y": 380,
+        "x": 1110,
+        "y": 500,
         "wires": [
             [
                 "e1ccb10b56d9320d",
@@ -7405,8 +7620,8 @@
         "links": [
             "febdd299270156ec"
         ],
-        "x": 1670,
-        "y": 380,
+        "x": 1660,
+        "y": 500,
         "wires": [],
         "l": true
     },
@@ -7420,8 +7635,8 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 1390,
-        "y": 380,
+        "x": 1380,
+        "y": 500,
         "wires": [
             [
                 "e5bda5258cfeaec4"
@@ -7436,8 +7651,8 @@
         "links": [
             "ab44c1861612ac7d"
         ],
-        "x": 735,
-        "y": 340,
+        "x": 725,
+        "y": 460,
         "wires": [
             [
                 "506e99efd94c4764"
@@ -7452,8 +7667,8 @@
         "links": [
             "57b65fb40e2adb7f"
         ],
-        "x": 735,
-        "y": 380,
+        "x": 725,
+        "y": 500,
         "wires": [
             [
                 "506e99efd94c4764"
@@ -7479,8 +7694,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 970,
-        "y": 380,
+        "x": 960,
+        "y": 500,
         "wires": [
             [
                 "1d66e843a4f452a0"
@@ -7518,8 +7733,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1270,
-        "y": 380,
+        "x": 1260,
+        "y": 500,
         "wires": [
             [
                 "8f3ba9eae59ece28"
@@ -7545,8 +7760,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1530,
-        "y": 380,
+        "x": 1520,
+        "y": 500,
         "wires": [
             [
                 "6dfb45ef726c5af9"
@@ -7564,8 +7779,8 @@
         "once": false,
         "onceDelay": "1",
         "topic": "",
-        "x": 150,
-        "y": 340,
+        "x": 140,
+        "y": 460,
         "wires": [
             [
                 "913464af7a3946b5"
@@ -7587,8 +7802,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 290,
-        "y": 340,
+        "x": 280,
+        "y": 460,
         "wires": [
             [
                 "42b1ccacba64b751"
@@ -7602,8 +7817,8 @@
         "name": "File Exists",
         "mode": "link",
         "links": [],
-        "x": 1520,
-        "y": 900,
+        "x": 1510,
+        "y": 1020,
         "wires": [],
         "l": true
     },
@@ -7619,8 +7834,8 @@
             "6873140e784b4ea3"
         ],
         "uncaught": false,
-        "x": 150,
-        "y": 700,
+        "x": 140,
+        "y": 820,
         "wires": [
             [
                 "67a08d8a21f14ae1"
@@ -7636,8 +7851,8 @@
             "873388b63527db5d",
             "6dfb45ef726c5af9"
         ],
-        "x": 130,
-        "y": 1380,
+        "x": 120,
+        "y": 1500,
         "wires": [
             [
                 "e017d6ebcfd5b26d",
@@ -7658,8 +7873,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 560,
-        "y": 1360,
+        "x": 550,
+        "y": 1480,
         "wires": [
             [
                 "e04457b61c5d9722"
@@ -7690,8 +7905,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 420,
-        "y": 1360,
+        "x": 410,
+        "y": 1480,
         "wires": [
             [
                 "697aab508a8bb809"
@@ -7743,8 +7958,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 700,
-        "y": 1140,
+        "x": 690,
+        "y": 1260,
         "wires": [
             [
                 "4668c1bfbf82afd5",
@@ -7777,8 +7992,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 700,
-        "y": 1100,
+        "x": 690,
+        "y": 1220,
         "wires": [
             [
                 "7d723d9cc15c1177"
@@ -7797,8 +8012,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 820,
-        "y": 1100,
+        "x": 810,
+        "y": 1220,
         "wires": [
             [
                 "6e26958ea82dc499"
@@ -7829,8 +8044,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 940,
-        "y": 1100,
+        "x": 930,
+        "y": 1220,
         "wires": [
             [
                 "39921dfd1f4e0602"
@@ -7849,8 +8064,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1070,
-        "y": 1100,
+        "x": 1060,
+        "y": 1220,
         "wires": [
             [
                 "52435883cf148ace"
@@ -7865,8 +8080,8 @@
         "links": [
             "8a011d3a2eeceb67"
         ],
-        "x": 140,
-        "y": 1340,
+        "x": 130,
+        "y": 1460,
         "wires": [
             [
                 "e017d6ebcfd5b26d",
@@ -7883,8 +8098,8 @@
         "links": [
             "7abde6069cced145"
         ],
-        "x": 150,
-        "y": 1120,
+        "x": 140,
+        "y": 1240,
         "wires": [
             [
                 "fa9df07335b8bf6c"
@@ -7906,8 +8121,8 @@
         "correl": "",
         "expiry": "",
         "broker": "bae38c3ec809a1b3",
-        "x": 970,
-        "y": 1140,
+        "x": 960,
+        "y": 1260,
         "wires": []
     },
     {
@@ -7924,8 +8139,8 @@
         "correl": "",
         "expiry": "",
         "broker": "6e294e8eeec8172b",
-        "x": 970,
-        "y": 1180,
+        "x": 960,
+        "y": 1300,
         "wires": []
     },
     {
@@ -7943,8 +8158,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 840,
-        "y": 1180,
+        "x": 830,
+        "y": 1300,
         "wires": [
             [
                 "49c7c6b206e065fe"
@@ -7975,8 +8190,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 280,
-        "y": 1120,
+        "x": 270,
+        "y": 1240,
         "wires": [
             [
                 "0483541e8e2a6d39"
@@ -7995,8 +8210,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 400,
-        "y": 1120,
+        "x": 390,
+        "y": 1240,
         "wires": [
             [
                 "0c9dc8d837b621d5"
@@ -8030,8 +8245,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 3,
-        "x": 820,
-        "y": 1360,
+        "x": 810,
+        "y": 1480,
         "wires": [
             [
                 "be17da13960262b3"
@@ -8066,8 +8281,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1090,
-        "y": 1340,
+        "x": 1080,
+        "y": 1460,
         "wires": [
             [
                 "8e7034ccd6a86316",
@@ -8087,8 +8302,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1220,
-        "y": 1340,
+        "x": 1210,
+        "y": 1460,
         "wires": [
             []
         ]
@@ -8111,6 +8326,13 @@
                 "p": "downloads.downloader_id",
                 "pt": "msg",
                 "to": "hget.downloader_id",
+                "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "downloads.topic",
+                "pt": "msg",
+                "to": "hget.topic",
                 "tot": "msg"
             },
             {
@@ -8201,8 +8423,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1090,
-        "y": 1300,
+        "x": 1080,
+        "y": 1420,
         "wires": [
             [
                 "107baa40af9e88b4",
@@ -8227,8 +8449,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 960,
-        "y": 1320,
+        "x": 950,
+        "y": 1440,
         "wires": [
             [
                 "15eb8cae84d98b6e",
@@ -8248,8 +8470,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 690,
-        "y": 1360,
+        "x": 680,
+        "y": 1480,
         "wires": [
             [
                 "fc4bf403e3a4f8fa"
@@ -8287,8 +8509,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1210,
-        "y": 1100,
+        "x": 1200,
+        "y": 1220,
         "wires": [
             [
                 "fd712bdc50f7b784",
@@ -8311,8 +8533,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 840,
-        "y": 1140,
+        "x": 830,
+        "y": 1260,
         "wires": [
             [
                 "d4a6d82c3519ede4"
@@ -8328,8 +8550,8 @@
         "links": [
             "2e122a8c06dcafd7"
         ],
-        "x": 1355,
-        "y": 1300,
+        "x": 1345,
+        "y": 1420,
         "wires": []
     },
     {
@@ -8343,8 +8565,8 @@
         "once": false,
         "onceDelay": 0.1,
         "topic": "",
-        "x": 150,
-        "y": 1520,
+        "x": 140,
+        "y": 1640,
         "wires": [
             [
                 "72fd4a3df5f5e9e7"
@@ -8366,8 +8588,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 720,
-        "y": 1520,
+        "x": 710,
+        "y": 1640,
         "wires": [
             [
                 "5f45859e8c944cc7"
@@ -8391,8 +8613,8 @@
                 "module": "fs"
             }
         ],
-        "x": 860,
-        "y": 1520,
+        "x": 850,
+        "y": 1640,
         "wires": [
             [],
             [
@@ -8427,8 +8649,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 450,
-        "y": 1520,
+        "x": 440,
+        "y": 1640,
         "wires": [
             [
                 "83b9019d33a80a1b"
@@ -8447,8 +8669,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 580,
-        "y": 1520,
+        "x": 570,
+        "y": 1640,
         "wires": [
             [
                 "f13f514272a5d076"
@@ -8486,8 +8708,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1010,
-        "y": 1580,
+        "x": 1000,
+        "y": 1700,
         "wires": [
             [
                 "963710c90b7be391"
@@ -8506,8 +8728,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1130,
-        "y": 1580,
+        "x": 1120,
+        "y": 1700,
         "wires": [
             []
         ]
@@ -8529,8 +8751,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 290,
-        "y": 1360,
+        "x": 280,
+        "y": 1480,
         "wires": [
             [
                 "3f9108575a9461d2"
@@ -8552,8 +8774,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 530,
-        "y": 1120,
+        "x": 520,
+        "y": 1240,
         "wires": [
             [
                 "d430de06ba1e6656",
@@ -8586,8 +8808,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1010,
-        "y": 1520,
+        "x": 1000,
+        "y": 1640,
         "wires": [
             [
                 "06cf1d6512292e5a"
@@ -8604,8 +8826,8 @@
         ],
         "linkType": "static",
         "timeout": "30",
-        "x": 1130,
-        "y": 1520,
+        "x": 1120,
+        "y": 1640,
         "wires": [
             [
                 "873388b63527db5d"
@@ -8621,8 +8843,8 @@
         "links": [
             "febdd299270156ec"
         ],
-        "x": 1250,
-        "y": 1520,
+        "x": 1240,
+        "y": 1640,
         "wires": [],
         "l": true
     },
@@ -8650,8 +8872,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 710,
-        "y": 1060,
+        "x": 700,
+        "y": 1180,
         "wires": [
             [
                 "173e41885095af2a"
@@ -8670,8 +8892,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 840,
-        "y": 1060,
+        "x": 830,
+        "y": 1180,
         "wires": [
             []
         ]
@@ -8691,8 +8913,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 300,
-        "y": 1520,
+        "x": 290,
+        "y": 1640,
         "wires": [
             [
                 "2843374246efbb12"
@@ -8708,8 +8930,8 @@
         "links": [
             "d1da644c2763c559"
         ],
-        "x": 1535,
-        "y": 780,
+        "x": 1525,
+        "y": 900,
         "wires": [],
         "icon": "font-awesome/fa-warning"
     },
@@ -8722,8 +8944,8 @@
         "links": [
             "7f8a8e775bcd0fcb"
         ],
-        "x": 1635,
-        "y": 80,
+        "x": 1625,
+        "y": 200,
         "wires": [],
         "icon": "font-awesome/fa-bug"
     },
@@ -8736,8 +8958,8 @@
         "links": [
             "7f8a8e775bcd0fcb"
         ],
-        "x": 1305,
-        "y": 220,
+        "x": 1295,
+        "y": 340,
         "wires": [],
         "icon": "font-awesome/fa-bug"
     },
@@ -8750,8 +8972,8 @@
         "links": [
             "7f8a8e775bcd0fcb"
         ],
-        "x": 1285,
-        "y": 340,
+        "x": 1275,
+        "y": 460,
         "wires": [],
         "icon": "font-awesome/fa-bug"
     },
@@ -8764,8 +8986,8 @@
         "links": [
             "7f8a8e775bcd0fcb"
         ],
-        "x": 285,
-        "y": 700,
+        "x": 275,
+        "y": 820,
         "wires": [],
         "icon": "font-awesome/fa-bug"
     },
@@ -8778,8 +9000,8 @@
         "links": [
             "d1da644c2763c559"
         ],
-        "x": 1245,
-        "y": 1260,
+        "x": 1235,
+        "y": 1380,
         "wires": [],
         "icon": "font-awesome/fa-warning"
     },
@@ -8792,8 +9014,8 @@
         "links": [
             "d1da644c2763c559"
         ],
-        "x": 1245,
-        "y": 1380,
+        "x": 1235,
+        "y": 1500,
         "wires": [],
         "icon": "font-awesome/fa-warning"
     },
@@ -8802,8 +9024,8 @@
         "type": "previous-node",
         "z": "caa031b5574b994f",
         "name": "",
-        "x": 795,
-        "y": 1220,
+        "x": 785,
+        "y": 1340,
         "wires": [
             [
                 "ef1953a3c2d06e9d"
@@ -8820,8 +9042,8 @@
         "links": [
             "735b65418467fb43"
         ],
-        "x": 845,
-        "y": 1220,
+        "x": 835,
+        "y": 1340,
         "wires": [],
         "icon": "font-awesome/fa-info"
     },
@@ -8830,8 +9052,8 @@
         "type": "previous-node",
         "z": "caa031b5574b994f",
         "name": "",
-        "x": 1585,
-        "y": 80,
+        "x": 1575,
+        "y": 200,
         "wires": [
             [
                 "e7c91e4b60ba1627"
@@ -8844,8 +9066,8 @@
         "type": "previous-node",
         "z": "caa031b5574b994f",
         "name": "",
-        "x": 1185,
-        "y": 1260,
+        "x": 1175,
+        "y": 1380,
         "wires": [
             [
                 "5d5dfebe816e4bba"
@@ -8858,8 +9080,8 @@
         "type": "previous-node",
         "z": "caa031b5574b994f",
         "name": "",
-        "x": 1185,
-        "y": 1380,
+        "x": 1175,
+        "y": 1500,
         "wires": [
             [
                 "2455679c2e499a2f"
@@ -8872,8 +9094,8 @@
         "type": "previous-node",
         "z": "caa031b5574b994f",
         "name": "",
-        "x": 1475,
-        "y": 780,
+        "x": 1465,
+        "y": 900,
         "wires": [
             [
                 "131da11d640a6716"
@@ -8886,8 +9108,8 @@
         "type": "previous-node",
         "z": "caa031b5574b994f",
         "name": "",
-        "x": 1255,
-        "y": 220,
+        "x": 1245,
+        "y": 340,
         "wires": [
             [
                 "fddf8cb492464947"
@@ -8900,8 +9122,8 @@
         "type": "previous-node",
         "z": "caa031b5574b994f",
         "name": "",
-        "x": 1235,
-        "y": 340,
+        "x": 1225,
+        "y": 460,
         "wires": [
             [
                 "f2a6341d51439b93"
@@ -8930,8 +9152,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 670,
-        "y": 640,
+        "x": 660,
+        "y": 760,
         "wires": [
             [
                 "f8e71999af77f9db"
@@ -8950,8 +9172,8 @@
         "links": [
             "21b7092be4ba73e3"
         ],
-        "x": 755,
-        "y": 700,
+        "x": 745,
+        "y": 820,
         "wires": []
     },
     {
@@ -8962,8 +9184,8 @@
         "links": [
             "27de7c8ceb8ed6f2"
         ],
-        "x": 1385,
-        "y": 700,
+        "x": 1375,
+        "y": 820,
         "wires": [
             [
                 "7181e3d4bb9a619e"
@@ -8975,8 +9197,8 @@
         "type": "previous-node",
         "z": "caa031b5574b994f",
         "name": "",
-        "x": 235,
-        "y": 700,
+        "x": 225,
+        "y": 820,
         "wires": [
             [
                 "abc0185ff9bc6d64"
@@ -8994,8 +9216,8 @@
             "0483541e8e2a6d39"
         ],
         "uncaught": false,
-        "x": 1340,
-        "y": 980,
+        "x": 1330,
+        "y": 1100,
         "wires": [
             [
                 "b632c75a30bcbb2b"
@@ -9007,8 +9229,8 @@
         "type": "previous-node",
         "z": "caa031b5574b994f",
         "name": "",
-        "x": 1435,
-        "y": 980,
+        "x": 1425,
+        "y": 1100,
         "wires": [
             [
                 "ca364788f8a59612"
@@ -9025,8 +9247,8 @@
         "links": [
             "7f8a8e775bcd0fcb"
         ],
-        "x": 1485,
-        "y": 980,
+        "x": 1475,
+        "y": 1100,
         "wires": [],
         "icon": "font-awesome/fa-bug"
     },
@@ -9049,8 +9271,8 @@
                 "pt": "msg"
             }
         ],
-        "x": 960,
-        "y": 1380,
+        "x": 950,
+        "y": 1500,
         "wires": [
             [
                 "xadd_error_node"
@@ -9069,8 +9291,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1080,
-        "y": 1380,
+        "x": 1070,
+        "y": 1500,
         "wires": [
             []
         ]
@@ -9099,8 +9321,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1110,
-        "y": 660,
+        "x": 1100,
+        "y": 780,
         "wires": [
             [
                 "0a2dcb9e916b337c"
@@ -9119,8 +9341,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1205,
-        "y": 660,
+        "x": 1195,
+        "y": 780,
         "wires": [
             [
                 "22a42a503ccaa8b1"
@@ -9147,8 +9369,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1250,
-        "y": 1300,
+        "x": 1240,
+        "y": 1420,
         "wires": [
             [
                 "dcdb15c44538c891"
@@ -9164,8 +9386,8 @@
             "ad8a9179675c4114",
             "6e8a51bde60eebd0"
         ],
-        "x": 1255,
-        "y": 1060,
+        "x": 1245,
+        "y": 1180,
         "wires": [
             [
                 "fd712bdc50f7b784"
@@ -9191,8 +9413,8 @@
                 "pt": "msg"
             }
         ],
-        "x": 300,
-        "y": 1320,
+        "x": 290,
+        "y": 1440,
         "wires": [
             [
                 "ad8a9179675c4114"
@@ -9208,8 +9430,8 @@
         "links": [
             "0bb2f4eaccb182c1"
         ],
-        "x": 395,
-        "y": 1320,
+        "x": 385,
+        "y": 1440,
         "wires": []
     },
     {
@@ -9231,8 +9453,8 @@
                 "pt": "msg"
             }
         ],
-        "x": 290,
-        "y": 1400,
+        "x": 280,
+        "y": 1520,
         "wires": [
             [
                 "6e8a51bde60eebd0"
@@ -9248,8 +9470,8 @@
         "links": [
             "0bb2f4eaccb182c1"
         ],
-        "x": 375,
-        "y": 1400,
+        "x": 365,
+        "y": 1520,
         "wires": []
     },
     {
@@ -9265,9 +9487,121 @@
         "targetType": "msg",
         "statusVal": "",
         "statusType": "auto",
-        "x": 1380,
-        "y": 1140,
+        "x": 1370,
+        "y": 1260,
         "wires": []
+    },
+    {
+        "id": "cred-sync-inject",
+        "type": "inject",
+        "z": "caa031b5574b994f",
+        "name": "Every 10s",
+        "props": [],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": 5,
+        "topic": "",
+        "x": 170,
+        "y": 80,
+        "wires": [
+            [
+                "d45fea44eccc5be2"
+            ]
+        ]
+    },
+    {
+        "id": "cred-sync-hgetall-build",
+        "type": "change",
+        "z": "caa031b5574b994f",
+        "name": "HGETALL",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[ \"wis2gc:downloader:credentials\" ]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 80,
+        "wires": [
+            [
+                "cred-sync-hgetall"
+            ]
+        ]
+    },
+    {
+        "id": "cred-sync-hgetall",
+        "type": "redis-command",
+        "z": "caa031b5574b994f",
+        "server": "029ff868be3010db",
+        "command": "HGETALL",
+        "name": "HGETALL",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 600,
+        "y": 80,
+        "wires": [
+            [
+                "cred-sync-update"
+            ]
+        ]
+    },
+    {
+        "id": "cred-sync-update",
+        "type": "function",
+        "z": "caa031b5574b994f",
+        "name": "Credentials",
+        "func": "const payload = msg.payload;\nif (!payload || (!Array.isArray(payload) && typeof payload !== 'object')) {\n    return null;\n}\n\nconst creds = {};\n\nif (Array.isArray(payload)) {\n    for (let i = 0; i < payload.length; i += 2) {\n        try {\n            creds[payload[i]] = JSON.parse(payload[i + 1]);\n        } catch (e) {\n            node.warn(`download-creds: failed to parse '${payload[i]}'`);\n        }\n    }\n} else {\n    for (const [field, val] of Object.entries(payload)) {\n        try {\n            creds[field] = JSON.parse(val);\n        } catch (e) {\n            node.warn(`download-creds: failed to parse '${field}'`);\n        }\n    }\n}\n\nglobal.set('download-creds', creds);\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 750,
+        "y": 80,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d45fea44eccc5be2",
+        "type": "switch",
+        "z": "caa031b5574b994f",
+        "name": "Ready  ?",
+        "property": "( $globalContext(\"downloader\") = true ) and ( $globalContext(\"redis_ready\") = true ) and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 320,
+        "y": 80,
+        "wires": [
+            [
+                "cred-sync-hgetall-build"
+            ]
+        ]
     },
     {
         "id": "5034d326b1b418b5",
@@ -9309,7 +9643,7 @@
         "repeat": "",
         "crontab": "",
         "once": true,
-        "onceDelay": "1",
+        "onceDelay": "15",
         "topic": "",
         "x": 230,
         "y": 200,
@@ -9506,7 +9840,7 @@
         "type": "switch",
         "z": "102b04b3eaea572e",
         "name": "Cleaner ?",
-        "property": "$globalContext(\"cleaner\") and ( $globalContext(\"redis_ready\") = true ) and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "property": "$globalContext(\"cleaner-primary\") and ( $globalContext(\"redis_ready\") = true ) and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
         "propertyType": "jsonata",
         "rules": [
             {
@@ -9549,7 +9883,7 @@
         "type": "switch",
         "z": "102b04b3eaea572e",
         "name": "Cleaner ?",
-        "property": "$globalContext(\"cleaner\") and ( $globalContext(\"rename-to-s3\") != true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "property": "$globalContext(\"cleaner-primary\") and ( $globalContext(\"rename-to-s3\") != true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
         "propertyType": "jsonata",
         "rules": [
             {
@@ -9856,7 +10190,7 @@
         "type": "switch",
         "z": "102b04b3eaea572e",
         "name": "Cleaner ?",
-        "property": "$globalContext(\"cleaner\") and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "property": "$globalContext(\"cleaner-primary\") and ( $globalContext(\"process-mode\") = \"run\" ) ",
         "propertyType": "jsonata",
         "rules": [
             {
@@ -9935,7 +10269,7 @@
         "type": "switch",
         "z": "102b04b3eaea572e",
         "name": "Cleaner ?",
-        "property": "$globalContext(\"cleaner\") and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "property": "$globalContext(\"cleaner-primary\") and ( $globalContext(\"process-mode\") = \"run\" ) ",
         "propertyType": "jsonata",
         "rules": [
             {
@@ -9954,6 +10288,278 @@
         ]
     },
     {
+        "id": "a856758742503774",
+        "type": "inject",
+        "z": "102b04b3eaea572e",
+        "name": "2s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 560,
+        "wires": [
+            [
+                "954b95f18ad33cc9"
+            ]
+        ]
+    },
+    {
+        "id": "c441158d22597ad0",
+        "type": "change",
+        "z": "102b04b3eaea572e",
+        "name": "Heartbeat",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[  \"wis2gc:election\",  $globalContext(\"worker\") & \":ts\",       $millis(),  $globalContext(\"worker\") & \":uuid\",      $globalContext(\"uuid\"),  $globalContext(\"worker\") & \":cleaner\",  true ]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 520,
+        "y": 560,
+        "wires": [
+            [
+                "a540e4cfba713d9c"
+            ]
+        ]
+    },
+    {
+        "id": "a540e4cfba713d9c",
+        "type": "redis-command",
+        "z": "102b04b3eaea572e",
+        "server": "029ff868be3010db",
+        "command": "HSET",
+        "name": "HSET",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 650,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "954b95f18ad33cc9",
+        "type": "switch",
+        "z": "102b04b3eaea572e",
+        "name": "Cleaner ?",
+        "property": "$globalContext(\"cleaner\") and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 360,
+        "y": 560,
+        "wires": [
+            [
+                "c441158d22597ad0"
+            ]
+        ]
+    },
+    {
+        "id": "5e1829a8deb130f9",
+        "type": "inject",
+        "z": "102b04b3eaea572e",
+        "name": "10s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 230,
+        "y": 640,
+        "wires": [
+            [
+                "fdfada5317311cb9"
+            ]
+        ]
+    },
+    {
+        "id": "c97481ecd566aa56",
+        "type": "change",
+        "z": "102b04b3eaea572e",
+        "name": "Key",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "wis2gc:election",
+                "tot": "str"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 510,
+        "y": 640,
+        "wires": [
+            [
+                "b5eb0c643fec2a39"
+            ]
+        ]
+    },
+    {
+        "id": "b5eb0c643fec2a39",
+        "type": "redis-command",
+        "z": "102b04b3eaea572e",
+        "server": "029ff868be3010db",
+        "command": "HGETALL",
+        "name": "HGETALL",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 640,
+        "y": 640,
+        "wires": [
+            [
+                "105a70cf2b93201b"
+            ]
+        ]
+    },
+    {
+        "id": "105a70cf2b93201b",
+        "type": "function",
+        "z": "102b04b3eaea572e",
+        "name": "Elect",
+        "func": "const data = msg.payload || [];\nconst myUuid = global.get('uuid');\nconst myWorker = global.get('worker');\n\n// HGETALL (redis-command node) returns a flat array [field1, val1, field2, val2, ...]\n// Parse into { workerName: { ts, uuid, cleaner } }\nconst workers = {};\nfor (let i = 0; i < data.length - 1; i += 2) {\n    const key = data[i];\n    const value = data[i + 1];\n    const colon = key.lastIndexOf(':');\n    const worker = key.substring(0, colon);\n    const field = key.substring(colon + 1);\n    if (!workers[worker]) workers[worker] = {};\n    workers[worker][field] = value;\n}\n\nconst now = Date.now();\n\n// Election: lowest uuid among alive cleaner (ts < 8s)\nlet minUuid = null;\nfor (const info of Object.values(workers)) {\n    if (info.cleaner !== 'true') continue;\n    if (now - parseFloat(info.ts || 0) >= 8000) continue;\n    if (!info.uuid) continue;\n    if (minUuid === null || info.uuid < minUuid) minUuid = info.uuid;\n}\nconst priority = (minUuid !== null && myUuid === minUuid) ? 'primary' : 'secondary';\n\n// Stale workers (ts > 30s) → collect all 4 fields for HDEL\nconst staleFields = [];\nfor (const [w, info] of Object.entries(workers)) {\n    if (now - parseFloat(info.ts || 0) >= 30000) {\n        staleFields.push(w + ':ts', w + ':uuid', w + ':cleaner');\n    }\n}\n\nconst msg1 = { payload: priority };\nconst msg2 = staleFields.length > 0\n    ? { topic: ['wis2gc:election', ...staleFields] }\n    : null;\n\nreturn [msg1, msg2];",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 770,
+        "y": 640,
+        "wires": [
+            [
+                "7e7078469f8b5504"
+            ],
+            [
+                "1256d44a02f0969e"
+            ]
+        ]
+    },
+    {
+        "id": "7e7078469f8b5504",
+        "type": "change",
+        "z": "102b04b3eaea572e",
+        "name": "Primary",
+        "rules": [
+            {
+                "t": "set",
+                "p": "cleaner-primary",
+                "pt": "global",
+                "to": "payload = 'primary'",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 900,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1256d44a02f0969e",
+        "type": "redis-command",
+        "z": "102b04b3eaea572e",
+        "server": "029ff868be3010db",
+        "command": "HDEL",
+        "name": "HDEL",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 890,
+        "y": 660,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fdfada5317311cb9",
+        "type": "switch",
+        "z": "102b04b3eaea572e",
+        "name": "Cleaner",
+        "property": "$globalContext(\"cleaner\") and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 360,
+        "y": 640,
+        "wires": [
+            [
+                "c97481ecd566aa56"
+            ]
+        ]
+    },
+    {
         "id": "0114eaab13d782d9",
         "type": "function",
         "z": "5ff6c20513455391",
@@ -9966,7 +10572,7 @@
         "finalize": "",
         "libs": [],
         "x": 460,
-        "y": 320,
+        "y": 340,
         "wires": [
             [
                 "24ddb5fcccf4e13b"
@@ -9995,33 +10601,10 @@
         "payload": "",
         "payloadType": "date",
         "x": 170,
-        "y": 320,
+        "y": 340,
         "wires": [
             [
                 "9bf83f610940c63a"
-            ]
-        ]
-    },
-    {
-        "id": "9bf83f610940c63a",
-        "type": "switch",
-        "z": "5ff6c20513455391",
-        "name": "Reporter ?",
-        "property": "$globalContext(\"reporter\") and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
-        "propertyType": "jsonata",
-        "rules": [
-            {
-                "t": "true"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 310,
-        "y": 320,
-        "wires": [
-            [
-                "0114eaab13d782d9"
             ]
         ]
     },
@@ -10117,7 +10700,7 @@
         "finalize": "",
         "libs": [],
         "x": 600,
-        "y": 320,
+        "y": 340,
         "wires": [
             [
                 "c99c758c05d58fe6"
@@ -10147,7 +10730,7 @@
         "name": "Downloaded",
         "metric": "d265551416fe184b",
         "x": 770,
-        "y": 380,
+        "y": 400,
         "wires": []
     },
     {
@@ -10157,7 +10740,7 @@
         "name": "Timestamp",
         "metric": "e2c731c0b72b7626",
         "x": 770,
-        "y": 420,
+        "y": 440,
         "wires": []
     },
     {
@@ -10167,7 +10750,7 @@
         "name": "Delay",
         "metric": "f2a2a080e159b3a2",
         "x": 750,
-        "y": 300,
+        "y": 320,
         "wires": []
     },
     {
@@ -10177,7 +10760,7 @@
         "name": "Volume",
         "metric": "0b1738558640a231",
         "x": 760,
-        "y": 260,
+        "y": 280,
         "wires": []
     },
     {
@@ -10187,7 +10770,7 @@
         "name": "Number",
         "metric": "833dd9f884cd3f43",
         "x": 760,
-        "y": 220,
+        "y": 240,
         "wires": []
     },
     {
@@ -10300,8 +10883,386 @@
         "name": "Source",
         "metric": "b6eaa80da4be2167",
         "x": 760,
-        "y": 340,
+        "y": 360,
         "wires": []
+    },
+    {
+        "id": "eb00000000000003",
+        "type": "inject",
+        "z": "5ff6c20513455391",
+        "name": "2s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 520,
+        "wires": [
+            [
+                "c9f4515ea4e84d7e"
+            ]
+        ]
+    },
+    {
+        "id": "eb00000000000005",
+        "type": "change",
+        "z": "5ff6c20513455391",
+        "name": "Heartbeat",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[  \"wis2gc:election\",  $globalContext(\"worker\") & \":ts\",       $millis(),  $globalContext(\"worker\") & \":uuid\",      $globalContext(\"uuid\"),  $globalContext(\"worker\") & \":reporter\",  true ]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 460,
+        "y": 520,
+        "wires": [
+            [
+                "eb00000000000006"
+            ]
+        ]
+    },
+    {
+        "id": "eb00000000000006",
+        "type": "redis-command",
+        "z": "5ff6c20513455391",
+        "server": "029ff868be3010db",
+        "command": "HSET",
+        "name": "HSET",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 590,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9bf83f610940c63a",
+        "type": "switch",
+        "z": "5ff6c20513455391",
+        "name": "Reporter ?",
+        "property": "$globalContext(\"reporter\") and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 310,
+        "y": 340,
+        "wires": [
+            [
+                "0114eaab13d782d9"
+            ]
+        ]
+    },
+    {
+        "id": "c9f4515ea4e84d7e",
+        "type": "switch",
+        "z": "5ff6c20513455391",
+        "name": "Reporter ?",
+        "property": "$globalContext(\"reporter\") and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 310,
+        "y": 520,
+        "wires": [
+            [
+                "eb00000000000005"
+            ]
+        ]
+    },
+    {
+        "id": "eb0000000000a003",
+        "type": "inject",
+        "z": "5ff6c20513455391",
+        "name": "10s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 170,
+        "y": 600,
+        "wires": [
+            [
+                "78b33fa5d65d022e"
+            ]
+        ]
+    },
+    {
+        "id": "eb0000000000a006",
+        "type": "change",
+        "z": "5ff6c20513455391",
+        "name": "Key",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "wis2gc:election",
+                "tot": "str"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 450,
+        "y": 600,
+        "wires": [
+            [
+                "eb0000000000a007"
+            ]
+        ]
+    },
+    {
+        "id": "eb0000000000a007",
+        "type": "redis-command",
+        "z": "5ff6c20513455391",
+        "server": "029ff868be3010db",
+        "command": "HGETALL",
+        "name": "HGETALL",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 580,
+        "y": 600,
+        "wires": [
+            [
+                "eb0000000000a008"
+            ]
+        ]
+    },
+    {
+        "id": "eb0000000000a008",
+        "type": "function",
+        "z": "5ff6c20513455391",
+        "name": "Elect",
+        "func": "const data = msg.payload || [];\nconst myUuid = global.get('uuid');\nconst myWorker = global.get('worker');\n\n// HGETALL (redis-command node) returns a flat array [field1, val1, field2, val2, ...]\n// Parse into { workerName: { ts, uuid, reporter, replayer } }\nconst workers = {};\nfor (let i = 0; i < data.length - 1; i += 2) {\n    const key = data[i];\n    const value = data[i + 1];\n    const colon = key.lastIndexOf(':');\n    const worker = key.substring(0, colon);\n    const field = key.substring(colon + 1);\n    if (!workers[worker]) workers[worker] = {};\n    workers[worker][field] = value;\n}\n\nconst now = Date.now();\n\n// Election: lowest uuid among alive reporters (ts < 8s)\nlet minUuid = null;\nfor (const info of Object.values(workers)) {\n    if (info.reporter !== 'true') continue;\n    if (now - parseFloat(info.ts || 0) >= 8000) continue;\n    if (!info.uuid) continue;\n    if (minUuid === null || info.uuid < minUuid) minUuid = info.uuid;\n}\nconst priority = (minUuid !== null && myUuid === minUuid) ? 'primary' : 'secondary';\n\n// Stale workers (ts > 30s) → collect all 4 fields for HDEL\nconst staleFields = [];\nfor (const [w, info] of Object.entries(workers)) {\n    if (now - parseFloat(info.ts || 0) >= 30000) {\n        staleFields.push(w + ':ts', w + ':uuid', w + ':reporter');\n    }\n}\n\nconst msg1 = { payload: priority };\nconst msg2 = staleFields.length > 0\n    ? { topic: ['wis2gc:election', ...staleFields] }\n    : null;\n\nreturn [msg1, msg2];",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 710,
+        "y": 600,
+        "wires": [
+            [
+                "eb0000000000a009"
+            ],
+            [
+                "eb0000000000a00a"
+            ]
+        ]
+    },
+    {
+        "id": "eb0000000000a009",
+        "type": "change",
+        "z": "5ff6c20513455391",
+        "name": "Primary",
+        "rules": [
+            {
+                "t": "set",
+                "p": "reporter-primary",
+                "pt": "global",
+                "to": "payload = 'primary'",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 840,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "eb0000000000a00a",
+        "type": "redis-command",
+        "z": "5ff6c20513455391",
+        "server": "029ff868be3010db",
+        "command": "HDEL",
+        "name": "HDEL",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 830,
+        "y": 620,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "78b33fa5d65d022e",
+        "type": "switch",
+        "z": "5ff6c20513455391",
+        "name": "Reporter ?",
+        "property": "$globalContext(\"reporter\") and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 310,
+        "y": 600,
+        "wires": [
+            [
+                "eb0000000000a006"
+            ]
+        ]
+    },
+    {
+        "id": "750624e739f5f073",
+        "type": "http in",
+        "z": "5ff6c20513455391",
+        "name": "",
+        "url": "/reporter/primary",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 200,
+        "y": 680,
+        "wires": [
+            [
+                "91776a21ca7460fa"
+            ]
+        ]
+    },
+    {
+        "id": "9ca6f5b65925e91b",
+        "type": "change",
+        "z": "5ff6c20513455391",
+        "name": "Response",
+        "rules": [
+            {
+                "t": "set",
+                "p": "statusCode",
+                "pt": "msg",
+                "to": "$globalContext(\"reporter-primary\") = true ? 200 : 404",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 680,
+        "wires": [
+            [
+                "6fe0c81b4d4fe974"
+            ]
+        ]
+    },
+    {
+        "id": "6fe0c81b4d4fe974",
+        "type": "http response",
+        "z": "5ff6c20513455391",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 670,
+        "y": 680,
+        "wires": []
+    },
+    {
+        "id": "91776a21ca7460fa",
+        "type": "switch",
+        "z": "5ff6c20513455391",
+        "name": "Reporter ?",
+        "property": "$globalContext(\"reporter\") and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 390,
+        "y": 680,
+        "wires": [
+            [
+                "9ca6f5b65925e91b"
+            ]
+        ]
     },
     {
         "id": "71d475d0d4f7977f",
@@ -10319,7 +11280,7 @@
         "authType": "",
         "senderr": false,
         "headers": [],
-        "x": 1010,
+        "x": 1170,
         "y": 80,
         "wires": [
             []
@@ -10351,7 +11312,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 370,
+        "x": 530,
         "y": 80,
         "wires": [
             [
@@ -10371,7 +11332,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 500,
+        "x": 660,
         "y": 80,
         "wires": [
             [
@@ -10391,7 +11352,7 @@
         "stream": false,
         "addname": "",
         "property": "topics",
-        "x": 630,
+        "x": 790,
         "y": 80,
         "wires": [
             [
@@ -10416,7 +11377,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 750,
+        "x": 910,
         "y": 80,
         "wires": [
             [
@@ -10436,7 +11397,7 @@
         "y": 80,
         "wires": [
             [
-                "0a97f7690cd3ef92"
+                "11182c72da73936a"
             ]
         ],
         "l": true
@@ -10481,11 +11442,389 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 880,
+        "x": 1040,
         "y": 80,
         "wires": [
             [
                 "71d475d0d4f7977f"
+            ]
+        ]
+    },
+    {
+        "id": "11182c72da73936a",
+        "type": "switch",
+        "z": "5751c69be6006c9c",
+        "name": "Replayer ?",
+        "property": "$globalContext(\"replayer-primary\") and ( $globalContext(\"process-mode\") = \"run\" )  and $boolean($globalContext(\"global-replay-url\"))",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 390,
+        "y": 80,
+        "wires": [
+            [
+                "0a97f7690cd3ef92"
+            ]
+        ]
+    },
+    {
+        "id": "2b2da634cb952528",
+        "type": "inject",
+        "z": "5751c69be6006c9c",
+        "name": "2s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "2",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 160,
+        "wires": [
+            [
+                "de4c3988e19ab3da"
+            ]
+        ]
+    },
+    {
+        "id": "570c0a179f2899a0",
+        "type": "change",
+        "z": "5751c69be6006c9c",
+        "name": "Heartbeat",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[  \"wis2gc:election\",  $globalContext(\"worker\") & \":ts\",       $millis(),  $globalContext(\"worker\") & \":uuid\",      $globalContext(\"uuid\"),  $globalContext(\"worker\") & \":replayer\",  true ]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 540,
+        "y": 160,
+        "wires": [
+            [
+                "4d122c1a60212513"
+            ]
+        ]
+    },
+    {
+        "id": "4d122c1a60212513",
+        "type": "redis-command",
+        "z": "5751c69be6006c9c",
+        "server": "029ff868be3010db",
+        "command": "HSET",
+        "name": "HSET",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 670,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "de4c3988e19ab3da",
+        "type": "switch",
+        "z": "5751c69be6006c9c",
+        "name": "Replayer ?",
+        "property": "$globalContext(\"replayer\") and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 390,
+        "y": 160,
+        "wires": [
+            [
+                "570c0a179f2899a0"
+            ]
+        ]
+    },
+    {
+        "id": "ba45a62123c561d4",
+        "type": "inject",
+        "z": "5751c69be6006c9c",
+        "name": "10s",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "5",
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 250,
+        "y": 240,
+        "wires": [
+            [
+                "4cbfc2ac3e0b9d66"
+            ]
+        ]
+    },
+    {
+        "id": "f106d17eb7f12a8d",
+        "type": "change",
+        "z": "5751c69be6006c9c",
+        "name": "Key",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "wis2gc:election",
+                "tot": "str"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 530,
+        "y": 240,
+        "wires": [
+            [
+                "2ccd0410cf039e26"
+            ]
+        ]
+    },
+    {
+        "id": "2ccd0410cf039e26",
+        "type": "redis-command",
+        "z": "5751c69be6006c9c",
+        "server": "029ff868be3010db",
+        "command": "HGETALL",
+        "name": "HGETALL",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 660,
+        "y": 240,
+        "wires": [
+            [
+                "aaa9732837560d1b"
+            ]
+        ]
+    },
+    {
+        "id": "aaa9732837560d1b",
+        "type": "function",
+        "z": "5751c69be6006c9c",
+        "name": "Elect",
+        "func": "const data = msg.payload || [];\nconst myUuid = global.get('uuid');\nconst myWorker = global.get('worker');\n\n// HGETALL (redis-command node) returns a flat array [field1, val1, field2, val2, ...]\n// Parse into { workerName: { ts, uuid, reporter, replayer } }\nconst workers = {};\nfor (let i = 0; i < data.length - 1; i += 2) {\n    const key = data[i];\n    const value = data[i + 1];\n    const colon = key.lastIndexOf(':');\n    const worker = key.substring(0, colon);\n    const field = key.substring(colon + 1);\n    if (!workers[worker]) workers[worker] = {};\n    workers[worker][field] = value;\n}\n\nconst now = Date.now();\n\n// Election: lowest uuid among alive reporters (ts < 8s)\nlet minUuid = null;\nfor (const info of Object.values(workers)) {\n    if (info.replayer !== 'true') continue;\n    if (now - parseFloat(info.ts || 0) >= 8000) continue;\n    if (!info.uuid) continue;\n    if (minUuid === null || info.uuid < minUuid) minUuid = info.uuid;\n}\nconst priority = (minUuid !== null && myUuid === minUuid) ? 'primary' : 'secondary';\n\n// Stale workers (ts > 30s) → collect all 4 fields for HDEL\nconst staleFields = [];\nfor (const [w, info] of Object.entries(workers)) {\n    if (now - parseFloat(info.ts || 0) >= 30000) {\n        staleFields.push(w + ':ts', w + ':uuid', w + ':replayer');\n    }\n}\n\nconst msg1 = { payload: priority };\nconst msg2 = staleFields.length > 0\n    ? { topic: ['wis2gc:election', ...staleFields] }\n    : null;\n\nreturn [msg1, msg2];",
+        "outputs": 2,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 790,
+        "y": 240,
+        "wires": [
+            [
+                "85174ec1eb9c6fd0"
+            ],
+            [
+                "b6fc68dca858a96f"
+            ]
+        ]
+    },
+    {
+        "id": "85174ec1eb9c6fd0",
+        "type": "change",
+        "z": "5751c69be6006c9c",
+        "name": "Primary",
+        "rules": [
+            {
+                "t": "set",
+                "p": "replayer-primary",
+                "pt": "global",
+                "to": "payload = 'primary'",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 920,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "b6fc68dca858a96f",
+        "type": "redis-command",
+        "z": "5751c69be6006c9c",
+        "server": "029ff868be3010db",
+        "command": "HDEL",
+        "name": "HDEL",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 910,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4cbfc2ac3e0b9d66",
+        "type": "switch",
+        "z": "5751c69be6006c9c",
+        "name": "Replayer ?",
+        "property": "$globalContext(\"replayer\") and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 390,
+        "y": 240,
+        "wires": [
+            [
+                "f106d17eb7f12a8d"
+            ]
+        ]
+    },
+    {
+        "id": "b51d7e0fe03960f6",
+        "type": "http in",
+        "z": "5751c69be6006c9c",
+        "name": "",
+        "url": "/replayer/primary",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 280,
+        "y": 320,
+        "wires": [
+            [
+                "c7c61be8cbf08a09"
+            ]
+        ]
+    },
+    {
+        "id": "5ec4cf3c7798d026",
+        "type": "change",
+        "z": "5751c69be6006c9c",
+        "name": "Response",
+        "rules": [
+            {
+                "t": "set",
+                "p": "statusCode",
+                "pt": "msg",
+                "to": "$globalContext(\"replayer-primary\") = true ? 200 : 404",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 620,
+        "y": 320,
+        "wires": [
+            [
+                "916732761db163f6"
+            ]
+        ]
+    },
+    {
+        "id": "916732761db163f6",
+        "type": "http response",
+        "z": "5751c69be6006c9c",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 750,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "c7c61be8cbf08a09",
+        "type": "switch",
+        "z": "5751c69be6006c9c",
+        "name": "Replayer ?",
+        "property": "$globalContext(\"replayer\") and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 470,
+        "y": 320,
+        "wires": [
+            [
+                "5ec4cf3c7798d026"
             ]
         ]
     }

@@ -8,7 +8,7 @@ This document covers every option in `configuration.yml`. It is intended for adm
 
 At startup the application reads `configuration.yml` once and validates its content. If validation fails, the flow halts and logs the errors — no downloading or subscribing takes place until the problem is fixed and the application is restarted.
 
-A subset of settings can also be changed at runtime through the `/set` HTTP endpoint without restarting. Those settings are marked **runtime-settable** throughout this document. Changes made via `/set` are applied immediately to the running instance but are **not written back** to `configuration.yml`. After a restart the file values take effect again.
+A subset of settings can also be changed at runtime through the HTTP API (`/set` and `/replayer` endpoints) without restarting. Those settings are marked **runtime-settable** throughout this document. Changes are applied immediately to the running instance but are **not written back** to `configuration.yml`. After a restart the file values take effect again.
 
 ---
 
@@ -317,7 +317,7 @@ If omitted, no messages are filtered out beyond what the whitelist restricts.
 
 ### `subscriber.mqtt.global-replay`
 
-**Optional. Runtime-settable.**
+**Optional. Runtime-settable via `POST /replayer`.**
 
 When set to a non-null string, the subscriber also subscribes to the `replay/a/wis2/<value>/#` topic pattern on the global brokers. This receives replayed historical messages injected by a remote replay service.
 
@@ -327,7 +327,7 @@ subscriber:
     global-replay: "some-replay-uuid"
 ```
 
-In normal operation this is left `null` or omitted. The Replayer role sets and clears this automatically when a replay is triggered via `/set`. You do not normally need to set it manually.
+In normal operation this is left `null` or omitted. The Replayer role sets this automatically when a replay is triggered via `POST /replayer` with a `global-replay` key. You do not normally need to set it manually in the config file.
 
 > **Cross-check:** if this is set to a non-null value but `REPLAYER` is not in `global.roles`, the validator emits a warning (the subscription will work but no replay orchestration is active).
 
@@ -480,6 +480,35 @@ downloader:
 
 ---
 
+### `downloader.credentials`
+
+**Optional.**
+
+Per-topic HTTP credentials for data sources that require authentication. The downloader applies these credentials when building aria2 download requests.
+
+```yaml
+downloader:
+  credentials:
+    origin/a/wis2/int-ecmwf/data/recommended/weather/prediction/forecast/medium-range/deterministic/global:
+      username: ecmwf_user
+      password: s3cr3t!
+    origin/a/wis2/fr-meteofrance/data/recommended/weather/aviation/sigmet:
+      username: mf_aviation
+      password: p@ssw0rd
+```
+
+Each key is a WIS2 topic string. Validation rules:
+
+- Must be a valid MQTT topic starting with `origin/`.
+- Must contain `recommended` at level 6 (i.e. `origin/a/wis2/<centre-id>/data/recommended/...`).
+- Each value must contain exactly `username` and `password` (non-empty strings). No other keys are accepted.
+
+At startup, all entries are written to the shared Redis hash `wis2gc:downloader:credentials`. The hash persists across restarts — the startup write **adds to** the hash rather than replacing it, so entries from other instances or from prior `/set` calls are preserved.
+
+Credentials can also be added, changed, or removed at runtime via `POST /set` without restarting (see [Runtime API](#runtime-api)).
+
+---
+
 ## `cleaner`
 
 Controls how long downloaded files are kept in the local cache before being deleted. This section is only meaningful when `CLEANER` is in `global.roles`.
@@ -536,9 +565,15 @@ Must be a valid `http://` or `https://` URL. The endpoint is expected to impleme
 
 ---
 
-## Runtime-settable settings (`/set` API)
+## Runtime API
 
-These settings can be changed without restarting the application by sending a POST request to the `/set` HTTP endpoint. Changes take effect immediately and are lost on restart (the file values are reloaded).
+The application exposes several HTTP endpoints for runtime control and monitoring. Changes made via these endpoints take effect immediately and are **not written back** to `configuration.yml` — after a restart the file values reload.
+
+---
+
+### `POST /set`
+
+Updates general runtime settings.
 
 **Endpoint:** `POST http://<host>:<port>/set`  
 **Content-Type:** `application/json`
@@ -551,21 +586,24 @@ You can set multiple values in a single request. The response reports which valu
 | `log-level` | `"info"`, `"warn"`, `"debug"` | any | Changes log verbosity immediately. |
 | `whitelist` | array of topic strings | SUBSCRIBER | Replaces the active MQTT subscription list. Existing replay subscriptions are preserved. Same validation rules as in the config file. |
 | `blacklist` | array of topic strings | SUBSCRIBER | Replaces the active blacklist. |
-| `global-replay` | string | REPLAYER | Sets the active replay source UUID. |
-| `replay` | object `{from, to}` | REPLAYER | Triggers a one-off historical replay. `from` and `to` are integers in **minutes before now**. `from` must be greater than `to`. Example: `{"from": 60, "to": 0}` replays the last hour. |
+| `credentials` | CRUD object | DOWNLOADER | Create, update, or delete a per-topic download credential in the shared Redis hash. |
+
+The `credentials` object must contain:
+
+| Field | Required | Description |
+|---|---|---|
+| `op` | yes | `"create"`, `"update"`, or `"delete"`. |
+| `topic` | yes | Full WIS2 topic starting with `origin/` and containing `recommended` at level 6. |
+| `username` | for create/update | Non-empty string. |
+| `password` | for create/update | Non-empty string. |
+
+The change is written immediately to the shared Redis hash `wis2gc:downloader:credentials`. All downloader instances pick it up within their next 10-second credential sync cycle.
 
 **Example — pause the downloader:**
 ```bash
 curl -X POST http://localhost:1880/set \
   -H "Content-Type: application/json" \
   -d '{"process-mode": "halt"}'
-```
-
-**Example — trigger a 2-hour replay:**
-```bash
-curl -X POST http://localhost:1880/set \
-  -H "Content-Type: application/json" \
-  -d '{"replay": {"from": 120, "to": 0}}'
 ```
 
 **Example — add a temporary blacklist entry:**
@@ -575,7 +613,108 @@ curl -X POST http://localhost:1880/set \
   -d '{"blacklist": ["origin/a/wis2/some-centre/#"]}'
 ```
 
-> **GET `/get`** — returns the current value of all runtime-accessible settings. Add `?key=<name>` to query a single key.
+**Example — create a credential:**
+```bash
+curl -X POST http://localhost:1880/set \
+  -H "Content-Type: application/json" \
+  -d '{
+    "credentials": {
+      "op": "create",
+      "topic": "origin/a/wis2/int-ecmwf/data/recommended/weather/prediction/forecast/medium-range/deterministic/global",
+      "username": "ecmwf_user",
+      "password": "s3cr3t!"
+    }
+  }'
+```
+
+**Example — update a credential:**
+```bash
+curl -X POST http://localhost:1880/set \
+  -H "Content-Type: application/json" \
+  -d '{
+    "credentials": {
+      "op": "update",
+      "topic": "origin/a/wis2/int-ecmwf/data/recommended/weather/prediction/forecast/medium-range/deterministic/global",
+      "username": "ecmwf_user",
+      "password": "newpassword!"
+    }
+  }'
+```
+
+**Example — delete a credential:**
+```bash
+curl -X POST http://localhost:1880/set \
+  -H "Content-Type: application/json" \
+  -d '{
+    "credentials": {
+      "op": "delete",
+      "topic": "origin/a/wis2/int-ecmwf/data/recommended/weather/prediction/forecast/medium-range/deterministic/global"
+    }
+  }'
+```
+
+---
+
+### `POST /replayer`
+
+Handles replay-specific operations. This endpoint is **primary-gated**: only the instance currently elected as replayer primary processes the request. Non-primary instances return HTTP 403 immediately.
+
+**Endpoint:** `POST http://<host>:<port>/replayer`  
+**Content-Type:** `application/json`
+
+| Key | Type | Description |
+|---|---|---|
+| `global-replay` | string | Sets the active replay global cache identifier used to build the `replay/a/wis2/<value>/<uuid>/#` subscription. |
+| `replay` | object `{from, to}` | Triggers a one-off historical replay. `from` and `to` are integers in **minutes before now**. `from` must be greater than `to`. `to: 0` means "up to now". |
+
+**Example — trigger a 2-hour replay:**
+```bash
+curl -X POST http://localhost:1880/replayer \
+  -H "Content-Type: application/json" \
+  -d '{"replay": {"from": 120, "to": 0}}'
+```
+
+**Example — set the replay source:**
+```bash
+curl -X POST http://localhost:1880/replayer \
+  -H "Content-Type: application/json" \
+  -d '{"global-replay": "some-replay-uuid"}'
+```
+
+> If you send to a non-primary instance you will get HTTP 403. Use `GET /replayer/primary` to find the active primary first.
+
+---
+
+### `GET /get`
+
+Returns the current value of all runtime-accessible settings.
+
+```
+GET http://<host>:<port>/get
+GET http://<host>:<port>/get?key=<name>
+```
+
+Supported keys: `process-mode`, `log-level`, `worker`, `queue`, `whitelist` (SUBSCRIBER), `blacklist` (SUBSCRIBER), `global-replay` (REPLAYER), `credentials` (DOWNLOADER — returns the current in-memory credential map).
+
+---
+
+### `GET /reporter/primary`
+
+Returns HTTP 200 if this instance is the elected reporter primary, HTTP 404 otherwise. Use this to determine which instance is actively exporting Prometheus metrics.
+
+```bash
+curl -s -o /dev/null -w "%{http_code}" http://localhost:1880/reporter/primary
+```
+
+---
+
+### `GET /replayer/primary`
+
+Returns HTTP 200 if this instance is the elected replayer primary, HTTP 404 otherwise. Replay requests should be sent to the primary instance.
+
+```bash
+curl -s -o /dev/null -w "%{http_code}" http://localhost:1880/replayer/primary
+```
 
 ---
 
@@ -679,6 +818,12 @@ downloader:
   #   secretkey: <secret-key>
   #   bucket: global-cache
   #   region: garage
+
+  # Optional: per-topic HTTP credentials for authenticated data sources.
+  # credentials:
+  #   origin/a/wis2/int-ecmwf/data/recommended/weather/prediction/forecast/medium-range/deterministic/global:
+  #     username: ecmwf_user
+  #     password: s3cr3t!
 
 cleaner:
   # Delete files after this many seconds (180 = 3 minutes).
