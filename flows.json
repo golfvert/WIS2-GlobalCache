@@ -1869,8 +1869,7 @@
             "935ba99d18f04f78",
             "ef1953a3c2d06e9d",
             "07ad0baf7e59f967",
-            "d67bedf331afec26",
-            "0aee0c2aa27f59ba"
+            "d67bedf331afec26"
         ],
         "x": 970,
         "y": 740,
@@ -2627,8 +2626,7 @@
         "z": "1c6759660a32fda5",
         "name": "link in 19",
         "links": [
-            "5635a92d13ca3f9f",
-            "f19b041d1ba77045"
+            "5635a92d13ca3f9f"
         ],
         "x": 545,
         "y": 680,
@@ -4462,7 +4460,7 @@
         "type": "function",
         "z": "a843f3ff30ad0d18",
         "name": "Black &. GRep",
-        "func": "let topic = msg.topic;\nconst blacklist = global.get('blacklist');\n\n// If topic starts with replay/a/wis2/, remove first 4 levels\nif (topic.startsWith('replay/a/wis2/')) {\n    const parts = topic.split('/');\n    // Remove first 4 parts: replay, a, wis2, and the next item\n    topic = parts.slice(4).join('/');\n}\n\n// If blacklist is false/null/undefined or empty array, allow all messages\nif (!blacklist || blacklist.length === 0) {\n    return msg;\n}\n\nfunction isBlacklisted(topic, pattern) {\n    // Split both into parts\n    const topicParts = topic.split('/');\n    const patternParts = pattern.split('/');\n\n    for (let i = 0; i < patternParts.length; i++) {\n        const patternPart = patternParts[i];\n        const topicPart = topicParts[i];\n\n        if (patternPart === '#') {\n            // # matches everything remaining - always true\n            return true;\n        }\n\n        if (topicPart === undefined) {\n            // Topic is shorter than pattern - no match\n            return false;\n        }\n\n        if (patternPart === '+') {\n            // + matches exactly one level - continue\n            continue;\n        }\n\n        if (patternPart !== topicPart) {\n            // Literal mismatch - no match\n            return false;\n        }\n    }\n\n    // Pattern exhausted - match only if topic is also exhausted\n    return topicParts.length === patternParts.length;\n}\n\n// Check if topic matches any blacklist entry\nconst blocked = blacklist.some(pattern => isBlacklisted(topic, pattern));\n\n// If blocked, return null (silently drop message)\n// If not blocked, pass message through\nreturn blocked ? null : msg;",
+        "func": "let topic = msg.topic;\nconst blacklist = global.get('blacklist');\n\n// If topic starts with replay/a/wis2/, remove first 4 levels\nif (topic.startsWith('replay/a/wis2/')) {\n    const parts = topic.split('/');\n    // Remove first 5 parts: replay, a, wis2, GRep centre-id and the uuid\n    topic = parts.slice(5).join('/');\n}\n\n// If blacklist is false/null/undefined or empty array, allow all messages\nif (!blacklist || blacklist.length === 0) {\n    return msg;\n}\n\nfunction isBlacklisted(topic, pattern) {\n    // Split both into parts\n    const topicParts = topic.split('/');\n    const patternParts = pattern.split('/');\n\n    for (let i = 0; i < patternParts.length; i++) {\n        const patternPart = patternParts[i];\n        const topicPart = topicParts[i];\n\n        if (patternPart === '#') {\n            // # matches everything remaining - always true\n            return true;\n        }\n\n        if (topicPart === undefined) {\n            // Topic is shorter than pattern - no match\n            return false;\n        }\n\n        if (patternPart === '+') {\n            // + matches exactly one level - continue\n            continue;\n        }\n\n        if (patternPart !== topicPart) {\n            // Literal mismatch - no match\n            return false;\n        }\n    }\n\n    // Pattern exhausted - match only if topic is also exhausted\n    return topicParts.length === patternParts.length;\n}\n\n// Check if topic matches any blacklist entry\nconst blocked = blacklist.some(pattern => isBlacklisted(topic, pattern));\n\n// If blocked, return null (silently drop message)\n// If not blocked, pass message through\nreturn blocked ? null : msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -5625,8 +5623,7 @@
         "z": "a843f3ff30ad0d18",
         "name": "link in 20",
         "links": [
-            "a7b4e9d5237e6174",
-            "69e474d4865a541b"
+            "a7b4e9d5237e6174"
         ],
         "x": 145,
         "y": 1120,
@@ -8428,7 +8425,7 @@
         "wires": [
             [
                 "107baa40af9e88b4",
-                "baae52af9a7b9e74"
+                "dcdb15c44538c891"
             ]
         ]
     },
@@ -8513,8 +8510,7 @@
         "y": 1220,
         "wires": [
             [
-                "fd712bdc50f7b784",
-                "fa9a0e3feb7c1616"
+                "fd712bdc50f7b784"
             ]
         ]
     },
@@ -8550,7 +8546,7 @@
         "links": [
             "2e122a8c06dcafd7"
         ],
-        "x": 1345,
+        "x": 1175,
         "y": 1420,
         "wires": []
     },
@@ -9351,33 +9347,6 @@
         "l": false
     },
     {
-        "id": "baae52af9a7b9e74",
-        "type": "change",
-        "z": "caa031b5574b994f",
-        "name": "inQueue + 1",
-        "rules": [
-            {
-                "t": "set",
-                "p": "inQueue",
-                "pt": "flow",
-                "to": "$flowContext(\"inQueue\") + 1",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1240,
-        "y": 1420,
-        "wires": [
-            [
-                "dcdb15c44538c891"
-            ]
-        ]
-    },
-    {
         "id": "0bb2f4eaccb182c1",
         "type": "link in",
         "z": "caa031b5574b994f",
@@ -9472,23 +9441,6 @@
         ],
         "x": 365,
         "y": 1520,
-        "wires": []
-    },
-    {
-        "id": "fa9a0e3feb7c1616",
-        "type": "debug",
-        "z": "caa031b5574b994f",
-        "name": "debug 1",
-        "active": false,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "payload",
-        "targetType": "msg",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 1370,
-        "y": 1260,
         "wires": []
     },
     {
