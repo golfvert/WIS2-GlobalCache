@@ -3649,7 +3649,7 @@
                 "t": "set",
                 "p": "topic",
                 "pt": "msg",
-                "to": "[ \"wis2gc:downloader:downloader_id:\" & downloader_id , href , \"wait-\" & source]",
+                "to": "[ \"wis2gc:downloader:downloader_id:\" & downloader_id, href, \"wait\", \"src:\" & href, source ]",
                 "tot": "jsonata"
             },
             {
@@ -3734,7 +3734,7 @@
                 "t": "set",
                 "p": "topic",
                 "pt": "msg",
-                "to": "[ \"wis2gc:downloader:downloader_id:\" & downloader_id , href , \"wait-\" & source ]",
+                "to": "[ \"wis2gc:downloader:downloader_id:\" & downloader_id, href, \"wait\", \"src:\" & href, source ]",
                 "tot": "jsonata"
             },
             {
@@ -3929,7 +3929,7 @@
                 "t": "set",
                 "p": "topic",
                 "pt": "msg",
-                "to": "[ \"wis2gc:downloader:downloader_id:\" & downloader_id, href, \"queue-\" & source,   \"wnm\", $string(wnm), \"topic\", wnmtopic, \"published\", wnm.properties.pubtime, \"attempt\", 1 ]",
+                "to": "[ \"wis2gc:downloader:downloader_id:\" & downloader_id, href, \"queue\", \"src:\" & href, source, \"wnm\", $string(wnm), \"topic\", wnmtopic, \"published\", wnm.properties.pubtime, \"attempt\", 1 ]",
                 "tot": "jsonata"
             },
             {
@@ -6830,7 +6830,7 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1330,
+        "x": 1090,
         "y": 1220,
         "wires": [
             []
@@ -7446,7 +7446,8 @@
         "y": 240,
         "wires": [
             [
-                "defc4f68ca99d44f"
+                "defc4f68ca99d44f",
+                "ad3831085d2c14c9"
             ]
         ]
     },
@@ -7855,7 +7856,7 @@
             "873388b63527db5d",
             "6dfb45ef726c5af9"
         ],
-        "x": 120,
+        "x": 140,
         "y": 1500,
         "wires": [
             [
@@ -7877,11 +7878,11 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 550,
+        "x": 560,
         "y": 1480,
         "wires": [
             [
-                "e04457b61c5d9722"
+                "10817f441ec6fc4d"
             ]
         ]
     },
@@ -7909,7 +7910,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 410,
+        "x": 420,
         "y": 1480,
         "wires": [
             [
@@ -7973,58 +7974,6 @@
         ]
     },
     {
-        "id": "7949400d806c8645",
-        "type": "change",
-        "z": "caa031b5574b994f",
-        "name": "HSET",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "[ \"wis2gc:downloader:downloader_id:\" & wnm.downloader_id , href , \"complete-\" & $substringAfter(payload,\"queue-\") , \"stored\" , $millis() , \"link\", localhref ]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 690,
-        "y": 1220,
-        "wires": [
-            [
-                "7d723d9cc15c1177"
-            ]
-        ]
-    },
-    {
-        "id": "7d723d9cc15c1177",
-        "type": "redis-command",
-        "z": "caa031b5574b994f",
-        "server": "029ff868be3010db",
-        "command": "HSET",
-        "name": "HSET",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 810,
-        "y": 1220,
-        "wires": [
-            [
-                "6e26958ea82dc499"
-            ]
-        ]
-    },
-    {
         "id": "6e26958ea82dc499",
         "type": "change",
         "z": "caa031b5574b994f",
@@ -8048,7 +7997,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 930,
+        "x": 690,
         "y": 1220,
         "wires": [
             [
@@ -8068,7 +8017,7 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1060,
+        "x": 820,
         "y": 1220,
         "wires": [
             [
@@ -8084,7 +8033,7 @@
         "links": [
             "8a011d3a2eeceb67"
         ],
-        "x": 130,
+        "x": 150,
         "y": 1460,
         "wires": [
             [
@@ -8106,7 +8055,7 @@
         "y": 1240,
         "wires": [
             [
-                "fa9df07335b8bf6c"
+                "1c95d462b92b83ce"
             ]
         ],
         "l": true
@@ -8171,58 +8120,6 @@
         ]
     },
     {
-        "id": "fa9df07335b8bf6c",
-        "type": "change",
-        "z": "caa031b5574b994f",
-        "name": "HGET",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "[ \"wis2gc:downloader:downloader_id:\" & wnm.downloader_id , href ]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 270,
-        "y": 1240,
-        "wires": [
-            [
-                "0483541e8e2a6d39"
-            ]
-        ]
-    },
-    {
-        "id": "0483541e8e2a6d39",
-        "type": "redis-command",
-        "z": "caa031b5574b994f",
-        "server": "029ff868be3010db",
-        "command": "HGET",
-        "name": "HGET",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 390,
-        "y": 1240,
-        "wires": [
-            [
-                "0c9dc8d837b621d5"
-            ]
-        ]
-    },
-    {
         "id": "fc4bf403e3a4f8fa",
         "type": "switch",
         "z": "caa031b5574b994f",
@@ -8249,7 +8146,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 3,
-        "x": 810,
+        "x": 820,
         "y": 1480,
         "wires": [
             [
@@ -8258,57 +8155,6 @@
             [
                 "69fecbd2e0adadb4"
             ],
-            []
-        ]
-    },
-    {
-        "id": "15eb8cae84d98b6e",
-        "type": "change",
-        "z": "caa031b5574b994f",
-        "name": "Update",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "$append(topic,payload)",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1080,
-        "y": 1460,
-        "wires": [
-            [
-                "8e7034ccd6a86316",
-                "c4847bd8123fe67d"
-            ]
-        ]
-    },
-    {
-        "id": "8e7034ccd6a86316",
-        "type": "redis-command",
-        "z": "caa031b5574b994f",
-        "server": "029ff868be3010db",
-        "command": "HSET",
-        "name": "HSET",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 1210,
-        "y": 1460,
-        "wires": [
             []
         ]
     },
@@ -8457,28 +8303,8 @@
         "y": 1440,
         "wires": [
             [
-                "15eb8cae84d98b6e",
-                "835bcad5013f7c05"
-            ]
-        ]
-    },
-    {
-        "id": "e04457b61c5d9722",
-        "type": "function",
-        "z": "caa031b5574b994f",
-        "name": "Next",
-        "func": "const arr = msg.payload;\n\n// Default values\nmsg.retry = \"RETRY_NOK\";  // Changed from false\nmsg.extracted = null;\n\nlet queueIndex = -1;\nlet hasComplete = false;\n\nfor (let i = 0; i < arr.length; i++) {\n    if (typeof arr[i] === 'string') {\n        // Check for complete-\n        if (arr[i].startsWith('complete-')) {\n            hasComplete = true;\n        }\n\n        if (arr[i].startsWith('queue-')) {\n            queueIndex = i;\n        } else if (arr[i].startsWith('wait-')) {\n            // Check if previous index exists and is a string starting with http\n            if (i > 0 && typeof arr[i - 1] === 'string' && arr[i - 1].startsWith('http')) {\n                const waitHref = arr[i - 1];\n\n                // Find attempt value\n                let attemptValue = 0;\n                const attemptIndex = arr.indexOf('attempt');\n                if (attemptIndex !== -1 && attemptIndex + 1 < arr.length) {\n                    attemptValue = parseInt(arr[attemptIndex + 1]) || 0;\n                }\n\n                // Check if error-nocache exists\n                const hasErrorNoCache = arr.includes('error-nocache');\n\n                // Check if we should retry\n                const shouldRetry = attemptValue <= 6 && !hasErrorNoCache;\n\n                if (shouldRetry) {\n                    msg.retry = \"RETRY_OK\";  // Changed from true\n                    if (attemptIndex !== -1) {\n                        arr[attemptIndex + 1] = String(attemptValue + 1);\n                        msg.delay = 5 * attemptValue;\n                    } else {\n                        arr.push('attempt', '1');  // re-create the missing field\n                        msg.delay = 5;             // minimum first-retry delay\n                    }\n                    arr[i] = arr[i].replace('wait-', 'queue-');\n                    msg.extracted = waitHref;\n                }\n\n                break; // Exit loop after processing first wait-\n            }\n        }\n    }\n}\n\n// If complete- was found, override retry status\nif (hasComplete) {\n    msg.retry = \"RETRY_NONEED\";\n}\n\n// Always convert queue- to error-\nif (queueIndex !== -1) {\n    arr[queueIndex] = arr[queueIndex].replace('queue-', 'error-');\n}\n\nmsg.payload = arr;\nreturn msg;",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [],
-        "x": 680,
-        "y": 1480,
-        "wires": [
-            [
-                "fc4bf403e3a4f8fa"
+                "835bcad5013f7c05",
+                "051ef2b8332e9716"
             ]
         ]
     },
@@ -8513,7 +8339,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1200,
+        "x": 960,
         "y": 1220,
         "wires": [
             [
@@ -8553,7 +8379,7 @@
         "links": [
             "2e122a8c06dcafd7"
         ],
-        "x": 1175,
+        "x": 1185,
         "y": 1420,
         "wires": []
     },
@@ -8754,7 +8580,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 280,
+        "x": 290,
         "y": 1480,
         "wires": [
             [
@@ -8782,8 +8608,8 @@
         "wires": [
             [
                 "d430de06ba1e6656",
-                "7949400d806c8645",
-                "8da13408293c76fb"
+                "8da13408293c76fb",
+                "6e26958ea82dc499"
             ]
         ]
     },
@@ -9003,7 +8829,7 @@
         "links": [
             "d1da644c2763c559"
         ],
-        "x": 1235,
+        "x": 1245,
         "y": 1380,
         "wires": [],
         "icon": "font-awesome/fa-warning"
@@ -9017,7 +8843,7 @@
         "links": [
             "d1da644c2763c559"
         ],
-        "x": 1235,
+        "x": 1225,
         "y": 1500,
         "wires": [],
         "icon": "font-awesome/fa-warning"
@@ -9069,7 +8895,7 @@
         "type": "previous-node",
         "z": "caa031b5574b994f",
         "name": "",
-        "x": 1175,
+        "x": 1185,
         "y": 1380,
         "wires": [
             [
@@ -9176,7 +9002,7 @@
             "21b7092be4ba73e3"
         ],
         "x": 745,
-        "y": 820,
+        "y": 800,
         "wires": []
     },
     {
@@ -9362,7 +9188,7 @@
             "ad8a9179675c4114",
             "6e8a51bde60eebd0"
         ],
-        "x": 1245,
+        "x": 1005,
         "y": 1180,
         "wires": [
             [
@@ -9389,7 +9215,7 @@
                 "pt": "msg"
             }
         ],
-        "x": 290,
+        "x": 300,
         "y": 1440,
         "wires": [
             [
@@ -9406,7 +9232,7 @@
         "links": [
             "0bb2f4eaccb182c1"
         ],
-        "x": 385,
+        "x": 395,
         "y": 1440,
         "wires": []
     },
@@ -9429,7 +9255,7 @@
                 "pt": "msg"
             }
         ],
-        "x": 280,
+        "x": 290,
         "y": 1520,
         "wires": [
             [
@@ -9446,7 +9272,7 @@
         "links": [
             "0bb2f4eaccb182c1"
         ],
-        "x": 365,
+        "x": 375,
         "y": 1520,
         "wires": []
     },
@@ -9560,6 +9386,179 @@
             [
                 "cred-sync-hgetall-build"
             ]
+        ]
+    },
+    {
+        "id": "051ef2b8332e9716",
+        "type": "change",
+        "z": "caa031b5574b994f",
+        "name": "Update",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[ $flowContext(\"luaRetry\"), 1, \"wis2gc:downloader:downloader_id:\" & hget.downloader_id, promoteHref, promoteSource, newAttempt, errorHref, errorSource ]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1080,
+        "y": 1460,
+        "wires": [
+            [
+                "32d1d4a4cae36be6",
+                "c4847bd8123fe67d"
+            ]
+        ]
+    },
+    {
+        "id": "32d1d4a4cae36be6",
+        "type": "redis-command",
+        "z": "caa031b5574b994f",
+        "server": "029ff868be3010db",
+        "command": "EVAL",
+        "name": "EVAL",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 1210,
+        "y": 1460,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1c95d462b92b83ce",
+        "type": "change",
+        "z": "caa031b5574b994f",
+        "name": "HGET",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[ $flowContext(\"luaComplete\"), 1, \"wis2gc:downloader:downloader_id:\" & wnm.downloader_id, href, $string($millis()), localhref ]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 270,
+        "y": 1240,
+        "wires": [
+            [
+                "dba76a2231eb7150"
+            ]
+        ]
+    },
+    {
+        "id": "dba76a2231eb7150",
+        "type": "redis-command",
+        "z": "caa031b5574b994f",
+        "server": "029ff868be3010db",
+        "command": "EVAL",
+        "name": "EVAL",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 390,
+        "y": 1240,
+        "wires": [
+            [
+                "0c9dc8d837b621d5"
+            ]
+        ]
+    },
+    {
+        "id": "10817f441ec6fc4d",
+        "type": "function",
+        "z": "caa031b5574b994f",
+        "name": "Next",
+        "func": "const arr = msg.payload;\n\nmsg.retry = \"RETRY_NOK\";\nmsg.extracted = null;\nmsg.promoteHref = '';\nmsg.promoteSource = '';\nmsg.newAttempt = '';\nmsg.errorHref = '';\nmsg.errorSource = '';\n\n// source now lives in a sibling field \"src:\"+href (fix 1c)\nfunction srcOf(href) {\n    const idx = arr.indexOf('src:' + href);\n    return (idx !== -1 && idx + 1 < arr.length) ? arr[idx + 1] : '';\n}\n\nlet queueIndex = -1;\nlet hasComplete = false;\n\nfor (let i = 0; i < arr.length; i++) {\n    if (typeof arr[i] === 'string') {\n        if (arr[i] === 'complete') {\n            hasComplete = true;\n        }\n\n        if (arr[i] === 'queue') {\n            if (i > 0 && typeof arr[i - 1] === 'string' && arr[i - 1].startsWith('http')) {\n                queueIndex = i;\n            }\n        } else if (arr[i] === 'wait') {\n            if (i > 0 && typeof arr[i - 1] === 'string' && arr[i - 1].startsWith('http')) {\n                const waitHref = arr[i - 1];\n\n                let attemptValue = 0;\n                const attemptIndex = arr.indexOf('attempt');\n                if (attemptIndex !== -1 && attemptIndex + 1 < arr.length) {\n                    attemptValue = parseInt(arr[attemptIndex + 1]) || 0;\n                }\n\n                const hasErrorNoCache = arr.includes('error-nocache');\n                const shouldRetry = attemptValue <= 6 && !hasErrorNoCache;\n\n                if (shouldRetry) {\n                    msg.retry = \"RETRY_OK\";\n                    if (attemptIndex !== -1) {\n                        arr[attemptIndex + 1] = String(attemptValue + 1);\n                        msg.delay = 5 * attemptValue;\n                    } else {\n                        arr.push('attempt', '1');\n                        msg.delay = 5;\n                    }\n                    msg.promoteHref = waitHref;\n                    msg.promoteSource = srcOf(waitHref);\n                    msg.newAttempt = String(attemptValue + 1);\n\n                    arr[i] = 'queue';\n                    msg.extracted = waitHref;\n                }\n\n                break;\n            }\n        }\n    }\n}\n\nif (hasComplete) {\n    msg.retry = \"RETRY_NONEED\";\n}\n\n// give up on the active source only if it has not completed (fix 1b + 1c)\nif (queueIndex !== -1 && !hasComplete) {\n    msg.errorHref = arr[queueIndex - 1];\n    msg.errorSource = srcOf(arr[queueIndex - 1]);\n    arr[queueIndex] = 'error';\n}\n\nmsg.payload = arr;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 690,
+        "y": 1480,
+        "wires": [
+            [
+                "fc4bf403e3a4f8fa"
+            ]
+        ]
+    },
+    {
+        "id": "36dc4658333ba601",
+        "type": "function",
+        "z": "caa031b5574b994f",
+        "name": "K/V",
+        "func": "// First, convert array to object\nconst arr = msg.payload;\nconst output = {};\n\nfor (let i = 0; i < arr.length; i += 2) {\n    const key = String(arr[i]);\n    const value = arr[i + 1];\n    output[key] = value;\n}\n\n// Get length directly from payload key\nlet length = output.length ? parseInt(output.length) : 0;\n\n// Compute difference between stored and published\nlet delay = null;\nif (output.stored && output.published) {\n    delay = parseInt(output.stored) - new Date(output.published).getTime(); \n}\n\n// Extract centre-id (4th value when split by /)\nlet centreId = null;\nif (output.topic) {\n    const topicParts = output.topic.split('/');\n    if (topicParts.length >= 4) {\n        centreId = topicParts[3];  // Index 3 is the 4th value\n    }\n}\n\n// Extract subtopic (from 7th value onwards)\nlet subtopic = null;\nif (output.topic) {\n    const topicParts = output.topic.split('/');\n    if (topicParts.length >= 6) {\n        subtopic = topicParts.slice(5, 8).join('/');\n    }\n}\n\n// Source now stored in sibling field \"src:\"+href; the completed href has value \"complete\" (fix 1c)\nlet source = null;\nfor (const [k, v] of Object.entries(output)) {\n    if (v === 'complete') { source = output['src:' + k] || null; break; }\n}\n\n// Add extracted values to output\noutput.length = length;\noutput.delay = delay;\noutput.lastTimestamp = output.stored ? Math.floor(parseInt(output.stored) / 1000) : null;\noutput.centreId = centreId;\noutput.subtopic = subtopic;\noutput.source = source;\n\nmsg.payload = output;\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 390,
+        "y": 540,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ad3831085d2c14c9",
+        "type": "change",
+        "z": "caa031b5574b994f",
+        "name": "Load Lua",
+        "rules": [
+            {
+                "t": "set",
+                "p": "luaComplete",
+                "pt": "flow",
+                "to": "local c=redis.call('HGET',KEYS[1],ARGV[1]); if not c then return false end; if c=='complete' then return 'complete' end; redis.call('HSET',KEYS[1],ARGV[1],'complete','stored',ARGV[2],'link',ARGV[3]); return 'complete'",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "luaRetry",
+                "pt": "flow",
+                "to": "if ARGV[4]~='' then local e=redis.call('HGET',KEYS[1],ARGV[4]); if e and e=='queue' then redis.call('HSET',KEYS[1],ARGV[4],'error') end end; if ARGV[1]~='' then local w=redis.call('HGET',KEYS[1],ARGV[1]); if w and w=='wait' then redis.call('HSET',KEYS[1],ARGV[1],'queue','attempt',ARGV[3]); return 1 end; return 0 end; return 0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 420,
+        "y": 280,
+        "wires": [
+            []
         ]
     },
     {
@@ -10613,7 +10612,7 @@
         "type": "function",
         "z": "5ff6c20513455391",
         "name": "K/V",
-        "func": "// First, convert array to object\nconst arr = msg.payload;\nconst output = {};\n\nfor (let i = 0; i < arr.length; i += 2) {\n    const key = String(arr[i]);\n    const value = arr[i + 1];\n    output[key] = value;\n}\n\n// Get length directly from payload key\nlet length = output.length ? parseInt(output.length) : 0;\n\n// Compute difference between stored and published\nlet delay = null;\nif (output.stored && output.published) {\n    delay = parseInt(output.stored) - new Date(output.published).getTime(); \n}\n\n// Extract centre-id (4th value when split by /)\nlet centreId = null;\nif (output.topic) {\n    const topicParts = output.topic.split('/');\n    if (topicParts.length >= 4) {\n        centreId = topicParts[3];  // Index 3 is the 4th value\n    }\n}\n\n// Extract subtopic (from 7th value onwards)\nlet subtopic = null;\nif (output.topic) {\n    const topicParts = output.topic.split('/');\n    if (topicParts.length >= 6) {\n        subtopic = topicParts.slice(5, 8).join('/');\n    }\n}\n\n// Extract source from href value (\"complete-origin\", \"complete-fr-meteofrance\", etc.)\nlet source = null;\nfor (const [k, v] of Object.entries(output)) {\n    if (typeof v === 'string' && v.startsWith('complete-')) {\n        source = v.slice(9); // strip \"complete-\"\n        break;\n    }\n}\n\n// Add extracted values to output\noutput.length = length;\noutput.delay = delay;\noutput.lastTimestamp = output.stored ? Math.floor(parseInt(output.stored) / 1000) : null;\noutput.centreId = centreId;\noutput.subtopic = subtopic;\noutput.source = source;\n\nmsg.payload = output;\nreturn msg;\n",
+        "func": "// First, convert array to object\nconst arr = msg.payload;\nconst output = {};\n\nfor (let i = 0; i < arr.length; i += 2) {\n    const key = String(arr[i]);\n    const value = arr[i + 1];\n    output[key] = value;\n}\n\n// Get length directly from payload key\nlet length = output.length ? parseInt(output.length) : 0;\n\n// Compute difference between stored and published\nlet delay = null;\nif (output.stored && output.published) {\n    delay = parseInt(output.stored) - new Date(output.published).getTime(); \n}\n\n// Extract centre-id (4th value when split by /)\nlet centreId = null;\nif (output.topic) {\n    const topicParts = output.topic.split('/');\n    if (topicParts.length >= 4) {\n        centreId = topicParts[3];  // Index 3 is the 4th value\n    }\n}\n\n// Extract subtopic (from 7th value onwards)\nlet subtopic = null;\nif (output.topic) {\n    const topicParts = output.topic.split('/');\n    if (topicParts.length >= 6) {\n        subtopic = topicParts.slice(5, 8).join('/');\n    }\n}\n\n// Source from sibling \"src:\"+href; tolerate bare \"complete\" or legacy \"complete-...\" (fix 1c)\nlet source = null;\nfor (const [k, v] of Object.entries(output)) {\n    if (typeof v === 'string' && v.startsWith('complete')) {\n        source = output['src:' + k] || null;\n        break;\n    }\n}\n\n\n// Add extracted values to output\noutput.length = length;\noutput.delay = delay;\noutput.lastTimestamp = output.stored ? Math.floor(parseInt(output.stored) / 1000) : null;\noutput.centreId = centreId;\noutput.subtopic = subtopic;\noutput.source = source;\n\nmsg.payload = output;\nreturn msg;\n",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -10624,7 +10623,8 @@
         "y": 120,
         "wires": [
             [
-                "7c9b8e862cac33e8"
+                "7c9b8e862cac33e8",
+                "743b371f6fd509a5"
             ]
         ]
     },
@@ -11222,6 +11222,22 @@
                 "9ca6f5b65925e91b"
             ]
         ]
+    },
+    {
+        "id": "743b371f6fd509a5",
+        "type": "debug",
+        "z": "5ff6c20513455391",
+        "name": "debug 2",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 960,
+        "y": 180,
+        "wires": []
     },
     {
         "id": "71d475d0d4f7977f",
