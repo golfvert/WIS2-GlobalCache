@@ -6613,7 +6613,7 @@
         "y": 580,
         "wires": [
             [
-                "2c30bd36583f255a"
+                "fix_cxl_zadd_build"
             ]
         ]
     },
@@ -6670,38 +6670,6 @@
         ]
     },
     {
-        "id": "2c30bd36583f255a",
-        "type": "change",
-        "z": "caa031b5574b994f",
-        "name": "Expire",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "[ \"wis2gc:downloader:\" & $globalContext(\"worker\") & \":aria2_gid:\" & result & \":expire\", true, \"EX\", 420 ]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1220,
-        "y": 580,
-        "wires": [
-            [
-                "f3407b5c6529285b"
-            ]
-        ]
-    },
-    {
         "id": "2d1ec9b7e3ea8084",
         "type": "link call",
         "z": "caa031b5574b994f",
@@ -6732,24 +6700,6 @@
         "y": 380,
         "wires": [],
         "l": true
-    },
-    {
-        "id": "f3407b5c6529285b",
-        "type": "redis-command",
-        "z": "caa031b5574b994f",
-        "server": "029ff868be3010db",
-        "command": "SET",
-        "name": "Expire",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 1340,
-        "y": 580,
-        "wires": [
-            []
-        ]
     },
     {
         "id": "e51b855e0983bca1",
@@ -6927,7 +6877,8 @@
         "y": 980,
         "wires": [
             [
-                "7e85da62dad6be3d"
+                "7e85da62dad6be3d",
+                "fix_cxl_zrem_build"
             ]
         ]
     },
@@ -9555,53 +9506,103 @@
         ]
     },
     {
-        "id": "5034d326b1b418b5",
-        "type": "function",
-        "z": "102b04b3eaea572e",
-        "name": "Redis Expiry",
-        "func": "\nconst nodes = msg.redis;\nconst cluster = new redis.Cluster(nodes);\n\ncluster.on('ready', async () => {\n    try {\n        const allNodes = cluster.nodes('all');\n        let successCount = 0;\n\n        for (const nodeConn of allNodes) {\n            try {\n                // Subscribe on this specific node\n                await nodeConn.psubscribe('__keyevent@0__:*');\n\n                node.warn(`Subscribed on ${nodeConn.options.host}:${nodeConn.options.port}`);\n                successCount++;\n\n                // Attach listener to this node connection\n                nodeConn.on('pmessage', (pattern, channel, message) => {\n                    node.send({\n                        payload: {\n                            pattern,\n                            channel,\n                            key: message,\n                            source: `${nodeConn.options.host}:${nodeConn.options.port}`\n                        }\n                    });\n                });\n\n            } catch (err) {\n                node.error(\n                    `Subscribe error on ${nodeConn.options.host}:${nodeConn.options.port}: ${err.message}`\n                );\n            }\n        }\n\n\n    } catch (err) {\n        node.error('Cluster configuration error: ' + err.message);\n        msg.payload = false;\n        node.send(msg);\n    }\n});\n\ncluster.on('error', err => {\n    node.error('Cluster error: ' + err.message);\n});",
-        "outputs": 1,
-        "timeout": 0,
-        "noerr": 0,
-        "initialize": "",
-        "finalize": "",
-        "libs": [
+        "id": "fix_cxl_zadd_build",
+        "type": "change",
+        "z": "caa031b5574b994f",
+        "name": "Cancel",
+        "rules": [
             {
-                "var": "redis",
-                "module": "ioredis"
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[ \"wis2gc:cleaner:cancel\", $string($millis() + 420000), $globalContext(\"worker\") & \"|\" & result ]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
             }
         ],
-        "x": 510,
-        "y": 200,
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1240,
+        "y": 580,
         "wires": [
             [
-                "94e20e1ada295086"
+                "fix_cxl_zadd"
             ]
         ]
     },
     {
-        "id": "c61756a78a1caf58",
-        "type": "inject",
-        "z": "102b04b3eaea572e",
-        "name": "Init",
-        "props": [
+        "id": "fix_cxl_zadd",
+        "type": "redis-command",
+        "z": "caa031b5574b994f",
+        "server": "029ff868be3010db",
+        "command": "ZADD",
+        "name": "ZADD",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 1370,
+        "y": 580,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fix_cxl_zrem_build",
+        "type": "change",
+        "z": "caa031b5574b994f",
+        "name": "Cancel",
+        "rules": [
             {
-                "p": "redis",
-                "v": "$eval($env(\"REDIS_URL\"))",
-                "vt": "jsonata"
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[ \"wis2gc:cleaner:cancel\", $globalContext(\"worker\") & \"|\" & gid ]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
             }
         ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "15",
-        "topic": "",
-        "x": 230,
-        "y": 200,
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 1100,
+        "y": 920,
         "wires": [
             [
-                "ec214ec92bfead86"
+                "fix_cxl_zrem_done"
             ]
+        ]
+    },
+    {
+        "id": "fix_cxl_zrem_done",
+        "type": "redis-command",
+        "z": "caa031b5574b994f",
+        "server": "029ff868be3010db",
+        "command": "ZREM",
+        "name": "ZREM",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 1230,
+        "y": 920,
+        "wires": [
+            []
         ]
     },
     {
@@ -9614,8 +9615,8 @@
         "topic": "wis2gc:cleaner-reporter:*",
         "obj": true,
         "timeout": 0,
-        "x": 230,
-        "y": 280,
+        "x": 210,
+        "y": 220,
         "wires": [
             [
                 "d1a37dc7eb2804ea"
@@ -9626,206 +9627,19 @@
         "id": "657fefb1a3a5afae",
         "type": "function",
         "z": "102b04b3eaea572e",
-        "name": "K/V",
-        "func": "const arr = msg.payload;\nconst output = {};\n\nfor (let i = 0; i < arr.length; i += 2) {\n    output[String(arr[i])] = arr[i + 1];\n}\n\nmsg.payload = output.link;\nreturn msg;",
+        "name": "Schedule",
+        "func": "// Merge of \"K/V\" + \"Schedule delete\"\n// In:  msg.payload = flat [field, val, ...] cache-reporter record, msg.topic = \"wis2gc:cleaner-reporter:<worker>\"\n// Out: msg.topic = ZADD args for wis2gc:cleaner:pending   (return null = skip)\n\nconst arr = Array.isArray(msg.payload) ? msg.payload : [];\nconst rec = {};\nfor (let i = 0; i < arr.length; i += 2) {\n    rec[String(arr[i])] = arr[i + 1];\n}\nconst link = rec.link;\n\n// skip records with no local file (download_error / integrity_fail carry no link)\nif (typeof link !== 'string' || link.indexOf('downloads/') === -1) return null;\n\n// retention in seconds; if unset/disabled, keep the file\nconst keep = global.get('keep-in-cache');\nif (typeof keep !== 'number' || keep <= 0) return null;\n\n// worker from the channel, path from the link\nconst worker = msg.topic.substring(msg.topic.indexOf('cleaner-reporter:') + 'cleaner-reporter:'.length);\nconst path = link.substring(link.indexOf('downloads/') + 'downloads/'.length);\n\n// ZADD wis2gc:cleaner:pending <deleteAt-ms> \"<worker>|<path>\"\nmsg.topic = ['wis2gc:cleaner:pending', String(Date.now() + keep * 1000), worker + '|' + path];\ndelete msg.payload;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 490,
-        "y": 280,
+        "x": 480,
+        "y": 220,
         "wires": [
             [
-                "042423cc1cf00a73"
-            ]
-        ]
-    },
-    {
-        "id": "042423cc1cf00a73",
-        "type": "change",
-        "z": "102b04b3eaea572e",
-        "name": "Prepare",
-        "rules": [
-            {
-                "t": "set",
-                "p": "payload",
-                "pt": "msg",
-                "to": "$substringAfter(payload,\"downloads/\")",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "[ topic & \":expire:\" & payload , true ,  \"EX\" , $globalContext(\"keep-in-cache\") ]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 620,
-        "y": 280,
-        "wires": [
-            [
-                "6f7eafd6a247b7b6"
-            ]
-        ]
-    },
-    {
-        "id": "6f7eafd6a247b7b6",
-        "type": "redis-command",
-        "z": "102b04b3eaea572e",
-        "server": "029ff868be3010db",
-        "command": "SET",
-        "name": "Set",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 750,
-        "y": 280,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "e1f6e48081d6b019",
-        "type": "switch",
-        "z": "102b04b3eaea572e",
-        "name": "Action",
-        "property": "payload",
-        "propertyType": "msg",
-        "rules": [
-            {
-                "t": "jsonata_exp",
-                "v": "( items[0] = \"wis2gc\" ) and ( items[1] = \"cleaner-reporter\" ) and ( items[3] = \"expire\" )",
-                "vt": "jsonata"
-            },
-            {
-                "t": "jsonata_exp",
-                "v": "( items[0] = \"wis2gc\" ) and ( items[1] = \"downloader\" ) and ( items[3] = \"aria2_gid\" ) and ( items[5] = \"expire\" ) ",
-                "vt": "jsonata"
-            },
-            {
-                "t": "else"
-            }
-        ],
-        "checkall": "false",
-        "repair": false,
-        "outputs": 3,
-        "x": 910,
-        "y": 200,
-        "wires": [
-            [
-                "a27acf28d7b7b3f9"
-            ],
-            [
-                "deb66345c0daf188"
-            ],
-            []
-        ]
-    },
-    {
-        "id": "986e9a2cc040c5f9",
-        "type": "change",
-        "z": "102b04b3eaea572e",
-        "name": "Delete",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "[ items[2], \"*\" , \"action\", \"delete\" , \"filename\", filename ]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1170,
-        "y": 160,
-        "wires": [
-            [
-                "ad0e84a7b869c0b6"
-            ]
-        ]
-    },
-    {
-        "id": "ad0e84a7b869c0b6",
-        "type": "redis-command",
-        "z": "102b04b3eaea572e",
-        "server": "029ff868be3010db",
-        "command": "XADD",
-        "name": "XADD",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 1290,
-        "y": 160,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "ec214ec92bfead86",
-        "type": "switch",
-        "z": "102b04b3eaea572e",
-        "name": "Cleaner ?",
-        "property": "$globalContext(\"cleaner-primary\") and ( $globalContext(\"redis_ready\") = true ) and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
-        "propertyType": "jsonata",
-        "rules": [
-            {
-                "t": "true"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 360,
-        "y": 200,
-        "wires": [
-            [
-                "5034d326b1b418b5"
-            ]
-        ]
-    },
-    {
-        "id": "94e20e1ada295086",
-        "type": "rbe",
-        "z": "102b04b3eaea572e",
-        "name": "Unique",
-        "func": "rbe",
-        "gap": "",
-        "start": "",
-        "inout": "out",
-        "septopics": true,
-        "property": "payload",
-        "topi": "topic",
-        "x": 660,
-        "y": 200,
-        "wires": [
-            [
-                "d7bc6efba04db0b1"
+                "fix_zadd"
             ]
         ]
     },
@@ -9844,147 +9658,11 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 360,
-        "y": 280,
+        "x": 340,
+        "y": 220,
         "wires": [
             [
                 "657fefb1a3a5afae"
-            ]
-        ]
-    },
-    {
-        "id": "a27acf28d7b7b3f9",
-        "type": "change",
-        "z": "102b04b3eaea572e",
-        "name": "Filename",
-        "rules": [
-            {
-                "t": "set",
-                "p": "filename",
-                "pt": "msg",
-                "to": "$substringAfter(payload.key,\"expire:\")",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1040,
-        "y": 160,
-        "wires": [
-            [
-                "986e9a2cc040c5f9"
-            ]
-        ]
-    },
-    {
-        "id": "d7bc6efba04db0b1",
-        "type": "change",
-        "z": "102b04b3eaea572e",
-        "name": "Items",
-        "rules": [
-            {
-                "t": "set",
-                "p": "items",
-                "pt": "msg",
-                "to": "$split(payload.key,\":\")",
-                "tot": "jsonata"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 790,
-        "y": 200,
-        "wires": [
-            [
-                "e1f6e48081d6b019"
-            ]
-        ]
-    },
-    {
-        "id": "af3c7f39b3e3b23f",
-        "type": "redis-command",
-        "z": "102b04b3eaea572e",
-        "server": "029ff868be3010db",
-        "command": "XADD",
-        "name": "XADD",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 1310,
-        "y": 200,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "deb66345c0daf188",
-        "type": "change",
-        "z": "102b04b3eaea572e",
-        "name": "aria2_gid",
-        "rules": [
-            {
-                "t": "set",
-                "p": "aria2_gid",
-                "pt": "msg",
-                "to": "items[4]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1040,
-        "y": 200,
-        "wires": [
-            [
-                "50b02f8d5928ee4e"
-            ]
-        ]
-    },
-    {
-        "id": "50b02f8d5928ee4e",
-        "type": "change",
-        "z": "102b04b3eaea572e",
-        "name": "Cancel",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "[ items[2], \"*\" , \"action\", \"cancel\" , \"aria2_gid\", aria2_gid ]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 1180,
-        "y": 200,
-        "wires": [
-            [
-                "af3c7f39b3e3b23f"
             ]
         ]
     },
@@ -10000,7 +9678,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "x": 230,
-        "y": 480,
+        "y": 380,
         "wires": [
             [
                 "2ae60817cedd9bde"
@@ -10020,7 +9698,7 @@
         "finalize": "",
         "libs": [],
         "x": 520,
-        "y": 480,
+        "y": 380,
         "wires": [
             [
                 "16843fc39d8d2908"
@@ -10039,7 +9717,7 @@
         "onceDelay": 0.1,
         "topic": "",
         "x": 250,
-        "y": 380,
+        "y": 300,
         "wires": [
             [
                 "bc606cd68ed70ca1"
@@ -10066,7 +9744,7 @@
             }
         ],
         "x": 540,
-        "y": 380,
+        "y": 300,
         "wires": [
             [
                 "f8db455e64558271"
@@ -10086,7 +9764,7 @@
         "payloadType": "json",
         "block": false,
         "x": 670,
-        "y": 380,
+        "y": 300,
         "wires": [
             [
                 "1268ac50f3832247"
@@ -10109,7 +9787,7 @@
         "repair": false,
         "outputs": 1,
         "x": 800,
-        "y": 380,
+        "y": 300,
         "wires": [
             [
                 "83e1371b32e9608f"
@@ -10129,7 +9807,7 @@
         "finalize": "",
         "libs": [],
         "x": 960,
-        "y": 380,
+        "y": 300,
         "wires": [
             [
                 "fbb02586af0f3189"
@@ -10152,7 +9830,7 @@
         "repair": false,
         "outputs": 1,
         "x": 400,
-        "y": 380,
+        "y": 300,
         "wires": [
             [
                 "d0c8b0be856355d3"
@@ -10169,7 +9847,7 @@
             "7f8a8e775bcd0fcb"
         ],
         "x": 1135,
-        "y": 380,
+        "y": 300,
         "wires": [],
         "icon": "font-awesome/fa-bug"
     },
@@ -10179,7 +9857,7 @@
         "z": "102b04b3eaea572e",
         "name": "",
         "x": 1075,
-        "y": 380,
+        "y": 300,
         "wires": [
             [
                 "411f08083f4fc6c6"
@@ -10197,7 +9875,7 @@
             "7f8a8e775bcd0fcb"
         ],
         "x": 685,
-        "y": 480,
+        "y": 380,
         "wires": [],
         "icon": "font-awesome/fa-bug"
     },
@@ -10207,7 +9885,7 @@
         "z": "102b04b3eaea572e",
         "name": "",
         "x": 625,
-        "y": 480,
+        "y": 380,
         "wires": [
             [
                 "46f6746bf163a9af"
@@ -10231,7 +9909,7 @@
         "repair": false,
         "outputs": 1,
         "x": 370,
-        "y": 480,
+        "y": 380,
         "wires": [
             [
                 "cleanup_function_simple"
@@ -10260,7 +9938,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 230,
-        "y": 560,
+        "y": 460,
         "wires": [
             [
                 "954b95f18ad33cc9"
@@ -10292,7 +9970,7 @@
         "to": "",
         "reg": false,
         "x": 520,
-        "y": 560,
+        "y": 460,
         "wires": [
             [
                 "a540e4cfba713d9c"
@@ -10312,7 +9990,7 @@
         "payloadType": "json",
         "block": false,
         "x": 650,
-        "y": 560,
+        "y": 460,
         "wires": [
             []
         ]
@@ -10333,7 +10011,7 @@
         "repair": false,
         "outputs": 1,
         "x": 360,
-        "y": 560,
+        "y": 460,
         "wires": [
             [
                 "c441158d22597ad0"
@@ -10362,7 +10040,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 230,
-        "y": 640,
+        "y": 540,
         "wires": [
             [
                 "fdfada5317311cb9"
@@ -10394,7 +10072,7 @@
         "to": "",
         "reg": false,
         "x": 510,
-        "y": 640,
+        "y": 540,
         "wires": [
             [
                 "b5eb0c643fec2a39"
@@ -10414,7 +10092,7 @@
         "payloadType": "json",
         "block": false,
         "x": 640,
-        "y": 640,
+        "y": 540,
         "wires": [
             [
                 "105a70cf2b93201b"
@@ -10434,7 +10112,7 @@
         "finalize": "",
         "libs": [],
         "x": 770,
-        "y": 640,
+        "y": 540,
         "wires": [
             [
                 "7e7078469f8b5504"
@@ -10464,7 +10142,7 @@
         "to": "",
         "reg": false,
         "x": 900,
-        "y": 620,
+        "y": 520,
         "wires": [
             []
         ]
@@ -10482,7 +10160,7 @@
         "payloadType": "json",
         "block": false,
         "x": 890,
-        "y": 660,
+        "y": 560,
         "wires": [
             []
         ]
@@ -10503,11 +10181,130 @@
         "repair": false,
         "outputs": 1,
         "x": 360,
-        "y": 640,
+        "y": 540,
         "wires": [
             [
                 "c97481ecd566aa56"
             ]
+        ]
+    },
+    {
+        "id": "fix_zadd",
+        "type": "redis-command",
+        "z": "102b04b3eaea572e",
+        "server": "029ff868be3010db",
+        "command": "ZADD",
+        "name": "ZADD",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 610,
+        "y": 220,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d00707f41c14fbb3",
+        "type": "inject",
+        "z": "102b04b3eaea572e",
+        "name": "Sweep",
+        "props": [],
+        "repeat": "2",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "7",
+        "topic": "",
+        "x": 240,
+        "y": 140,
+        "wires": [
+            [
+                "f9f454896525812b"
+            ]
+        ]
+    },
+    {
+        "id": "f9f454896525812b",
+        "type": "switch",
+        "z": "102b04b3eaea572e",
+        "name": "Cleaner ?",
+        "property": "$globalContext(\"cleaner-primary\") and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 380,
+        "y": 140,
+        "wires": [
+            [
+                "fix_sweep_run"
+            ]
+        ]
+    },
+    {
+        "id": "fix_sweep_run",
+        "type": "function",
+        "z": "102b04b3eaea572e",
+        "name": "Sweep",
+        "func": "// Merged sweep (visual writes): reads both ZSETs, emits XADD on output 1, ZREM on output 2.\nconst cluster = global.get('redisCluster');\nif (!cluster) { node.error('Redis cluster not connected'); return null; }\nconst now = Date.now();\n\nconst jobs = [\n    { set: 'wis2gc:cleaner:pending', action: 'delete', field: 'filename'  },\n    { set: 'wis2gc:cleaner:cancel',  action: 'cancel', field: 'aria2_gid' },\n];\n\n(async () => {\n    for (const job of jobs) {\n        let due;\n        try { due = await cluster.zrangebyscore(job.set, 0, now); }\n        catch (e) { node.error(`zrangebyscore ${job.set}: ${e.message}`); continue; }\n        if (!due || due.length === 0) continue;\n\n        const done = [];\n        for (const m of due) {\n            const i = m.indexOf('|');\n            if (i === -1) { done.push(m); continue; }        // malformed -> just remove it\n            const worker = m.substring(0, i);\n            const value  = m.substring(i + 1);\n            // output 1 -> XADD  [stream, \"*\", \"action\", <action>, <field>, <value>]\n            node.send([ { topic: [ worker, '*', 'action', job.action, job.field, value ] }, null ]);\n            done.push(m);\n        }\n        // output 2 -> ZREM  [set, member, member, ...]\n        node.send([ null, { topic: [ job.set, ...done ] } ]);\n    }\n})();\n\nreturn null;",
+        "outputs": 2,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 510,
+        "y": 140,
+        "wires": [
+            [
+                "fix_sweep_xadd"
+            ],
+            [
+                "fix_sweep_zrem"
+            ]
+        ]
+    },
+    {
+        "id": "fix_sweep_xadd",
+        "type": "redis-command",
+        "z": "102b04b3eaea572e",
+        "server": "029ff868be3010db",
+        "command": "XADD",
+        "name": "XADD",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 630,
+        "y": 120,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fix_sweep_zrem",
+        "type": "redis-command",
+        "z": "102b04b3eaea572e",
+        "server": "029ff868be3010db",
+        "command": "ZREM",
+        "name": "ZREM",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 630,
+        "y": 160,
+        "wires": [
+            []
         ]
     },
     {
