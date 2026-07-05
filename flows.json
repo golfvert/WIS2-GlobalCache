@@ -59,8 +59,8 @@
         "id": "7df5aeb06a15c0e4",
         "type": "junction",
         "z": "a843f3ff30ad0d18",
-        "x": 510,
-        "y": 380,
+        "x": 460,
+        "y": 400,
         "wires": [
             [
                 "03c6799d92d6d702"
@@ -71,8 +71,8 @@
         "id": "b9ece7ebef6b02b6",
         "type": "junction",
         "z": "a843f3ff30ad0d18",
-        "x": 490,
-        "y": 380,
+        "x": 440,
+        "y": 400,
         "wires": [
             [
                 "7df5aeb06a15c0e4"
@@ -495,13 +495,13 @@
                 "d115a1b70e3c60df"
             ],
             [
-                "3668b2ec19eebb18"
+                "25ac402a9f85e34b"
             ],
             [
-                "287c036c9d516543"
+                "55f185e97ff146c4"
             ],
             [
-                "51ff616a0b410052"
+                "62f1f1baa600d1ea"
             ],
             []
         ]
@@ -626,8 +626,8 @@
         "links": [
             "3b607bab1ce4d22d"
         ],
-        "x": 200,
-        "y": 760,
+        "x": 220,
+        "y": 980,
         "wires": [
             [
                 "d8206db29d0e7696",
@@ -638,20 +638,6 @@
         "l": true
     },
     {
-        "id": "d115a1b70e3c60df",
-        "type": "link out",
-        "z": "1c6759660a32fda5",
-        "name": "Downloader",
-        "mode": "link",
-        "links": [
-            "f0c2751b37f6b71f"
-        ],
-        "x": 830,
-        "y": 440,
-        "wires": [],
-        "l": true
-    },
-    {
         "id": "f0c2751b37f6b71f",
         "type": "link in",
         "z": "1c6759660a32fda5",
@@ -659,8 +645,8 @@
         "links": [
             "d115a1b70e3c60df"
         ],
-        "x": 210,
-        "y": 920,
+        "x": 230,
+        "y": 1140,
         "wires": [
             [
                 "b6dda43fbcd85817",
@@ -745,8 +731,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 490,
-        "y": 720,
+        "x": 510,
+        "y": 940,
         "wires": [
             [
                 "d5fd7ba9ba7e7a48"
@@ -766,8 +752,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 1,
-        "x": 630,
-        "y": 720,
+        "x": 650,
+        "y": 940,
         "wires": [
             []
         ]
@@ -785,8 +771,8 @@
         "rap": true,
         "rh": 0,
         "inputs": 1,
-        "x": 630,
-        "y": 760,
+        "x": 650,
+        "y": 980,
         "wires": [
             []
         ]
@@ -866,8 +852,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 490,
-        "y": 760,
+        "x": 510,
+        "y": 980,
         "wires": [
             [
                 "65a4682d5ce9b9db"
@@ -928,18 +914,6 @@
                 "pt": "global",
                 "to": "true",
                 "tot": "bool"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "[ \"wis2gc:setup:\" & $globalContext(\"queue\"), $globalContext(\"worker\") & \":subscriber\" , $string($globalContext(\"topic\")) ]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
             }
         ],
         "action": "",
@@ -947,12 +921,10 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 360,
-        "y": 800,
+        "x": 380,
+        "y": 1020,
         "wires": [
-            [
-                "b36a39df4b2c4b55"
-            ]
+            []
         ]
     },
     {
@@ -979,8 +951,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 370,
-        "y": 880,
+        "x": 390,
+        "y": 1100,
         "wires": [
             [
                 "1b42b9c92f4352df"
@@ -1020,8 +992,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 370,
-        "y": 920,
+        "x": 390,
+        "y": 1140,
         "wires": [
             []
         ]
@@ -1064,7 +1036,7 @@
         "payloadType": "json",
         "block": false,
         "x": 520,
-        "y": 880,
+        "y": 1100,
         "wires": [
             []
         ]
@@ -1357,90 +1329,6 @@
         ]
     },
     {
-        "id": "3668b2ec19eebb18",
-        "type": "link out",
-        "z": "1c6759660a32fda5",
-        "name": "Cleaner",
-        "mode": "link",
-        "links": [
-            "c2ef9f8fba06325d"
-        ],
-        "x": 820,
-        "y": 480,
-        "wires": [],
-        "l": true
-    },
-    {
-        "id": "c2ef9f8fba06325d",
-        "type": "link in",
-        "z": "1c6759660a32fda5",
-        "name": "Cleaner",
-        "links": [
-            "3668b2ec19eebb18"
-        ],
-        "x": 190,
-        "y": 1100,
-        "wires": [
-            [
-                "25ac402a9f85e34b"
-            ]
-        ],
-        "l": true
-    },
-    {
-        "id": "25ac402a9f85e34b",
-        "type": "change",
-        "z": "1c6759660a32fda5",
-        "name": "Configuration",
-        "rules": [
-            {
-                "t": "set",
-                "p": "cleaner",
-                "pt": "global",
-                "to": "true",
-                "tot": "bool"
-            },
-            {
-                "t": "set",
-                "p": "keep-in-cache",
-                "pt": "global",
-                "to": "$exists(payload.cleaner.\"keep-in-cache\") ? payload.cleaner.\"keep-in-cache\" : false",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
-                "p": "lastErrorId",
-                "pt": "global",
-                "to": "0-0",
-                "tot": "str"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "[ \"wis2gc:setup:\" & $globalContext(\"queue\"), $globalContext(\"worker\") & \":cleaner\" , true ]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 360,
-        "y": 1100,
-        "wires": [
-            [
-                "bd8f8b9b4e439529"
-            ]
-        ]
-    },
-    {
         "id": "8f4133e85592931a",
         "type": "change",
         "z": "1c6759660a32fda5",
@@ -1489,90 +1377,6 @@
         ]
     },
     {
-        "id": "287c036c9d516543",
-        "type": "link out",
-        "z": "1c6759660a32fda5",
-        "name": "Reporter",
-        "mode": "link",
-        "links": [
-            "9763aa67f99aece4"
-        ],
-        "x": 820,
-        "y": 520,
-        "wires": [],
-        "l": true
-    },
-    {
-        "id": "9763aa67f99aece4",
-        "type": "link in",
-        "z": "1c6759660a32fda5",
-        "name": "Reporter",
-        "links": [
-            "287c036c9d516543"
-        ],
-        "x": 200,
-        "y": 1160,
-        "wires": [
-            [
-                "55f185e97ff146c4"
-            ]
-        ],
-        "l": true
-    },
-    {
-        "id": "55f185e97ff146c4",
-        "type": "change",
-        "z": "1c6759660a32fda5",
-        "name": "Configuration",
-        "rules": [
-            {
-                "t": "set",
-                "p": "reporter",
-                "pt": "global",
-                "to": "true",
-                "tot": "bool"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "[ \"wis2gc:setup:\" & $globalContext(\"queue\"), $globalContext(\"worker\") & \":reporter\" , true ]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 360,
-        "y": 1160,
-        "wires": [
-            [
-                "9c9026da609199a8"
-            ]
-        ]
-    },
-    {
-        "id": "51ff616a0b410052",
-        "type": "link out",
-        "z": "1c6759660a32fda5",
-        "name": "Replayer",
-        "mode": "link",
-        "links": [
-            "4ff0e0b350b60479"
-        ],
-        "x": 820,
-        "y": 560,
-        "wires": [],
-        "l": true
-    },
-    {
         "id": "78d502b560d7183e",
         "type": "function",
         "z": "1c6759660a32fda5",
@@ -1598,192 +1402,6 @@
         ]
     },
     {
-        "id": "4ff0e0b350b60479",
-        "type": "link in",
-        "z": "1c6759660a32fda5",
-        "name": "Replayer",
-        "links": [
-            "51ff616a0b410052"
-        ],
-        "x": 200,
-        "y": 1220,
-        "wires": [
-            [
-                "62f1f1baa600d1ea"
-            ]
-        ],
-        "l": true
-    },
-    {
-        "id": "f2bce2db3a5fb7b4",
-        "type": "inject",
-        "z": "1c6759660a32fda5",
-        "name": "Init",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "2",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "1",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 210,
-        "y": 620,
-        "wires": [
-            [
-                "23ce24c124386b7c"
-            ]
-        ]
-    },
-    {
-        "id": "91e10ebd880f5147",
-        "type": "change",
-        "z": "1c6759660a32fda5",
-        "name": "Message",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "[ \"wis2gc:setup:\" & $globalContext(\"queue\"), $globalContext(\"worker\") & \":alive\" , $millis() , $globalContext(\"worker\") & \":uuid\" , $globalContext(\"uuid\") ]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 480,
-        "y": 620,
-        "wires": [
-            [
-                "7fb07cd1226c36af"
-            ]
-        ]
-    },
-    {
-        "id": "7fb07cd1226c36af",
-        "type": "redis-command",
-        "z": "1c6759660a32fda5",
-        "server": "029ff868be3010db",
-        "command": "HSET",
-        "name": "Hset",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 610,
-        "y": 620,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "b36a39df4b2c4b55",
-        "type": "redis-command",
-        "z": "1c6759660a32fda5",
-        "server": "029ff868be3010db",
-        "command": "HSET",
-        "name": "Hset",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 530,
-        "y": 800,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "7dac53323143c7b0",
-        "type": "redis-command",
-        "z": "1c6759660a32fda5",
-        "server": "029ff868be3010db",
-        "command": "HSET",
-        "name": "Hset",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 690,
-        "y": 1000,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "d9f629d5b51a605a",
-        "type": "redis-command",
-        "z": "1c6759660a32fda5",
-        "server": "029ff868be3010db",
-        "command": "HSET",
-        "name": "Hset",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 650,
-        "y": 1100,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "9c9026da609199a8",
-        "type": "redis-command",
-        "z": "1c6759660a32fda5",
-        "server": "029ff868be3010db",
-        "command": "HSET",
-        "name": "Hset",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 510,
-        "y": 1160,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "7296650db5397b96",
-        "type": "redis-command",
-        "z": "1c6759660a32fda5",
-        "server": "029ff868be3010db",
-        "command": "HSET",
-        "name": "Hset",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 510,
-        "y": 1220,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "f3c8b225584944ae",
         "type": "switch",
         "z": "1c6759660a32fda5",
@@ -1798,8 +1416,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 1055,
-        "y": 740,
+        "x": 315,
+        "y": 620,
         "wires": [
             [
                 "244b379575d5653c"
@@ -1826,8 +1444,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 1055,
-        "y": 800,
+        "x": 315,
+        "y": 680,
         "wires": [
             [
                 "b4eda2dd5f255c3c"
@@ -1857,8 +1475,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 1055,
-        "y": 860,
+        "x": 315,
+        "y": 740,
         "wires": [
             [
                 "aefeea0d2c59acde"
@@ -1878,8 +1496,8 @@
             "07ad0baf7e59f967",
             "d67bedf331afec26"
         ],
-        "x": 970,
-        "y": 740,
+        "x": 230,
+        "y": 620,
         "wires": [
             [
                 "f3c8b225584944ae"
@@ -1901,8 +1519,8 @@
         "logIOScope": "I",
         "autoStart": true,
         "scope": [],
-        "x": 1280,
-        "y": 740,
+        "x": 540,
+        "y": 620,
         "wires": [
             []
         ]
@@ -1919,8 +1537,8 @@
             "c36071f90c484a6e",
             "50ff53bf687ee138"
         ],
-        "x": 970,
-        "y": 800,
+        "x": 230,
+        "y": 680,
         "wires": [
             [
                 "1f8ceb1df55ececd"
@@ -1942,8 +1560,8 @@
         "logIOScope": "I",
         "autoStart": true,
         "scope": [],
-        "x": 1290,
-        "y": 800,
+        "x": 550,
+        "y": 680,
         "wires": [
             []
         ]
@@ -1961,8 +1579,8 @@
         "logIOScope": "I",
         "autoStart": true,
         "scope": [],
-        "x": 1300,
-        "y": 860,
+        "x": 560,
+        "y": 740,
         "wires": [
             []
         ]
@@ -1982,8 +1600,8 @@
             "411f08083f4fc6c6",
             "46f6746bf163a9af"
         ],
-        "x": 970,
-        "y": 860,
+        "x": 230,
+        "y": 740,
         "wires": [
             [
                 "96d3af64c93b3b3d"
@@ -2044,8 +1662,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1150,
-        "y": 740,
+        "x": 410,
+        "y": 620,
         "wires": [
             [
                 "6298cf4e7bd76a5c"
@@ -2076,8 +1694,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1150,
-        "y": 800,
+        "x": 410,
+        "y": 680,
         "wires": [
             [
                 "e0394f5343d8f0e3"
@@ -2108,8 +1726,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1150,
-        "y": 860,
+        "x": 410,
+        "y": 740,
         "wires": [
             [
                 "c22bd570c213d585"
@@ -2131,8 +1749,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 570,
-        "y": 1040,
+        "x": 590,
+        "y": 1220,
         "wires": [
             [
                 "s3-config-change"
@@ -2200,60 +1818,10 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 690,
-        "y": 1040,
+        "x": 710,
+        "y": 1220,
         "wires": [
             []
-        ]
-    },
-    {
-        "id": "5115f76dbabd9e9b",
-        "type": "change",
-        "z": "1c6759660a32fda5",
-        "name": "Del",
-        "rules": [
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 570,
-        "y": 1000,
-        "wires": [
-            [
-                "7dac53323143c7b0"
-            ]
-        ]
-    },
-    {
-        "id": "bd8f8b9b4e439529",
-        "type": "switch",
-        "z": "1c6759660a32fda5",
-        "name": "Keep ?",
-        "property": "keep-in-cache",
-        "propertyType": "global",
-        "rules": [
-            {
-                "t": "istype",
-                "v": "number",
-                "vt": "number"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 520,
-        "y": 1100,
-        "wires": [
-            [
-                "d9f629d5b51a605a"
-            ]
         ]
     },
     {
@@ -2481,29 +2049,6 @@
         ]
     },
     {
-        "id": "23ce24c124386b7c",
-        "type": "switch",
-        "z": "1c6759660a32fda5",
-        "name": "Ready  ?",
-        "property": "$globalContext(\"config_valid\")",
-        "propertyType": "jsonata",
-        "rules": [
-            {
-                "t": "true"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 340,
-        "y": 620,
-        "wires": [
-            [
-                "91e10ebd880f5147"
-            ]
-        ]
-    },
-    {
         "id": "7b0525ef3667eb54",
         "type": "switch",
         "z": "1c6759660a32fda5",
@@ -2518,8 +2063,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 460,
-        "y": 1500,
+        "x": 480,
+        "y": 1480,
         "wires": [
             [
                 "eeca55e8996b39fc",
@@ -2549,8 +2094,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 760,
-        "y": 1440,
+        "x": 780,
+        "y": 1420,
         "wires": [
             [
                 "4b04613d7a09a8c8"
@@ -2579,8 +2124,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1080,
-        "y": 1400,
+        "x": 1100,
+        "y": 1380,
         "wires": [
             [
                 "5635a92d13ca3f9f"
@@ -2606,8 +2151,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1090,
-        "y": 1440,
+        "x": 1110,
+        "y": 1420,
         "wires": [
             [
                 "5635a92d13ca3f9f"
@@ -2623,8 +2168,8 @@
         "links": [
             "e6caed93a9ccdbe7"
         ],
-        "x": 1205,
-        "y": 1420,
+        "x": 1225,
+        "y": 1400,
         "wires": []
     },
     {
@@ -2635,8 +2180,8 @@
         "links": [
             "5635a92d13ca3f9f"
         ],
-        "x": 545,
-        "y": 680,
+        "x": 565,
+        "y": 900,
         "wires": [
             [
                 "d5fd7ba9ba7e7a48",
@@ -2659,8 +2204,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 930,
-        "y": 1400,
+        "x": 950,
+        "y": 1380,
         "wires": [
             [
                 "029eb604bdd1e003"
@@ -2682,8 +2227,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 930,
-        "y": 1440,
+        "x": 950,
+        "y": 1420,
         "wires": [
             [
                 "7dbeb8da2ba67aca"
@@ -2700,8 +2245,8 @@
         "upload": false,
         "skipBodyParsing": false,
         "swaggerDoc": "",
-        "x": 190,
-        "y": 1460,
+        "x": 210,
+        "y": 1440,
         "wires": [
             [
                 "b2f749ba8536f6bc"
@@ -2715,8 +2260,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 450,
-        "y": 1440,
+        "x": 470,
+        "y": 1420,
         "wires": []
     },
     {
@@ -2728,8 +2273,8 @@
         "method": "get",
         "upload": false,
         "skipBodyParsing": false,
-        "x": 190,
-        "y": 1340,
+        "x": 210,
+        "y": 1320,
         "wires": [
             [
                 "get_function"
@@ -2748,8 +2293,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 310,
-        "y": 1340,
+        "x": 330,
+        "y": 1320,
         "wires": [
             [
                 "get_http_resp"
@@ -2763,8 +2308,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 430,
-        "y": 1340,
+        "x": 450,
+        "y": 1320,
         "wires": []
     },
     {
@@ -2772,8 +2317,8 @@
         "type": "previous-node",
         "z": "1c6759660a32fda5",
         "name": "",
-        "x": 565,
-        "y": 1420,
+        "x": 585,
+        "y": 1400,
         "wires": [
             [
                 "d67bedf331afec26"
@@ -2790,24 +2335,10 @@
         "links": [
             "735b65418467fb43"
         ],
-        "x": 615,
-        "y": 1420,
+        "x": 635,
+        "y": 1400,
         "wires": [],
         "icon": "font-awesome/fa-info"
-    },
-    {
-        "id": "a7b4e9d5237e6174",
-        "type": "link out",
-        "z": "1c6759660a32fda5",
-        "name": "Whitelist",
-        "mode": "link",
-        "links": [
-            "1130afe3374e04fd"
-        ],
-        "x": 760,
-        "y": 1500,
-        "wires": [],
-        "l": true
     },
     {
         "id": "483cc04477132899",
@@ -2824,8 +2355,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 340,
-        "y": 720,
+        "x": 360,
+        "y": 940,
         "wires": [
             [
                 "065f44d8bb59a1fd"
@@ -2847,57 +2378,11 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 340,
-        "y": 760,
+        "x": 360,
+        "y": 980,
         "wires": [
             [
                 "0cf15be34a1c1b08"
-            ]
-        ]
-    },
-    {
-        "id": "62f1f1baa600d1ea",
-        "type": "change",
-        "z": "1c6759660a32fda5",
-        "name": "Configuration",
-        "rules": [
-            {
-                "t": "set",
-                "p": "replayer",
-                "pt": "global",
-                "to": "true",
-                "tot": "bool"
-            },
-            {
-                "t": "set",
-                "p": "global-replay-url",
-                "pt": "global",
-                "to": "$exists(payload.replayer.\"global-replay-url\") ? payload.replayer.\"global-replay-url\" : false",
-                "tot": "jsonata"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "[ \"wis2gc:setup:\" & $globalContext(\"queue\"), $globalContext(\"worker\") & \":replayer\" , true ]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 360,
-        "y": 1220,
-        "wires": [
-            [
-                "7296650db5397b96"
             ]
         ]
     },
@@ -2911,8 +2396,8 @@
         "upload": false,
         "skipBodyParsing": false,
         "swaggerDoc": "",
-        "x": 200,
-        "y": 1660,
+        "x": 220,
+        "y": 1640,
         "wires": [
             [
                 "d3825413c971a294"
@@ -2937,8 +2422,8 @@
         "checkall": "false",
         "repair": false,
         "outputs": 2,
-        "x": 340,
-        "y": 1660,
+        "x": 360,
+        "y": 1640,
         "wires": [
             [
                 "956d90f4f52ba3bc"
@@ -2974,8 +2459,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 470,
-        "y": 1700,
+        "x": 490,
+        "y": 1680,
         "wires": [
             [
                 "0b5df4de94e08951"
@@ -2994,8 +2479,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 480,
-        "y": 1640,
+        "x": 500,
+        "y": 1620,
         "wires": [
             [
                 "0b5df4de94e08951",
@@ -3011,8 +2496,8 @@
         "name": "",
         "statusCode": "",
         "headers": {},
-        "x": 650,
-        "y": 1700,
+        "x": 670,
+        "y": 1680,
         "wires": []
     },
     {
@@ -3024,8 +2509,8 @@
         "links": [
             "97a4f0f2771ea2b3"
         ],
-        "x": 660,
-        "y": 1640,
+        "x": 680,
+        "y": 1620,
         "wires": [],
         "l": true
     },
@@ -3076,13 +2561,6 @@
                 "pt": "global",
                 "to": "0-0",
                 "tot": "str"
-            },
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "[ \"wis2gc:setup:\" & $globalContext(\"queue\"), $globalContext(\"worker\") & \":downloader\" , true ]",
-                "tot": "jsonata"
             }
         ],
         "action": "",
@@ -3090,11 +2568,10 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 400,
-        "y": 960,
+        "x": 420,
+        "y": 1180,
         "wires": [
             [
-                "5115f76dbabd9e9b",
                 "b59dbe190ca901ca",
                 "cred-config-prep"
             ]
@@ -3112,8 +2589,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 320,
-        "y": 1460,
+        "x": 340,
+        "y": 1440,
         "wires": [
             [
                 "c28e7b27bb911a04"
@@ -3153,14 +2630,14 @@
         "checkall": "false",
         "repair": false,
         "outputs": 4,
-        "x": 600,
-        "y": 1500,
+        "x": 620,
+        "y": 1480,
         "wires": [
             [
                 "b712d85691267149"
             ],
             [
-                "a7b4e9d5237e6174"
+                "283ba984404a1c58"
             ],
             [
                 "02a4f430ad19de4e"
@@ -3180,8 +2657,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 590,
-        "y": 960,
+        "x": 610,
+        "y": 1180,
         "wires": [
             [
                 "cred-config-hset"
@@ -3200,8 +2677,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 730,
-        "y": 960,
+        "x": 750,
+        "y": 1180,
         "wires": [
             []
         ]
@@ -3218,8 +2695,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 770,
-        "y": 1540,
+        "x": 790,
+        "y": 1520,
         "wires": [
             [
                 "4e3516e728d0abf9"
@@ -3241,8 +2718,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 920,
-        "y": 1520,
+        "x": 940,
+        "y": 1500,
         "wires": [
             []
         ]
@@ -3259,11 +2736,287 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 920,
-        "y": 1560,
+        "x": 940,
+        "y": 1540,
         "wires": [
             []
         ]
+    },
+    {
+        "id": "ua_hb_inject",
+        "type": "inject",
+        "z": "1c6759660a32fda5",
+        "name": "Heartbeat",
+        "props": [],
+        "repeat": "2",
+        "crontab": "",
+        "once": true,
+        "onceDelay": "3",
+        "topic": "",
+        "x": 250,
+        "y": 840,
+        "wires": [
+            [
+                "ua_hb_gate"
+            ]
+        ]
+    },
+    {
+        "id": "ua_hb_gate",
+        "type": "switch",
+        "z": "1c6759660a32fda5",
+        "name": "Ready ?",
+        "property": "$globalContext(\"config_valid\") = true and ( $globalContext(\"process-mode\") = \"run\" )",
+        "propertyType": "jsonata",
+        "rules": [
+            {
+                "t": "true"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 400,
+        "y": 840,
+        "wires": [
+            [
+                "ua_hb_build"
+            ]
+        ]
+    },
+    {
+        "id": "ua_hb_build",
+        "type": "change",
+        "z": "1c6759660a32fda5",
+        "name": "Configuration",
+        "rules": [
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "[\t   \"wis2gc:configuration\",\t   $globalContext(\"worker\") & \":ts\",\t   $millis(),\t   $globalContext(\"worker\") & \":uuid\",\t   $globalContext(\"uuid\"),\t   $globalContext(\"worker\") & \":subscriber\",\t   $globalContext(\"subscriber\") = true,\t   $globalContext(\"worker\") & \":downloader\",\t   $globalContext(\"downloader\") = true,\t   $globalContext(\"worker\") & \":cleaner\",\t   $globalContext(\"cleaner\")    = true,\t   $globalContext(\"worker\") & \":reporter\",\t   $globalContext(\"reporter\")   = true,\t   $globalContext(\"worker\") & \":replayer\",\t   $globalContext(\"replayer\")   = true,\t   $globalContext(\"worker\") & \":s3\",\t   $globalContext(\"rename-to-s3\") = true,\t   $globalContext(\"worker\") & \":topics\",\t   $string(\t       $exists($globalContext(\"topic\")) ? $globalContext(\"topic\") : []\t   ) \t]",
+                "tot": "jsonata"
+            },
+            {
+                "t": "delete",
+                "p": "payload",
+                "pt": "msg"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 560,
+        "y": 840,
+        "wires": [
+            [
+                "ua_hb_hset"
+            ]
+        ]
+    },
+    {
+        "id": "ua_hb_hset",
+        "type": "redis-command",
+        "z": "1c6759660a32fda5",
+        "server": "029ff868be3010db",
+        "command": "HSET",
+        "name": "HSET",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 710,
+        "y": 840,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "283ba984404a1c58",
+        "type": "link out",
+        "z": "1c6759660a32fda5",
+        "name": "Whitelist",
+        "mode": "link",
+        "links": [
+            "1130afe3374e04fd"
+        ],
+        "x": 780,
+        "y": 1480,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "25ac402a9f85e34b",
+        "type": "change",
+        "z": "1c6759660a32fda5",
+        "name": "Cleaner",
+        "rules": [
+            {
+                "t": "set",
+                "p": "cleaner",
+                "pt": "global",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "keep-in-cache",
+                "pt": "global",
+                "to": "$exists(payload.cleaner.\"keep-in-cache\") ? payload.cleaner.\"keep-in-cache\" : false",
+                "tot": "jsonata"
+            },
+            {
+                "t": "set",
+                "p": "lastErrorId",
+                "pt": "global",
+                "to": "0-0",
+                "tot": "str"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 480,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "55f185e97ff146c4",
+        "type": "change",
+        "z": "1c6759660a32fda5",
+        "name": "Reporter",
+        "rules": [
+            {
+                "t": "set",
+                "p": "reporter",
+                "pt": "global",
+                "to": "true",
+                "tot": "bool"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 520,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "62f1f1baa600d1ea",
+        "type": "change",
+        "z": "1c6759660a32fda5",
+        "name": "Replayer",
+        "rules": [
+            {
+                "t": "set",
+                "p": "replayer",
+                "pt": "global",
+                "to": "true",
+                "tot": "bool"
+            },
+            {
+                "t": "set",
+                "p": "global-replay-url",
+                "pt": "global",
+                "to": "$exists(payload.replayer.\"global-replay-url\") ? payload.replayer.\"global-replay-url\" : false",
+                "tot": "jsonata"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 820,
+        "y": 560,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "d115a1b70e3c60df",
+        "type": "link out",
+        "z": "1c6759660a32fda5",
+        "name": "Downloader",
+        "mode": "link",
+        "links": [
+            "f0c2751b37f6b71f"
+        ],
+        "x": 830,
+        "y": 440,
+        "wires": [],
+        "l": true
+    },
+    {
+        "id": "ecd4cba1d3c3ffc0",
+        "type": "status",
+        "z": "1c6759660a32fda5",
+        "name": "Brokers",
+        "scope": [
+            "6600d6a1be6e48c0",
+            "1067ac263cbb3463",
+            "4acc9c68e853f923",
+            "aa9138632819c6cc",
+            "d38c0f3f45cec671",
+            "f83c3e81808bdce1"
+        ],
+        "x": 830,
+        "y": 960,
+        "wires": [
+            [
+                "db6692c486872572"
+            ]
+        ]
+    },
+    {
+        "id": "db6692c486872572",
+        "type": "switch",
+        "z": "1c6759660a32fda5",
+        "name": "Green ?",
+        "property": "status.fill",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "green",
+                "vt": "str"
+            }
+        ],
+        "checkall": "true",
+        "repair": false,
+        "outputs": 1,
+        "x": 960,
+        "y": 960,
+        "wires": [
+            [
+                "78a80f4187e46830"
+            ]
+        ]
+    },
+    {
+        "id": "78a80f4187e46830",
+        "type": "link out",
+        "z": "1c6759660a32fda5",
+        "name": "Subcriber",
+        "mode": "link",
+        "links": [
+            "93695eb59a77f631"
+        ],
+        "x": 1100,
+        "y": 960,
+        "wires": [],
+        "l": true
     },
     {
         "id": "f53714198eb1e993",
@@ -3278,7 +3031,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 1,
-        "x": 510,
+        "x": 630,
         "y": 120,
         "wires": [
             [
@@ -3298,40 +3051,13 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 630,
+        "x": 750,
         "y": 120,
         "wires": [
             [
                 "b1e017aa86e0e4b3"
             ]
         ]
-    },
-    {
-        "id": "b778150ac43b8303",
-        "type": "delay",
-        "z": "a843f3ff30ad0d18",
-        "name": "",
-        "pauseType": "delay",
-        "timeout": "1",
-        "timeoutUnits": "seconds",
-        "rate": "1",
-        "nbRateUnits": "1",
-        "rateUnits": "second",
-        "randomFirst": "1",
-        "randomLast": "5",
-        "randomUnits": "seconds",
-        "drop": false,
-        "allowrate": false,
-        "outputs": 1,
-        "x": 415,
-        "y": 160,
-        "wires": [
-            [
-                "6effc579c4b9bbf3",
-                "f53714198eb1e993"
-            ]
-        ],
-        "l": false
     },
     {
         "id": "6effc579c4b9bbf3",
@@ -3346,7 +3072,7 @@
         "rap": true,
         "rh": 0,
         "inputs": 1,
-        "x": 510,
+        "x": 630,
         "y": 200,
         "wires": [
             [
@@ -3366,7 +3092,7 @@
         "septopics": true,
         "property": "payload",
         "topi": "topic",
-        "x": 690,
+        "x": 810,
         "y": 200,
         "wires": [
             [
@@ -3412,7 +3138,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 940,
+        "x": 1060,
         "y": 120,
         "wires": [
             [
@@ -3435,7 +3161,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 1180,
+        "x": 1300,
         "y": 120,
         "wires": [
             [
@@ -3481,7 +3207,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 990,
+        "x": 1110,
         "y": 200,
         "wires": [
             [
@@ -3504,7 +3230,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 1230,
+        "x": 1350,
         "y": 200,
         "wires": [
             [
@@ -3529,7 +3255,7 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 595,
+        "x": 715,
         "y": 200,
         "wires": [
             [
@@ -3537,36 +3263,6 @@
             ]
         ],
         "l": false
-    },
-    {
-        "id": "55d8e6090f953b1c",
-        "type": "inject",
-        "z": "a843f3ff30ad0d18",
-        "name": "",
-        "props": [
-            {
-                "p": "topic",
-                "v": "topic",
-                "vt": "global"
-            },
-            {
-                "p": "action",
-                "v": "subscribe",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "1",
-        "topic": "",
-        "x": 190,
-        "y": 160,
-        "wires": [
-            [
-                "a99b9e45079692f2"
-            ]
-        ]
     },
     {
         "id": "aa5146ce5de05959",
@@ -3580,7 +3276,7 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1110,
+        "x": 1230,
         "y": 200,
         "wires": [
             [
@@ -3600,7 +3296,7 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1060,
+        "x": 1180,
         "y": 120,
         "wires": [
             [
@@ -3628,7 +3324,7 @@
         "wires": [
             [
                 "d5b0409ae997d1aa",
-                "1df2def93e34df34"
+                "04d1fbc09060ffc3"
             ]
         ]
     },
@@ -4092,8 +3788,8 @@
         "id": "a99b9e45079692f2",
         "type": "switch",
         "z": "a843f3ff30ad0d18",
-        "name": "Ready  ?",
-        "property": "( $globalContext(\"subscriber\") = true ) and ( $globalContext(\"redis_ready\") = true ) and ( $globalContext(\"config_valid\") = true )",
+        "name": "R & G ?",
+        "property": "( $globalContext(\"subscriber\") = true ) and ( $globalContext(\"redis_ready\") = true ) and ( $globalContext(\"config_valid\") = true ) and ( status.fill = \"green\" )",
         "propertyType": "jsonata",
         "rules": [
             {
@@ -4103,11 +3799,11 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 330,
+        "x": 360,
         "y": 160,
         "wires": [
             [
-                "b778150ac43b8303"
+                "8cfdcf31b980fc0d"
             ]
         ]
     },
@@ -4191,8 +3887,8 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 370,
-        "y": 540,
+        "x": 320,
+        "y": 560,
         "wires": [
             [
                 "b9ece7ebef6b02b6",
@@ -4447,7 +4143,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 790,
+        "x": 910,
         "y": 120,
         "wires": [
             [
@@ -4467,7 +4163,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 840,
+        "x": 960,
         "y": 200,
         "wires": [
             [
@@ -4543,8 +4239,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 640,
-        "y": 540,
+        "x": 590,
+        "y": 560,
         "wires": [
             [
                 "e04b46130b5aef38"
@@ -4769,8 +4465,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 505,
-        "y": 420,
+        "x": 455,
+        "y": 440,
         "wires": [
             [
                 "03c6799d92d6d702"
@@ -4795,8 +4491,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 505,
-        "y": 460,
+        "x": 455,
+        "y": 480,
         "wires": [
             [
                 "03c6799d92d6d702"
@@ -4821,8 +4517,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 505,
-        "y": 500,
+        "x": 455,
+        "y": 520,
         "wires": [
             [
                 "03c6799d92d6d702"
@@ -4847,8 +4543,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 505,
-        "y": 540,
+        "x": 455,
+        "y": 560,
         "wires": [
             [
                 "03c6799d92d6d702"
@@ -4873,8 +4569,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 505,
-        "y": 580,
+        "x": 455,
+        "y": 600,
         "wires": [
             [
                 "03c6799d92d6d702"
@@ -4899,8 +4595,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 505,
-        "y": 620,
+        "x": 455,
+        "y": 640,
         "wires": [
             [
                 "03c6799d92d6d702"
@@ -4925,8 +4621,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 505,
-        "y": 660,
+        "x": 455,
+        "y": 680,
         "wires": [
             [
                 "03c6799d92d6d702"
@@ -4951,8 +4647,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 505,
-        "y": 700,
+        "x": 455,
+        "y": 720,
         "wires": [
             [
                 "03c6799d92d6d702"
@@ -5006,8 +4702,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 770,
-        "y": 540,
+        "x": 720,
+        "y": 560,
         "wires": [
             [
                 "a78990a6467f55e2"
@@ -5034,8 +4730,8 @@
         "checkall": "true",
         "repair": false,
         "outputs": 2,
-        "x": 910,
-        "y": 540,
+        "x": 860,
+        "y": 560,
         "wires": [
             [
                 "dfcd92f87b0b313b"
@@ -5067,8 +4763,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1060,
-        "y": 540,
+        "x": 1010,
+        "y": 560,
         "wires": [
             [
                 "4ba20af2486d4cb3"
@@ -5084,8 +4780,8 @@
         "links": [
             "f1bfb46b496769da"
         ],
-        "x": 1155,
-        "y": 540,
+        "x": 1105,
+        "y": 560,
         "wires": []
     },
     {
@@ -5113,7 +4809,7 @@
         "links": [
             "7f8a8e775bcd0fcb"
         ],
-        "x": 1125,
+        "x": 1175,
         "y": 260,
         "wires": [],
         "icon": "font-awesome/fa-bug"
@@ -5123,8 +4819,8 @@
         "type": "previous-node",
         "z": "a843f3ff30ad0d18",
         "name": "",
-        "x": 595,
-        "y": 380,
+        "x": 545,
+        "y": 400,
         "wires": [
             [
                 "c36071f90c484a6e"
@@ -5137,8 +4833,8 @@
         "type": "previous-node",
         "z": "a843f3ff30ad0d18",
         "name": "",
-        "x": 595,
-        "y": 440,
+        "x": 545,
+        "y": 460,
         "wires": [
             [
                 "50ff53bf687ee138"
@@ -5155,8 +4851,8 @@
         "links": [
             "d1da644c2763c559"
         ],
-        "x": 655,
-        "y": 380,
+        "x": 605,
+        "y": 400,
         "wires": [],
         "icon": "font-awesome/fa-warning"
     },
@@ -5169,8 +4865,8 @@
         "links": [
             "d1da644c2763c559"
         ],
-        "x": 655,
-        "y": 440,
+        "x": 605,
+        "y": 460,
         "wires": [],
         "icon": "font-awesome/fa-warning"
     },
@@ -5198,7 +4894,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1360,
+        "x": 1480,
         "y": 200,
         "wires": [
             [
@@ -5218,7 +4914,7 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1490,
+        "x": 1610,
         "y": 200,
         "wires": [
             []
@@ -5248,7 +4944,7 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 1320,
+        "x": 1440,
         "y": 120,
         "wires": [
             [
@@ -5268,7 +4964,7 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 1450,
+        "x": 1570,
         "y": 120,
         "wires": [
             []
@@ -5355,7 +5051,7 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 730,
+        "x": 740,
         "y": 320,
         "wires": [
             [
@@ -5375,7 +5071,7 @@
         "initialize": "",
         "finalize": "",
         "libs": [],
-        "x": 870,
+        "x": 880,
         "y": 320,
         "wires": [
             [
@@ -5404,8 +5100,8 @@
         "links": [
             "32f06040cbdb17ea"
         ],
-        "x": 255,
-        "y": 540,
+        "x": 205,
+        "y": 560,
         "wires": [
             [
                 "4ae91f6f2721511e"
@@ -5441,9 +5137,10 @@
         "z": "a843f3ff30ad0d18",
         "name": "Subscribe",
         "links": [
-            "698c4dc31973a53e"
+            "698c4dc31973a53e",
+            "a185028f34ea9cfb"
         ],
-        "x": 415,
+        "x": 535,
         "y": 100,
         "wires": [
             [
@@ -5457,9 +5154,10 @@
         "z": "a843f3ff30ad0d18",
         "name": "Subscribe",
         "links": [
-            "698c4dc31973a53e"
+            "698c4dc31973a53e",
+            "a185028f34ea9cfb"
         ],
-        "x": 415,
+        "x": 535,
         "y": 220,
         "wires": [
             [
@@ -5488,8 +5186,8 @@
                 "tot": "str"
             }
         ],
-        "x": 410,
-        "y": 1120,
+        "x": 510,
+        "y": 1140,
         "wires": [
             [
                 "5fa6496246abf0ee"
@@ -5517,8 +5215,8 @@
                 "tot": "str"
             }
         ],
-        "x": 620,
-        "y": 1160,
+        "x": 720,
+        "y": 1180,
         "wires": [
             [
                 "74659c96d3fca742",
@@ -5543,8 +5241,8 @@
         "drop": false,
         "allowrate": false,
         "outputs": 1,
-        "x": 515,
-        "y": 1120,
+        "x": 615,
+        "y": 1140,
         "wires": [
             [
                 "sub_subscribe",
@@ -5563,7 +5261,7 @@
                 "t": "set",
                 "p": "topic",
                 "pt": "msg",
-                "to": "[ \"wis2gc:setup:\" & $globalContext(\"queue\"), $globalContext(\"worker\") & \":subscriber\" , $string($globalContext(\"topic\")) ]",
+                "to": "[ \"wis2gc:configuration\", $globalContext(\"worker\") & \":topics\", $string($exists($globalContext(\"topic\")) ? $globalContext(\"topic\") : []) ]",
                 "tot": "jsonata"
             },
             {
@@ -5577,8 +5275,8 @@
         "from": "",
         "to": "",
         "reg": false,
-        "x": 800,
-        "y": 1160,
+        "x": 900,
+        "y": 1180,
         "wires": [
             [
                 "bb864bc9279d335b"
@@ -5597,8 +5295,8 @@
         "paramsType": "json",
         "payloadType": "json",
         "block": false,
-        "x": 950,
-        "y": 1160,
+        "x": 1050,
+        "y": 1180,
         "wires": [
             []
         ]
@@ -5613,25 +5311,26 @@
             "9b1f313a465f2eeb",
             "0fa85233edc469fa"
         ],
-        "x": 735,
-        "y": 1120,
+        "x": 835,
+        "y": 1140,
         "wires": []
     },
     {
         "id": "1130afe3374e04fd",
         "type": "link in",
         "z": "a843f3ff30ad0d18",
-        "name": "link in 20",
+        "name": "Whitelist",
         "links": [
-            "a7b4e9d5237e6174"
+            "283ba984404a1c58"
         ],
-        "x": 145,
-        "y": 1120,
+        "x": 200,
+        "y": 1140,
         "wires": [
             [
                 "d045b47c95bb25fd"
             ]
-        ]
+        ],
+        "l": true
     },
     {
         "id": "d045b47c95bb25fd",
@@ -5648,13 +5347,106 @@
         "checkall": "true",
         "repair": false,
         "outputs": 1,
-        "x": 250,
-        "y": 1120,
+        "x": 350,
+        "y": 1140,
         "wires": [
             [
                 "sub_unsubscribe"
             ]
         ]
+    },
+    {
+        "id": "8cfdcf31b980fc0d",
+        "type": "change",
+        "z": "a843f3ff30ad0d18",
+        "name": "Subscribe",
+        "rules": [
+            {
+                "t": "set",
+                "p": "payload",
+                "pt": "msg",
+                "to": "subscribe",
+                "tot": "str"
+            },
+            {
+                "t": "set",
+                "p": "topic",
+                "pt": "msg",
+                "to": "topic",
+                "tot": "global"
+            }
+        ],
+        "action": "",
+        "property": "",
+        "from": "",
+        "to": "",
+        "reg": false,
+        "x": 500,
+        "y": 160,
+        "wires": [
+            [
+                "f53714198eb1e993",
+                "6effc579c4b9bbf3"
+            ]
+        ]
+    },
+    {
+        "id": "93695eb59a77f631",
+        "type": "link in",
+        "z": "a843f3ff30ad0d18",
+        "name": "Brokers",
+        "links": [
+            "927ca9d6449a6c3f",
+            "78a80f4187e46830"
+        ],
+        "x": 170,
+        "y": 160,
+        "wires": [
+            [
+                "a7ad72f368a748b7"
+            ]
+        ],
+        "l": true
+    },
+    {
+        "id": "a7ad72f368a748b7",
+        "type": "delay",
+        "z": "a843f3ff30ad0d18",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "2",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 265,
+        "y": 160,
+        "wires": [
+            [
+                "a99b9e45079692f2"
+            ]
+        ],
+        "l": false
+    },
+    {
+        "id": "04d1fbc09060ffc3",
+        "type": "previous-node",
+        "z": "a843f3ff30ad0d18",
+        "name": "",
+        "x": 1125,
+        "y": 260,
+        "wires": [
+            [
+                "1df2def93e34df34"
+            ]
+        ],
+        "l": false
     },
     {
         "id": "ada4f85f94febb91",
@@ -9628,7 +9420,7 @@
         "type": "function",
         "z": "102b04b3eaea572e",
         "name": "Schedule",
-        "func": "// Merge of \"K/V\" + \"Schedule delete\"\n// In:  msg.payload = flat [field, val, ...] cache-reporter record, msg.topic = \"wis2gc:cleaner-reporter:<worker>\"\n// Out: msg.topic = ZADD args for wis2gc:cleaner:pending   (return null = skip)\n\nconst arr = Array.isArray(msg.payload) ? msg.payload : [];\nconst rec = {};\nfor (let i = 0; i < arr.length; i += 2) {\n    rec[String(arr[i])] = arr[i + 1];\n}\nconst link = rec.link;\n\n// skip records with no local file (download_error / integrity_fail carry no link)\nif (typeof link !== 'string' || link.indexOf('downloads/') === -1) return null;\n\n// retention in seconds; if unset/disabled, keep the file\nconst keep = global.get('keep-in-cache');\nif (typeof keep !== 'number' || keep <= 0) return null;\n\n// worker from the channel, path from the link\nconst worker = msg.topic.substring(msg.topic.indexOf('cleaner-reporter:') + 'cleaner-reporter:'.length);\nconst path = link.substring(link.indexOf('downloads/') + 'downloads/'.length);\n\n// ZADD wis2gc:cleaner:pending <deleteAt-ms> \"<worker>|<path>\"\nmsg.topic = ['wis2gc:cleaner:pending', String(Date.now() + keep * 1000), worker + '|' + path];\ndelete msg.payload;\n\nreturn msg;",
+        "func": "// Merge of \"K/V\" + \"Schedule delete\"\n// In:  msg.payload = flat [field, val, ...] cache-reporter record, msg.topic = \"wis2gc:cleaner-reporter:<worker>\"\n// Out: msg.topic = ZADD args for wis2gc:cleaner:pending   (return null = skip)\n\n// S3 mode: files are uploaded to S3 and not kept on local disk -> nothing to delete\nif (global.get('rename-to-s3') === true) return null;\n\nconst arr = Array.isArray(msg.payload) ? msg.payload : [];\nconst rec = {};\nfor (let i = 0; i < arr.length; i += 2) {\n    rec[String(arr[i])] = arr[i + 1];\n}\nconst link = rec.link;\n\n// skip records with no local file (download_error / integrity_fail carry no link)\nif (typeof link !== 'string' || link.indexOf('downloads/') === -1) return null;\n\n// retention in seconds; if unset/disabled, keep the file\nconst keep = global.get('keep-in-cache');\nif (typeof keep !== 'number' || keep <= 0) return null;\n\n// worker from the channel, path from the link\nconst worker = msg.topic.substring(msg.topic.indexOf('cleaner-reporter:') + 'cleaner-reporter:'.length);\nconst path = link.substring(link.indexOf('downloads/') + 'downloads/'.length);\n\n// ZADD wis2gc:cleaner:pending <deleteAt-ms> \"<worker>|<path>\"\nmsg.topic = ['wis2gc:cleaner:pending', String(Date.now() + keep * 1000), worker + '|' + path];\ndelete msg.payload;\n\nreturn msg;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -9648,7 +9440,7 @@
         "type": "switch",
         "z": "102b04b3eaea572e",
         "name": "Cleaner ?",
-        "property": "$globalContext(\"cleaner-primary\") and ( $globalContext(\"rename-to-s3\") != true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "property": "$globalContext(\"cleaner-primary\") and $globalContext(\"cleaning-needed\") and ( $globalContext(\"process-mode\") = \"run\" )",
         "propertyType": "jsonata",
         "rules": [
             {
@@ -9917,108 +9709,6 @@
         ]
     },
     {
-        "id": "a856758742503774",
-        "type": "inject",
-        "z": "102b04b3eaea572e",
-        "name": "2s",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "2",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "3",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 230,
-        "y": 460,
-        "wires": [
-            [
-                "954b95f18ad33cc9"
-            ]
-        ]
-    },
-    {
-        "id": "c441158d22597ad0",
-        "type": "change",
-        "z": "102b04b3eaea572e",
-        "name": "Heartbeat",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "[  \"wis2gc:election\",  $globalContext(\"worker\") & \":ts\",       $millis(),  $globalContext(\"worker\") & \":uuid\",      $globalContext(\"uuid\"),  $globalContext(\"worker\") & \":cleaner\",  true ]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 520,
-        "y": 460,
-        "wires": [
-            [
-                "a540e4cfba713d9c"
-            ]
-        ]
-    },
-    {
-        "id": "a540e4cfba713d9c",
-        "type": "redis-command",
-        "z": "102b04b3eaea572e",
-        "server": "029ff868be3010db",
-        "command": "HSET",
-        "name": "HSET",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 650,
-        "y": 460,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "954b95f18ad33cc9",
-        "type": "switch",
-        "z": "102b04b3eaea572e",
-        "name": "Cleaner ?",
-        "property": "$globalContext(\"cleaner\") and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
-        "propertyType": "jsonata",
-        "rules": [
-            {
-                "t": "true"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 360,
-        "y": 460,
-        "wires": [
-            [
-                "c441158d22597ad0"
-            ]
-        ]
-    },
-    {
         "id": "5e1829a8deb130f9",
         "type": "inject",
         "z": "102b04b3eaea572e",
@@ -10040,7 +9730,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 230,
-        "y": 540,
+        "y": 460,
         "wires": [
             [
                 "fdfada5317311cb9"
@@ -10057,7 +9747,7 @@
                 "t": "set",
                 "p": "topic",
                 "pt": "msg",
-                "to": "wis2gc:election",
+                "to": "wis2gc:configuration",
                 "tot": "str"
             },
             {
@@ -10072,7 +9762,7 @@
         "to": "",
         "reg": false,
         "x": 510,
-        "y": 540,
+        "y": 460,
         "wires": [
             [
                 "b5eb0c643fec2a39"
@@ -10092,7 +9782,7 @@
         "payloadType": "json",
         "block": false,
         "x": 640,
-        "y": 540,
+        "y": 460,
         "wires": [
             [
                 "105a70cf2b93201b"
@@ -10104,15 +9794,15 @@
         "type": "function",
         "z": "102b04b3eaea572e",
         "name": "Elect",
-        "func": "const data = msg.payload || [];\nconst myUuid = global.get('uuid');\nconst myWorker = global.get('worker');\n\n// HGETALL (redis-command node) returns a flat array [field1, val1, field2, val2, ...]\n// Parse into { workerName: { ts, uuid, cleaner } }\nconst workers = {};\nfor (let i = 0; i < data.length - 1; i += 2) {\n    const key = data[i];\n    const value = data[i + 1];\n    const colon = key.lastIndexOf(':');\n    const worker = key.substring(0, colon);\n    const field = key.substring(colon + 1);\n    if (!workers[worker]) workers[worker] = {};\n    workers[worker][field] = value;\n}\n\nconst now = Date.now();\n\n// Election: lowest uuid among alive cleaner (ts < 8s)\nlet minUuid = null;\nfor (const info of Object.values(workers)) {\n    if (info.cleaner !== 'true') continue;\n    if (now - parseFloat(info.ts || 0) >= 8000) continue;\n    if (!info.uuid) continue;\n    if (minUuid === null || info.uuid < minUuid) minUuid = info.uuid;\n}\nconst priority = (minUuid !== null && myUuid === minUuid) ? 'primary' : 'secondary';\n\n// Stale workers (ts > 30s) → collect all 4 fields for HDEL\nconst staleFields = [];\nfor (const [w, info] of Object.entries(workers)) {\n    if (now - parseFloat(info.ts || 0) >= 30000) {\n        staleFields.push(w + ':ts', w + ':uuid', w + ':cleaner');\n    }\n}\n\nconst msg1 = { payload: priority };\nconst msg2 = staleFields.length > 0\n    ? { topic: ['wis2gc:election', ...staleFields] }\n    : null;\n\nreturn [msg1, msg2];",
+        "func": "const ROLE = 'cleaner';\nconst data = msg.payload || [];\nconst myUuid = global.get('uuid');\n\n// Parse election hash into { worker: { ts, uuid, cleaner, reporter, replayer, downloader, s3, ... } }\nconst workers = {};\nfor (let i = 0; i < data.length - 1; i += 2) {\n    const key = data[i], value = data[i + 1];\n    const colon = key.lastIndexOf(':');\n    const w = key.substring(0, colon), f = key.substring(colon + 1);\n    (workers[w] = workers[w] || {})[f] = value;\n}\nconst now = Date.now();\n\n// Election: lowest uuid among alive holders of ROLE (ts < 8s)\nlet minUuid = null;\nfor (const info of Object.values(workers)) {\n    if (info[ROLE] !== 'true') continue;\n    if (now - parseFloat(info.ts || 0) >= 8000) continue;\n    if (!info.uuid) continue;\n    if (minUuid === null || info.uuid < minUuid) minUuid = info.uuid;\n}\nconst priority = (minUuid !== null && myUuid === minUuid) ? 'primary' : 'secondary';\n\n// Cluster-wide S3 awareness — fail-safe: clean unless every alive downloader is S3 (CLEANER ONLY)\nlet anyDownloader = false, anyLocal = false;\nfor (const info of Object.values(workers)) {\n    if (now - parseFloat(info.ts || 0) >= 8000) continue;\n    if (info.downloader === 'true') { anyDownloader = true; if (info.s3 !== 'true') anyLocal = true; }\n}\nglobal.set('cleaning-needed', anyLocal || !anyDownloader);\n\n// Reap stale workers (ts > 60s): delete every field they registered\nconst staleFields = [];\nfor (const [w, info] of Object.entries(workers)) {\n    if (now - parseFloat(info.ts || 0) >= 60000) {\n        for (const f of Object.keys(info)) staleFields.push(w + ':' + f);\n    }\n}\n\nconst msg1 = { payload: priority };\nconst msg2 = staleFields.length > 0 ? { topic: ['wis2gc:configuration', ...staleFields] } : null;\nreturn [msg1, msg2];",
         "outputs": 2,
         "timeout": "",
         "noerr": 0,
-        "initialize": "",
+        "initialize": "// Code added here will be run once\n// whenever the node is started.\nglobal.set('cleaning-needed', true);",
         "finalize": "",
         "libs": [],
         "x": 770,
-        "y": 540,
+        "y": 460,
         "wires": [
             [
                 "7e7078469f8b5504"
@@ -10142,7 +9832,7 @@
         "to": "",
         "reg": false,
         "x": 900,
-        "y": 520,
+        "y": 440,
         "wires": [
             []
         ]
@@ -10160,7 +9850,7 @@
         "payloadType": "json",
         "block": false,
         "x": 890,
-        "y": 560,
+        "y": 480,
         "wires": [
             []
         ]
@@ -10170,7 +9860,7 @@
         "type": "switch",
         "z": "102b04b3eaea572e",
         "name": "Cleaner",
-        "property": "$globalContext(\"cleaner\") and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "property": "$globalContext(\"cleaner-primary\") and $globalContext(\"cleaning-needed\") and ( $globalContext(\"process-mode\") = \"run\" )",
         "propertyType": "jsonata",
         "rules": [
             {
@@ -10181,29 +9871,11 @@
         "repair": false,
         "outputs": 1,
         "x": 360,
-        "y": 540,
+        "y": 460,
         "wires": [
             [
                 "c97481ecd566aa56"
             ]
-        ]
-    },
-    {
-        "id": "fix_zadd",
-        "type": "redis-command",
-        "z": "102b04b3eaea572e",
-        "server": "029ff868be3010db",
-        "command": "ZADD",
-        "name": "ZADD",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 610,
-        "y": 220,
-        "wires": [
-            []
         ]
     },
     {
@@ -10230,7 +9902,7 @@
         "type": "switch",
         "z": "102b04b3eaea572e",
         "name": "Cleaner ?",
-        "property": "$globalContext(\"cleaner-primary\") and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "property": "$globalContext(\"cleaner-primary\") and $globalContext(\"cleaning-needed\") and ( $globalContext(\"process-mode\") = \"run\" )",
         "propertyType": "jsonata",
         "rules": [
             {
@@ -10303,6 +9975,24 @@
         "block": false,
         "x": 630,
         "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "fix_zadd",
+        "type": "redis-command",
+        "z": "102b04b3eaea572e",
+        "server": "029ff868be3010db",
+        "command": "ZADD",
+        "name": "ZADD",
+        "topic": "",
+        "params": "[]",
+        "paramsType": "json",
+        "payloadType": "json",
+        "block": false,
+        "x": 610,
+        "y": 220,
         "wires": [
             []
         ]
@@ -10635,85 +10325,6 @@
         "wires": []
     },
     {
-        "id": "eb00000000000003",
-        "type": "inject",
-        "z": "5ff6c20513455391",
-        "name": "2s",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "2",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "3",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 170,
-        "y": 520,
-        "wires": [
-            [
-                "c9f4515ea4e84d7e"
-            ]
-        ]
-    },
-    {
-        "id": "eb00000000000005",
-        "type": "change",
-        "z": "5ff6c20513455391",
-        "name": "Heartbeat",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "[  \"wis2gc:election\",  $globalContext(\"worker\") & \":ts\",       $millis(),  $globalContext(\"worker\") & \":uuid\",      $globalContext(\"uuid\"),  $globalContext(\"worker\") & \":reporter\",  true ]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 460,
-        "y": 520,
-        "wires": [
-            [
-                "eb00000000000006"
-            ]
-        ]
-    },
-    {
-        "id": "eb00000000000006",
-        "type": "redis-command",
-        "z": "5ff6c20513455391",
-        "server": "029ff868be3010db",
-        "command": "HSET",
-        "name": "HSET",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 590,
-        "y": 520,
-        "wires": [
-            []
-        ]
-    },
-    {
         "id": "9bf83f610940c63a",
         "type": "switch",
         "z": "5ff6c20513455391",
@@ -10733,29 +10344,6 @@
         "wires": [
             [
                 "0114eaab13d782d9"
-            ]
-        ]
-    },
-    {
-        "id": "c9f4515ea4e84d7e",
-        "type": "switch",
-        "z": "5ff6c20513455391",
-        "name": "Reporter ?",
-        "property": "$globalContext(\"reporter\") and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
-        "propertyType": "jsonata",
-        "rules": [
-            {
-                "t": "true"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 310,
-        "y": 520,
-        "wires": [
-            [
-                "eb00000000000005"
             ]
         ]
     },
@@ -10798,7 +10386,7 @@
                 "t": "set",
                 "p": "topic",
                 "pt": "msg",
-                "to": "wis2gc:election",
+                "to": "wis2gc:configuration",
                 "tot": "str"
             },
             {
@@ -10845,7 +10433,7 @@
         "type": "function",
         "z": "5ff6c20513455391",
         "name": "Elect",
-        "func": "const data = msg.payload || [];\nconst myUuid = global.get('uuid');\nconst myWorker = global.get('worker');\n\n// HGETALL (redis-command node) returns a flat array [field1, val1, field2, val2, ...]\n// Parse into { workerName: { ts, uuid, reporter, replayer } }\nconst workers = {};\nfor (let i = 0; i < data.length - 1; i += 2) {\n    const key = data[i];\n    const value = data[i + 1];\n    const colon = key.lastIndexOf(':');\n    const worker = key.substring(0, colon);\n    const field = key.substring(colon + 1);\n    if (!workers[worker]) workers[worker] = {};\n    workers[worker][field] = value;\n}\n\nconst now = Date.now();\n\n// Election: lowest uuid among alive reporters (ts < 8s)\nlet minUuid = null;\nfor (const info of Object.values(workers)) {\n    if (info.reporter !== 'true') continue;\n    if (now - parseFloat(info.ts || 0) >= 8000) continue;\n    if (!info.uuid) continue;\n    if (minUuid === null || info.uuid < minUuid) minUuid = info.uuid;\n}\nconst priority = (minUuid !== null && myUuid === minUuid) ? 'primary' : 'secondary';\n\n// Stale workers (ts > 30s) → collect all 4 fields for HDEL\nconst staleFields = [];\nfor (const [w, info] of Object.entries(workers)) {\n    if (now - parseFloat(info.ts || 0) >= 30000) {\n        staleFields.push(w + ':ts', w + ':uuid', w + ':reporter');\n    }\n}\n\nconst msg1 = { payload: priority };\nconst msg2 = staleFields.length > 0\n    ? { topic: ['wis2gc:election', ...staleFields] }\n    : null;\n\nreturn [msg1, msg2];",
+        "func": "const ROLE = 'reporter';\nconst data = msg.payload || [];\nconst myUuid = global.get('uuid');\n\n// Parse election hash into { worker: { ts, uuid, cleaner, reporter, replayer, downloader, s3, ... } }\nconst workers = {};\nfor (let i = 0; i < data.length - 1; i += 2) {\n    const key = data[i], value = data[i + 1];\n    const colon = key.lastIndexOf(':');\n    const w = key.substring(0, colon), f = key.substring(colon + 1);\n    (workers[w] = workers[w] || {})[f] = value;\n}\nconst now = Date.now();\n\n// Election: lowest uuid among alive holders of ROLE (ts < 8s)\nlet minUuid = null;\nfor (const info of Object.values(workers)) {\n    if (info[ROLE] !== 'true') continue;\n    if (now - parseFloat(info.ts || 0) >= 8000) continue;\n    if (!info.uuid) continue;\n    if (minUuid === null || info.uuid < minUuid) minUuid = info.uuid;\n}\nconst priority = (minUuid !== null && myUuid === minUuid) ? 'primary' : 'secondary';\n\n// Reap stale workers (ts > 60s): delete every field they registered\nconst staleFields = [];\nfor (const [w, info] of Object.entries(workers)) {\n    if (now - parseFloat(info.ts || 0) >= 60000) {\n        for (const f of Object.keys(info)) staleFields.push(w + ':' + f);\n    }\n}\n\nconst msg1 = { payload: priority };\nconst msg2 = staleFields.length > 0 ? { topic: ['wis2gc:configuration', ...staleFields] } : null;\nreturn [msg1, msg2];",
         "outputs": 2,
         "timeout": "",
         "noerr": 0,
@@ -11073,7 +10661,7 @@
         "type": "function",
         "z": "5751c69be6006c9c",
         "name": "Get sub",
-        "func": "const cluster = global.get('redisCluster');\n\n(async () => {\n    try {\n        const pattern = 'wis2gc:setup:*';\n        const nodes = cluster.nodes('master');\n        const allKeys = [];\n        \n        for (const node of nodes) {\n            let cursor = '0';\n            do {\n                const [newCursor, keys] = await node.scan(cursor, 'MATCH', pattern, 'COUNT', 1000);\n                cursor = newCursor;\n                allKeys.push(...keys);\n            } while (cursor !== '0');\n        }\n        \n        const promises = allKeys.map(key => \n            cluster.hgetall(key)\n                .then(value => value)\n                .catch(err => {\n                    node.warn(`Failed to HGETALL ${key}: ${err.message}`);\n                    return null;\n                })\n        );\n        \n        const hashResults = await Promise.all(promises);\n        const allTopics = [];\n        \n        for (const hashData of hashResults) {\n            if (!hashData) continue;\n            const arr = [];\n            for (const [key, value] of Object.entries(hashData)) {\n                arr.push(key, value);\n            }\n            for (let i = 0; i < arr.length; i += 2) {\n                const key = arr[i];\n                const value = arr[i + 1];\n                if (key && key.endsWith(':subscriber')) {\n                    try {\n                        const parsed = JSON.parse(value);\n                        if (Array.isArray(parsed)) {\n                            if (parsed.length > 0 && typeof parsed[0] === 'object') {\n                                // New format: array of {topic, qos} objects\n                                parsed\n                                    .filter(item => !item.topic.startsWith('replay/a/wis2'))\n                                    .forEach(item => allTopics.push(item.topic));\n                            } else {\n                                // Old format: array of strings\n                                parsed\n                                    .filter(t => !t.startsWith('replay/a/wis2'))\n                                    .forEach(t => allTopics.push(t));\n                            }\n                        }\n                    } catch (e) {\n                        node.warn(`Failed to parse subscriber value for ${key}: ${e.message}`);\n                    }\n                }\n            }\n        }\n        \n        msg.topics = [...new Set(allTopics)];\n        node.send(msg);\n        \n    } catch (err) {\n        node.error('Error processing cluster data: ' + err.message);\n    }\n})();\n\nreturn null;",
+        "func": "const cluster = global.get('redisCluster');\n(async () => {\n    try {\n        const flat = await cluster.hgetall('wis2gc:configuration');   // { \"<worker>:<field>\": val }\n        const workers = {};\n        for (const [k, v] of Object.entries(flat || {})) {\n            const c = k.lastIndexOf(':');\n            (workers[k.substring(0, c)] = workers[k.substring(0, c)] || {})[k.substring(c + 1)] = v;\n        }\n        const now = Date.now();\n        const all = [];\n        for (const info of Object.values(workers)) {\n            if (now - parseFloat(info.ts || 0) >= 60000) continue;      // skip dead (>60s)\n            if (!info.topics) continue;\n            let parsed; try { parsed = JSON.parse(info.topics); } catch { continue; }\n            if (!Array.isArray(parsed)) continue;\n            for (const it of parsed) {\n                const t = (it && typeof it === 'object') ? it.topic : it;\n                if (typeof t === 'string' && !t.startsWith('replay/a/wis2')) all.push(t);\n            }\n        }\n        msg.topics = [...new Set(all)];\n        node.send(msg);\n    } catch (e) { node.error('config read error: ' + e.message); }\n})();\nreturn null;",
         "outputs": 1,
         "timeout": 0,
         "noerr": 0,
@@ -11222,108 +10810,6 @@
         ]
     },
     {
-        "id": "2b2da634cb952528",
-        "type": "inject",
-        "z": "5751c69be6006c9c",
-        "name": "2s",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "2",
-        "crontab": "",
-        "once": true,
-        "onceDelay": "3",
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 250,
-        "y": 160,
-        "wires": [
-            [
-                "de4c3988e19ab3da"
-            ]
-        ]
-    },
-    {
-        "id": "570c0a179f2899a0",
-        "type": "change",
-        "z": "5751c69be6006c9c",
-        "name": "Heartbeat",
-        "rules": [
-            {
-                "t": "set",
-                "p": "topic",
-                "pt": "msg",
-                "to": "[  \"wis2gc:election\",  $globalContext(\"worker\") & \":ts\",       $millis(),  $globalContext(\"worker\") & \":uuid\",      $globalContext(\"uuid\"),  $globalContext(\"worker\") & \":replayer\",  true ]",
-                "tot": "jsonata"
-            },
-            {
-                "t": "delete",
-                "p": "payload",
-                "pt": "msg"
-            }
-        ],
-        "action": "",
-        "property": "",
-        "from": "",
-        "to": "",
-        "reg": false,
-        "x": 540,
-        "y": 160,
-        "wires": [
-            [
-                "4d122c1a60212513"
-            ]
-        ]
-    },
-    {
-        "id": "4d122c1a60212513",
-        "type": "redis-command",
-        "z": "5751c69be6006c9c",
-        "server": "029ff868be3010db",
-        "command": "HSET",
-        "name": "HSET",
-        "topic": "",
-        "params": "[]",
-        "paramsType": "json",
-        "payloadType": "json",
-        "block": false,
-        "x": 670,
-        "y": 160,
-        "wires": [
-            []
-        ]
-    },
-    {
-        "id": "de4c3988e19ab3da",
-        "type": "switch",
-        "z": "5751c69be6006c9c",
-        "name": "Replayer ?",
-        "property": "$globalContext(\"replayer\") and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
-        "propertyType": "jsonata",
-        "rules": [
-            {
-                "t": "true"
-            }
-        ],
-        "checkall": "true",
-        "repair": false,
-        "outputs": 1,
-        "x": 390,
-        "y": 160,
-        "wires": [
-            [
-                "570c0a179f2899a0"
-            ]
-        ]
-    },
-    {
         "id": "ba45a62123c561d4",
         "type": "inject",
         "z": "5751c69be6006c9c",
@@ -11345,7 +10831,7 @@
         "payload": "",
         "payloadType": "date",
         "x": 250,
-        "y": 240,
+        "y": 160,
         "wires": [
             [
                 "4cbfc2ac3e0b9d66"
@@ -11362,7 +10848,7 @@
                 "t": "set",
                 "p": "topic",
                 "pt": "msg",
-                "to": "wis2gc:election",
+                "to": "wis2gc:configuration",
                 "tot": "str"
             },
             {
@@ -11377,7 +10863,7 @@
         "to": "",
         "reg": false,
         "x": 530,
-        "y": 240,
+        "y": 160,
         "wires": [
             [
                 "2ccd0410cf039e26"
@@ -11397,7 +10883,7 @@
         "payloadType": "json",
         "block": false,
         "x": 660,
-        "y": 240,
+        "y": 160,
         "wires": [
             [
                 "aaa9732837560d1b"
@@ -11409,7 +10895,7 @@
         "type": "function",
         "z": "5751c69be6006c9c",
         "name": "Elect",
-        "func": "const data = msg.payload || [];\nconst myUuid = global.get('uuid');\nconst myWorker = global.get('worker');\n\n// HGETALL (redis-command node) returns a flat array [field1, val1, field2, val2, ...]\n// Parse into { workerName: { ts, uuid, reporter, replayer } }\nconst workers = {};\nfor (let i = 0; i < data.length - 1; i += 2) {\n    const key = data[i];\n    const value = data[i + 1];\n    const colon = key.lastIndexOf(':');\n    const worker = key.substring(0, colon);\n    const field = key.substring(colon + 1);\n    if (!workers[worker]) workers[worker] = {};\n    workers[worker][field] = value;\n}\n\nconst now = Date.now();\n\n// Election: lowest uuid among alive reporters (ts < 8s)\nlet minUuid = null;\nfor (const info of Object.values(workers)) {\n    if (info.replayer !== 'true') continue;\n    if (now - parseFloat(info.ts || 0) >= 8000) continue;\n    if (!info.uuid) continue;\n    if (minUuid === null || info.uuid < minUuid) minUuid = info.uuid;\n}\nconst priority = (minUuid !== null && myUuid === minUuid) ? 'primary' : 'secondary';\n\n// Stale workers (ts > 30s) → collect all 4 fields for HDEL\nconst staleFields = [];\nfor (const [w, info] of Object.entries(workers)) {\n    if (now - parseFloat(info.ts || 0) >= 30000) {\n        staleFields.push(w + ':ts', w + ':uuid', w + ':replayer');\n    }\n}\n\nconst msg1 = { payload: priority };\nconst msg2 = staleFields.length > 0\n    ? { topic: ['wis2gc:election', ...staleFields] }\n    : null;\n\nreturn [msg1, msg2];",
+        "func": "const ROLE = 'replayer';\nconst data = msg.payload || [];\nconst myUuid = global.get('uuid');\n\n// Parse election hash into { worker: { ts, uuid, cleaner, reporter, replayer, downloader, s3, ... } }\nconst workers = {};\nfor (let i = 0; i < data.length - 1; i += 2) {\n    const key = data[i], value = data[i + 1];\n    const colon = key.lastIndexOf(':');\n    const w = key.substring(0, colon), f = key.substring(colon + 1);\n    (workers[w] = workers[w] || {})[f] = value;\n}\nconst now = Date.now();\n\n// Election: lowest uuid among alive holders of ROLE (ts < 8s)\nlet minUuid = null;\nfor (const info of Object.values(workers)) {\n    if (info[ROLE] !== 'true') continue;\n    if (now - parseFloat(info.ts || 0) >= 8000) continue;\n    if (!info.uuid) continue;\n    if (minUuid === null || info.uuid < minUuid) minUuid = info.uuid;\n}\nconst priority = (minUuid !== null && myUuid === minUuid) ? 'primary' : 'secondary';\n\n// Reap stale workers (ts > 60s): delete every field they registered\nconst staleFields = [];\nfor (const [w, info] of Object.entries(workers)) {\n    if (now - parseFloat(info.ts || 0) >= 60000) {\n        for (const f of Object.keys(info)) staleFields.push(w + ':' + f);\n    }\n}\n\nconst msg1 = { payload: priority };\nconst msg2 = staleFields.length > 0 ? { topic: ['wis2gc:configuration', ...staleFields] } : null;\nreturn [msg1, msg2];",
         "outputs": 2,
         "timeout": "",
         "noerr": 0,
@@ -11417,7 +10903,7 @@
         "finalize": "",
         "libs": [],
         "x": 790,
-        "y": 240,
+        "y": 160,
         "wires": [
             [
                 "85174ec1eb9c6fd0"
@@ -11447,7 +10933,7 @@
         "to": "",
         "reg": false,
         "x": 920,
-        "y": 220,
+        "y": 140,
         "wires": [
             []
         ]
@@ -11465,7 +10951,7 @@
         "payloadType": "json",
         "block": false,
         "x": 910,
-        "y": 260,
+        "y": 180,
         "wires": [
             []
         ]
@@ -11486,7 +10972,7 @@
         "repair": false,
         "outputs": 1,
         "x": 390,
-        "y": 240,
+        "y": 160,
         "wires": [
             [
                 "f106d17eb7f12a8d"
@@ -11503,7 +10989,7 @@
         "upload": false,
         "swaggerDoc": "",
         "x": 280,
-        "y": 320,
+        "y": 240,
         "wires": [
             [
                 "c7c61be8cbf08a09"
@@ -11535,7 +11021,7 @@
         "to": "",
         "reg": false,
         "x": 620,
-        "y": 320,
+        "y": 240,
         "wires": [
             [
                 "916732761db163f6"
@@ -11550,7 +11036,7 @@
         "statusCode": "",
         "headers": {},
         "x": 750,
-        "y": 320,
+        "y": 240,
         "wires": []
     },
     {
@@ -11569,7 +11055,7 @@
         "repair": false,
         "outputs": 1,
         "x": 470,
-        "y": 320,
+        "y": 240,
         "wires": [
             [
                 "5ec4cf3c7798d026"
