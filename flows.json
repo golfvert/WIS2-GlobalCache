@@ -985,6 +985,13 @@
                 "pt": "global",
                 "to": "payload.downloader.aria-inqueue",
                 "tot": "msg"
+            },
+            {
+                "t": "set",
+                "p": "aria-check-tls",
+                "pt": "global",
+                "to": "payload.downloader.aria-check-tls",
+                "tot": "msg"
             }
         ],
         "action": "",
@@ -5380,8 +5387,7 @@
         "wires": [
             [
                 "f53714198eb1e993",
-                "6effc579c4b9bbf3",
-                "024553ad8e58034c"
+                "6effc579c4b9bbf3"
             ]
         ]
     },
@@ -5443,52 +5449,6 @@
         "l": false
     },
     {
-        "id": "5bdc1fb72d491e1f",
-        "type": "inject",
-        "z": "a843f3ff30ad0d18",
-        "name": "",
-        "props": [
-            {
-                "p": "payload"
-            },
-            {
-                "p": "topic",
-                "vt": "str"
-            }
-        ],
-        "repeat": "",
-        "crontab": "",
-        "once": false,
-        "onceDelay": 0.1,
-        "topic": "",
-        "payload": "",
-        "payloadType": "date",
-        "x": 340,
-        "y": 60,
-        "wires": [
-            [
-                "8cfdcf31b980fc0d"
-            ]
-        ]
-    },
-    {
-        "id": "024553ad8e58034c",
-        "type": "debug",
-        "z": "a843f3ff30ad0d18",
-        "name": "debug 1",
-        "active": true,
-        "tosidebar": true,
-        "console": false,
-        "tostatus": false,
-        "complete": "true",
-        "targetType": "full",
-        "statusVal": "",
-        "statusType": "auto",
-        "x": 680,
-        "y": 60,
-        "wires": []
-    },
-    {
         "id": "ada4f85f94febb91",
         "type": "function",
         "z": "caa031b5574b994f",
@@ -5539,7 +5499,7 @@
                 "t": "set",
                 "p": "message",
                 "pt": "msg",
-                "to": "{\t  \"jsonrpc\": \"2.0\",\t  \"method\": \"aria2.addUri\",\t  \"id\": stream_id,\t  \"params\": [\t    \"token:\" & $globalContext(\"aria-secret\"),\t    [downloads.href],\t    $merge([\t      { \"out\": filename, \"disk-cache\": 0 },\t      $exists($globalContext(\"download-creds\")[downloads.topic]) ? {  \t              \"http-user\": $globalContext(\"download-creds\")[downloads.topic].username,\t              \"http-passwd\": $globalContext(\"download-creds\")[downloads.topic].password \t            } : {}\t    ])\t  ]\t}",
+                "to": "{\t  \"jsonrpc\": \"2.0\",\t  \"method\": \"aria2.addUri\",\t  \"id\": stream_id,\t  \"params\": [\t    \"token:\" & $globalContext(\"aria-secret\"),\t    [downloads.href],\t    $merge([\t      { \"out\": filename, \"disk-cache\": 0, \"check-certificate\": $globalContext(\"aria-check-tls\") },\t      $exists($globalContext(\"download-creds\")[downloads.topic]) ? {  \t              \"http-user\": $globalContext(\"download-creds\")[downloads.topic].username,\t              \"http-passwd\": $globalContext(\"download-creds\")[downloads.topic].password \t            } : {}\t    ])\t  ]\t}",
                 "tot": "jsonata"
             }
         ],
@@ -9900,7 +9860,7 @@
         "type": "switch",
         "z": "102b04b3eaea572e",
         "name": "Cleaner",
-        "property": "$globalContext(\"cleaner-primary\") and $globalContext(\"cleaning-needed\") and ( $globalContext(\"process-mode\") = \"run\" )",
+        "property": "$globalContext(\"cleaner\") and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" )",
         "propertyType": "jsonata",
         "rules": [
             {
@@ -10109,7 +10069,7 @@
         "type": "switch",
         "z": "5ff6c20513455391",
         "name": "Reporter ?",
-        "property": "$globalContext(\"reporter\") and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "property": "$globalContext(\"reporter-primary\") and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" )",
         "propertyType": "jsonata",
         "rules": [
             {
@@ -10369,7 +10329,7 @@
         "type": "switch",
         "z": "5ff6c20513455391",
         "name": "Reporter ?",
-        "property": "$globalContext(\"reporter\") and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" ) ",
+        "property": "$globalContext(\"reporter-primary\") and ( $globalContext(\"config_valid\") = true ) and ( $globalContext(\"process-mode\") = \"run\" )",
         "propertyType": "jsonata",
         "rules": [
             {
