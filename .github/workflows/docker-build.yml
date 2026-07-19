@@ -1,54 +1,65 @@
 name: Build and Push Docker Image
-
 on:
   push:
     paths:
       - 'image:tag'
   workflow_call:
-  workflow_dispatch: 
-
+  workflow_dispatch:
 jobs:
-  build-and-push:
+  read-image:
     runs-on: ubuntu-latest
-    env:
-      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+    outputs:
+      name: ${{ steps.image.outputs.name }}
+      tag: ${{ steps.image.outputs.tag }}
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v6
-
-      - name: Read image name and tag
-        id: image
+      - uses: actions/checkout@v6
+      - id: image
         run: |
           IMAGE_TAG=$(cat image:tag)
           echo "name=${IMAGE_TAG%%:*}" >> $GITHUB_OUTPUT
           echo "tag=${IMAGE_TAG##*:}" >> $GITHUB_OUTPUT
 
-      - name: Set up QEMU
-        uses: docker/setup-qemu-action@v4.0.0
-        with:
-          platforms: arm64
-          image: tonistiigi/binfmt:latest
-          
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v4.1.0
-        with:
-          driver-opts: |
-            image=moby/buildkit:latest
-
-      - name: Log in to Docker Hub
-        uses: docker/login-action@v4.2.0
+  build:
+    needs: read-image
+    strategy:
+      matrix:
+        include:
+          - platform: linux/amd64
+            runner: ubuntu-latest
+            suffix: amd64
+          - platform: linux/arm64
+            runner: ubuntu-24.04-arm
+            suffix: arm64
+    runs-on: ${{ matrix.runner }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: docker/setup-buildx-action@v4.1.0
+      - uses: docker/login-action@v4.2.0
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_TOKEN }}
-
-      - name: Build and push
-        uses: docker/build-push-action@v7.2.0
+      - uses: docker/build-push-action@v7.2.0
         with:
           context: .
-          platforms: linux/amd64,linux/arm64
+          platforms: ${{ matrix.platform }}
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.image.outputs.name }}:${{ steps.image.outputs.tag }}
-      
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ needs.read-image.outputs.name }}:${{ needs.read-image.outputs.tag }}-${{ matrix.suffix }}
+
+  merge:
+    needs: [read-image, build]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: docker/login-action@v4.2.0
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+      - name: Create multi-arch manifest
+        run: |
+          docker buildx imagetools create \
+            -t ${{ secrets.DOCKERHUB_USERNAME }}/${{ needs.read-image.outputs.name }}:${{ needs.read-image.outputs.tag }} \
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ needs.read-image.outputs.name }}:${{ needs.read-image.outputs.tag }}-amd64 \
+            ${{ secrets.DOCKERHUB_USERNAME }}/${{ needs.read-image.outputs.name }}:${{ needs.read-image.outputs.tag }}-arm64
+
       - name: Notify Slack on success
         if: success()
         uses: slackapi/slack-github-action@v2.1.1
@@ -62,7 +73,7 @@ jobs:
                 {
                   "color": "good",
                   "fields": [
-                    { "title": "Image", "value": "${{ secrets.DOCKERHUB_USERNAME }}/${{ steps.image.outputs.name }}:${{ steps.image.outputs.tag }}", "short": true },
+                    { "title": "Image", "value": "${{ secrets.DOCKERHUB_USERNAME }}/${{ needs.read-image.outputs.name }}:${{ needs.read-image.outputs.tag }}", "short": true },
                     { "title": "Branch", "value": "${{ github.ref_name }}", "short": true },
                     { "title": "Triggered by", "value": "${{ github.actor }}", "short": true },
                     { "title": "Workflow run", "value": "<${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}|View run>", "short": true }
